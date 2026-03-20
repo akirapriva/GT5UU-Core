@@ -1212,28 +1212,29 @@ public class ScriptThaumicEnergistics implements IScriptLoader {
                                 getModItem(ThaumicEnergistics.ID, "storage.essentia", 1, 8, missing))));
 
         // Fluid Quantum Drive
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(ThaumicEnergistics.ID, "storage.essentia", 1, 9, missing),
-                "---------",
-                "----a----",
-                "---bdb---",
-                "--bcdcb--",
-                "-addedda-",
-                "--bcdcb--",
-                "---bdb---",
-                "----a----",
-                "---------",
-                'a',
-                "blockCosmicNeutronium",
-                'b',
-                "plateDenseNeutronium",
-                'c',
-                "circuitInfinite",
-                'd',
-                EssentialComponent16384K,
-                'e',
-                getModItem(ThaumicEnergistics.ID, "storage.casing", 1, 0, missing));
-
+        if (AML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    getModItem(ThaumicEnergistics.ID, "storage.essentia", 1, 9, missing),
+                    "---------",
+                    "----a----",
+                    "---bdb---",
+                    "--bcdcb--",
+                    "-addedda-",
+                    "--bcdcb--",
+                    "---bdb---",
+                    "----a----",
+                    "---------",
+                    'a',
+                    "blockCosmicNeutronium",
+                    'b',
+                    "plateDenseNeutronium",
+                    'c',
+                    "circuitInfinite",
+                    'd',
+                    EssentialComponent16384K,
+                    'e',
+                    getModItem(ThaumicEnergistics.ID, "storage.casing", 1, 0, missing));
+        }
         TCHelper.setResearchAspects(
                 "thaumicenergistics.TESTORAGE",
                 new AspectList().add(Aspect.getAspect("vacuos"), 21).add(Aspect.getAspect("potentia"), 18)

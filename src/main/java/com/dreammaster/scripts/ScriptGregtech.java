@@ -1480,7 +1480,7 @@ public class ScriptGregtech implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.oreRedgranite, Materials.Magnetite, 1L),
                 getModItem(Minecraft.ID, "iron_ingot", 1, 0, missing));
 
-        if (BloodArsenal.isModLoaded() && DraconicEvolution.isModLoaded()) {
+        if (BloodArsenal.isModLoaded() && DraconicEvolution.isModLoaded() && AML) {
             ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
                     ItemList.ChaosLocator.get(1),
                     "----a----",

@@ -1295,34 +1295,35 @@ public class ScriptGalacticraft implements IScriptLoader {
                     getModItem(GalacticraftCore.ID, "item.parachute", 1, WILDCARD, missing),
                     dyeInputs[i]);
         }
-
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(GalacticraftCore.ID, "item.infiniteOxygen", 1, 0, missing),
-                "--abbba--",
-                "-abcccba-",
-                "-bcdedcb-",
-                "-bcfgfcb-",
-                "-bcdhdcb-",
-                "-bcfgfcb-",
-                "-bcdedcb-",
-                "-abcccba-",
-                "--abbba--",
-                'a',
-                "ingotInfinity",
-                'b',
-                "plateNeutronium",
-                'c',
-                NHItemList.HeavyDutyPlateTier8.get(),
-                'd',
-                getModItem(GalacticraftCore.ID, "item.oxygenTankUltraHeavyFull", 1, WILDCARD, missing),
-                'e',
-                ItemList.Electric_Pump_ZPM.get(1L),
-                'f',
-                ItemList.Circuit_Board_Wetware_Extreme.get(1L),
-                'g',
-                "pipeSmallInfinity",
-                'h',
-                ItemList.Quantum_Tank_HV.get(1L));
+        if (AML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    getModItem(GalacticraftCore.ID, "item.infiniteOxygen", 1, 0, missing),
+                    "--abbba--",
+                    "-abcccba-",
+                    "-bcdedcb-",
+                    "-bcfgfcb-",
+                    "-bcdhdcb-",
+                    "-bcfgfcb-",
+                    "-bcdedcb-",
+                    "-abcccba-",
+                    "--abbba--",
+                    'a',
+                    "ingotInfinity",
+                    'b',
+                    "plateNeutronium",
+                    'c',
+                    NHItemList.HeavyDutyPlateTier8.get(),
+                    'd',
+                    getModItem(GalacticraftCore.ID, "item.oxygenTankUltraHeavyFull", 1, WILDCARD, missing),
+                    'e',
+                    ItemList.Electric_Pump_ZPM.get(1L),
+                    'f',
+                    ItemList.Circuit_Board_Wetware_Extreme.get(1L),
+                    'g',
+                    "pipeSmallInfinity",
+                    'h',
+                    ItemList.Quantum_Tank_HV.get(1L));
+        }
 
         GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.cell, Materials.Oil, 1))
                 .itemOutputs(ItemList.Cell_Empty.get(1)).metadata(FUEL_VALUE, 16).metadata(FUEL_TYPE, 0).duration(0)

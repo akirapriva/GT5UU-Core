@@ -685,69 +685,69 @@ public class ScriptAE2FC implements IScriptLoader {
                         ItemList.Circuit_Board_Bio_Ultra.get(1))
                 .circuit(1).itemOutputs(COMPONENT_16384).fluidInputs(Materials.SolderingAlloy.getMolten(72))
                 .requiresCleanRoom().duration(10 * SECONDS).eut(TierEU.RECIPE_UV).addTo(circuitAssemblerRecipes);
+        if (Avaritia.isModLoaded()) {
+            if (UniversalSingularities.isModLoaded()) {
+                // Infinite Water Cell
+                ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                        (AE2FC_INFINITY_WATER_STORAGE_CELL),
+                        "--ebcbe--",
+                        "-dalflad-",
+                        "egllhllge",
+                        "illljllli",
+                        "cfhjkjhfc",
+                        "illljllli",
+                        "egllhllge",
+                        "-dalflad-",
+                        "--ebcbe--",
+                        'a',
+                        "plateSuperdenseCeruclase",
+                        'b',
+                        "plateSuperdenseCallistoIce",
+                        'c',
+                        "plateSuperdenseEnrichedHolmium",
+                        'd',
+                        "plateSuperdenseOsmiridium",
+                        'e',
+                        "blockCosmicNeutronium",
+                        'f',
+                        ItemList.Field_Generator_UV.get(1L),
+                        'g',
+                        "plateSuperdenseOsmium",
+                        'h',
+                        getModItem(Avaritia.ID, "Resource", 1, 5),
+                        'i',
+                        "plateSuperdenseLedox",
+                        'j',
+                        GregtechItemList.Hatch_Reservoir.get(1L),
+                        'k',
+                        AE2FC_ADVANCED_FLUID_STORAGE_HOUSING,
+                        'l',
+                        getModItem(UniversalSingularities.ID, "universal.vanilla.singularity", 1, 3));
+            }
 
-        if (UniversalSingularities.isModLoaded()) {
-            // Infinite Water Cell
+            // Fluid Quantum Drive
             ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                    (AE2FC_INFINITY_WATER_STORAGE_CELL),
-                    "--ebcbe--",
-                    "-dalflad-",
-                    "egllhllge",
-                    "illljllli",
-                    "cfhjkjhfc",
-                    "illljllli",
-                    "egllhllge",
-                    "-dalflad-",
-                    "--ebcbe--",
+                    (AE2FC_QUANTUM_CELL),
+                    "---------",
+                    "----a----",
+                    "---bdb---",
+                    "--bcdcb--",
+                    "-addedda-",
+                    "--bcdcb--",
+                    "---bdb---",
+                    "----a----",
+                    "---------",
                     'a',
-                    "plateSuperdenseCeruclase",
-                    'b',
-                    "plateSuperdenseCallistoIce",
-                    'c',
-                    "plateSuperdenseEnrichedHolmium",
-                    'd',
-                    "plateSuperdenseOsmiridium",
-                    'e',
                     "blockCosmicNeutronium",
-                    'f',
-                    ItemList.Field_Generator_UV.get(1L),
-                    'g',
-                    "plateSuperdenseOsmium",
-                    'h',
-                    getModItem(Avaritia.ID, "Resource", 1, 5),
-                    'i',
-                    "plateSuperdenseLedox",
-                    'j',
-                    GregtechItemList.Hatch_Reservoir.get(1L),
-                    'k',
-                    AE2FC_ADVANCED_FLUID_STORAGE_HOUSING,
-                    'l',
-                    getModItem(UniversalSingularities.ID, "universal.vanilla.singularity", 1, 3));
+                    'b',
+                    "plateDenseNeutronium",
+                    'c',
+                    "circuitInfinite",
+                    'd',
+                    COMPONENT_16384,
+                    'e',
+                    AE2FC_ADVANCED_FLUID_STORAGE_HOUSING);
         }
-
-        // Fluid Quantum Drive
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                (AE2FC_QUANTUM_CELL),
-                "---------",
-                "----a----",
-                "---bdb---",
-                "--bcdcb--",
-                "-addedda-",
-                "--bcdcb--",
-                "---bdb---",
-                "----a----",
-                "---------",
-                'a',
-                "blockCosmicNeutronium",
-                'b',
-                "plateDenseNeutronium",
-                'c',
-                "circuitInfinite",
-                'd',
-                COMPONENT_16384,
-                'e',
-                AE2FC_ADVANCED_FLUID_STORAGE_HOUSING);
-
         // level maintainer
         addShapedRecipe(
                 AE2FC_MAINTAIN,
