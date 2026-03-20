@@ -1,9 +1,8 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.GregTechAPI.sBlockOres1;
-import static gregtech.api.enums.Mods.AdvancedSolarPanel;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.BloodArsenal;
 import static gregtech.api.enums.Mods.CropsPlusPlus;
@@ -16,9 +15,7 @@ import static gregtech.api.enums.Mods.OpenBlocks;
 import static gregtech.api.enums.Mods.PamsHarvestCraft;
 import static gregtech.api.enums.Mods.ProjectRedExpansion;
 import static gregtech.api.enums.Mods.ProjectRedTransmission;
-import static gregtech.api.enums.Mods.SGCraft;
 import static gregtech.api.enums.Mods.StructureLib;
-import static gregtech.api.enums.Mods.SuperSolarPanels;
 import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.enums.Mods.ThaumicBases;
 import static gregtech.api.enums.Mods.TinkerConstruct;
@@ -71,19 +68,7 @@ public class ScriptGregtech implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AdvancedSolarPanel.ID,
-                AppliedEnergistics2.ID,
-                Avaritia.ID,
-                CropsPlusPlus.ID,
-                IndustrialCraft2.ID,
-                OpenBlocks.ID,
-                PamsHarvestCraft.ID,
-                ProjectRedExpansion.ID,
-                ProjectRedTransmission.ID,
-                SGCraft.ID,
-                StructureLib.ID,
-                SuperSolarPanels.ID);
+        return Arrays.asList(IndustrialCraft2.ID, StructureLib.ID);
     }
 
     @Override
@@ -120,10 +105,12 @@ public class ScriptGregtech implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.MeatRaw, 1L),
                 "craftingToolMortar",
                 "listAllfishraw");
-        addShapelessRecipe(
-                getModItem(Minecraft.ID, "sugar", 4, 0, missing),
-                "craftingToolMortar",
-                getModItem(CropsPlusPlus.ID, "foodBerries", 1, 1, missing));
+        if (CPPML) {
+            addShapelessRecipe(
+                    getModItem(Minecraft.ID, "sugar", 4, 0, missing),
+                    "craftingToolMortar",
+                    getModItem(CropsPlusPlus.ID, "foodBerries", 1, 1, missing));
+        }
         List<ItemStack> cookedMeatItems = new ArrayList<>(OreDictionary.getOres("listAllmeatcooked")).stream()
                 .filter(
                         itemStack -> !ItemStack.areItemStacksEqual(
@@ -302,12 +289,14 @@ public class ScriptGregtech implements IScriptLoader {
                 "itemCasingStainlessSteel",
                 "circuitAdvanced",
                 "itemCasingStainlessSteel");
-        addShapelessRecipe(
-                ItemList.Cover_SolarPanel.get(1L),
-                getModItem(ProjectRedExpansion.ID, "projectred.expansion.solar_panel", 1, 0, missing));
-        addShapelessRecipe(
-                GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.RedAlloy, 1L),
-                getModItem(ProjectRedTransmission.ID, "projectred.transmission.wire", 1, 0, missing));
+        if (PREDML) {
+            addShapelessRecipe(
+                    ItemList.Cover_SolarPanel.get(1L),
+                    getModItem(ProjectRedExpansion.ID, "projectred.expansion.solar_panel", 1, 0, missing));
+            addShapelessRecipe(
+                    GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.RedAlloy, 1L),
+                    getModItem(ProjectRedTransmission.ID, "projectred.transmission.wire", 1, 0, missing));
+        }
         addShapedRecipe(
                 GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Rubber, 1),
                 "stickRubber",
@@ -348,9 +337,11 @@ public class ScriptGregtech implements IScriptLoader {
                     GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 2L),
                     getModItem(MCFrames.ID, "mcframes.frame", 1, 0, missing));
         }
-        addShapelessRecipe(
-                GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 1L),
-                getModItem(OpenBlocks.ID, "scaffolding", 1, 0, missing));
+        if (OML) {
+            addShapelessRecipe(
+                    GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 1L),
+                    getModItem(OpenBlocks.ID, "scaffolding", 1, 0, missing));
+        }
         addShapelessRecipe(
                 GTOreDictUnificator.get(OrePrefixes.dustSmall, Materials.Glass, 1L),
                 "craftingToolMortar",
@@ -606,7 +597,7 @@ public class ScriptGregtech implements IScriptLoader {
                 "dyeBlue",
                 "dyeWhite");
 
-        if (Thaumcraft.isModLoaded()) {
+        if (Thaumcraft.isModLoaded() && AML && AEML && OML) {
             ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
                     ItemList.Spray_Color_Infinite.get(1L),
                     "---RR----",

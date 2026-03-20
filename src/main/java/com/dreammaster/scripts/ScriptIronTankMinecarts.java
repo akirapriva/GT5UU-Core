@@ -3,7 +3,6 @@ package com.dreammaster.scripts;
 import static gregtech.api.enums.Mods.IronTanks;
 import static gregtech.api.enums.Mods.IronTanksMinecarts;
 import static gregtech.api.enums.Mods.Minecraft;
-import static gregtech.api.enums.Mods.Railcraft;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
@@ -27,7 +26,7 @@ public class ScriptIronTankMinecarts implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Railcraft.ID, IronTanks.ID, IronTanksMinecarts.ID);
+        return Arrays.asList(IronTanks.ID, IronTanksMinecarts.ID);
     }
 
     @Override

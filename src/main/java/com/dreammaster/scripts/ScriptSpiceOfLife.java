@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
 import static gregtech.api.enums.Mods.Minecraft;
 import static gregtech.api.enums.Mods.SpiceOfLife;
@@ -20,23 +21,24 @@ public class ScriptSpiceOfLife implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(IndustrialCraft2.ID, SpiceOfLife.ID);
+        return Arrays.asList(SpiceOfLife.ID);
     }
 
     @Override
     public void loadRecipes() {
-        addShapedRecipe(
-                getModItem(SpiceOfLife.ID, "lunchbag", 1),
-                getModItem(Minecraft.ID, "paper", 1),
-                null,
-                getModItem(Minecraft.ID, "paper", 1),
-                getModItem(IndustrialCraft2.ID, "itemHarz", 1),
-                getModItem(Minecraft.ID, "paper", 1),
-                getModItem(IndustrialCraft2.ID, "itemHarz", 1),
-                null,
-                null,
-                null);
-
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(SpiceOfLife.ID, "lunchbag", 1),
+                    getModItem(Minecraft.ID, "paper", 1),
+                    null,
+                    getModItem(Minecraft.ID, "paper", 1),
+                    getModItem(IndustrialCraft2.ID, "itemHarz", 1),
+                    getModItem(Minecraft.ID, "paper", 1),
+                    getModItem(IndustrialCraft2.ID, "itemHarz", 1),
+                    null,
+                    null,
+                    null);
+        }
         addShapedRecipe(
                 getModItem(SpiceOfLife.ID, "lunchbox", 1),
                 "plateDoubleIron",

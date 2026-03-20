@@ -4,20 +4,29 @@ import static gregtech.api.enums.Mods.*;
 
 public class BooleanModLoaded {
 
+    public static final boolean NCML = IC2NuclearControl.isModLoaded();
+    public static final boolean CBML = CarpentersBlocks.isModLoaded();
+    public static final boolean SCML = StevesCarts2.isModLoaded();
+    public static final boolean SAML = StevesAddons.isModLoaded();
     public static final boolean RML = RemoteIO.isModLoaded();
     public static final boolean EFRML = EtFuturumRequiem.isModLoaded();
     public static final boolean AMAGYML = Automagy.isModLoaded();
     public static final boolean EIOML = EnderIO.isModLoaded();
     public static final boolean CML = Computronics.isModLoaded();
     public static final boolean GSuiteML = GraviSuite.isModLoaded();
+    public static final boolean ZML = ZTones.isModLoaded();
     public static final boolean ASML = AdvancedSolarPanel.isModLoaded();
     public static final boolean OCML = OpenComputers.isModLoaded();
     public static final boolean ABML = AdventureBackpack.isModLoaded();
     public static final boolean BCML = BuildCraftCore.isModLoaded();
     public static final boolean ICML = IndustrialCraft2.isModLoaded();
+    public static final boolean AESML = AE2Stuff.isModLoaded();
+    public static final boolean TCMML = TinkersMechworks.isModLoaded();
     public static final boolean AEML = AppliedEnergistics2.isModLoaded();
+    public static final boolean AEFCML = AE2FluidCraft.isModLoaded();
     public static final boolean AML = Avaritia.isModLoaded();
     public static final boolean AAML = AvaritiaAddons.isModLoaded();
+    public static final boolean ITML = IronTanks.isModLoaded();
     public static final boolean IML = IronChests.isModLoaded();
     public static final boolean XUML = ExtraUtilities.isModLoaded();
     public static final boolean EML = EternalSingularity.isModLoaded();
@@ -25,17 +34,21 @@ public class BooleanModLoaded {
     public static final boolean GSML = GalaxySpace.isModLoaded();
     public static final boolean GCML = GalacticraftCore.isModLoaded();
     public static final boolean AMML = GalacticraftAmunRa.isModLoaded();
+    public static final boolean ICMML = IronChestsMinecarts.isModLoaded();
     public static final boolean SML = SleepingBags.isModLoaded();
     public static final boolean BPML = Backpack.isModLoaded();
     public static final boolean PHML = PamsHarvestCraft.isModLoaded();
+    public static final boolean PHNML = PamsHarvestTheNether.isModLoaded();
     public static final boolean RCML = Railcraft.isModLoaded();
+    public static final boolean LPML = LogisticsPipes.isModLoaded();
     public static final boolean DEML = DraconicEvolution.isModLoaded();
     public static final boolean BOPML = BiomesOPlenty.isModLoaded();
+    public static final boolean BIBLIOML = BiblioCraft.isModLoaded();
     public static final boolean BAML = BloodArsenal.isModLoaded();
     public static final boolean BML = Botania.isModLoaded();
     public static final boolean ESML = EnderStorage.isModLoaded();
     public static final boolean FMML = ForbiddenMagic.isModLoaded();
-    public static final boolean ITML = IguanaTweaksTinkerConstruct.isModLoaded();
+    public static final boolean IGTML = IguanaTweaksTinkerConstruct.isModLoaded();
     public static final boolean MBML = MagicBees.isModLoaded();
     public static final boolean BMML = BloodMagic.isModLoaded();
     public static final boolean NML = Natura.isModLoaded();
@@ -47,12 +60,15 @@ public class BooleanModLoaded {
     public static final boolean TMML = TaintedMagic.isModLoaded();
     public static final boolean TML = Thaumcraft.isModLoaded();
     public static final boolean TBML = ThaumicBases.isModLoaded();
+    public static final boolean THEML = ThaumicExploration.isModLoaded();
     public static final boolean TCML = TinkerConstruct.isModLoaded();
     public static final boolean TFML = TwilightForest.isModLoaded();
     public static final boolean WML = Witchery.isModLoaded();
     public static final boolean RTML = RandomThings.isModLoaded();
     public static final boolean GEML = Genetics.isModLoaded();
+    public static final boolean GDML = Gendustry.isModLoaded();
     public static final boolean PREDML = ProjectRedCore.isModLoaded();
+    public static final boolean PBLUEML = ProjectBlue.isModLoaded();
     public static final boolean BOML = Botany.isModLoaded();
     public static final boolean CHML = Chisel.isModLoaded();
     public static final boolean FML = Forestry.isModLoaded();
@@ -60,4 +76,8 @@ public class BooleanModLoaded {
     public static final boolean EXML = ExtraBees.isModLoaded();
     public static final boolean OML = OpenBlocks.isModLoaded();
     public static final boolean FMBML = ForgeMicroblocks.isModLoaded();
+    public static final boolean FLML = FloodLights.isModLoaded();
+    public static final boolean MDML = MalisisDoors.isModLoaded();
+    public static final boolean WRML = WirelessRedstoneCBECore.isModLoaded();
+    public static final boolean CPPML = CropsPlusPlus.isModLoaded();
 }

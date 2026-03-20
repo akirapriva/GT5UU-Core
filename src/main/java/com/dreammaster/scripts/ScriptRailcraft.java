@@ -65,18 +65,7 @@ public class ScriptRailcraft implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Backpack.ID,
-                BuildCraftFactory.ID,
-                EnderIO.ID,
-                Forestry.ID,
-                ForgeMicroblocks.ID,
-                IC2NuclearControl.ID,
-                IndustrialCraft2.ID,
-                PamsHarvestCraft.ID,
-                ProjectRedIntegration.ID,
-                Railcraft.ID,
-                StevesCarts2.ID);
+        return Arrays.asList(Railcraft.ID);
     }
 
     @Override
@@ -544,38 +533,40 @@ public class ScriptRailcraft implements IScriptLoader {
                 "plateSteel",
                 "plateRedAlloy",
                 "plateSteel");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "signal", 4, 10, missing),
-                "plateSteel",
-                getModItem(Railcraft.ID, "part.circuit", 1, 0, missing),
-                "plateSteel",
-                "plateSteel",
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
-                "plateSteel");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "signal", 4, 8, missing),
-                "plateSteel",
-                getModItem(Railcraft.ID, "part.circuit", 1, 1, missing),
-                "plateSteel",
-                "plateSteel",
-                "plateRedAlloy",
-                "plateSteel");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "signal", 4, 7, missing),
-                "plateSteel",
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 10, missing),
-                "plateSteel",
-                "plateSteel",
-                "plateRedAlloy",
-                "plateSteel");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "signal", 4, 6, missing),
-                "plateSteel",
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
-                "plateSteel",
-                "plateSteel",
-                "plateRedAlloy",
-                "plateSteel");
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "signal", 4, 10, missing),
+                    "plateSteel",
+                    getModItem(Railcraft.ID, "part.circuit", 1, 0, missing),
+                    "plateSteel",
+                    "plateSteel",
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
+                    "plateSteel");
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "signal", 4, 8, missing),
+                    "plateSteel",
+                    getModItem(Railcraft.ID, "part.circuit", 1, 1, missing),
+                    "plateSteel",
+                    "plateSteel",
+                    "plateRedAlloy",
+                    "plateSteel");
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "signal", 4, 7, missing),
+                    "plateSteel",
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 10, missing),
+                    "plateSteel",
+                    "plateSteel",
+                    "plateRedAlloy",
+                    "plateSteel");
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "signal", 4, 6, missing),
+                    "plateSteel",
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
+                    "plateSteel",
+                    "plateSteel",
+                    "plateRedAlloy",
+                    "plateSteel");
+        }
         addShapedRecipe(
                 getModItem(Railcraft.ID, "signal", 4, 0, missing),
                 "plateSteel",
@@ -708,17 +699,19 @@ public class ScriptRailcraft implements IScriptLoader {
                 "stoneMossy",
                 "plateRedAlloy",
                 "stoneMossy");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "detector", 4, 4, missing),
-                "stoneCobble",
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
-                "stoneCobble",
-                "plateRedAlloy",
-                getModItem(Minecraft.ID, "heavy_weighted_pressure_plate", 1, 0, missing),
-                "plateRedAlloy",
-                "stoneCobble",
-                "plateRedAlloy",
-                "stoneCobble");
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "detector", 4, 4, missing),
+                    "stoneCobble",
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
+                    "stoneCobble",
+                    "plateRedAlloy",
+                    getModItem(Minecraft.ID, "heavy_weighted_pressure_plate", 1, 0, missing),
+                    "plateRedAlloy",
+                    "stoneCobble",
+                    "plateRedAlloy",
+                    "stoneCobble");
+        }
         addShapedRecipe(
                 getModItem(Railcraft.ID, "detector", 4, 5, missing),
                 getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
@@ -917,28 +910,30 @@ public class ScriptRailcraft implements IScriptLoader {
                 "paneGlass",
                 GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Steel, 1L),
                 "paneGlass");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "machine.gamma", 2, 6, missing),
-                "plateSteel",
-                GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Gold, 1L),
-                "plateSteel",
-                "plateRedAlloy",
-                getModItem(Railcraft.ID, "detector", 1, 10, missing),
-                "plateRedAlloy",
-                "plateSteel",
-                getModItem(IndustrialCraft2.ID, "itemAdvBat", 1, wildcard, missing),
-                "plateSteel");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "machine.gamma", 2, 7, missing),
-                "plateSteel",
-                getModItem(IndustrialCraft2.ID, "itemAdvBat", 1, wildcard, missing),
-                "plateSteel",
-                "plateRedAlloy",
-                getModItem(Railcraft.ID, "detector", 1, 10, missing),
-                "plateRedAlloy",
-                "plateSteel",
-                GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Gold, 1L),
-                "plateSteel");
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "machine.gamma", 2, 6, missing),
+                    "plateSteel",
+                    GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Gold, 1L),
+                    "plateSteel",
+                    "plateRedAlloy",
+                    getModItem(Railcraft.ID, "detector", 1, 10, missing),
+                    "plateRedAlloy",
+                    "plateSteel",
+                    getModItem(IndustrialCraft2.ID, "itemAdvBat", 1, wildcard, missing),
+                    "plateSteel");
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "machine.gamma", 2, 7, missing),
+                    "plateSteel",
+                    getModItem(IndustrialCraft2.ID, "itemAdvBat", 1, wildcard, missing),
+                    "plateSteel",
+                    "plateRedAlloy",
+                    getModItem(Railcraft.ID, "detector", 1, 10, missing),
+                    "plateRedAlloy",
+                    "plateSteel",
+                    GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.Gold, 1L),
+                    "plateSteel");
+        }
         addShapedRecipe(
                 getModItem(Railcraft.ID, "machine.gamma", 1, 8, missing),
                 getModItem(Minecraft.ID, "dispenser", 1, 0, missing),
@@ -1002,17 +997,19 @@ public class ScriptRailcraft implements IScriptLoader {
                 null,
                 "craftingToolScrewdriver",
                 null);
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "cart.tank", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "craftingToolWrench",
-                null,
-                getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                null,
-                null,
-                "craftingToolScrewdriver",
-                null);
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "cart.tank", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "craftingToolWrench",
+                    null,
+                    getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                    null,
+                    null,
+                    "craftingToolScrewdriver",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(Railcraft.ID, "tool.steel.shears", 1, 0, missing),
                 "plateSteel",
@@ -1101,116 +1098,118 @@ public class ScriptRailcraft implements IScriptLoader {
                 "blockDiamond",
                 "blockDiamond",
                 "blockDiamond");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 0, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 28, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 28, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 1, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 26, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 26, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 2, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 27, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 27, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 3, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 24, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 24, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 4, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 23, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 23, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 5, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 29, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 29, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 6, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 25, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 25, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 7, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 22, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Railcraft.ID, "slab", 1, 22, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 8, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Minecraft.ID, "stone_slab", 1, 1, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Minecraft.ID, "stone_slab", 1, 1, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "lantern.stone", 1, 9, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                "craftingToolFile",
-                getModItem(Minecraft.ID, "torch", 1, 0, missing),
-                "craftingToolHardHammer",
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
-                getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
-                getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+        if (FMBML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 0, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 28, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 28, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 1, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 26, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 26, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 2, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 27, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 27, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 3, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 24, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 24, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 4, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 23, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 23, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 5, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 29, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 29, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 6, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 25, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 25, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 7, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 22, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Railcraft.ID, "slab", 1, 22, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 8, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Minecraft.ID, "stone_slab", 1, 1, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Minecraft.ID, "stone_slab", 1, 1, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "lantern.stone", 1, 9, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    "craftingToolFile",
+                    getModItem(Minecraft.ID, "torch", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing),
+                    getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
+                    getModItem(ForgeMicroblocks.ID, "stoneRod", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(Railcraft.ID, "lantern.metal", 1, 0, missing),
                 "screwAnyIron",
@@ -1277,41 +1276,45 @@ public class ScriptRailcraft implements IScriptLoader {
                 "screwSteel",
                 "plateSteel",
                 "screwSteel");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "part.signal.lamp", 8, 0, missing),
-                "paneGlass",
-                createItemStack(
-                        ForgeMicroblocks.ID,
-                        "microblock",
-                        1,
-                        516,
-                        "{mat:\"ProjRed|Illumination:projectred.illumination.lamp_29\"}",
-                        missing),
-                "plateAnyIron",
-                "paneGlass",
-                createItemStack(
-                        ForgeMicroblocks.ID,
-                        "microblock",
-                        1,
-                        516,
-                        "{mat:\"ProjRed|Illumination:projectred.illumination.lamp_20\"}",
-                        missing),
-                "plateAnyIron",
-                "paneGlass",
-                createItemStack(
-                        ForgeMicroblocks.ID,
-                        "microblock",
-                        1,
-                        516,
-                        "{mat:\"ProjRed|Illumination:projectred.illumination.lamp_30\"}",
-                        missing),
-                "plateAnyIron");
-        addShapelessRecipe(
-                getModItem(Railcraft.ID, "part.turbine.disk", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "itemSteamTurbineBlade", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(Railcraft.ID, "part.turbine.rotor", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "itemSteamTurbine", 1, 0, missing));
+        if (FMBML && PREDML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "part.signal.lamp", 8, 0, missing),
+                    "paneGlass",
+                    createItemStack(
+                            ForgeMicroblocks.ID,
+                            "microblock",
+                            1,
+                            516,
+                            "{mat:\"ProjRed|Illumination:projectred.illumination.lamp_29\"}",
+                            missing),
+                    "plateAnyIron",
+                    "paneGlass",
+                    createItemStack(
+                            ForgeMicroblocks.ID,
+                            "microblock",
+                            1,
+                            516,
+                            "{mat:\"ProjRed|Illumination:projectred.illumination.lamp_20\"}",
+                            missing),
+                    "plateAnyIron",
+                    "paneGlass",
+                    createItemStack(
+                            ForgeMicroblocks.ID,
+                            "microblock",
+                            1,
+                            516,
+                            "{mat:\"ProjRed|Illumination:projectred.illumination.lamp_30\"}",
+                            missing),
+                    "plateAnyIron");
+        }
+        if (ICML) {
+            addShapelessRecipe(
+                    getModItem(Railcraft.ID, "part.turbine.disk", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "itemSteamTurbineBlade", 1, 0, missing));
+            addShapelessRecipe(
+                    getModItem(Railcraft.ID, "part.turbine.rotor", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "itemSteamTurbine", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(Railcraft.ID, "armor.goggles", 1, 0, missing),
                 "lensGlass",
@@ -1360,21 +1363,23 @@ public class ScriptRailcraft implements IScriptLoader {
                 getModItem(Railcraft.ID, "slab", 2, 38, missing),
                 "craftingToolSaw",
                 getModItem(Railcraft.ID, "cube", 1, 8, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "backpack.trackman.t1", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                getModItem(Minecraft.ID, "rail", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                getModItem(Minecraft.ID, "rail", 1, 0, missing),
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "backpack.trackman.t1", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    getModItem(Minecraft.ID, "rail", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    getModItem(Minecraft.ID, "rail", 1, 0, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Railcraft.ID, "backpack.trackman.t1", 1, 0, missing),
                 getModItem(Railcraft.ID, "backpack.trackman.t1", 1, 0, missing));
-        if (BOPML) {
+        if (BOPML && BPML && PHML) {
             addShapedRecipe(
                     getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing),
                     getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
@@ -1390,17 +1395,19 @@ public class ScriptRailcraft implements IScriptLoader {
         addShapelessRecipe(
                 getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing),
                 getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "backpack.apothecary.t1", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                getModItem(Minecraft.ID, "potion", 1, 8229, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                getModItem(Minecraft.ID, "potion", 1, 8229, missing),
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "backpack.apothecary.t1", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    getModItem(Minecraft.ID, "potion", 1, 8229, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    getModItem(Minecraft.ID, "potion", 1, 8229, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Railcraft.ID, "backpack.apothecary.t1", 1, 0, missing),
                 getModItem(Railcraft.ID, "backpack.apothecary.t1", 1, 0, missing));
@@ -1415,17 +1422,19 @@ public class ScriptRailcraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "upgrade.lapotron", 1, 0, missing),
-                "itemCasingAluminium",
-                "circuitAdvanced",
-                "itemCasingAluminium",
-                "cableGt02Platinum",
-                getModItem(IndustrialCraft2.ID, "itemBatLamaCrystal", 1, wildcard, missing),
-                "cableGt02Platinum",
-                "itemCasingAluminium",
-                "circuitAdvanced",
-                "itemCasingAluminium");
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "upgrade.lapotron", 1, 0, missing),
+                    "itemCasingAluminium",
+                    "circuitAdvanced",
+                    "itemCasingAluminium",
+                    "cableGt02Platinum",
+                    getModItem(IndustrialCraft2.ID, "itemBatLamaCrystal", 1, wildcard, missing),
+                    "cableGt02Platinum",
+                    "itemCasingAluminium",
+                    "circuitAdvanced",
+                    "itemCasingAluminium");
+        }
         addShapedRecipe(
                 getModItem(Railcraft.ID, "cart.cargo", 1, 0, missing),
                 "craftingToolHardHammer",
@@ -1437,83 +1446,89 @@ public class ScriptRailcraft implements IScriptLoader {
                 null,
                 "craftingToolScrewdriver",
                 null);
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "cart.track.relayer", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                getModItem(IC2NuclearControl.ID, "blockNuclearControlLight", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                ItemList.Conveyor_Module_LV.get(1L),
-                "circuitBasic",
-                ItemList.Conveyor_Module_LV.get(1L),
-                ItemList.Electric_Motor_LV.get(1L),
-                getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "CartModule", 1, 8, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "cart.undercutter", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                getModItem(IC2NuclearControl.ID, "blockNuclearControlLight", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                ItemList.Electric_Piston_LV.get(1L),
-                "circuitBasic",
-                ItemList.Electric_Piston_LV.get(1L),
-                ItemList.Electric_Motor_LV.get(1L),
-                getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                ItemList.Conveyor_Module_LV.get(1L));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "cart.track.layer", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                getModItem(IC2NuclearControl.ID, "blockNuclearControlLight", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                getModItem(Minecraft.ID, "anvil", 1, 0, missing),
-                "circuitBasic",
-                getModItem(Minecraft.ID, "anvil", 1, 0, missing),
-                ItemList.Electric_Motor_LV.get(1L),
-                getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                getModItem(Minecraft.ID, "dispenser", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "cart.track.remover", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                getModItem(IC2NuclearControl.ID, "blockNuclearControlLight", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                getModItem(Railcraft.ID, "tool.crowbar.reinforced", 1, 0, missing),
-                "circuitBasic",
-                getModItem(Railcraft.ID, "tool.crowbar.reinforced", 1, 0, missing),
-                ItemList.Electric_Motor_LV.get(1L),
-                getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                ItemList.Electric_Motor_LV.get(1L));
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "cart.redstone.flux", 1, 0, missing),
-                "plateLead",
-                "craftingToolScrewdriver",
-                "plateLead",
-                createItemStack(EnderIO.ID, "blockCapBank", 1, 1, "{type:\"SIMPLE\",storedEnergyRF:0}", missing),
-                "circuitBasic",
-                createItemStack(EnderIO.ID, "blockCapBank", 1, 1, "{type:\"SIMPLE\",storedEnergyRF:0}", missing),
-                "screwSteel",
-                getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                "screwSteel");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "machine.gamma", 1, 10, missing),
-                "plateLead",
-                getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 0, missing),
-                "plateLead",
-                "plateRedstoneAlloy",
-                getModItem(Railcraft.ID, "detector", 1, 10, missing),
-                "plateRedstoneAlloy",
-                "plateLead",
-                createItemStack(EnderIO.ID, "blockCapBank", 1, 1, "{type:\"SIMPLE\",storedEnergyRF:0}", missing),
-                "plateLead");
-        addShapedRecipe(
-                getModItem(Railcraft.ID, "machine.gamma", 1, 11, missing),
-                "plateLead",
-                createItemStack(EnderIO.ID, "blockCapBank", 1, 1, "{type:\"SIMPLE\",storedEnergyRF:0}", missing),
-                "plateLead",
-                "plateRedstoneAlloy",
-                getModItem(Railcraft.ID, "detector", 1, 10, missing),
-                "plateRedstoneAlloy",
-                "plateLead",
-                getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 0, missing),
-                "plateLead");
+        if (NCML) {
+            if (SCML) {
+                addShapedRecipe(
+                        getModItem(Railcraft.ID, "cart.track.relayer", 1, 0, missing),
+                        ItemList.Robot_Arm_LV.get(1L),
+                        getModItem(IC2NuclearControl.ID, "blockNuclearControlLight", 1, 0, missing),
+                        ItemList.Robot_Arm_LV.get(1L),
+                        ItemList.Conveyor_Module_LV.get(1L),
+                        "circuitBasic",
+                        ItemList.Conveyor_Module_LV.get(1L),
+                        ItemList.Electric_Motor_LV.get(1L),
+                        getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                        getModItem(StevesCarts2.ID, "CartModule", 1, 8, missing));
+            }
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "cart.undercutter", 1, 0, missing),
+                    ItemList.Robot_Arm_LV.get(1L),
+                    getModItem(IC2NuclearControl.ID, "blockNuclearControlLight", 1, 0, missing),
+                    ItemList.Robot_Arm_LV.get(1L),
+                    ItemList.Electric_Piston_LV.get(1L),
+                    "circuitBasic",
+                    ItemList.Electric_Piston_LV.get(1L),
+                    ItemList.Electric_Motor_LV.get(1L),
+                    getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                    ItemList.Conveyor_Module_LV.get(1L));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "cart.track.layer", 1, 0, missing),
+                    ItemList.Robot_Arm_LV.get(1L),
+                    getModItem(IC2NuclearControl.ID, "blockNuclearControlLight", 1, 0, missing),
+                    ItemList.Robot_Arm_LV.get(1L),
+                    getModItem(Minecraft.ID, "anvil", 1, 0, missing),
+                    "circuitBasic",
+                    getModItem(Minecraft.ID, "anvil", 1, 0, missing),
+                    ItemList.Electric_Motor_LV.get(1L),
+                    getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                    getModItem(Minecraft.ID, "dispenser", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "cart.track.remover", 1, 0, missing),
+                    ItemList.Robot_Arm_LV.get(1L),
+                    getModItem(IC2NuclearControl.ID, "blockNuclearControlLight", 1, 0, missing),
+                    ItemList.Robot_Arm_LV.get(1L),
+                    getModItem(Railcraft.ID, "tool.crowbar.reinforced", 1, 0, missing),
+                    "circuitBasic",
+                    getModItem(Railcraft.ID, "tool.crowbar.reinforced", 1, 0, missing),
+                    ItemList.Electric_Motor_LV.get(1L),
+                    getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                    ItemList.Electric_Motor_LV.get(1L));
+        }
+        if (EIOML) {
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "cart.redstone.flux", 1, 0, missing),
+                    "plateLead",
+                    "craftingToolScrewdriver",
+                    "plateLead",
+                    createItemStack(EnderIO.ID, "blockCapBank", 1, 1, "{type:\"SIMPLE\",storedEnergyRF:0}", missing),
+                    "circuitBasic",
+                    createItemStack(EnderIO.ID, "blockCapBank", 1, 1, "{type:\"SIMPLE\",storedEnergyRF:0}", missing),
+                    "screwSteel",
+                    getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                    "screwSteel");
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "machine.gamma", 1, 10, missing),
+                    "plateLead",
+                    getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 0, missing),
+                    "plateLead",
+                    "plateRedstoneAlloy",
+                    getModItem(Railcraft.ID, "detector", 1, 10, missing),
+                    "plateRedstoneAlloy",
+                    "plateLead",
+                    createItemStack(EnderIO.ID, "blockCapBank", 1, 1, "{type:\"SIMPLE\",storedEnergyRF:0}", missing),
+                    "plateLead");
+            addShapedRecipe(
+                    getModItem(Railcraft.ID, "machine.gamma", 1, 11, missing),
+                    "plateLead",
+                    createItemStack(EnderIO.ID, "blockCapBank", 1, 1, "{type:\"SIMPLE\",storedEnergyRF:0}", missing),
+                    "plateLead",
+                    "plateRedstoneAlloy",
+                    getModItem(Railcraft.ID, "detector", 1, 10, missing),
+                    "plateRedstoneAlloy",
+                    "plateLead",
+                    getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 0, missing),
+                    "plateLead");
+        }
         addShapedRecipe(
                 getModItem(Railcraft.ID, "machine.epsilon", 1, 5, missing),
                 "screwSteel",
@@ -1536,109 +1551,110 @@ public class ScriptRailcraft implements IScriptLoader {
                 null,
                 null,
                 null);
-
-        ForestryHelper.removeCarpenterRecipe(
-                createItemStack(
-                        Railcraft.ID,
-                        "backpack.trackman.t2",
-                        1,
-                        0,
-                        "{display:{Lore:[0:\"§7§oDesigned by Railcraft, Inc.\"]}}",
-                        missing));
-        ForestryHelper.removeCarpenterRecipe(
-                createItemStack(
-                        Railcraft.ID,
-                        "backpack.iceman.t2",
-                        1,
-                        0,
-                        "{display:{Lore:[0:\"§7§oDesigned by Railcraft, Inc.\"]}}",
-                        missing));
-        ForestryHelper.removeCarpenterRecipe(
-                createItemStack(
-                        Railcraft.ID,
-                        "backpack.apothecary.t2",
-                        1,
-                        0,
-                        "{display:{Lore:[0:\"§7§oDesigned by Railcraft, Inc.\"]}}",
-                        missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("seedoil", 5000),
-                getModItem(Railcraft.ID, "backpack.trackman.t1", 1, 0, missing),
-                getModItem(Railcraft.ID, "backpack.trackman.t2", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'b',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'c',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'd',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'e',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'f',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'g',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'h',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'i',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("seedoil", 5000),
-                getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing),
-                getModItem(Railcraft.ID, "backpack.iceman.t2", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'b',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'c',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'd',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'e',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'f',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'g',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'h',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'i',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("seedoil", 5000),
-                getModItem(Railcraft.ID, "backpack.apothecary.t1", 1, 0, missing),
-                getModItem(Railcraft.ID, "backpack.apothecary.t2", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'b',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'c',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'd',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'e',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'f',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'g',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'h',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'i',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing));
+        if (FML) {
+            ForestryHelper.removeCarpenterRecipe(
+                    createItemStack(
+                            Railcraft.ID,
+                            "backpack.trackman.t2",
+                            1,
+                            0,
+                            "{display:{Lore:[0:\"§7§oDesigned by Railcraft, Inc.\"]}}",
+                            missing));
+            ForestryHelper.removeCarpenterRecipe(
+                    createItemStack(
+                            Railcraft.ID,
+                            "backpack.iceman.t2",
+                            1,
+                            0,
+                            "{display:{Lore:[0:\"§7§oDesigned by Railcraft, Inc.\"]}}",
+                            missing));
+            ForestryHelper.removeCarpenterRecipe(
+                    createItemStack(
+                            Railcraft.ID,
+                            "backpack.apothecary.t2",
+                            1,
+                            0,
+                            "{display:{Lore:[0:\"§7§oDesigned by Railcraft, Inc.\"]}}",
+                            missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("seedoil", 5000),
+                    getModItem(Railcraft.ID, "backpack.trackman.t1", 1, 0, missing),
+                    getModItem(Railcraft.ID, "backpack.trackman.t2", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'b',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'c',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'd',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'e',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'f',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'g',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'h',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'i',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("seedoil", 5000),
+                    getModItem(Railcraft.ID, "backpack.iceman.t1", 1, 0, missing),
+                    getModItem(Railcraft.ID, "backpack.iceman.t2", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'b',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'c',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'd',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'e',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'f',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'g',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'h',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'i',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("seedoil", 5000),
+                    getModItem(Railcraft.ID, "backpack.apothecary.t1", 1, 0, missing),
+                    getModItem(Railcraft.ID, "backpack.apothecary.t2", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'b',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'c',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'd',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'e',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'f',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'g',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'h',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'i',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing));
+        }
 
         GTValues.RA.stdBuilder().itemInputs(Materials.Creosote.getCells(1)).metadata(FUEL_VALUE, 8)
                 .metadata(FUEL_TYPE, 0).duration(0).eut(0).addTo(GTRecipeConstants.Fuel);
@@ -1893,63 +1909,64 @@ public class ScriptRailcraft implements IScriptLoader {
                         'i',
                         "stickSteel"));
         RailcraftHelper.removeRollingRecipe(getModItem(Railcraft.ID, "part.plate", 4, 4, missing));
-        RecipeManagers.fabricatorManager.addRecipe(
-                getModItem(Forestry.ID, "waxCast", 1, wildcard, missing),
-                FluidRegistry.getFluidStack("glass", 2000),
-                getModItem(Railcraft.ID, "glass", 4, 0, missing),
-                new Object[] { "abc", "def", "ghi", 'a',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'b',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'c',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'd',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1L), 'e',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.NetherQuartz, 1L), 'f',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L), 'g',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'h',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'i',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L) });
-        RecipeManagers.fabricatorManager.addRecipe(
-                getModItem(Forestry.ID, "waxCast", 1, wildcard, missing),
-                FluidRegistry.getFluidStack("glass", 2000),
-                getModItem(Railcraft.ID, "glass", 4, 0, missing),
-                new Object[] { "abc", "def", "ghi", 'a',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'b',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'c',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'd',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1L), 'e',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.CertusQuartz, 1L), 'f',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L), 'g',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'h',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'i',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L) });
-        RecipeManagers.fabricatorManager.addRecipe(
-                getModItem(Forestry.ID, "waxCast", 1, wildcard, missing),
-                FluidRegistry.getFluidStack("glass", 2000),
-                getModItem(Railcraft.ID, "glass", 4, 0, missing),
-                new Object[] { "abc", "def", "ghi", 'a',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'b',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'c',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'd',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1L), 'e',
-                        NHItemList.ChargedCertusQuartzDust.get(), 'f',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L), 'g',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'h',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'i',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L) });
-        RecipeManagers.fabricatorManager.addRecipe(
-                getModItem(Forestry.ID, "waxCast", 1, wildcard, missing),
-                FluidRegistry.getFluidStack("glass", 2000),
-                getModItem(Railcraft.ID, "glass", 4, 0, missing),
-                new Object[] { "abc", "def", "ghi", 'a',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'b',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'c',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'd',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1L), 'e',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Quartzite, 1L), 'f',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L), 'g',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'h',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'i',
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L) });
-
+        if (FML) {
+            RecipeManagers.fabricatorManager.addRecipe(
+                    getModItem(Forestry.ID, "waxCast", 1, wildcard, missing),
+                    FluidRegistry.getFluidStack("glass", 2000),
+                    getModItem(Railcraft.ID, "glass", 4, 0, missing),
+                    new Object[] { "abc", "def", "ghi", 'a',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'b',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'c',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'd',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1L), 'e',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.NetherQuartz, 1L), 'f',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L), 'g',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'h',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'i',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L) });
+            RecipeManagers.fabricatorManager.addRecipe(
+                    getModItem(Forestry.ID, "waxCast", 1, wildcard, missing),
+                    FluidRegistry.getFluidStack("glass", 2000),
+                    getModItem(Railcraft.ID, "glass", 4, 0, missing),
+                    new Object[] { "abc", "def", "ghi", 'a',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'b',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'c',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'd',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1L), 'e',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.CertusQuartz, 1L), 'f',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L), 'g',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'h',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'i',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L) });
+            RecipeManagers.fabricatorManager.addRecipe(
+                    getModItem(Forestry.ID, "waxCast", 1, wildcard, missing),
+                    FluidRegistry.getFluidStack("glass", 2000),
+                    getModItem(Railcraft.ID, "glass", 4, 0, missing),
+                    new Object[] { "abc", "def", "ghi", 'a',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'b',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'c',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'd',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1L), 'e',
+                            NHItemList.ChargedCertusQuartzDust.get(), 'f',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L), 'g',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'h',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'i',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L) });
+            RecipeManagers.fabricatorManager.addRecipe(
+                    getModItem(Forestry.ID, "waxCast", 1, wildcard, missing),
+                    FluidRegistry.getFluidStack("glass", 2000),
+                    getModItem(Railcraft.ID, "glass", 4, 0, missing),
+                    new Object[] { "abc", "def", "ghi", 'a',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'b',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'c',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'd',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Tin, 1L), 'e',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Quartzite, 1L), 'f',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Iron, 1L), 'g',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L), 'h',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Saltpeter, 1L), 'i',
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Obsidian, 1L) });
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(Railcraft.ID, "cube", 1, 7, missing))
                 .itemOutputs(Materials.Marble.getDust(1)).duration(8 * SECONDS).eut(4).addTo(maceratorRecipes);
         GTValues.RA.stdBuilder()
@@ -2060,42 +2077,46 @@ public class ScriptRailcraft implements IScriptLoader {
                         getModItem(Railcraft.ID, "machine.alpha", 1, 0, missing))
                 .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.anchor", 1, 0, missing)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                        getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing))
-                .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.tank", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                        getModItem(IndustrialCraft2.ID, "blockElectric", 1, 0, missing))
-                .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.energy.batbox", 1, 0, missing))
-                .duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                        getModItem(IndustrialCraft2.ID, "blockElectric", 1, 7, missing))
-                .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.energy.cesu", 1, 0, missing))
-                .duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "minecart", 1, 0, missing),
-                        getModItem(IndustrialCraft2.ID, "blockElectric", 1, 1, missing))
-                .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.energy.mfe", 1, 0, missing))
-                .duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemToolMEter", 1, 0, missing),
-                        getModItem(Railcraft.ID, "part.circuit", 1, 1, missing))
-                .circuit(1).itemOutputs(getModItem(Railcraft.ID, "tool.electric.meter", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemFreq", 1, 0, missing),
-                        getModItem(Railcraft.ID, "part.circuit", 1, 1, missing))
-                .circuit(1).itemOutputs(getModItem(Railcraft.ID, "tool.signal.tuner", 1, 0, missing))
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (BCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                            getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing))
+                    .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.tank", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+        }
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                            getModItem(IndustrialCraft2.ID, "blockElectric", 1, 0, missing))
+                    .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.energy.batbox", 1, 0, missing))
+                    .duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                            getModItem(IndustrialCraft2.ID, "blockElectric", 1, 7, missing))
+                    .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.energy.cesu", 1, 0, missing))
+                    .duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "minecart", 1, 0, missing),
+                            getModItem(IndustrialCraft2.ID, "blockElectric", 1, 1, missing))
+                    .circuit(1).itemOutputs(getModItem(Railcraft.ID, "cart.energy.mfe", 1, 0, missing))
+                    .duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemToolMEter", 1, 0, missing),
+                            getModItem(Railcraft.ID, "part.circuit", 1, 1, missing))
+                    .circuit(1).itemOutputs(getModItem(Railcraft.ID, "tool.electric.meter", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemFreq", 1, 0, missing),
+                            getModItem(Railcraft.ID, "part.circuit", 1, 1, missing))
+                    .circuit(1).itemOutputs(getModItem(Railcraft.ID, "tool.signal.tuner", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Railcraft.ID, "tool.signal.tuner", 1, 0, missing),

@@ -2,7 +2,7 @@
 {
   "modid": "${modId}",
   "name": "${modName}",
-  "description": "Core Mod for the GT5u Community Edition",
+  "description": "Core Mod for the GT5 Unbound",
   "version": "${modVersion}",
   "mcversion": "${minecraftVersion}",
   "url": "",

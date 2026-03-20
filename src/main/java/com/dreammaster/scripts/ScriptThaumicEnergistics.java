@@ -1,10 +1,9 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AE2Stuff;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.EternalSingularity;
 import static gregtech.api.enums.Mods.Gadomancy;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
 import static gregtech.api.enums.Mods.TaintedMagic;
 import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.enums.Mods.ThaumicEnergistics;
@@ -44,17 +43,7 @@ public class ScriptThaumicEnergistics implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AE2Stuff.ID,
-                AppliedEnergistics2.ID,
-                EternalSingularity.ID,
-                Gadomancy.ID,
-                IndustrialCraft2.ID,
-                TaintedMagic.ID,
-                Thaumcraft.ID,
-                ThaumicEnergistics.ID,
-                ThaumicInsurgence.ID,
-                TinkerConstruct.ID);
+        return Arrays.asList(AppliedEnergistics2.ID, Thaumcraft.ID, ThaumicEnergistics.ID);
     }
 
     @Override
@@ -95,34 +84,33 @@ public class ScriptThaumicEnergistics implements IScriptLoader {
         final FluidStack[] solders = new FluidStack[] { Materials.Lead.getMolten(288), Materials.Tin.getMolten(144),
                 Materials.SolderingAlloy.getMolten(72) };
 
-        // Creates ItemStack for CEC craft input
-        Object[] CECInfusionItems = { ItemList.Field_Generator_UIV.get(1),
-                getModItem(TaintedMagic.ID, "ItemFocusEldritch", 1),
-                getModItem(Gadomancy.ID, "BlockNodeManipulator", 1, 5),
-                getModItem(Gadomancy.ID, "BlockEssentiaCompressor", 1), ItemList.Field_Generator_UIV.get(1),
-                getModItem(TaintedMagic.ID, "ItemFocusEldritch", 1),
-                getModItem(Gadomancy.ID, "BlockNodeManipulator", 1, 5),
-                getModItem(Gadomancy.ID, "BlockEssentiaCompressor", 1), ItemList.Field_Generator_UIV.get(1),
-                getModItem(TaintedMagic.ID, "ItemFocusEldritch", 1),
-                getModItem(Gadomancy.ID, "BlockNodeManipulator", 1, 5),
-                getModItem(Gadomancy.ID, "BlockEssentiaCompressor", 1), ItemList.Field_Generator_UIV.get(1),
-                getModItem(TaintedMagic.ID, "ItemFocusEldritch", 1),
-                getModItem(Gadomancy.ID, "BlockNodeManipulator", 1, 5),
-                getModItem(Gadomancy.ID, "BlockEssentiaCompressor", 1) };
-
         // ItemStacks for in/out
         ItemStack DigitalSingularity = getModItem(ThaumicEnergistics.ID, "storage.essentia", 1, 10);
         // Creative Essentia Cell
 
-        TCHelper.addInfusionCraftingRecipe(
-                "thaumicenergistics.TESTORAGE",
-                EssentialCellCreative,
-                10,
-                new AspectList().add(Aspect.AIR, 2000).add(Aspect.FIRE, 2000).add(Aspect.ORDER, 2000)
-                        .add(Aspect.ENTROPY, 2000).add(Aspect.EARTH, 2000).add(Aspect.WATER, 2000),
-                DigitalSingularity,
-                CECInfusionItems);
-
+        if (TMML && GML) {
+            Object[] CECInfusionItems = { ItemList.Field_Generator_UIV.get(1),
+                    getModItem(TaintedMagic.ID, "ItemFocusEldritch", 1),
+                    getModItem(Gadomancy.ID, "BlockNodeManipulator", 1, 5),
+                    getModItem(Gadomancy.ID, "BlockEssentiaCompressor", 1), ItemList.Field_Generator_UIV.get(1),
+                    getModItem(TaintedMagic.ID, "ItemFocusEldritch", 1),
+                    getModItem(Gadomancy.ID, "BlockNodeManipulator", 1, 5),
+                    getModItem(Gadomancy.ID, "BlockEssentiaCompressor", 1), ItemList.Field_Generator_UIV.get(1),
+                    getModItem(TaintedMagic.ID, "ItemFocusEldritch", 1),
+                    getModItem(Gadomancy.ID, "BlockNodeManipulator", 1, 5),
+                    getModItem(Gadomancy.ID, "BlockEssentiaCompressor", 1), ItemList.Field_Generator_UIV.get(1),
+                    getModItem(TaintedMagic.ID, "ItemFocusEldritch", 1),
+                    getModItem(Gadomancy.ID, "BlockNodeManipulator", 1, 5),
+                    getModItem(Gadomancy.ID, "BlockEssentiaCompressor", 1) };
+            TCHelper.addInfusionCraftingRecipe(
+                    "thaumicenergistics.TESTORAGE",
+                    EssentialCellCreative,
+                    10,
+                    new AspectList().add(Aspect.AIR, 2000).add(Aspect.FIRE, 2000).add(Aspect.ORDER, 2000)
+                            .add(Aspect.ENTROPY, 2000).add(Aspect.EARTH, 2000).add(Aspect.WATER, 2000),
+                    DigitalSingularity,
+                    CECInfusionItems);
+        }
         for (FluidStack solder : solders) {
             // 1k Essentia Storage Component
             GTValues.RA.stdBuilder()
@@ -547,32 +535,34 @@ public class ScriptThaumicEnergistics implements IScriptLoader {
                         .add(Aspect.getAspect("metallum"), 12).add(Aspect.getAspect("vitreus"), 9)
                         .add(Aspect.getAspect("aer"), 6).add(Aspect.getAspect("aqua"), 3));
         TCHelper.setResearchComplexity("thaumicenergistics.TEIO", 3);
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "thaumicenergistics.TEDISTILLATIONPATTERNENCODER",
-                getModItem(ThaumicEnergistics.ID, "thaumicenergistics.block.distillation.encoder", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("ordo"), 25).add(Aspect.getAspect("perditio"), 25)
-                        .add(Aspect.getAspect("ignis"), 25),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "plateInfusedFire",
-                'b',
-                getModItem(Thaumcraft.ID, "ItemThaumometer", 1, 0, missing),
-                'c',
-                "plateInfusedFire",
-                'd',
-                LogicProcessor,
-                'e',
-                getModItem(AE2Stuff.ID, "Encoder", 1, 0, missing),
-                'f',
-                LogicProcessor,
-                'g',
-                "plateInfusedOrder",
-                'h',
-                EngProcessor,
-                'i',
-                "plateInfusedOrder");
+        if (AESML) {
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "thaumicenergistics.TEDISTILLATIONPATTERNENCODER",
+                    getModItem(ThaumicEnergistics.ID, "thaumicenergistics.block.distillation.encoder", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("ordo"), 25).add(Aspect.getAspect("perditio"), 25)
+                            .add(Aspect.getAspect("ignis"), 25),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "plateInfusedFire",
+                    'b',
+                    getModItem(Thaumcraft.ID, "ItemThaumometer", 1, 0, missing),
+                    'c',
+                    "plateInfusedFire",
+                    'd',
+                    LogicProcessor,
+                    'e',
+                    getModItem(AE2Stuff.ID, "Encoder", 1, 0, missing),
+                    'f',
+                    LogicProcessor,
+                    'g',
+                    "plateInfusedOrder",
+                    'h',
+                    EngProcessor,
+                    'i',
+                    "plateInfusedOrder");
+        }
         TCHelper.setResearchAspects(
                 "thaumicenergistics.TEDISTILLATIONPATTERNENCODER",
                 new AspectList().add(Aspect.getAspect("ordo"), 21).add(Aspect.getAspect("fabrico"), 18)
@@ -884,32 +874,34 @@ public class ScriptThaumicEnergistics implements IScriptLoader {
         TCHelper.addResearchPage(
                 "thaumicenergistics.TESTORAGE",
                 new ResearchPage(TCHelper.findArcaneRecipe(EssentialComponent16384K)));
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "thaumicenergistics.TESTORAGE",
-                getModItem(ThaumicEnergistics.ID, "storage.casing", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("ordo"), 10).add(Aspect.getAspect("terra"), 10)
-                        .add(Aspect.getAspect("aqua"), 10),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
-                'b',
-                "plateInfusedFire",
-                'c',
-                getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
-                'd',
-                "plateInfusedEarth",
-                'e',
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                'f',
-                "plateInfusedEarth",
-                'g',
-                "plateThaumium",
-                'h',
-                "plateThaumium",
-                'i',
-                "plateThaumium");
+        if (TCML) {
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "thaumicenergistics.TESTORAGE",
+                    getModItem(ThaumicEnergistics.ID, "storage.casing", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("ordo"), 10).add(Aspect.getAspect("terra"), 10)
+                            .add(Aspect.getAspect("aqua"), 10),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
+                    'b',
+                    "plateInfusedFire",
+                    'c',
+                    getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
+                    'd',
+                    "plateInfusedEarth",
+                    'e',
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    'f',
+                    "plateInfusedEarth",
+                    'g',
+                    "plateThaumium",
+                    'h',
+                    "plateThaumium",
+                    'i',
+                    "plateThaumium");
+        }
         TCHelper.addResearchPage(
                 "thaumicenergistics.TESTORAGE",
                 new ResearchPage(
@@ -1408,26 +1400,32 @@ public class ScriptThaumicEnergistics implements IScriptLoader {
                         .add(Aspect.getAspect("praecantatio"), 9).add(Aspect.getAspect("alienis"), 6)
                         .add(Aspect.getAspect("spiritus"), 3));
         TCHelper.setResearchComplexity("thaumicenergistics.TEINFPROV", 3);
-
-        TCHelper.addInfusionCraftingRecipe(
-                "thaumicenergistics.TEADVINFPROV",
-                getModItem(ThaumicEnergistics.ID, "thaumicenergistics.block.advanced.infusion.provider", 1, 0, missing),
-                30,
-                new AspectList().add(Aspect.MECHANISM, 64).add(Aspect.MAGIC, 64).add(Aspect.EXCHANGE, 64)
-                        .add(Aspect.MIND, 64).add(Aspect.GREED, 64),
-                getModItem(ThaumicEnergistics.ID, "thaumicenergistics.block.infusion.provider", 1, 0, missing),
-                InfusionIntercepter,
-                PrimalCharm,
-                DiffusionCore,
-                ZPMEmitter,
-                DiffusionCore,
-                PrimalCharm,
-                CraftingUnit,
-                PrimalCharm,
-                EngProcessor,
-                ZPMSensor,
-                EngProcessor,
-                PrimalCharm);
+        if (ThaumicInsurgence.isModLoaded()) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "thaumicenergistics.TEADVINFPROV",
+                    getModItem(
+                            ThaumicEnergistics.ID,
+                            "thaumicenergistics.block.advanced.infusion.provider",
+                            1,
+                            0,
+                            missing),
+                    30,
+                    new AspectList().add(Aspect.MECHANISM, 64).add(Aspect.MAGIC, 64).add(Aspect.EXCHANGE, 64)
+                            .add(Aspect.MIND, 64).add(Aspect.GREED, 64),
+                    getModItem(ThaumicEnergistics.ID, "thaumicenergistics.block.infusion.provider", 1, 0, missing),
+                    InfusionIntercepter,
+                    PrimalCharm,
+                    DiffusionCore,
+                    ZPMEmitter,
+                    DiffusionCore,
+                    PrimalCharm,
+                    CraftingUnit,
+                    PrimalCharm,
+                    EngProcessor,
+                    ZPMSensor,
+                    EngProcessor,
+                    PrimalCharm);
+        }
 
         TCHelper.refreshResearchPages("thaumicenergistics.TEESSPROV");
         TCHelper.refreshResearchPages("thaumicenergistics.TEIRONGEARBOX");

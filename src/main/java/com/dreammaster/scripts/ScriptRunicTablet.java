@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Automagy;
 import static gregtech.api.enums.Mods.DraconicEvolution;
 import static gregtech.api.enums.Mods.Thaumcraft;
@@ -26,7 +27,7 @@ public class ScriptRunicTablet implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Automagy.ID, DraconicEvolution.ID, Thaumcraft.ID, ThaumicExploration.ID);
+        return Arrays.asList(Thaumcraft.ID);
     }
 
     @Override
@@ -43,26 +44,29 @@ public class ScriptRunicTablet implements IScriptLoader {
                 getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 2, missing)).setParents("OCULUS")
                         .setSiblings("OCULUS").setConcealed()
                         .setPages(new ResearchPage("kosh.research_page.RUNEDTABLET")).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "RUNEDTABLET",
-                getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 2, missing),
-                10,
-                new AspectList().add(Aspect.getAspect("alienis"), 64).add(Aspect.getAspect("iter"), 32)
-                        .add(Aspect.getAspect("tenebrae"), 32).add(Aspect.getAspect("vacuos"), 32)
-                        .add(Aspect.getAspect("cognitio"), 64).add(Aspect.getAspect("praecantatio"), 128),
-                getModItem(DraconicEvolution.ID, "infoTablet", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 17, missing),
-                getModItem(ThaumicExploration.ID, "pureZombieBrain", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 17, missing),
-                getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 17, missing),
-                getModItem(Automagy.ID, "crystalBrain", 1, 3, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 17, missing));
-        TCHelper.addResearchPage(
-                "RUNEDTABLET",
-                new ResearchPage(
-                        TCHelper.findInfusionRecipe(getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 2, missing))));
-        ThaumcraftApi.addWarpToResearch("RUNEDTABLET", 5);
+        if (DEML && AMAGYML && THEML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "RUNEDTABLET",
+                    getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 2, missing),
+                    10,
+                    new AspectList().add(Aspect.getAspect("alienis"), 64).add(Aspect.getAspect("iter"), 32)
+                            .add(Aspect.getAspect("tenebrae"), 32).add(Aspect.getAspect("vacuos"), 32)
+                            .add(Aspect.getAspect("cognitio"), 64).add(Aspect.getAspect("praecantatio"), 128),
+                    getModItem(DraconicEvolution.ID, "infoTablet", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 17, missing),
+                    getModItem(ThaumicExploration.ID, "pureZombieBrain", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 17, missing),
+                    getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 17, missing),
+                    getModItem(Automagy.ID, "crystalBrain", 1, 3, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 17, missing));
+            TCHelper.addResearchPage(
+                    "RUNEDTABLET",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(
+                                    getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 2, missing))));
+            ThaumcraftApi.addWarpToResearch("RUNEDTABLET", 5);
+        }
     }
 }

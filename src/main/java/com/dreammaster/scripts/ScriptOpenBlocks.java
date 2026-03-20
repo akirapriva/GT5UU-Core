@@ -55,35 +55,24 @@ public class ScriptOpenBlocks implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Backpack.ID,
-                BiblioCraft.ID,
-                BuildCraftCore.ID,
-                ExtraUtilities.ID,
-                Forestry.ID,
-                GalacticraftCore.ID,
-                IndustrialCraft2.ID,
-                OpenBlocks.ID,
-                OpenComputers.ID,
-                ProjectBlue.ID,
-                ProjectRedExpansion.ID,
-                Railcraft.ID,
-                RandomThings.ID);
+        return Arrays.asList(OpenBlocks.ID);
     }
 
     @Override
     public void loadRecipes() {
         ItemStack devNull = getModItem(OpenBlocks.ID, "devnull", 1);
-        ItemStack voidDropFilter = getModItem(RandomThings.ID, "dropFilter", 1, 1);
-        ItemStack trashCan = getModItem(ExtraUtilities.ID, "trashcan", 1);
+        if (RTML) {
+            ItemStack voidDropFilter = getModItem(RandomThings.ID, "dropFilter", 1, 1);
+            addShapelessRecipe(devNull, voidDropFilter);
+        }
+        if (XUML) {
+            FluidStack ender250 = FluidRegistry.getFluidStack("ender", 250);
+            ItemStack trashCan = getModItem(ExtraUtilities.ID, "trashcan", 1);
+            GTValues.RA.stdBuilder().itemInputs(trashCan).itemOutputs(devNull).circuit(2).fluidInputs(ender250)
+                    .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
 
         FluidStack ender250 = FluidRegistry.getFluidStack("ender", 250);
-
-        addShapelessRecipe(devNull, voidDropFilter);
-
-        GTValues.RA.stdBuilder().itemInputs(trashCan).itemOutputs(devNull).circuit(2).fluidInputs(ender250)
-                .duration(15 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-
         addShapedRecipe(
                 getModItem(OpenBlocks.ID, "hangglider", 1, 0, missing),
                 "screwSteel",
@@ -95,28 +84,32 @@ public class ScriptOpenBlocks implements IScriptLoader {
                 "craftingToolWrench",
                 "screwSteel",
                 "craftingToolScrewdriver");
-        addShapedRecipe(
-                getModItem(OpenBlocks.ID, "generic", 1, 0, missing),
-                "craftingToolHardHammer",
-                "stickSteel",
-                "itemLeather",
-                "stickSteel",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather",
-                "itemLeather",
-                "itemLeather",
-                "itemLeather");
-        addShapedRecipe(
-                getModItem(OpenBlocks.ID, "autoanvil", 1, 0, missing),
-                "blockStainlessSteel",
-                "blockStainlessSteel",
-                "blockStainlessSteel",
-                "screwStainlessSteel",
-                getModItem(Railcraft.ID, "anvil", 1, 0, missing),
-                "screwStainlessSteel",
-                "plateRedAlloy",
-                "blockRedstone",
-                "plateRedAlloy");
+        if (BPML) {
+            addShapedRecipe(
+                    getModItem(OpenBlocks.ID, "generic", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    "stickSteel",
+                    "itemLeather",
+                    "stickSteel",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    "itemLeather",
+                    "itemLeather");
+        }
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(OpenBlocks.ID, "autoanvil", 1, 0, missing),
+                    "blockStainlessSteel",
+                    "blockStainlessSteel",
+                    "blockStainlessSteel",
+                    "screwStainlessSteel",
+                    getModItem(Railcraft.ID, "anvil", 1, 0, missing),
+                    "screwStainlessSteel",
+                    "plateRedAlloy",
+                    "blockRedstone",
+                    "plateRedAlloy");
+        }
         addShapedRecipe(
                 getModItem(OpenBlocks.ID, "xpdrain", 1, 0, missing),
                 "screwAnyIron",
@@ -205,23 +198,27 @@ public class ScriptOpenBlocks implements IScriptLoader {
                 NHItemList.AluminiumBars.get(),
                 "stickGold",
                 NHItemList.AluminiumBars.get());
-        addShapedRecipe(
-                getModItem(OpenBlocks.ID, "guide", 1, 0, missing),
-                "stoneObsidian",
-                getModItem(IndustrialCraft2.ID, "blockLuminatorDark", 1, 0, missing),
-                "stoneObsidian",
-                getModItem(IndustrialCraft2.ID, "blockLuminatorDark", 1, 0, missing),
-                "lensDiamond",
-                getModItem(IndustrialCraft2.ID, "blockLuminatorDark", 1, 0, missing),
-                "stoneObsidian",
-                getModItem(IndustrialCraft2.ID, "blockLuminatorDark", 1, 0, missing),
-                "stoneObsidian");
-        addShapelessRecipe(
-                getModItem(OpenBlocks.ID, "blockPlacer", 1, 0, missing),
-                getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 2, missing));
-        addShapelessRecipe(
-                getModItem(OpenBlocks.ID, "blockbreaker", 1, 0, missing),
-                getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 0, missing));
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(OpenBlocks.ID, "guide", 1, 0, missing),
+                    "stoneObsidian",
+                    getModItem(IndustrialCraft2.ID, "blockLuminatorDark", 1, 0, missing),
+                    "stoneObsidian",
+                    getModItem(IndustrialCraft2.ID, "blockLuminatorDark", 1, 0, missing),
+                    "lensDiamond",
+                    getModItem(IndustrialCraft2.ID, "blockLuminatorDark", 1, 0, missing),
+                    "stoneObsidian",
+                    getModItem(IndustrialCraft2.ID, "blockLuminatorDark", 1, 0, missing),
+                    "stoneObsidian");
+        }
+        if (PREDML) {
+            addShapelessRecipe(
+                    getModItem(OpenBlocks.ID, "blockPlacer", 1, 0, missing),
+                    getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 2, missing));
+            addShapelessRecipe(
+                    getModItem(OpenBlocks.ID, "blockbreaker", 1, 0, missing),
+                    getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(OpenBlocks.ID, "itemDropper", 1, 0, missing),
                 "plateStone",
@@ -282,20 +279,24 @@ public class ScriptOpenBlocks implements IScriptLoader {
         addShapelessRecipe(
                 getModItem(OpenBlocks.ID, "sky", 1, 0, missing),
                 getModItem(OpenBlocks.ID, "sky", 1, 1, missing));
-        addShapedRecipe(
-                getModItem(OpenBlocks.ID, "projector", 1, 0, missing),
-                "screwSteel",
-                "craftingToolScrewdriver",
-                "screwSteel",
-                "craftingRedstoneTorch",
-                getModItem(OpenComputers.ID, "hologram1", 1, 0, missing),
-                "craftingRedstoneTorch",
-                "craftingRedstoneTorch",
-                getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
-                "craftingRedstoneTorch");
-        addShapelessRecipe(
-                getModItem(OpenBlocks.ID, "canvas", 1, 0, missing),
-                getModItem(BiblioCraft.ID, "item.PaintingCanvas", 1, 0, missing));
+        if (OCML) {
+            addShapedRecipe(
+                    getModItem(OpenBlocks.ID, "projector", 1, 0, missing),
+                    "screwSteel",
+                    "craftingToolScrewdriver",
+                    "screwSteel",
+                    "craftingRedstoneTorch",
+                    getModItem(OpenComputers.ID, "hologram1", 1, 0, missing),
+                    "craftingRedstoneTorch",
+                    "craftingRedstoneTorch",
+                    getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
+                    "craftingRedstoneTorch");
+        }
+        if (BIBLIOML) {
+            addShapelessRecipe(
+                    getModItem(OpenBlocks.ID, "canvas", 1, 0, missing),
+                    getModItem(BiblioCraft.ID, "item.PaintingCanvas", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(OpenBlocks.ID, "drawingtable", 1, 0, missing),
                 getModItem(OpenBlocks.ID, "generic", 1, 10, missing),
@@ -321,17 +322,19 @@ public class ScriptOpenBlocks implements IScriptLoader {
         addShapelessRecipe(
                 getModItem(OpenBlocks.ID, "scaffolding", 1, 0, missing),
                 GTOreDictUnificator.get(OrePrefixes.frameGt, Materials.Wood, 1L));
-        addShapedRecipe(
-                getModItem(OpenBlocks.ID, "generic", 1, 9, missing),
-                getModItem(ProjectBlue.ID, "miniatureLamp", 1, 14, missing),
-                "plateEnderEye",
-                getModItem(ProjectBlue.ID, "miniatureLamp", 1, 14, missing),
-                ItemList.Electric_Motor_LV.get(1L),
-                "circuitBasic",
-                ItemList.Electric_Motor_LV.get(1L),
-                "rotorAluminium",
-                "plateEnderEye",
-                "rotorAluminium");
+        if (PBLUEML) {
+            addShapedRecipe(
+                    getModItem(OpenBlocks.ID, "generic", 1, 9, missing),
+                    getModItem(ProjectBlue.ID, "miniatureLamp", 1, 14, missing),
+                    "plateEnderEye",
+                    getModItem(ProjectBlue.ID, "miniatureLamp", 1, 14, missing),
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "circuitBasic",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "rotorAluminium",
+                    "plateEnderEye",
+                    "rotorAluminium");
+        }
         if (TCML) {
             addShapedRecipe(
                     getModItem(OpenBlocks.ID, "slimalyzer", 1, 0, missing),
@@ -345,20 +348,24 @@ public class ScriptOpenBlocks implements IScriptLoader {
                     "circuitBasic",
                     "craftingToolFile");
         }
-        addShapelessRecipe(
-                getModItem(OpenBlocks.ID, "paintBrush", 1, 0, missing),
-                getModItem(BuildCraftCore.ID, "paintbrush", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(OpenBlocks.ID, "sonicglasses", 1, 0, missing),
-                "wireGt01RedAlloy",
-                getModItem(GalacticraftCore.ID, "item.basicItem", 1, 19, missing),
-                "wireGt01RedAlloy",
-                "circuitBasic",
-                getModItem(Minecraft.ID, "iron_helmet", 1, 0, missing),
-                "circuitBasic",
-                "screwAluminium",
-                "craftingToolScrewdriver",
-                "screwAluminium");
+        if (BCML) {
+            addShapelessRecipe(
+                    getModItem(OpenBlocks.ID, "paintBrush", 1, 0, missing),
+                    getModItem(BuildCraftCore.ID, "paintbrush", 1, 0, missing));
+        }
+        if (GCML) {
+            addShapedRecipe(
+                    getModItem(OpenBlocks.ID, "sonicglasses", 1, 0, missing),
+                    "wireGt01RedAlloy",
+                    getModItem(GalacticraftCore.ID, "item.basicItem", 1, 19, missing),
+                    "wireGt01RedAlloy",
+                    "circuitBasic",
+                    getModItem(Minecraft.ID, "iron_helmet", 1, 0, missing),
+                    "circuitBasic",
+                    "screwAluminium",
+                    "craftingToolScrewdriver",
+                    "screwAluminium");
+        }
 
         GTValues.RA.stdBuilder()
                 .itemInputs(
@@ -376,12 +383,14 @@ public class ScriptOpenBlocks implements IScriptLoader {
                 .itemOutputs(getModItem(OpenBlocks.ID, "sky", 1, 1, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 144)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_LV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        ItemList.Machine_LV_Mixer.get(1L),
-                        getModItem(IndustrialCraft2.ID, "itemCasing", 4, 4, missing))
-                .itemOutputs(getModItem(OpenBlocks.ID, "paintmixer", 1, 0, missing)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            ItemList.Machine_LV_Mixer.get(1L),
+                            getModItem(IndustrialCraft2.ID, "itemCasing", 4, 4, missing))
+                    .itemOutputs(getModItem(OpenBlocks.ID, "paintmixer", 1, 0, missing)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         ItemList.Machine_LV_Mixer.get(1L),
@@ -394,24 +403,28 @@ public class ScriptOpenBlocks implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.PigIron, 4))
                 .itemOutputs(getModItem(OpenBlocks.ID, "paintmixer", 1, 0, missing)).duration(30 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "factory", 1, 0, missing),
-                        getModItem(IndustrialCraft2.ID, "itemCasing", 4, 4, missing))
-                .itemOutputs(getModItem(OpenBlocks.ID, "xpbottler", 1, 0, missing)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "factory", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.WroughtIron, 4))
-                .itemOutputs(getModItem(OpenBlocks.ID, "xpbottler", 1, 0, missing)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "factory", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.PigIron, 4))
-                .itemOutputs(getModItem(OpenBlocks.ID, "xpbottler", 1, 0, missing)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (FML) {
+            if (ICML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "factory", 1, 0, missing),
+                                getModItem(IndustrialCraft2.ID, "itemCasing", 4, 4, missing))
+                        .itemOutputs(getModItem(OpenBlocks.ID, "xpbottler", 1, 0, missing)).duration(30 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Forestry.ID, "factory", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.WroughtIron, 4))
+                    .itemOutputs(getModItem(OpenBlocks.ID, "xpbottler", 1, 0, missing)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Forestry.ID, "factory", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.PigIron, 4))
+                    .itemOutputs(getModItem(OpenBlocks.ID, "xpbottler", 1, 0, missing)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (TCML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(

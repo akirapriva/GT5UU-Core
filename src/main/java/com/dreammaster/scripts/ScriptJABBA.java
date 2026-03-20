@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.EnderStorage;
 import static gregtech.api.enums.Mods.ExtraTrees;
@@ -34,15 +35,7 @@ public class ScriptJABBA implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                BiomesOPlenty.ID,
-                EnderStorage.ID,
-                ExtraTrees.ID,
-                ExtraUtilities.ID,
-                Forestry.ID,
-                JABBA.ID,
-                Natura.ID,
-                Railcraft.ID);
+        return Arrays.asList(JABBA.ID);
     }
 
     @Override
@@ -52,39 +45,47 @@ public class ScriptJABBA implements IScriptLoader {
                 .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
                 .addTo(assemblerRecipes);
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(BiomesOPlenty.ID, "planks", 8, wildcard), getModItem(Minecraft.ID, "chest", 1))
-                .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(assemblerRecipes);
+        if (BOPML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BiomesOPlenty.ID, "planks", 8, wildcard),
+                            getModItem(Minecraft.ID, "chest", 1))
+                    .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
+                    .addTo(assemblerRecipes);
+        }
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(ExtraTrees.ID, "planks", 8, wildcard), getModItem(Minecraft.ID, "chest", 1))
+                    .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
+                    .addTo(assemblerRecipes);
+        }
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 8, wildcard),
+                            getModItem(Minecraft.ID, "chest", 1))
+                    .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
+                    .addTo(assemblerRecipes);
+        }
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Forestry.ID, "planks", 8, wildcard), getModItem(Minecraft.ID, "chest", 1))
+                    .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
+                    .addTo(assemblerRecipes);
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(ExtraTrees.ID, "planks", 8, wildcard), getModItem(Minecraft.ID, "chest", 1))
-                .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraUtilities.ID, "colorWoodPlanks", 8, wildcard),
-                        getModItem(Minecraft.ID, "chest", 1))
-                .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Forestry.ID, "planks", 8, wildcard), getModItem(Minecraft.ID, "chest", 1))
-                .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "planksFireproof", 8, wildcard),
-                        getModItem(Minecraft.ID, "chest", 1))
-                .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(assemblerRecipes);
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Natura.ID, "planks", 8, wildcard), getModItem(Minecraft.ID, "chest", 1))
-                .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Forestry.ID, "planksFireproof", 8, wildcard),
+                            getModItem(Minecraft.ID, "chest", 1))
+                    .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
+                    .addTo(assemblerRecipes);
+        }
+        if (NML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Natura.ID, "planks", 8, wildcard), getModItem(Minecraft.ID, "chest", 1))
+                    .itemOutputs(getModItem(JABBA.ID, "barrel", 1)).duration(10 * SECONDS).eut(TierEU.RECIPE_LV / 2)
+                    .addTo(assemblerRecipes);
+        }
 
         GTValues.RA.stdBuilder().itemInputs(getModItem(JABBA.ID, "barrel", 1), getModItem(Minecraft.ID, "piston", 1))
                 .circuit(1).itemOutputs(getModItem(JABBA.ID, "upgradeCore", 1)).duration(60 * SECONDS)
@@ -423,30 +424,31 @@ public class ScriptJABBA implements IScriptLoader {
                 "stickBlackPlutonium",
                 "plateBlackPlutonium",
                 "stickBlackPlutonium");
+        if (ESML) {
+            addShapedRecipe(
+                    getModItem(JABBA.ID, "upgradeCore", 2, 1),
+                    "plateEnderEye",
+                    getModItem(Minecraft.ID, "piston", 1),
+                    "plateEnderEye",
+                    getModItem(Minecraft.ID, "piston", 1),
+                    getModItem(EnderStorage.ID, "enderChest", 1),
+                    getModItem(Minecraft.ID, "piston", 1),
+                    "plateEnderEye",
+                    getModItem(Minecraft.ID, "piston", 1),
+                    "plateEnderEye");
 
-        addShapedRecipe(
-                getModItem(JABBA.ID, "upgradeCore", 2, 1),
-                "plateEnderEye",
-                getModItem(Minecraft.ID, "piston", 1),
-                "plateEnderEye",
-                getModItem(Minecraft.ID, "piston", 1),
-                getModItem(EnderStorage.ID, "enderChest", 1),
-                getModItem(Minecraft.ID, "piston", 1),
-                "plateEnderEye",
-                getModItem(Minecraft.ID, "piston", 1),
-                "plateEnderEye");
-
-        addShapedRecipe(
-                getModItem(JABBA.ID, "upgradeCore", 2, 1),
-                "plateEnderEye",
-                getModItem(Minecraft.ID, "sticky_piston", 1),
-                "plateEnderEye",
-                getModItem(Minecraft.ID, "piston", 1),
-                getModItem(EnderStorage.ID, "enderChest", 1),
-                getModItem(Minecraft.ID, "piston", 1),
-                "plateEnderEye",
-                getModItem(Minecraft.ID, "sticky_piston", 1),
-                "plateEnderEye");
+            addShapedRecipe(
+                    getModItem(JABBA.ID, "upgradeCore", 2, 1),
+                    "plateEnderEye",
+                    getModItem(Minecraft.ID, "sticky_piston", 1),
+                    "plateEnderEye",
+                    getModItem(Minecraft.ID, "piston", 1),
+                    getModItem(EnderStorage.ID, "enderChest", 1),
+                    getModItem(Minecraft.ID, "piston", 1),
+                    "plateEnderEye",
+                    getModItem(Minecraft.ID, "sticky_piston", 1),
+                    "plateEnderEye");
+        }
 
         addShapedRecipe(
                 getModItem(JABBA.ID, "upgradeCore", 1, 2),
@@ -495,31 +497,31 @@ public class ScriptJABBA implements IScriptLoader {
                 "plateIron",
                 getModItem(Minecraft.ID, "sticky_piston", 1),
                 "plateIron");
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(JABBA.ID, "upgradeCore", 1, 7),
+                    "plateIron",
+                    getModItem(Minecraft.ID, "piston", 1),
+                    "plateIron",
+                    getModItem(Minecraft.ID, "piston", 1),
+                    getModItem(Railcraft.ID, "machine.beta", 1, 11),
+                    getModItem(Minecraft.ID, "piston", 1),
+                    "plateIron",
+                    getModItem(Minecraft.ID, "piston", 1),
+                    "plateIron");
 
-        addShapedRecipe(
-                getModItem(JABBA.ID, "upgradeCore", 1, 7),
-                "plateIron",
-                getModItem(Minecraft.ID, "piston", 1),
-                "plateIron",
-                getModItem(Minecraft.ID, "piston", 1),
-                getModItem(Railcraft.ID, "machine.beta", 1, 11),
-                getModItem(Minecraft.ID, "piston", 1),
-                "plateIron",
-                getModItem(Minecraft.ID, "piston", 1),
-                "plateIron");
-
-        addShapedRecipe(
-                getModItem(JABBA.ID, "upgradeCore", 1, 7),
-                "plateIron",
-                getModItem(Minecraft.ID, "sticky_piston", 1),
-                "plateIron",
-                getModItem(Minecraft.ID, "piston", 1),
-                getModItem(Railcraft.ID, "machine.beta", 1, 11),
-                getModItem(Minecraft.ID, "piston", 1),
-                "plateIron",
-                getModItem(Minecraft.ID, "sticky_piston", 1),
-                "plateIron");
-
+            addShapedRecipe(
+                    getModItem(JABBA.ID, "upgradeCore", 1, 7),
+                    "plateIron",
+                    getModItem(Minecraft.ID, "sticky_piston", 1),
+                    "plateIron",
+                    getModItem(Minecraft.ID, "piston", 1),
+                    getModItem(Railcraft.ID, "machine.beta", 1, 11),
+                    getModItem(Minecraft.ID, "piston", 1),
+                    "plateIron",
+                    getModItem(Minecraft.ID, "sticky_piston", 1),
+                    "plateIron");
+        }
         addShapedRecipe(
                 getModItem(JABBA.ID, "upgradeCore", 1),
                 "screwSteel",

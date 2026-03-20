@@ -39,16 +39,7 @@ public class ScriptRemoteIO implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AppliedEnergistics2.ID,
-                EnderStorage.ID,
-                ExtraUtilities.ID,
-                IndustrialCraft2.ID,
-                ProjectRedIntegration.ID,
-                RandomThings.ID,
-                RemoteIO.ID,
-                TinkerConstruct.ID,
-                WirelessRedstoneCBELogic.ID);
+        return Arrays.asList(RemoteIO.ID);
     }
 
     @Override
@@ -64,9 +55,11 @@ public class ScriptRemoteIO implements IScriptLoader {
                 ItemList.Automation_Regulator_IV.get(1L),
                 ItemList.Emitter_EV.get(1L),
                 ItemList.Automation_Regulator_IV.get(1L));
-        addShapelessRecipe(
-                getModItem(RemoteIO.ID, "tile.remote_interface", 1, 0, missing),
-                getModItem(RandomThings.ID, "playerinterface", 1, 0, missing));
+        if (RTML) {
+            addShapelessRecipe(
+                    getModItem(RemoteIO.ID, "tile.remote_interface", 1, 0, missing),
+                    getModItem(RandomThings.ID, "playerinterface", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(RemoteIO.ID, "tile.machine", 1, 0, missing),
                 ItemList.Electric_Pump_EV.get(1L),
@@ -78,28 +71,32 @@ public class ScriptRemoteIO implements IScriptLoader {
                 ItemList.Electric_Pump_EV.get(1L),
                 "pipeMediumTitanium",
                 ItemList.Electric_Pump_EV.get(1L));
-        addShapedRecipe(
-                getModItem(RemoteIO.ID, "tile.machine", 1, 1, missing),
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                ItemList.Electric_Pump_EV.get(1L),
-                ItemList.Casing_HV.get(1L),
-                ItemList.Electric_Pump_EV.get(1L),
-                "plateTitanium",
-                "plateTitanium",
-                "plateTitanium");
-        addShapedRecipe(
-                getModItem(RemoteIO.ID, "skylight", 1, 0, missing),
-                "plateObsidian",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "plateObsidian",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 21, missing),
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "plateObsidian",
-                getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
-                "plateObsidian");
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(RemoteIO.ID, "tile.machine", 1, 1, missing),
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    ItemList.Electric_Pump_EV.get(1L),
+                    ItemList.Casing_HV.get(1L),
+                    ItemList.Electric_Pump_EV.get(1L),
+                    "plateTitanium",
+                    "plateTitanium",
+                    "plateTitanium");
+        }
+        if (PREDML && TCML) {
+            addShapedRecipe(
+                    getModItem(RemoteIO.ID, "skylight", 1, 0, missing),
+                    "plateObsidian",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "plateObsidian",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 21, missing),
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "plateObsidian",
+                    getModItem(TinkerConstruct.ID, "GlassPane", 1, 0, missing),
+                    "plateObsidian");
+        }
         addShapedRecipe(
                 getModItem(RemoteIO.ID, "intelligentWorkbench", 1, 0, missing),
                 null,
@@ -158,21 +155,24 @@ public class ScriptRemoteIO implements IScriptLoader {
                 "itemCasingAluminium",
                 createItemStack(GregTech.ID, "gt.metaitem.01", 1, 32518, "{GT.ItemCharge:100000L}", missing),
                 "itemCasingAluminium");
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 0, missing),
-                        getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 1, missing))
-                .itemOutputs(getModItem(RemoteIO.ID, "item.wireless_transmitter", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 1000)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(TinkerConstruct.ID, "blankPattern", 1, 1, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 1L))
-                .itemOutputs(getModItem(RemoteIO.ID, "item.blank_plate", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 144)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        if (WRML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 0, missing),
+                            getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 1, missing))
+                    .itemOutputs(getModItem(RemoteIO.ID, "item.wireless_transmitter", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 1000)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
+        if (TCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(TinkerConstruct.ID, "blankPattern", 1, 1, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.TungstenSteel, 1L))
+                    .itemOutputs(getModItem(RemoteIO.ID, "item.blank_plate", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 144)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 2),
@@ -180,16 +180,20 @@ public class ScriptRemoteIO implements IScriptLoader {
                 .itemOutputs(getModItem(RemoteIO.ID, "item.chip.location", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("ender", 1000)).duration(30 * SECONDS).eut(TierEU.RECIPE_HV)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(NHItemList.BlankPlatedChip.get(1), getModItem(EnderStorage.ID, "enderChest", 1, 0, missing))
-                .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        NHItemList.BlankPlatedChip.get(1),
-                        getModItem(EnderStorage.ID, "enderChest", 1, 4096, missing))
-                .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 1, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        if (ESML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            NHItemList.BlankPlatedChip.get(1),
+                            getModItem(EnderStorage.ID, "enderChest", 1, 0, missing))
+                    .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            NHItemList.BlankPlatedChip.get(1),
+                            getModItem(EnderStorage.ID, "enderChest", 1, 4096, missing))
+                    .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 1, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         if (TML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(NHItemList.BlankPlatedChip.get(1), getModItem(Thaumcraft.ID, "blockJar", 2, 0, missing))
@@ -202,18 +206,22 @@ public class ScriptRemoteIO implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.cableGt01, Materials.BlackSteel, 2L))
                 .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 10, missing)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        NHItemList.BlankPlatedChip.get(1),
-                        getModItem(ExtraUtilities.ID, "extractor_base", 2, 12, missing))
-                .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 12, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        NHItemList.BlankPlatedChip.get(1),
-                        getModItem(AppliedEnergistics2.ID, "tile.BlockController", 1, 0, missing))
-                .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 20, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            NHItemList.BlankPlatedChip.get(1),
+                            getModItem(ExtraUtilities.ID, "extractor_base", 2, 12, missing))
+                    .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 12, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
+        if (AEML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            NHItemList.BlankPlatedChip.get(1),
+                            getModItem(AppliedEnergistics2.ID, "tile.BlockController", 1, 0, missing))
+                    .itemOutputs(getModItem(RemoteIO.ID, "item.chip.transfer", 1, 20, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         NHItemList.BlankPlatedChip.get(1),

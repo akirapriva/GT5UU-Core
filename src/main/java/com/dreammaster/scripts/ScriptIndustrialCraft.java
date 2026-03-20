@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.alloySmelterRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
@@ -50,7 +51,7 @@ public class ScriptIndustrialCraft implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(BuildCraftFactory.ID, Forestry.ID, IndustrialCraft2.ID, Railcraft.ID);
+        return Arrays.asList(IndustrialCraft2.ID);
     }
 
     @Override
@@ -263,9 +264,11 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 "plateStainlessSteel",
                 "plateStainlessSteel",
                 "plateStainlessSteel");
-        addShapelessRecipe(
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 10, missing),
-                getModItem(Railcraft.ID, "part.turbine.blade", 1, 0, missing));
+        if (RCML) {
+            addShapelessRecipe(
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 10, missing),
+                    getModItem(Railcraft.ID, "part.turbine.blade", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(IndustrialCraft2.ID, "itemsteelrotor", 1, 1, missing),
                 getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 12, missing),
@@ -299,23 +302,27 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 "craftingToolWrench",
                 getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 9, missing),
                 GregtechItemList.TungstenSteelShaft.get(1));
-        addShapedRecipe(
-                getModItem(IndustrialCraft2.ID, "blockKineticGenerator", 1, 5, missing),
-                ItemList.Electric_Motor_MV.get(1L),
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 5, missing),
-                ItemList.Electric_Motor_MV.get(1L),
-                "circuitGood",
-                ItemList.Casing_HeatProof.get(1L),
-                "circuitGood",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 5, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(IndustrialCraft2.ID, "itemSteamTurbineBlade", 1, 0, missing),
-                getModItem(Railcraft.ID, "part.turbine.disk", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(IndustrialCraft2.ID, "itemSteamTurbine", 1, 0, missing),
-                getModItem(Railcraft.ID, "part.turbine.rotor", 1, 0, missing));
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(IndustrialCraft2.ID, "blockKineticGenerator", 1, 5, missing),
+                    ItemList.Electric_Motor_MV.get(1L),
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 5, missing),
+                    ItemList.Electric_Motor_MV.get(1L),
+                    "circuitGood",
+                    ItemList.Casing_HeatProof.get(1L),
+                    "circuitGood",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 5, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing));
+        }
+        if (RCML) {
+            addShapelessRecipe(
+                    getModItem(IndustrialCraft2.ID, "itemSteamTurbineBlade", 1, 0, missing),
+                    getModItem(Railcraft.ID, "part.turbine.disk", 1, 0, missing));
+            addShapelessRecipe(
+                    getModItem(IndustrialCraft2.ID, "itemSteamTurbine", 1, 0, missing),
+                    getModItem(Railcraft.ID, "part.turbine.rotor", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(IndustrialCraft2.ID, "itemSteamTurbine", 1, 0, missing),
                 getModItem(IndustrialCraft2.ID, "itemSteamTurbineBlade", 1, 0, missing),
@@ -647,39 +654,43 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 "screwIron",
                 getModItem(Minecraft.ID, "stone_button", 1, 0, missing),
                 "circuitBasic");
-        addShapedRecipe(
-                getModItem(IndustrialCraft2.ID, "itemArmorAlloyChestplate", 1, 0, missing),
-                "plateAlloyAdvanced",
-                "craftingToolHardHammer",
-                "plateAlloyAdvanced",
-                "plateAlloyAdvanced",
-                getModItem(Railcraft.ID, "armor.steel.plate", 1, 0, missing),
-                "plateAlloyAdvanced",
-                "plateAlloyAdvanced",
-                getModItem(Minecraft.ID, "leather_chestplate", 1, 0, missing),
-                "plateAlloyAdvanced");
-        addShapedRecipe(
-                getModItem(IndustrialCraft2.ID, "itemArmorAlloyChestplate", 1, 0, missing),
-                "plateAlloyAdvanced",
-                "craftingToolHardHammer",
-                "plateAlloyAdvanced",
-                "plateAlloyAdvanced",
-                getModItem(Minecraft.ID, "leather_chestplate", 1, 0, missing),
-                "plateAlloyAdvanced",
-                "plateAlloyAdvanced",
-                getModItem(Railcraft.ID, "armor.steel.plate", 1, 0, missing),
-                "plateAlloyAdvanced");
-        addShapedRecipe(
-                getModItem(IndustrialCraft2.ID, "itemArmorCFPack", 1, 26, missing),
-                "itemCasingSteel",
-                "craftingToolHardHammer",
-                "itemCasingSteel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "screwSteel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "itemCasingSteel",
-                "craftingToolScrewdriver",
-                "itemCasingSteel");
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(IndustrialCraft2.ID, "itemArmorAlloyChestplate", 1, 0, missing),
+                    "plateAlloyAdvanced",
+                    "craftingToolHardHammer",
+                    "plateAlloyAdvanced",
+                    "plateAlloyAdvanced",
+                    getModItem(Railcraft.ID, "armor.steel.plate", 1, 0, missing),
+                    "plateAlloyAdvanced",
+                    "plateAlloyAdvanced",
+                    getModItem(Minecraft.ID, "leather_chestplate", 1, 0, missing),
+                    "plateAlloyAdvanced");
+            addShapedRecipe(
+                    getModItem(IndustrialCraft2.ID, "itemArmorAlloyChestplate", 1, 0, missing),
+                    "plateAlloyAdvanced",
+                    "craftingToolHardHammer",
+                    "plateAlloyAdvanced",
+                    "plateAlloyAdvanced",
+                    getModItem(Minecraft.ID, "leather_chestplate", 1, 0, missing),
+                    "plateAlloyAdvanced",
+                    "plateAlloyAdvanced",
+                    getModItem(Railcraft.ID, "armor.steel.plate", 1, 0, missing),
+                    "plateAlloyAdvanced");
+        }
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(IndustrialCraft2.ID, "itemArmorCFPack", 1, 26, missing),
+                    "itemCasingSteel",
+                    "craftingToolHardHammer",
+                    "itemCasingSteel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "screwSteel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "itemCasingSteel",
+                    "craftingToolScrewdriver",
+                    "itemCasingSteel");
+        }
         if (TinkersGregworks.isModLoaded()) {
             addShapedRecipe(
                     getModItem(IndustrialCraft2.ID, "itemNanoSaber", 1, 0, missing),
@@ -743,17 +754,19 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 "itemCasingSteel",
                 getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 5, missing),
                 "itemCasingSteel");
-        addShapedRecipe(
-                getModItem(IndustrialCraft2.ID, "blockMachine2", 1, 15, missing),
-                getModItem(IndustrialCraft2.ID, "reactorCoolantSimple", 1, 1, missing),
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "reactorCoolantSimple", 1, 1, missing),
-                "pipeMediumSteel",
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 6, missing),
-                "pipeMediumSteel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "circuitBasic",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing));
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(IndustrialCraft2.ID, "blockMachine2", 1, 15, missing),
+                    getModItem(IndustrialCraft2.ID, "reactorCoolantSimple", 1, 1, missing),
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "reactorCoolantSimple", 1, 1, missing),
+                    "pipeMediumSteel",
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 6, missing),
+                    "pipeMediumSteel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "circuitBasic",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(IndustrialCraft2.ID, "blockMachine2", 1, 1, missing),
                 getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
@@ -809,17 +822,19 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 "itemCasingAnyIron",
                 "craftingToolScrewdriver",
                 "itemCasingAnyIron");
-        addShapedRecipe(
-                getModItem(IndustrialCraft2.ID, "blockHeatGenerator", 1, 1, missing),
-                "itemCasingSteel",
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 5, missing),
-                "itemCasingSteel",
-                "pipeMediumSteel",
-                ItemList.Casing_Firebox_Steel.get(1L),
-                "pipeMediumSteel",
-                "itemCasingSteel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "itemCasingSteel");
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(IndustrialCraft2.ID, "blockHeatGenerator", 1, 1, missing),
+                    "itemCasingSteel",
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 5, missing),
+                    "itemCasingSteel",
+                    "pipeMediumSteel",
+                    ItemList.Casing_Firebox_Steel.get(1L),
+                    "pipeMediumSteel",
+                    "itemCasingSteel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "itemCasingSteel");
+        }
         addShapedRecipe(
                 getModItem(IndustrialCraft2.ID, "blockHeatGenerator", 1, 0, missing),
                 "itemCasingSteel",
@@ -848,17 +863,19 @@ public class ScriptIndustrialCraft implements IScriptLoader {
                 "cableGt04Gold",
                 "rotorStainlessSteel",
                 "cableGt04Gold");
-        addShapedRecipe(
-                getModItem(IndustrialCraft2.ID, "blockKineticGenerator", 1, 1, missing),
-                "itemCasingStainlessSteel",
-                "rotorStainlessSteel",
-                "itemCasingStainlessSteel",
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 12, missing),
-                getModItem(Railcraft.ID, "machine.beta", 1, 4, missing),
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 12, missing),
-                "circuitAdvanced",
-                "rotorStainlessSteel",
-                "circuitAdvanced");
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(IndustrialCraft2.ID, "blockKineticGenerator", 1, 1, missing),
+                    "itemCasingStainlessSteel",
+                    "rotorStainlessSteel",
+                    "itemCasingStainlessSteel",
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 12, missing),
+                    getModItem(Railcraft.ID, "machine.beta", 1, 4, missing),
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 12, missing),
+                    "circuitAdvanced",
+                    "rotorStainlessSteel",
+                    "circuitAdvanced");
+        }
         addShapedRecipe(
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iridium, 1L),
                 "craftingToolHardHammer",

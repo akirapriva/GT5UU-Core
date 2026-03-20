@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.BuildCraftFactory;
 import static gregtech.api.enums.Mods.ExtraTrees;
 import static gregtech.api.enums.Mods.Forestry;
@@ -31,13 +32,7 @@ public class ScriptExtraTrees implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                BuildCraftFactory.ID,
-                ExtraTrees.ID,
-                Forestry.ID,
-                MalisisDoors.ID,
-                Railcraft.ID,
-                RandomThings.ID);
+        return Arrays.asList(ExtraTrees.ID, Forestry.ID);
     }
 
     @Override
@@ -55,17 +50,19 @@ public class ScriptExtraTrees implements IScriptLoader {
         addShapelessRecipe(
                 getModItem(ExtraTrees.ID, "databaseMoth", 1, 0, missing),
                 getModItem(ExtraTrees.ID, "databaseMoth", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(ExtraTrees.ID, "machine", 1, 0, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "plateSteel",
-                ItemList.Component_Sawblade_Diamond.get(1L),
-                ItemList.Conveyor_Module_LV.get(1L),
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                ItemList.Conveyor_Module_LV.get(1L),
-                getModItem(ExtraTrees.ID, "misc", 1, 3, missing),
-                ItemList.Electric_Motor_LV.get(1L),
-                getModItem(ExtraTrees.ID, "misc", 1, 3, missing));
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(ExtraTrees.ID, "machine", 1, 0, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "plateSteel",
+                    ItemList.Component_Sawblade_Diamond.get(1L),
+                    ItemList.Conveyor_Module_LV.get(1L),
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    ItemList.Conveyor_Module_LV.get(1L),
+                    getModItem(ExtraTrees.ID, "misc", 1, 3, missing),
+                    ItemList.Electric_Motor_LV.get(1L),
+                    getModItem(ExtraTrees.ID, "misc", 1, 3, missing));
+        }
         addShapedRecipe(
                 getModItem(ExtraTrees.ID, "machine", 1, 1, missing),
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.WoodSealed, 1L),
@@ -88,28 +85,32 @@ public class ScriptExtraTrees implements IScriptLoader {
                 getModItem(ExtraTrees.ID, "misc", 1, 3, missing),
                 "slabWood",
                 getModItem(ExtraTrees.ID, "misc", 1, 3, missing));
-        addShapedRecipe(
-                getModItem(ExtraTrees.ID, "machine", 1, 4, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "plateSteel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                ItemList.Electric_Piston_LV.get(1L),
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                ItemList.Electric_Piston_LV.get(1L),
-                "gearGtSmallBronze",
-                ItemList.Electric_Motor_LV.get(1L),
-                "gearGtSmallBronze");
-        addShapedRecipe(
-                getModItem(ExtraTrees.ID, "misc", 1, 3, missing),
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                getModItem(Railcraft.ID, "cube", 1, 8, missing),
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                getModItem(Railcraft.ID, "cube", 1, 8, missing),
-                "craftingToolSaw",
-                getModItem(Railcraft.ID, "cube", 1, 8, missing),
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                getModItem(Railcraft.ID, "cube", 1, 8, missing),
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing));
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(ExtraTrees.ID, "machine", 1, 4, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "plateSteel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    ItemList.Electric_Piston_LV.get(1L),
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    ItemList.Electric_Piston_LV.get(1L),
+                    "gearGtSmallBronze",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "gearGtSmallBronze");
+        }
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(ExtraTrees.ID, "misc", 1, 3, missing),
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    getModItem(Railcraft.ID, "cube", 1, 8, missing),
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    getModItem(Railcraft.ID, "cube", 1, 8, missing),
+                    "craftingToolSaw",
+                    getModItem(Railcraft.ID, "cube", 1, 8, missing),
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    getModItem(Railcraft.ID, "cube", 1, 8, missing),
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(ExtraTrees.ID, "hammer", 1, 0, missing),
                 "plankWood",
@@ -121,17 +122,19 @@ public class ScriptExtraTrees implements IScriptLoader {
                 "plankWood",
                 "plankWood",
                 null);
-        addShapedRecipe(
-                getModItem(ExtraTrees.ID, "durableHammer", 1, 0, missing),
-                "plateObsidian",
-                "plateObsidian",
-                null,
-                "ingotGold",
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                "stickWood",
-                "plateObsidian",
-                "plateObsidian",
-                null);
+        if (RTML) {
+            addShapedRecipe(
+                    getModItem(ExtraTrees.ID, "durableHammer", 1, 0, missing),
+                    "plateObsidian",
+                    "plateObsidian",
+                    null,
+                    "ingotGold",
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    "stickWood",
+                    "plateObsidian",
+                    "plateObsidian",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(ExtraTrees.ID, "misc", 5, 5, missing),
                 "stickLongAnyIron",
@@ -187,226 +190,228 @@ public class ScriptExtraTrees implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 1, "{meta:1}", missing),
-                getModItem(MalisisDoors.ID, "item.door_spruce", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 257, "{meta:257}", missing),
-                null,
-                getModItem(MalisisDoors.ID, "item.door_spruce", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 513, "{meta:513}", missing),
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_spruce", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 769, "{meta:769}", missing),
-                null,
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_spruce", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 2, "{meta:2}", missing),
-                getModItem(MalisisDoors.ID, "item.door_birch", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 258, "{meta:258}", missing),
-                null,
-                getModItem(MalisisDoors.ID, "item.door_birch", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 514, "{meta:514}", missing),
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_birch", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 770, "{meta:770}", missing),
-                null,
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_birch", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 3, "{meta:3}", missing),
-                getModItem(MalisisDoors.ID, "item.door_jungle", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 259, "{meta:259}", missing),
-                null,
-                getModItem(MalisisDoors.ID, "item.door_jungle", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 515, "{meta:515}", missing),
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_jungle", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 771, "{meta:771}", missing),
-                null,
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_jungle", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 4, "{meta:4}", missing),
-                getModItem(MalisisDoors.ID, "item.door_acacia", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 260, "{meta:260}", missing),
-                null,
-                getModItem(MalisisDoors.ID, "item.door_acacia", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 516, "{meta:516}", missing),
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_acacia", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 772, "{meta:772}", missing),
-                null,
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_acacia", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 5, "{meta:5}", missing),
-                getModItem(MalisisDoors.ID, "item.door_dark_oak", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 261, "{meta:261}", missing),
-                null,
-                getModItem(MalisisDoors.ID, "item.door_dark_oak", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 517, "{meta:517}", missing),
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_dark_oak", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "door", 1, 773, "{meta:773}", missing),
-                null,
-                null,
-                null,
-                getModItem(MalisisDoors.ID, "item.door_dark_oak", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null);
+        if (MDML) {
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 1, "{meta:1}", missing),
+                    getModItem(MalisisDoors.ID, "item.door_spruce", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 257, "{meta:257}", missing),
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_spruce", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 513, "{meta:513}", missing),
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_spruce", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 769, "{meta:769}", missing),
+                    null,
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_spruce", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 2, "{meta:2}", missing),
+                    getModItem(MalisisDoors.ID, "item.door_birch", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 258, "{meta:258}", missing),
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_birch", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 514, "{meta:514}", missing),
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_birch", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 770, "{meta:770}", missing),
+                    null,
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_birch", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 3, "{meta:3}", missing),
+                    getModItem(MalisisDoors.ID, "item.door_jungle", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 259, "{meta:259}", missing),
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_jungle", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 515, "{meta:515}", missing),
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_jungle", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 771, "{meta:771}", missing),
+                    null,
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_jungle", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 4, "{meta:4}", missing),
+                    getModItem(MalisisDoors.ID, "item.door_acacia", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 260, "{meta:260}", missing),
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_acacia", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 516, "{meta:516}", missing),
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_acacia", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 772, "{meta:772}", missing),
+                    null,
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_acacia", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 5, "{meta:5}", missing),
+                    getModItem(MalisisDoors.ID, "item.door_dark_oak", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 261, "{meta:261}", missing),
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_dark_oak", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 517, "{meta:517}", missing),
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_dark_oak", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "door", 1, 773, "{meta:773}", missing),
+                    null,
+                    null,
+                    null,
+                    getModItem(MalisisDoors.ID, "item.door_dark_oak", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+        }
         addShapedRecipe(
                 createItemStack(ExtraTrees.ID, "door", 1, 32, "{meta:32}", missing),
                 createItemStack(ExtraTrees.ID, "planks", 1, 0, "{meta:0}", missing),
@@ -3927,61 +3932,63 @@ public class ScriptExtraTrees implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "gate", 1, 1, "{meta:1}", missing),
-                getModItem(MalisisDoors.ID, "spruceFenceGate", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "gate", 1, 2, "{meta:2}", missing),
-                getModItem(MalisisDoors.ID, "birchFenceGate", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "gate", 1, 3, "{meta:3}", missing),
-                getModItem(MalisisDoors.ID, "jungleFenceGate", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "gate", 1, 4, "{meta:4}", missing),
-                getModItem(MalisisDoors.ID, "acaciaFenceGate", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
-        addShapedRecipe(
-                createItemStack(ExtraTrees.ID, "gate", 1, 5, "{meta:5}", missing),
-                getModItem(MalisisDoors.ID, "darkOakFenceGate", 1, 0, missing),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
+        if (MDML) {
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "gate", 1, 1, "{meta:1}", missing),
+                    getModItem(MalisisDoors.ID, "spruceFenceGate", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "gate", 1, 2, "{meta:2}", missing),
+                    getModItem(MalisisDoors.ID, "birchFenceGate", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "gate", 1, 3, "{meta:3}", missing),
+                    getModItem(MalisisDoors.ID, "jungleFenceGate", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "gate", 1, 4, "{meta:4}", missing),
+                    getModItem(MalisisDoors.ID, "acaciaFenceGate", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+            addShapedRecipe(
+                    createItemStack(ExtraTrees.ID, "gate", 1, 5, "{meta:5}", missing),
+                    getModItem(MalisisDoors.ID, "darkOakFenceGate", 1, 0, missing),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
+        }
         addShapedRecipe(
                 createItemStack(ExtraTrees.ID, "gate", 1, 32, "{meta:32}", missing),
                 "itemFlint",

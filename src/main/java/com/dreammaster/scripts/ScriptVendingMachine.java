@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.Minecraft;
 import static gregtech.api.enums.Mods.VendingMachine;
@@ -27,7 +28,7 @@ public class ScriptVendingMachine implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(AppliedEnergistics2.ID, VendingMachine.ID);
+        return Arrays.asList(VendingMachine.ID);
     }
 
     @Override
@@ -43,10 +44,13 @@ public class ScriptVendingMachine implements IScriptLoader {
                 null,
                 getModItem(Minecraft.ID, "hopper", 1),
                 null);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(AppliedEnergistics2.ID, "tile.BlockInterface", 1, 0, missing),
-                        getModItem(Minecraft.ID, "dispenser", 1, 0))
-                .duration(5 * SECONDS).itemOutputs(VMItems.uplinkHatch).eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        if (AEML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(AppliedEnergistics2.ID, "tile.BlockInterface", 1, 0, missing),
+                            getModItem(Minecraft.ID, "dispenser", 1, 0))
+                    .duration(5 * SECONDS).itemOutputs(VMItems.uplinkHatch).eut(TierEU.RECIPE_MV)
+                    .addTo(assemblerRecipes);
+        }
     }
 }

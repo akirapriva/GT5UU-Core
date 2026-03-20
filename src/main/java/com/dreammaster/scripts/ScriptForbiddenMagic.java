@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
@@ -54,20 +55,7 @@ public class ScriptForbiddenMagic implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AppliedEnergistics2.ID,
-                Backpack.ID,
-                BiomesOPlenty.ID,
-                BloodArsenal.ID,
-                BloodMagic.ID,
-                Botania.ID,
-                EnderIO.ID,
-                ForbiddenMagic.ID,
-                IndustrialCraft2.ID,
-                Thaumcraft.ID,
-                ThaumicTinkerer.ID,
-                TinkerConstruct.ID,
-                Witchery.ID);
+        return Arrays.asList(ForbiddenMagic.ID, Thaumcraft.ID);
     }
 
     @Override
@@ -94,20 +82,23 @@ public class ScriptForbiddenMagic implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(ForbiddenMagic.ID, "InkFlower", 1, 0, missing))
                 .itemOutputs(ItemList.Color_00.get(2L)).duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
 
-        BloodMagicHelper.removeAltarRecipe(getModItem(ForbiddenMagic.ID, "WandCores", 1, 3, missing));
-        AltarRecipeRegistry.registerAltarRecipe(
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 3, missing),
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 6, missing),
-                4,
-                50000,
-                20,
-                20,
-                false);
-
+        if (BMML) {
+            BloodMagicHelper.removeAltarRecipe(getModItem(ForbiddenMagic.ID, "WandCores", 1, 3, missing));
+            AltarRecipeRegistry.registerAltarRecipe(
+                    getModItem(ForbiddenMagic.ID, "WandCores", 1, 3, missing),
+                    getModItem(ForbiddenMagic.ID, "WandCores", 1, 6, missing),
+                    4,
+                    50000,
+                    20,
+                    20,
+                    false);
+        }
         // WANDS
-        TCHelper.clearPages("CAP_manasteel");
-        TCHelper.clearPages("CAP_terrasteel");
-        TCHelper.clearPages("CAP_elementium");
+        if (BML) {
+            TCHelper.clearPages("CAP_manasteel");
+            TCHelper.clearPages("CAP_terrasteel");
+            TCHelper.clearPages("CAP_elementium");
+        }
         ThaumcraftApi.addArcaneCraftingRecipe(
                 "CAP_vinteum",
                 getModItem(ForbiddenMagic.ID, "WandCaps", 1, 1, missing),
@@ -168,37 +159,41 @@ public class ScriptForbiddenMagic implements IScriptLoader {
                 "nuggetThaumium",
                 new AspectList().add(Aspect.getAspect("permutatio"), 4).add(Aspect.getAspect("ordo"), 2)
                         .add(Aspect.getAspect("vitreus"), 2));
-        TCHelper.addInfusionCraftingRecipe(
-                "ROD_witchwood",
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 4, missing),
-                6,
-                new AspectList().add(Aspect.getAspect("arbor"), 64).add(Aspect.getAspect("praecantatio"), 48)
-                        .add(Aspect.getAspect("herba"), 32).add(Aspect.getAspect("instrumentum"), 24)
-                        .add(Aspect.getAspect("vacuos"), 24),
-                getModItem(Witchery.ID, "ingredient", 1, 82, missing),
-                OrePrefixes.gem.get(Materials.Vinteum),
-                getModItem(Witchery.ID, "witchsapling", 1, 0, missing),
-                getModItem(Witchery.ID, "ingredient", 1, 34, missing),
-                getModItem(Witchery.ID, "witchsapling", 1, 1, missing),
-                getModItem(Witchery.ID, "ingredient", 1, 36, missing),
-                getModItem(Witchery.ID, "witchsapling", 1, 2, missing),
-                OrePrefixes.gem.get(Materials.Vinteum),
-                getModItem(Witchery.ID, "witchsapling", 1, 0, missing),
-                getModItem(Witchery.ID, "ingredient", 1, 34, missing),
-                getModItem(Witchery.ID, "witchsapling", 1, 1, missing),
-                getModItem(Witchery.ID, "ingredient", 1, 36, missing),
-                getModItem(Witchery.ID, "witchsapling", 1, 2, missing));
-        new ResearchItem(
-                "JOURNEY",
-                "FORBIDDEN",
-                new AspectList().add(Aspect.getAspect("iter"), 5).add(Aspect.getAspect("praecantatio"), 10)
-                        .add(Aspect.getAspect("instrumentum"), 3),
-                -3,
-                1,
-                3,
-                getModItem(BiomesOPlenty.ID, "food", 1, 7, missing))
-                        .setPages(new ResearchPage("derp.research_page.JOURNEY")).setParents("SCHOOLS").setRound()
-                        .setStub().setAutoUnlock().registerResearchItem();
+        if (WML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "ROD_witchwood",
+                    getModItem(ForbiddenMagic.ID, "WandCores", 1, 4, missing),
+                    6,
+                    new AspectList().add(Aspect.getAspect("arbor"), 64).add(Aspect.getAspect("praecantatio"), 48)
+                            .add(Aspect.getAspect("herba"), 32).add(Aspect.getAspect("instrumentum"), 24)
+                            .add(Aspect.getAspect("vacuos"), 24),
+                    getModItem(Witchery.ID, "ingredient", 1, 82, missing),
+                    OrePrefixes.gem.get(Materials.Vinteum),
+                    getModItem(Witchery.ID, "witchsapling", 1, 0, missing),
+                    getModItem(Witchery.ID, "ingredient", 1, 34, missing),
+                    getModItem(Witchery.ID, "witchsapling", 1, 1, missing),
+                    getModItem(Witchery.ID, "ingredient", 1, 36, missing),
+                    getModItem(Witchery.ID, "witchsapling", 1, 2, missing),
+                    OrePrefixes.gem.get(Materials.Vinteum),
+                    getModItem(Witchery.ID, "witchsapling", 1, 0, missing),
+                    getModItem(Witchery.ID, "ingredient", 1, 34, missing),
+                    getModItem(Witchery.ID, "witchsapling", 1, 1, missing),
+                    getModItem(Witchery.ID, "ingredient", 1, 36, missing),
+                    getModItem(Witchery.ID, "witchsapling", 1, 2, missing));
+        }
+        if (BOPML) {
+            new ResearchItem(
+                    "JOURNEY",
+                    "FORBIDDEN",
+                    new AspectList().add(Aspect.getAspect("iter"), 5).add(Aspect.getAspect("praecantatio"), 10)
+                            .add(Aspect.getAspect("instrumentum"), 3),
+                    -3,
+                    1,
+                    3,
+                    getModItem(BiomesOPlenty.ID, "food", 1, 7, missing))
+                            .setPages(new ResearchPage("derp.research_page.JOURNEY")).setParents("SCHOOLS").setRound()
+                            .setStub().setAutoUnlock().registerResearchItem();
+        }
         new ResearchItem(
                 "ROD_livingwood",
                 "FORBIDDEN",
@@ -284,128 +279,131 @@ public class ScriptForbiddenMagic implements IScriptLoader {
         TCHelper.addResearchPrereq("ROD_dreamwood_staff_v2", "ROD_silverwood_staff", false);
         ThaumcraftApi.addWarpToResearch("ROD_dreamwood_staff_v2", 3);
         TCHelper.removeArcaneRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 4, missing));
-        new ResearchItem(
-                "CAP_manasteel",
-                "FORBIDDEN",
-                new AspectList().add(Aspect.getAspect("metallum"), 5).add(Aspect.getAspect("praecantatio"), 10)
-                        .add(Aspect.getAspect("lucrum"), 3).add(Aspect.getAspect("instrumentum"), 4)
-                        .add(Aspect.getAspect("auram"), 5),
-                1,
-                2,
-                3,
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 3, missing)).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "CAP_manasteel",
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 4, missing),
-                6,
-                new AspectList().add(Aspect.getAspect("potentia"), 64).add(Aspect.getAspect("praecantatio"), 48)
-                        .add(Aspect.getAspect("electrum"), 32).add(Aspect.getAspect("instrumentum"), 24)
-                        .add(Aspect.getAspect("machina"), 24),
-                getModItem(Thaumcraft.ID, "WandCap", 1, 4, missing),
-                OrePrefixes.dust.get(Materials.AstralSilver),
-                getModItem(Botania.ID, "manaResource", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.AstralSilver),
-                getModItem(Botania.ID, "manaResource", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.AstralSilver),
-                getModItem(Botania.ID, "manaResource", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.AstralSilver),
-                getModItem(Botania.ID, "manaResource", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.AstralSilver),
-                getModItem(Botania.ID, "manaResource", 1, 0, missing));
-        TCHelper.addResearchPage("CAP_manasteel", new ResearchPage("derp.research_page.CAP_manasteel"));
-        TCHelper.addResearchPage(
-                "CAP_manasteel",
-                new ResearchPage(
-                        TCHelper.findInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 4, missing))));
-        ResearchCategories.getResearch("CAP_manasteel").setConcealed();
-        TCHelper.addResearchPrereq("CAP_manasteel", "ROD_livingwood", false);
-        TCHelper.addResearchPrereq("CAP_manasteel", "CAP_silver", false);
-        TCHelper.addResearchPrereq("CAP_manasteel", "THAUMIUM", false);
-        ThaumcraftApi.addWarpToResearch("CAP_manasteel", 2);
-        new ResearchItem(
-                "CAP_terrasteel",
-                "FORBIDDEN",
-                new AspectList().add(Aspect.getAspect("terra"), 5).add(Aspect.getAspect("praecantatio"), 10)
-                        .add(Aspect.getAspect("superbia"), 3).add(Aspect.getAspect("instrumentum"), 4)
-                        .add(Aspect.getAspect("strontio"), 2).add(Aspect.getAspect("vitreus"), 5),
-                3,
-                2,
-                3,
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 2, missing)).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "CAP_terrasteel",
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 2, missing),
-                6,
-                new AspectList().add(Aspect.getAspect("praecantatio"), 256).add(Aspect.getAspect("ordo"), 64)
-                        .add(Aspect.getAspect("metallum"), 64).add(Aspect.getAspect("superbia"), 20)
-                        .add(Aspect.getAspect("strontio"), 10),
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 3, missing),
-                OrePrefixes.gemExquisite.get(Materials.Emerald),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 3, missing),
-                OrePrefixes.plate.get(Materials.Steeleaf),
-                getModItem(Botania.ID, "manaResource", 1, 4, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 3, missing),
-                OrePrefixes.gemExquisite.get(Materials.Emerald),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 3, missing),
-                getModItem(Botania.ID, "manaResource", 1, 4, missing),
-                OrePrefixes.plate.get(Materials.Steeleaf),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 3, missing));
-        TCHelper.addResearchPage("CAP_terrasteel", new ResearchPage("derp.research_page.CAP_terrasteel"));
-        TCHelper.addResearchPage(
-                "CAP_terrasteel",
-                new ResearchPage(
-                        TCHelper.findInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 2, missing))));
-        ResearchCategories.getResearch("CAP_terrasteel").setConcealed();
-        TCHelper.addResearchPrereq("CAP_terrasteel", "CAP_manasteel", false);
-        TCHelper.addResearchPrereq("CAP_terrasteel", "TRANSEMERALD", true);
-        ThaumcraftApi.addWarpToResearch("CAP_terrasteel", 4);
-        new ResearchItem(
-                "CAP_elementium",
-                "FORBIDDEN",
-                new AspectList().add(Aspect.getAspect("auram"), 5).add(Aspect.getAspect("praecantatio"), 10)
-                        .add(Aspect.getAspect("victus"), 3).add(Aspect.getAspect("instrumentum"), 4)
-                        .add(Aspect.getAspect("humanus"), 5),
-                3,
-                4,
-                3,
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 5, missing)).registerResearchItem();
-        TCHelper.removeArcaneRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 6, missing));
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "CAP_elementium",
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 6, missing),
-                new AspectList().add(Aspect.getAspect("terra"), 40).add(Aspect.getAspect("aqua"), 40)
-                        .add(Aspect.getAspect("aer"), 40),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTungstenSteel",
-                'b',
-                "ingotElvenElementium",
-                'c',
-                "screwTungstenSteel",
-                'd',
-                "ingotElvenElementium",
-                'e',
-                "elvenPixieDust",
-                'f',
-                "ingotElvenElementium",
-                'g',
-                "screwTungstenSteel",
-                'h',
-                "ingotElvenElementium",
-                'i',
-                "screwTungstenSteel");
-        TCHelper.addResearchPage("CAP_elementium", new ResearchPage("derp.research_page.CAP_elementium"));
-        TCHelper.addResearchPrereq("CAP_elementium", "CAP_manasteel", false);
-        TCHelper.addResearchPage(
-                "CAP_elementium",
-                new ResearchPage(TCHelper.findArcaneRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 6, missing))));
-        TCHelper.addResearchPage(
-                "CAP_elementium",
-                new ResearchPage(
-                        TCHelper.findInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 5, missing))));
-        ResearchCategories.getResearch("CAP_elementium").setConcealed();
+        if (BML) {
+            new ResearchItem(
+                    "CAP_manasteel",
+                    "FORBIDDEN",
+                    new AspectList().add(Aspect.getAspect("metallum"), 5).add(Aspect.getAspect("praecantatio"), 10)
+                            .add(Aspect.getAspect("lucrum"), 3).add(Aspect.getAspect("instrumentum"), 4)
+                            .add(Aspect.getAspect("auram"), 5),
+                    1,
+                    2,
+                    3,
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 3, missing)).registerResearchItem();
+            TCHelper.addInfusionCraftingRecipe(
+                    "CAP_manasteel",
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 4, missing),
+                    6,
+                    new AspectList().add(Aspect.getAspect("potentia"), 64).add(Aspect.getAspect("praecantatio"), 48)
+                            .add(Aspect.getAspect("electrum"), 32).add(Aspect.getAspect("instrumentum"), 24)
+                            .add(Aspect.getAspect("machina"), 24),
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 4, missing),
+                    OrePrefixes.dust.get(Materials.AstralSilver),
+                    getModItem(Botania.ID, "manaResource", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.AstralSilver),
+                    getModItem(Botania.ID, "manaResource", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.AstralSilver),
+                    getModItem(Botania.ID, "manaResource", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.AstralSilver),
+                    getModItem(Botania.ID, "manaResource", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.AstralSilver),
+                    getModItem(Botania.ID, "manaResource", 1, 0, missing));
+            TCHelper.addResearchPage("CAP_manasteel", new ResearchPage("derp.research_page.CAP_manasteel"));
+            TCHelper.addResearchPage(
+                    "CAP_manasteel",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 4, missing))));
+            ResearchCategories.getResearch("CAP_manasteel").setConcealed();
+            TCHelper.addResearchPrereq("CAP_manasteel", "ROD_livingwood", false);
+            TCHelper.addResearchPrereq("CAP_manasteel", "CAP_silver", false);
+            TCHelper.addResearchPrereq("CAP_manasteel", "THAUMIUM", false);
+            ThaumcraftApi.addWarpToResearch("CAP_manasteel", 2);
+            new ResearchItem(
+                    "CAP_terrasteel",
+                    "FORBIDDEN",
+                    new AspectList().add(Aspect.getAspect("terra"), 5).add(Aspect.getAspect("praecantatio"), 10)
+                            .add(Aspect.getAspect("superbia"), 3).add(Aspect.getAspect("instrumentum"), 4)
+                            .add(Aspect.getAspect("strontio"), 2).add(Aspect.getAspect("vitreus"), 5),
+                    3,
+                    2,
+                    3,
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 2, missing)).registerResearchItem();
+            TCHelper.addInfusionCraftingRecipe(
+                    "CAP_terrasteel",
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 2, missing),
+                    6,
+                    new AspectList().add(Aspect.getAspect("praecantatio"), 256).add(Aspect.getAspect("ordo"), 64)
+                            .add(Aspect.getAspect("metallum"), 64).add(Aspect.getAspect("superbia"), 20)
+                            .add(Aspect.getAspect("strontio"), 10),
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 3, missing),
+                    OrePrefixes.gemExquisite.get(Materials.Emerald),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 3, missing),
+                    OrePrefixes.plate.get(Materials.Steeleaf),
+                    getModItem(Botania.ID, "manaResource", 1, 4, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 3, missing),
+                    OrePrefixes.gemExquisite.get(Materials.Emerald),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 3, missing),
+                    getModItem(Botania.ID, "manaResource", 1, 4, missing),
+                    OrePrefixes.plate.get(Materials.Steeleaf),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 3, missing));
+            TCHelper.addResearchPage("CAP_terrasteel", new ResearchPage("derp.research_page.CAP_terrasteel"));
+            TCHelper.addResearchPage(
+                    "CAP_terrasteel",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 2, missing))));
+            ResearchCategories.getResearch("CAP_terrasteel").setConcealed();
+            TCHelper.addResearchPrereq("CAP_terrasteel", "CAP_manasteel", false);
+            TCHelper.addResearchPrereq("CAP_terrasteel", "TRANSEMERALD", true);
+            ThaumcraftApi.addWarpToResearch("CAP_terrasteel", 4);
+            new ResearchItem(
+                    "CAP_elementium",
+                    "FORBIDDEN",
+                    new AspectList().add(Aspect.getAspect("auram"), 5).add(Aspect.getAspect("praecantatio"), 10)
+                            .add(Aspect.getAspect("victus"), 3).add(Aspect.getAspect("instrumentum"), 4)
+                            .add(Aspect.getAspect("humanus"), 5),
+                    3,
+                    4,
+                    3,
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 5, missing)).registerResearchItem();
+            TCHelper.removeArcaneRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 6, missing));
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "CAP_elementium",
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 6, missing),
+                    new AspectList().add(Aspect.getAspect("terra"), 40).add(Aspect.getAspect("aqua"), 40)
+                            .add(Aspect.getAspect("aer"), 40),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTungstenSteel",
+                    'b',
+                    "ingotElvenElementium",
+                    'c',
+                    "screwTungstenSteel",
+                    'd',
+                    "ingotElvenElementium",
+                    'e',
+                    "elvenPixieDust",
+                    'f',
+                    "ingotElvenElementium",
+                    'g',
+                    "screwTungstenSteel",
+                    'h',
+                    "ingotElvenElementium",
+                    'i',
+                    "screwTungstenSteel");
+            TCHelper.addResearchPage("CAP_elementium", new ResearchPage("derp.research_page.CAP_elementium"));
+            TCHelper.addResearchPrereq("CAP_elementium", "CAP_manasteel", false);
+            TCHelper.addResearchPage(
+                    "CAP_elementium",
+                    new ResearchPage(
+                            TCHelper.findArcaneRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 6, missing))));
+            TCHelper.addResearchPage(
+                    "CAP_elementium",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 5, missing))));
+            ResearchCategories.getResearch("CAP_elementium").setConcealed();
+        }
         new ResearchItem(
                 "VINTEUM",
                 "FORBIDDEN",
@@ -510,34 +508,36 @@ public class ScriptForbiddenMagic implements IScriptLoader {
         TCHelper.removeInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCores", 1, 0, missing));
         TCHelper.removeArcaneRecipe(getModItem(ForbiddenMagic.ID, "WandCores", 1, 9, missing));
         TCHelper.removeInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 0, missing));
-        TCHelper.clearPages("RIDINGCROP");
-        TCHelper.addResearchPage("RIDINGCROP", new ResearchPage("forbidden.research_page.RIDINGCROP.1"));
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "RIDINGCROP",
-                getModItem(ForbiddenMagic.ID, "RidingCrop", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("terra"), 5).add(Aspect.getAspect("ignis"), 5)
-                        .add(Aspect.getAspect("aer"), 5),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                getModItem(Backpack.ID, "boundLeather", 1, 0, missing),
-                'd',
-                "screwIron",
-                'e',
-                "stickWood",
-                'f',
-                "screwIron",
-                'g',
-                "craftingToolScrewdriver",
-                'h',
-                "stickWood",
-                'i',
-                ToolDictNames.craftingToolSoftMallet.name());
-        TCHelper.addResearchPage(
-                "RIDINGCROP",
-                new ResearchPage(
-                        TCHelper.findArcaneRecipe(getModItem(ForbiddenMagic.ID, "RidingCrop", 1, 0, missing))));
+        if (BPML) {
+            TCHelper.clearPages("RIDINGCROP");
+            TCHelper.addResearchPage("RIDINGCROP", new ResearchPage("forbidden.research_page.RIDINGCROP.1"));
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "RIDINGCROP",
+                    getModItem(ForbiddenMagic.ID, "RidingCrop", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("terra"), 5).add(Aspect.getAspect("ignis"), 5)
+                            .add(Aspect.getAspect("aer"), 5),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    getModItem(Backpack.ID, "boundLeather", 1, 0, missing),
+                    'd',
+                    "screwIron",
+                    'e',
+                    "stickWood",
+                    'f',
+                    "screwIron",
+                    'g',
+                    "craftingToolScrewdriver",
+                    'h',
+                    "stickWood",
+                    'i',
+                    ToolDictNames.craftingToolSoftMallet.name());
+            TCHelper.addResearchPage(
+                    "RIDINGCROP",
+                    new ResearchPage(
+                            TCHelper.findArcaneRecipe(getModItem(ForbiddenMagic.ID, "RidingCrop", 1, 0, missing))));
+        }
         ThaumcraftApi.addArcaneCraftingRecipe(
                 "CRYSTALWELL",
                 getModItem(ForbiddenMagic.ID, "Crystalwell", 1, 0, missing),
@@ -612,66 +612,70 @@ public class ScriptForbiddenMagic implements IScriptLoader {
                         .add(Aspect.getAspect("gula"), 9).add(Aspect.getAspect("lucrum"), 6)
                         .add(Aspect.getAspect("cognitio"), 3));
         TCHelper.setResearchComplexity("RINGFOOD", 3);
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "BLOODWELL",
-                getModItem(ForbiddenMagic.ID, "Bloodwell", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("aqua"), 25).add(Aspect.getAspect("aer"), 25)
-                        .add(Aspect.getAspect("ignis"), 25).add(Aspect.getAspect("terra"), 25)
-                        .add(Aspect.getAspect("perditio"), 25),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwInfusedWater",
-                'b',
-                getModItem(BloodMagic.ID, "bucketLife", 1, 0, missing),
-                'c',
-                "screwInfusedAir",
-                'd',
-                getModItem(Thaumcraft.ID, "ItemEssence", 1, 0, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "ItemInkwell", 1, 0, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "ItemEssence", 1, 0, missing),
-                'g',
-                "screwInfusedEarth",
-                'h',
-                getModItem(BloodMagic.ID, "weakBloodOrb", 1, 0, missing),
-                'i',
-                "screwInfusedFire");
-        TCHelper.setResearchAspects(
-                "BLOODWELL",
-                new AspectList().add(Aspect.getAspect("victus"), 15).add(Aspect.getAspect("cognitio"), 12)
-                        .add(Aspect.getAspect("sensus"), 9).add(Aspect.getAspect("lucrum"), 6)
-                        .add(Aspect.getAspect("praecantatio"), 3));
-        TCHelper.setResearchComplexity("BLOODWELL", 3);
-        TCHelper.addInfusionCraftingRecipe(
-                "FOCUSBLINK",
-                getModItem(ForbiddenMagic.ID, "BlinkFocus", 1, 0, missing),
-                8,
-                new AspectList().add(Aspect.getAspect("desidia"), 16).add(Aspect.getAspect("infernus"), 16)
-                        .add(Aspect.getAspect("iter"), 32).add(Aspect.getAspect("perditio"), 32)
-                        .add(Aspect.getAspect("alienis"), 8).add(Aspect.getAspect("praecantatio"), 8),
-                getModItem(Thaumcraft.ID, "FocusPortableHole", 1, 0, missing),
-                getModItem(Witchery.ID, "ingredient", 1, 92, missing),
-                getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 7, missing),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 5, missing),
-                ItemList.QuantumEye.get(1L),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 5, missing),
-                ItemList.QuantumEye.get(1L),
-                getModItem(Witchery.ID, "ingredient", 1, 92, missing),
-                ItemList.QuantumEye.get(1L),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 5, missing),
-                ItemList.QuantumEye.get(1L),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 5, missing),
-                getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 7, missing));
-        TCHelper.setResearchAspects(
-                "FOCUSBLINK",
-                new AspectList().add(Aspect.getAspect("desidia"), 21).add(Aspect.getAspect("iter"), 18)
-                        .add(Aspect.getAspect("perditio"), 15).add(Aspect.getAspect("infernus"), 12)
-                        .add(Aspect.getAspect("alienis"), 9).add(Aspect.getAspect("tenebrae"), 6)
-                        .add(Aspect.getAspect("praecantatio"), 3));
-        TCHelper.setResearchComplexity("FOCUSBLINK", 3);
+        if (BMML) {
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "BLOODWELL",
+                    getModItem(ForbiddenMagic.ID, "Bloodwell", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("aqua"), 25).add(Aspect.getAspect("aer"), 25)
+                            .add(Aspect.getAspect("ignis"), 25).add(Aspect.getAspect("terra"), 25)
+                            .add(Aspect.getAspect("perditio"), 25),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwInfusedWater",
+                    'b',
+                    getModItem(BloodMagic.ID, "bucketLife", 1, 0, missing),
+                    'c',
+                    "screwInfusedAir",
+                    'd',
+                    getModItem(Thaumcraft.ID, "ItemEssence", 1, 0, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "ItemInkwell", 1, 0, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "ItemEssence", 1, 0, missing),
+                    'g',
+                    "screwInfusedEarth",
+                    'h',
+                    getModItem(BloodMagic.ID, "weakBloodOrb", 1, 0, missing),
+                    'i',
+                    "screwInfusedFire");
+            TCHelper.setResearchAspects(
+                    "BLOODWELL",
+                    new AspectList().add(Aspect.getAspect("victus"), 15).add(Aspect.getAspect("cognitio"), 12)
+                            .add(Aspect.getAspect("sensus"), 9).add(Aspect.getAspect("lucrum"), 6)
+                            .add(Aspect.getAspect("praecantatio"), 3));
+            TCHelper.setResearchComplexity("BLOODWELL", 3);
+        }
+        if (TTML && WML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "FOCUSBLINK",
+                    getModItem(ForbiddenMagic.ID, "BlinkFocus", 1, 0, missing),
+                    8,
+                    new AspectList().add(Aspect.getAspect("desidia"), 16).add(Aspect.getAspect("infernus"), 16)
+                            .add(Aspect.getAspect("iter"), 32).add(Aspect.getAspect("perditio"), 32)
+                            .add(Aspect.getAspect("alienis"), 8).add(Aspect.getAspect("praecantatio"), 8),
+                    getModItem(Thaumcraft.ID, "FocusPortableHole", 1, 0, missing),
+                    getModItem(Witchery.ID, "ingredient", 1, 92, missing),
+                    getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 7, missing),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 5, missing),
+                    ItemList.QuantumEye.get(1L),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 5, missing),
+                    ItemList.QuantumEye.get(1L),
+                    getModItem(Witchery.ID, "ingredient", 1, 92, missing),
+                    ItemList.QuantumEye.get(1L),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 5, missing),
+                    ItemList.QuantumEye.get(1L),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 5, missing),
+                    getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 7, missing));
+            TCHelper.setResearchAspects(
+                    "FOCUSBLINK",
+                    new AspectList().add(Aspect.getAspect("desidia"), 21).add(Aspect.getAspect("iter"), 18)
+                            .add(Aspect.getAspect("perditio"), 15).add(Aspect.getAspect("infernus"), 12)
+                            .add(Aspect.getAspect("alienis"), 9).add(Aspect.getAspect("tenebrae"), 6)
+                            .add(Aspect.getAspect("praecantatio"), 3));
+            TCHelper.setResearchComplexity("FOCUSBLINK", 3);
+        }
         TCHelper.addInfusionCraftingRecipe(
                 "ARCANECAKE",
                 getModItem(ForbiddenMagic.ID, "ArcaneCakeItem", 1, 0, missing),
@@ -698,22 +702,24 @@ public class ScriptForbiddenMagic implements IScriptLoader {
                         .add(Aspect.getAspect("fames"), 12).add(Aspect.getAspect("fabrico"), 9)
                         .add(Aspect.getAspect("limus"), 6).add(Aspect.getAspect("aqua"), 3));
         TCHelper.setResearchComplexity("ARCANECAKE", 3);
-        TCHelper.addInfusionCraftingRecipe(
-                "FORK",
-                getModItem(ForbiddenMagic.ID, "DiabolistFork", 1, 0, missing),
-                10,
-                new AspectList().add(Aspect.getAspect("telum"), 32).add(Aspect.getAspect("infernus"), 24)
-                        .add(Aspect.getAspect("potentia"), 16).add(Aspect.getAspect("machina"), 8),
-                getModItem(Thaumcraft.ID, "ItemSwordThaumium", 1, 0, missing),
-                OrePrefixes.stick.get(Materials.BloodInfusedIron),
-                OrePrefixes.screw.get(Materials.InfusedFire),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
-                OrePrefixes.stick.get(Materials.BloodInfusedIron),
-                OrePrefixes.screw.get(Materials.InfusedFire),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
-                OrePrefixes.stick.get(Materials.BloodInfusedIron),
-                OrePrefixes.screw.get(Materials.InfusedFire),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing));
+        if (AEML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "FORK",
+                    getModItem(ForbiddenMagic.ID, "DiabolistFork", 1, 0, missing),
+                    10,
+                    new AspectList().add(Aspect.getAspect("telum"), 32).add(Aspect.getAspect("infernus"), 24)
+                            .add(Aspect.getAspect("potentia"), 16).add(Aspect.getAspect("machina"), 8),
+                    getModItem(Thaumcraft.ID, "ItemSwordThaumium", 1, 0, missing),
+                    OrePrefixes.stick.get(Materials.BloodInfusedIron),
+                    OrePrefixes.screw.get(Materials.InfusedFire),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
+                    OrePrefixes.stick.get(Materials.BloodInfusedIron),
+                    OrePrefixes.screw.get(Materials.InfusedFire),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing),
+                    OrePrefixes.stick.get(Materials.BloodInfusedIron),
+                    OrePrefixes.screw.get(Materials.InfusedFire),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 1, missing));
+        }
         TCHelper.setResearchAspects(
                 "FORK",
                 new AspectList().add(Aspect.getAspect("tenebrae"), 18).add(Aspect.getAspect("praecantatio"), 15)
@@ -782,42 +788,44 @@ public class ScriptForbiddenMagic implements IScriptLoader {
                         .add(Aspect.getAspect("lucrum"), 9).add(Aspect.getAspect("terra"), 6)
                         .add(Aspect.getAspect("praecantatio"), 3));
         TCHelper.setResearchComplexity("TRANSEMERALD", 3);
-        TCHelper.addInfusionCraftingRecipe(
-                "WRATHCAGE",
-                getModItem(ForbiddenMagic.ID, "WrathCage", 1, 0, missing),
-                15,
-                new AspectList().add(Aspect.getAspect("ira"), 32).add(Aspect.getAspect("machina"), 32)
-                        .add(Aspect.getAspect("bestia"), 64).add(Aspect.getAspect("metallum"), 48)
-                        .add(Aspect.getAspect("alienis"), 16).add(Aspect.getAspect("exanimis"), 16)
-                        .add(Aspect.getAspect("praecantatio"), 32),
-                getModItem(EnderIO.ID, "itemBrokenSpawner", 1, 0, missing),
-                OrePrefixes.block.get(Materials.Thaumium),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
-                getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
-                getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
-                getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
-                getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing));
-        ThaumcraftApi.addCrucibleRecipe(
-                "WRATHCAGE",
-                getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "itemBatCrystal", 1, wildcard, missing),
-                new AspectList().add(Aspect.getAspect("cognitio"), 10).add(Aspect.getAspect("potentia"), 10)
-                        .add(Aspect.getAspect("praecantatio"), 10).add(Aspect.getAspect("vitreus"), 10));
-        TCHelper.setResearchAspects(
-                "WRATHCAGE",
-                new AspectList().add(Aspect.getAspect("ira"), 21).add(Aspect.getAspect("machina"), 18)
-                        .add(Aspect.getAspect("bestia"), 15).add(Aspect.getAspect("metallum"), 12)
-                        .add(Aspect.getAspect("praecantatio"), 9).add(Aspect.getAspect("alienis"), 6)
-                        .add(Aspect.getAspect("exanimis"), 3));
-        TCHelper.setResearchComplexity("WRATHCAGE", 3);
-        ThaumcraftApi.addWarpToResearch("WRATHCAGE", 5);
+        if (EIOML && ICML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "WRATHCAGE",
+                    getModItem(ForbiddenMagic.ID, "WrathCage", 1, 0, missing),
+                    15,
+                    new AspectList().add(Aspect.getAspect("ira"), 32).add(Aspect.getAspect("machina"), 32)
+                            .add(Aspect.getAspect("bestia"), 64).add(Aspect.getAspect("metallum"), 48)
+                            .add(Aspect.getAspect("alienis"), 16).add(Aspect.getAspect("exanimis"), 16)
+                            .add(Aspect.getAspect("praecantatio"), 32),
+                    getModItem(EnderIO.ID, "itemBrokenSpawner", 1, 0, missing),
+                    OrePrefixes.block.get(Materials.Thaumium),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
+                    getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
+                    getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
+                    getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
+                    getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing));
+            ThaumcraftApi.addCrucibleRecipe(
+                    "WRATHCAGE",
+                    getModItem(ForbiddenMagic.ID, "MobCrystal", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "itemBatCrystal", 1, wildcard, missing),
+                    new AspectList().add(Aspect.getAspect("cognitio"), 10).add(Aspect.getAspect("potentia"), 10)
+                            .add(Aspect.getAspect("praecantatio"), 10).add(Aspect.getAspect("vitreus"), 10));
+            TCHelper.setResearchAspects(
+                    "WRATHCAGE",
+                    new AspectList().add(Aspect.getAspect("ira"), 21).add(Aspect.getAspect("machina"), 18)
+                            .add(Aspect.getAspect("bestia"), 15).add(Aspect.getAspect("metallum"), 12)
+                            .add(Aspect.getAspect("praecantatio"), 9).add(Aspect.getAspect("alienis"), 6)
+                            .add(Aspect.getAspect("exanimis"), 3));
+            TCHelper.setResearchComplexity("WRATHCAGE", 3);
+            ThaumcraftApi.addWarpToResearch("WRATHCAGE", 5);
+        }
         TCHelper.addInfusionCraftingRecipe(
                 "MORPHTOOLS",
                 getModItem(ForbiddenMagic.ID, "MorphPickaxe", 1, 0, missing),
@@ -897,30 +905,32 @@ public class ScriptForbiddenMagic implements IScriptLoader {
                         .add(Aspect.getAspect("praecantatio"), 6).add(Aspect.getAspect("potentia"), 3));
         TCHelper.setResearchComplexity("MORPHTOOLS", 3);
         ThaumcraftApi.addWarpToResearch("MORPHTOOLS", 5);
-        TCHelper.addInfusionCraftingRecipe(
-                "TAINTSHOVEL",
-                getModItem(ForbiddenMagic.ID, "TaintShovel", 1, 0, missing),
-                10,
-                new AspectList().add(Aspect.getAspect("perfodio"), 16).add(Aspect.getAspect("sano"), 16)
-                        .add(Aspect.getAspect("vitreus"), 32).add(Aspect.getAspect("praecantatio"), 32)
-                        .add(Aspect.getAspect("limus"), 8).add(Aspect.getAspect("instrumentum"), 8),
-                getModItem(Thaumcraft.ID, "ItemShovelElemental", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "WandRod", 1, 2, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 4, missing),
-                OrePrefixes.gemExquisite.get(Materials.Amber),
-                getModItem(TinkerConstruct.ID, "strangeFood", 1, 0, missing),
-                getModItem(TinkerConstruct.ID, "strangeFood", 1, 0, missing),
-                getModItem(Minecraft.ID, "slime_ball", 1, 0, missing),
-                getModItem(Minecraft.ID, "slime_ball", 1, 0, missing),
-                OrePrefixes.gemExquisite.get(Materials.Sapphire),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 4, missing));
-        TCHelper.setResearchAspects(
-                "TAINTSHOVEL",
-                new AspectList().add(Aspect.getAspect("vitreus"), 21).add(Aspect.getAspect("vitium"), 18)
-                        .add(Aspect.getAspect("instrumentum"), 15).add(Aspect.getAspect("limus"), 12)
-                        .add(Aspect.getAspect("praecantatio"), 9).add(Aspect.getAspect("venenum"), 6)
-                        .add(Aspect.getAspect("permutatio"), 3));
-        TCHelper.setResearchComplexity("TAINTSHOVEL", 3);
+        if (TCML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TAINTSHOVEL",
+                    getModItem(ForbiddenMagic.ID, "TaintShovel", 1, 0, missing),
+                    10,
+                    new AspectList().add(Aspect.getAspect("perfodio"), 16).add(Aspect.getAspect("sano"), 16)
+                            .add(Aspect.getAspect("vitreus"), 32).add(Aspect.getAspect("praecantatio"), 32)
+                            .add(Aspect.getAspect("limus"), 8).add(Aspect.getAspect("instrumentum"), 8),
+                    getModItem(Thaumcraft.ID, "ItemShovelElemental", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "WandRod", 1, 2, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 4, missing),
+                    OrePrefixes.gemExquisite.get(Materials.Amber),
+                    getModItem(TinkerConstruct.ID, "strangeFood", 1, 0, missing),
+                    getModItem(TinkerConstruct.ID, "strangeFood", 1, 0, missing),
+                    getModItem(Minecraft.ID, "slime_ball", 1, 0, missing),
+                    getModItem(Minecraft.ID, "slime_ball", 1, 0, missing),
+                    OrePrefixes.gemExquisite.get(Materials.Sapphire),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 4, missing));
+            TCHelper.setResearchAspects(
+                    "TAINTSHOVEL",
+                    new AspectList().add(Aspect.getAspect("vitreus"), 21).add(Aspect.getAspect("vitium"), 18)
+                            .add(Aspect.getAspect("instrumentum"), 15).add(Aspect.getAspect("limus"), 12)
+                            .add(Aspect.getAspect("praecantatio"), 9).add(Aspect.getAspect("venenum"), 6)
+                            .add(Aspect.getAspect("permutatio"), 3));
+            TCHelper.setResearchComplexity("TAINTSHOVEL", 3);
+        }
         TCHelper.addInfusionCraftingRecipe(
                 "TAINTPICK",
                 getModItem(ForbiddenMagic.ID, "TaintPickaxe", 1, 0, missing),
@@ -985,33 +995,35 @@ public class ScriptForbiddenMagic implements IScriptLoader {
                 new AspectList().add(Aspect.getAspect("praecantatio"), 12).add(Aspect.getAspect("vitium"), 9)
                         .add(Aspect.getAspect("terra"), 6).add(Aspect.getAspect("ordo"), 3));
         TCHelper.setResearchComplexity("TAINTSTONE", 2);
-        TCHelper.addInfusionCraftingRecipe(
-                "ELDRITCHORB",
-                getModItem(ForbiddenMagic.ID, "EldritchOrb", 1, 0, missing),
-                15,
-                new AspectList().add(Aspect.getAspect("alienis"), 48).add(Aspect.getAspect("tenebrae"), 32)
-                        .add(Aspect.getAspect("vacuos"), 64).add(Aspect.getAspect("victus"), 64)
-                        .add(Aspect.getAspect("praecantatio"), 16).add(Aspect.getAspect("vitreus"), 8),
-                getModItem(BloodArsenal.ID, "transparent_orb", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 3, missing),
-                getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 6, missing),
-                OrePrefixes.plate.get(Materials.Void),
-                OrePrefixes.plate.get(Materials.Void),
-                ItemList.QuantumEye.get(1L),
-                ItemList.Gravistar.get(1L),
-                ItemList.QuantumEye.get(1L),
-                OrePrefixes.plate.get(Materials.Void),
-                OrePrefixes.plate.get(Materials.Void),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 6, missing),
-                getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 0, missing));
-        TCHelper.setResearchAspects(
-                "ELDRITCHORB",
-                new AspectList().add(Aspect.getAspect("vacuos"), 18).add(Aspect.getAspect("victus"), 15)
-                        .add(Aspect.getAspect("alienis"), 12).add(Aspect.getAspect("vitreus"), 9)
-                        .add(Aspect.getAspect("tenebrae"), 6).add(Aspect.getAspect("praecantatio"), 3));
-        TCHelper.setResearchComplexity("ELDRITCHORB", 3);
-        ThaumcraftApi.addWarpToResearch("ELDRITCHORB", 6);
+        if (BAML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "ELDRITCHORB",
+                    getModItem(ForbiddenMagic.ID, "EldritchOrb", 1, 0, missing),
+                    15,
+                    new AspectList().add(Aspect.getAspect("alienis"), 48).add(Aspect.getAspect("tenebrae"), 32)
+                            .add(Aspect.getAspect("vacuos"), 64).add(Aspect.getAspect("victus"), 64)
+                            .add(Aspect.getAspect("praecantatio"), 16).add(Aspect.getAspect("vitreus"), 8),
+                    getModItem(BloodArsenal.ID, "transparent_orb", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 3, missing),
+                    getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 6, missing),
+                    OrePrefixes.plate.get(Materials.Void),
+                    OrePrefixes.plate.get(Materials.Void),
+                    ItemList.QuantumEye.get(1L),
+                    ItemList.Gravistar.get(1L),
+                    ItemList.QuantumEye.get(1L),
+                    OrePrefixes.plate.get(Materials.Void),
+                    OrePrefixes.plate.get(Materials.Void),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 6, missing),
+                    getModItem(Thaumcraft.ID, "ItemEldritchObject", 1, 0, missing));
+            TCHelper.setResearchAspects(
+                    "ELDRITCHORB",
+                    new AspectList().add(Aspect.getAspect("vacuos"), 18).add(Aspect.getAspect("victus"), 15)
+                            .add(Aspect.getAspect("alienis"), 12).add(Aspect.getAspect("vitreus"), 9)
+                            .add(Aspect.getAspect("tenebrae"), 6).add(Aspect.getAspect("praecantatio"), 3));
+            TCHelper.setResearchComplexity("ELDRITCHORB", 3);
+            ThaumcraftApi.addWarpToResearch("ELDRITCHORB", 6);
+        }
         ThaumcraftApi.addArcaneCraftingRecipe(
                 "PRIMEWELL",
                 getModItem(ForbiddenMagic.ID, "Primewell", 1, 0, missing),
@@ -1100,33 +1112,35 @@ public class ScriptForbiddenMagic implements IScriptLoader {
                         .add(Aspect.getAspect("instrumentum"), 3));
         TCHelper.setResearchComplexity("ROD_infernal", 3);
         ThaumcraftApi.addWarpToResearch("ROD_infernal", 3);
-        TCHelper.addInfusionCraftingRecipe(
-                "ROD_blood",
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 6, missing),
-                9,
-                new AspectList().add(Aspect.getAspect("aqua"), 16).add(Aspect.getAspect("praecantatio"), 32)
-                        .add(Aspect.getAspect("victus"), 24).add(Aspect.getAspect("exanimis"), 8)
-                        .add(Aspect.getAspect("alienis"), 8),
-                getModItem(BloodMagic.ID, "masterBloodOrb", 1, 0, missing),
-                getModItem(BloodMagic.ID, "demonicSlate", 1, 0, missing),
-                getModItem(BloodMagic.ID, "sanctus", 1, 0, missing),
-                getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
-                getModItem(BloodMagic.ID, "incendium", 1, 0, missing),
-                getModItem(BloodMagic.ID, "aether", 1, 0, missing),
-                getModItem(BloodMagic.ID, "bloodMagicBaseAlchemyItems", 1, 0, missing),
-                getModItem(BloodMagic.ID, "demonicSlate", 1, 0, missing),
-                getModItem(BloodMagic.ID, "terrae", 1, 0, missing),
-                getModItem(BloodMagic.ID, "tennebrae", 1, 0, missing),
-                getModItem(BloodMagic.ID, "aquasalus", 1, 0, missing),
-                getModItem(BloodMagic.ID, "crystallos", 1, 0, missing),
-                getModItem(BloodMagic.ID, "crepitous", 1, 0, missing));
-        TCHelper.setResearchAspects(
-                "ROD_blood",
-                new AspectList().add(Aspect.getAspect("victus"), 15).add(Aspect.getAspect("aqua"), 12)
-                        .add(Aspect.getAspect("tenebrae"), 9).add(Aspect.getAspect("praecantatio"), 6)
-                        .add(Aspect.getAspect("telum"), 3));
-        TCHelper.setResearchComplexity("ROD_blood", 3);
-        ThaumcraftApi.addWarpToResearch("ROD_blood", 3);
+        if (BMML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "ROD_blood",
+                    getModItem(ForbiddenMagic.ID, "WandCores", 1, 6, missing),
+                    9,
+                    new AspectList().add(Aspect.getAspect("aqua"), 16).add(Aspect.getAspect("praecantatio"), 32)
+                            .add(Aspect.getAspect("victus"), 24).add(Aspect.getAspect("exanimis"), 8)
+                            .add(Aspect.getAspect("alienis"), 8),
+                    getModItem(BloodMagic.ID, "masterBloodOrb", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "demonicSlate", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "sanctus", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "incendium", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "aether", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "bloodMagicBaseAlchemyItems", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "demonicSlate", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "terrae", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "tennebrae", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "aquasalus", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "crystallos", 1, 0, missing),
+                    getModItem(BloodMagic.ID, "crepitous", 1, 0, missing));
+            TCHelper.setResearchAspects(
+                    "ROD_blood",
+                    new AspectList().add(Aspect.getAspect("victus"), 15).add(Aspect.getAspect("aqua"), 12)
+                            .add(Aspect.getAspect("tenebrae"), 9).add(Aspect.getAspect("praecantatio"), 6)
+                            .add(Aspect.getAspect("telum"), 3));
+            TCHelper.setResearchComplexity("ROD_blood", 3);
+            ThaumcraftApi.addWarpToResearch("ROD_blood", 3);
+        }
         TCHelper.setResearchAspects(
                 "CONSUMING",
                 new AspectList().add(Aspect.getAspect("vacuos"), 18).add(Aspect.getAspect("praecantatio"), 15)
@@ -1205,71 +1219,75 @@ public class ScriptForbiddenMagic implements IScriptLoader {
                         .add(Aspect.getAspect("venenum"), 6).add(Aspect.getAspect("tenebrae"), 3));
         TCHelper.setResearchComplexity("ROD_tainted", 3);
         ThaumcraftApi.addWarpToResearch("ROD_tainted", 3);
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "ROD_blood_staff",
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 9, missing),
-                new AspectList().add(Aspect.getAspect("aqua"), 40).add(Aspect.getAspect("ignis"), 40)
-                        .add(Aspect.getAspect("aer"), 40).add(Aspect.getAspect("terra"), 40)
-                        .add(Aspect.getAspect("perditio"), 40).add(Aspect.getAspect("ordo"), 40),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwInfusedOrder",
-                'b',
-                getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 6, missing),
-                'c',
-                getModItem(BloodMagic.ID, "demonBloodShard", 1, 0, missing),
-                'd',
-                getModItem(BloodMagic.ID, "bloodMagicBaseItems", 1, 29, missing),
-                'e',
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 3, missing),
-                'f',
-                getModItem(BloodMagic.ID, "bloodMagicBaseItems", 1, 28, missing),
-                'g',
-                getModItem(ForbiddenMagic.ID, "WandCores", 1, 3, missing),
-                'h',
-                getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 7, missing),
-                'i',
-                "screwInfusedEntropy");
-        TCHelper.setResearchAspects(
-                "ROD_blood_staff",
-                new AspectList().add(Aspect.getAspect("victus"), 18).add(Aspect.getAspect("aqua"), 15)
-                        .add(Aspect.getAspect("telum"), 12).add(Aspect.getAspect("terra"), 9)
-                        .add(Aspect.getAspect("tenebrae"), 6).add(Aspect.getAspect("praecantatio"), 3));
-        TCHelper.setResearchComplexity("ROD_blood_staff", 3);
-        ThaumcraftApi.addWarpToResearch("ROD_blood_staff", 4);
-        TCHelper.clearPages("CAP_alchemical");
-        TCHelper.addResearchPage("CAP_alchemical", new ResearchPage("forbidden.research_page.CAP_alchemical.1"));
-        TCHelper.addInfusionCraftingRecipe(
-                "CAP_alchemical",
-                getModItem(ForbiddenMagic.ID, "WandCaps", 1, 0, missing),
-                6,
-                new AspectList().add(Aspect.getAspect("victus"), 16).add(Aspect.getAspect("aqua"), 32)
-                        .add(Aspect.getAspect("praecantatio"), 16).add(Aspect.getAspect("permutatio"), 8)
-                        .add(Aspect.getAspect("metallum"), 8),
-                getModItem(Thaumcraft.ID, "WandCap", 1, 1, missing),
-                getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.Thaumium),
-                getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.Thaumium),
-                getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.Thaumium),
-                getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.Thaumium),
-                getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
-                OrePrefixes.dust.get(Materials.Thaumium));
-        TCHelper.addResearchPage(
-                "CAP_alchemical",
-                new ResearchPage(
-                        TCHelper.findInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 0, missing))));
-        TCHelper.setResearchAspects(
-                "CAP_alchemical",
-                new AspectList().add(Aspect.getAspect("victus"), 15).add(Aspect.getAspect("aqua"), 12)
-                        .add(Aspect.getAspect("instrumentum"), 9).add(Aspect.getAspect("metallum"), 6)
-                        .add(Aspect.getAspect("praecantatio"), 3));
-        TCHelper.setResearchComplexity("CAP_alchemical", 3);
-        ThaumcraftApi.addWarpToResearch("CAP_alchemical", 2);
+        if (BMML) {
+            if (TTML) {
+                ThaumcraftApi.addArcaneCraftingRecipe(
+                        "ROD_blood_staff",
+                        getModItem(ForbiddenMagic.ID, "WandCores", 1, 9, missing),
+                        new AspectList().add(Aspect.getAspect("aqua"), 40).add(Aspect.getAspect("ignis"), 40)
+                                .add(Aspect.getAspect("aer"), 40).add(Aspect.getAspect("terra"), 40)
+                                .add(Aspect.getAspect("perditio"), 40).add(Aspect.getAspect("ordo"), 40),
+                        "abc",
+                        "def",
+                        "ghi",
+                        'a',
+                        "screwInfusedOrder",
+                        'b',
+                        getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 6, missing),
+                        'c',
+                        getModItem(BloodMagic.ID, "demonBloodShard", 1, 0, missing),
+                        'd',
+                        getModItem(BloodMagic.ID, "bloodMagicBaseItems", 1, 29, missing),
+                        'e',
+                        getModItem(ForbiddenMagic.ID, "WandCores", 1, 3, missing),
+                        'f',
+                        getModItem(BloodMagic.ID, "bloodMagicBaseItems", 1, 28, missing),
+                        'g',
+                        getModItem(ForbiddenMagic.ID, "WandCores", 1, 3, missing),
+                        'h',
+                        getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 7, missing),
+                        'i',
+                        "screwInfusedEntropy");
+                TCHelper.setResearchAspects(
+                        "ROD_blood_staff",
+                        new AspectList().add(Aspect.getAspect("victus"), 18).add(Aspect.getAspect("aqua"), 15)
+                                .add(Aspect.getAspect("telum"), 12).add(Aspect.getAspect("terra"), 9)
+                                .add(Aspect.getAspect("tenebrae"), 6).add(Aspect.getAspect("praecantatio"), 3));
+                TCHelper.setResearchComplexity("ROD_blood_staff", 3);
+                ThaumcraftApi.addWarpToResearch("ROD_blood_staff", 4);
+            }
+            TCHelper.clearPages("CAP_alchemical");
+            TCHelper.addResearchPage("CAP_alchemical", new ResearchPage("forbidden.research_page.CAP_alchemical.1"));
+            TCHelper.addInfusionCraftingRecipe(
+                    "CAP_alchemical",
+                    getModItem(ForbiddenMagic.ID, "WandCaps", 1, 0, missing),
+                    6,
+                    new AspectList().add(Aspect.getAspect("victus"), 16).add(Aspect.getAspect("aqua"), 32)
+                            .add(Aspect.getAspect("praecantatio"), 16).add(Aspect.getAspect("permutatio"), 8)
+                            .add(Aspect.getAspect("metallum"), 8),
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 1, missing),
+                    getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.Thaumium),
+                    getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.Thaumium),
+                    getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.Thaumium),
+                    getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.Thaumium),
+                    getModItem(BloodMagic.ID, "magicales", 1, 0, missing),
+                    OrePrefixes.dust.get(Materials.Thaumium));
+            TCHelper.addResearchPage(
+                    "CAP_alchemical",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(getModItem(ForbiddenMagic.ID, "WandCaps", 1, 0, missing))));
+            TCHelper.setResearchAspects(
+                    "CAP_alchemical",
+                    new AspectList().add(Aspect.getAspect("victus"), 15).add(Aspect.getAspect("aqua"), 12)
+                            .add(Aspect.getAspect("instrumentum"), 9).add(Aspect.getAspect("metallum"), 6)
+                            .add(Aspect.getAspect("praecantatio"), 3));
+            TCHelper.setResearchComplexity("CAP_alchemical", 3);
+            ThaumcraftApi.addWarpToResearch("CAP_alchemical", 2);
+        }
         TCHelper.refreshResearchPages("RIDINGCROP");
         TCHelper.refreshResearchPages("CRYSTALWELL");
         TCHelper.refreshResearchPages("BLACKFLOWER");

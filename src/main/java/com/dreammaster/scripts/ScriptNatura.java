@@ -1,6 +1,7 @@
 package com.dreammaster.scripts;
 
 import static com.dreammaster.main.MainRegistry.Module_CustomFuels;
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Minecraft;
 import static gregtech.api.enums.Mods.Natura;
 import static gregtech.api.enums.Mods.PamsHarvestCraft;
@@ -40,15 +41,17 @@ public class ScriptNatura implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Mods.Natura.ID, PamsHarvestCraft.ID);
+        return Arrays.asList(Mods.Natura.ID);
     }
 
     @Override
     public void loadRecipes() {
-        addShapelessRecipe(
-                getModItem(Natura.ID, "barleyFood", 1, 3, missing),
-                getModItem(PamsHarvestCraft.ID, "cottonItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "cottonItem", 1, 0, missing));
+        if (PHML) {
+            addShapelessRecipe(
+                    getModItem(Natura.ID, "barleyFood", 1, 3, missing),
+                    getModItem(PamsHarvestCraft.ID, "cottonItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "cottonItem", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Natura.ID, "barley.seed", 1, 1, missing),
                 getModItem(Natura.ID, "barleyFood", 1, 3, missing));
@@ -2152,18 +2155,20 @@ public class ScriptNatura implements IScriptLoader {
                 getModItem(Natura.ID, "natura.emptybowl", 1, 12, missing),
                 getModItem(Natura.ID, "planks", 1, 12, missing),
                 "craftingToolKnife");
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "juicerItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "raspberryItem", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "juicerItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "blueberryItem", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(PamsHarvestCraft.ID, "blackberryjuiceItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "juicerItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "blackberryItem", 1, 0, missing));
+        if (PHML) {
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "juicerItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "raspberryItem", 1, 0, missing));
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "juicerItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "blueberryItem", 1, 0, missing));
+            addShapelessRecipe(
+                    getModItem(PamsHarvestCraft.ID, "blackberryjuiceItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "juicerItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "blackberryItem", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Natura.ID, "barley.seed", 1, 0, missing),
                 getModItem(Natura.ID, "barleyFood", 1, 0, missing));

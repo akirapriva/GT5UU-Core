@@ -34,11 +34,7 @@ public class ScriptWirelessRedstone implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                ProjectRedCore.ID,
-                WirelessRedstoneCBEAddons.ID,
-                WirelessRedstoneCBECore.ID,
-                WirelessRedstoneCBELogic.ID);
+        return Arrays.asList(WirelessRedstoneCBEAddons.ID, WirelessRedstoneCBECore.ID, WirelessRedstoneCBELogic.ID);
     }
 
     @Override
@@ -65,29 +61,30 @@ public class ScriptWirelessRedstone implements IScriptLoader {
                 "itemCasingTungstenSteel",
                 "screwTungstenSteel",
                 "itemCasingTungstenSteel");
-        addShapedRecipe(
-                getModItem(WirelessRedstoneCBEAddons.ID, "sniffer", 1, 0, missing),
-                getModItem(WirelessRedstoneCBECore.ID, "recieverDish", 1, 0, missing),
-                getModItem(WirelessRedstoneCBECore.ID, "wirelessTransceiver", 1, 0, missing),
-                getModItem(WirelessRedstoneCBECore.ID, "recieverDish", 1, 0, missing),
-                "itemCasingTungstenSteel",
-                "stickTungstenSteel",
-                "itemCasingTungstenSteel",
-                getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing),
-                getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing),
-                getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(WirelessRedstoneCBEAddons.ID, "psniffer", 1, 0, missing),
-                getModItem(WirelessRedstoneCBECore.ID, "blazeRecieverDish", 1, 0, missing),
-                getModItem(WirelessRedstoneCBECore.ID, "blazeTransceiver", 1, 0, missing),
-                getModItem(WirelessRedstoneCBECore.ID, "blazeRecieverDish", 1, 0, missing),
-                "itemCasingTungstenSteel",
-                "stickTungstenSteel",
-                "itemCasingTungstenSteel",
-                getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing),
-                getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing),
-                getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing));
-
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(WirelessRedstoneCBEAddons.ID, "sniffer", 1, 0, missing),
+                    getModItem(WirelessRedstoneCBECore.ID, "recieverDish", 1, 0, missing),
+                    getModItem(WirelessRedstoneCBECore.ID, "wirelessTransceiver", 1, 0, missing),
+                    getModItem(WirelessRedstoneCBECore.ID, "recieverDish", 1, 0, missing),
+                    "itemCasingTungstenSteel",
+                    "stickTungstenSteel",
+                    "itemCasingTungstenSteel",
+                    getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing),
+                    getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing),
+                    getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(WirelessRedstoneCBEAddons.ID, "psniffer", 1, 0, missing),
+                    getModItem(WirelessRedstoneCBECore.ID, "blazeRecieverDish", 1, 0, missing),
+                    getModItem(WirelessRedstoneCBECore.ID, "blazeTransceiver", 1, 0, missing),
+                    getModItem(WirelessRedstoneCBECore.ID, "blazeRecieverDish", 1, 0, missing),
+                    "itemCasingTungstenSteel",
+                    "stickTungstenSteel",
+                    "itemCasingTungstenSteel",
+                    getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing),
+                    getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing),
+                    getModItem(ProjectRedCore.ID, "projectred.core.part", 1, 0, missing));
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.stick, Materials.TungstenSteel, 1L),
@@ -116,27 +113,29 @@ public class ScriptWirelessRedstone implements IScriptLoader {
                 .itemOutputs(getModItem(WirelessRedstoneCBECore.ID, "blazeRecieverDish", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("ender", 250)).duration(30 * SECONDS).eut(TierEU.RECIPE_HV / 2)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ProjectRedCore.ID, "projectred.core.part", 3, 0, missing),
-                        getModItem(WirelessRedstoneCBECore.ID, "wirelessTransceiver", 1, 0, missing))
-                .itemOutputs(getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("ender", 500)).duration(30 * SECONDS).eut(TierEU.RECIPE_HV / 2)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ProjectRedCore.ID, "projectred.core.part", 3, 0, missing),
-                        getModItem(WirelessRedstoneCBECore.ID, "recieverDish", 1, 0, missing))
-                .itemOutputs(getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 1, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("ender", 500)).duration(30 * SECONDS).eut(TierEU.RECIPE_HV / 2)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ProjectRedCore.ID, "projectred.core.part", 3, 0, missing),
-                        getModItem(WirelessRedstoneCBECore.ID, "blazeTransceiver", 1, 0, missing))
-                .itemOutputs(getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 2, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("ender", 250)).duration(30 * SECONDS).eut(TierEU.RECIPE_HV / 2)
-                .addTo(assemblerRecipes);
+        if (PREDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ProjectRedCore.ID, "projectred.core.part", 3, 0, missing),
+                            getModItem(WirelessRedstoneCBECore.ID, "wirelessTransceiver", 1, 0, missing))
+                    .itemOutputs(getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("ender", 500)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_HV / 2).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ProjectRedCore.ID, "projectred.core.part", 3, 0, missing),
+                            getModItem(WirelessRedstoneCBECore.ID, "recieverDish", 1, 0, missing))
+                    .itemOutputs(getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 1, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("ender", 500)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_HV / 2).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ProjectRedCore.ID, "projectred.core.part", 3, 0, missing),
+                            getModItem(WirelessRedstoneCBECore.ID, "blazeTransceiver", 1, 0, missing))
+                    .itemOutputs(getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 2, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("ender", 250)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_HV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "compass", 1, 0, missing),

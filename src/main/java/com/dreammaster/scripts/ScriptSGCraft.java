@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AE2FluidCraft;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.BartWorks;
@@ -34,7 +35,7 @@ public class ScriptSGCraft implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(SGCraft.ID, BartWorks.ID, EnderIO.ID, GoodGenerator.ID, TecTech.ID);
+        return Arrays.asList(SGCraft.ID, BartWorks.ID, GoodGenerator.ID, TecTech.ID);
     }
 
     @Override
@@ -60,12 +61,6 @@ public class ScriptSGCraft implements IScriptLoader {
         ItemStack rfUnit = getModItem(SGCraft.ID, "rfPowerUnit", 1, 0, missing);
         ItemStack ocInterface = getModItem(SGCraft.ID, "ocInterface", 1, 0, missing);
         ItemStack stargateController = getModItem(SGCraft.ID, "stargateController", 1, 0, missing);
-
-        ItemStack universeCell = getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Universe", 1, 0, missing);
-        ItemStack universeFluidCell = getModItem(AE2FluidCraft.ID, "fluid_storage.Universe", 1, 0, missing);
-        ItemStack singularityStorage = getModItem(AppliedEnergistics2.ID, "tile.BlockSingularityCraftingStorage", 1, 0, missing);
-        ItemStack chaoticCapacitor = createItemStack(EnderIO.ID, "blockCapBank", 1, 0, "{type:\"CREATIVE\",storedEnergyRF:2500000}", missing);
-        ItemStack keyboard = getModItem(OpenComputers.ID, "keyboard", 1, 0, missing);
 
         // Stargate Ring Block
         ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
@@ -125,53 +120,58 @@ public class ScriptSGCraft implements IScriptLoader {
                 'f', tectech.thing.CustomItemList.Godforge_GravitonFlowModulatorTier3.get(1L));
 
         // Stargate Base
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                stargateBase,
-                "abbcdcbba",
-                "befghgfeb",
-                "beigjgieb",
-                "cklmmmlkc",
-                "dkpmompkd",
-                "cklmmmlkc",
-                "beigngieb",
-                "befghgfeb",
-                "abbcdcbba",
-                'a', ItemList.Transdimensional_Alignment_Matrix.get(1L),
-                'b', ItemList.Field_Generator_UXV.get(1L),
-                'c', ItemList.Emitter_UXV.get(1L),
-                'd', magmatterNanite,
-                'e', tectech.thing.CustomItemList.Godforge_GravitonFlowModulatorTier3.get(1L),
-                'f', magmatterSuperdensePlate,
-                'g', NHItemList.StargateShieldingFoil.get(),
-                'h', ItemList.MiningDroneUXV.get(1),
-                'i', ItemList.ZPM6.get(1L),
-                'j', universeCell,
-                'k', tectech.thing.CustomItemList.astralArrayFabricator.get(1L),
-                'l', tectech.thing.CustomItemList.Machine_Multi_EyeOfHarmony.get(1L),
-                'm', chevronBlock,
-                'n', universeFluidCell,
-                'o', stargateCrystal,
-                'p', ItemList.SpaceElevatorModuleAssemblerT3.get(1));
-
-        // Ridiculously Large Capacitor
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                stargateCapacitor,
-                "---------",
-                "----e----",
-                "--pgpgp--",
-                "-pcscscp-",
-                "-pbcbcbp-",
-                "-pcscscp-",
-                "--pgpgp--",
-                "----e----",
-                "---------",
-                'p', NHItemList.StargateShieldingFoil.get(),
-                's', tectech.thing.CustomItemList.Godforge_StellarEnergySiphonCasing.get(1),
-                'g', ItemList.Field_Generator_UXV.get(1L),
-                'e', ItemList.Emitter_UXV.get(1L),
-                'b', ItemList.ZPM6.get(1L),
-                'c', chaoticCapacitor);
-
+        if (AEML && AEFCML) {
+            ItemStack universeFluidCell = getModItem(AE2FluidCraft.ID, "fluid_storage.Universe", 1, 0, missing);
+            ItemStack universeCell = getModItem(AppliedEnergistics2.ID, "item.ItemExtremeStorageCell.Universe", 1, 0, missing);
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    stargateBase,
+                    "abbcdcbba",
+                    "befghgfeb",
+                    "beigjgieb",
+                    "cklmmmlkc",
+                    "dkpmompkd",
+                    "cklmmmlkc",
+                    "beigngieb",
+                    "befghgfeb",
+                    "abbcdcbba",
+                    'a', ItemList.Transdimensional_Alignment_Matrix.get(1L),
+                    'b', ItemList.Field_Generator_UXV.get(1L),
+                    'c', ItemList.Emitter_UXV.get(1L),
+                    'd', magmatterNanite,
+                    'e', tectech.thing.CustomItemList.Godforge_GravitonFlowModulatorTier3.get(1L),
+                    'f', magmatterSuperdensePlate,
+                    'g', NHItemList.StargateShieldingFoil.get(),
+                    'h', ItemList.MiningDroneUXV.get(1),
+                    'i', ItemList.ZPM6.get(1L),
+                    'j', universeCell,
+                    'k', tectech.thing.CustomItemList.astralArrayFabricator.get(1L),
+                    'l', tectech.thing.CustomItemList.Machine_Multi_EyeOfHarmony.get(1L),
+                    'm', chevronBlock,
+                    'n', universeFluidCell,
+                    'o', stargateCrystal,
+                    'p', ItemList.SpaceElevatorModuleAssemblerT3.get(1));
+        }
+        if (EIOML) {
+            // Ridiculously Large Capacitor
+            ItemStack chaoticCapacitor = createItemStack(EnderIO.ID, "blockCapBank", 1, 0, "{type:\"CREATIVE\",storedEnergyRF:2500000}", missing);
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    stargateCapacitor,
+                    "---------",
+                    "----e----",
+                    "--pgpgp--",
+                    "-pcscscp-",
+                    "-pbcbcbp-",
+                    "-pcscscp-",
+                    "--pgpgp--",
+                    "----e----",
+                    "---------",
+                    'p', NHItemList.StargateShieldingFoil.get(),
+                    's', tectech.thing.CustomItemList.Godforge_StellarEnergySiphonCasing.get(1),
+                    'g', ItemList.Field_Generator_UXV.get(1L),
+                    'e', ItemList.Emitter_UXV.get(1L),
+                    'b', ItemList.ZPM6.get(1L),
+                    'c', chaoticCapacitor);
+        }
         // Stargate Iris Blade
         ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
                 irisBlade,
@@ -228,51 +228,56 @@ public class ScriptSGCraft implements IScriptLoader {
                 'n', magmatterNanite,
                 'g', ItemList.GigaChad.get(1L));
 
-        // OpenComputers Stargate Interface
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                ocInterface,
-                "mmcdddcmm",
-                "m-c---c-m",
-                "m-c-w-c-m",
-                "d--csc--d",
-                "d-wsrsw-d",
-                "d--csc--d",
-                "mnn-w-nnm",
-                "mgn---ngm",
-                "mmmdddmmm",
-                'm', magmatterBlock,
-                'd', darkMatterBlock,
-                'c', compact5Coil,
-                'w', tectech.thing.CustomItemList.dataIn_Wireless_Hatch.get(1L),
-                's', singularityStorage,
-                'r', ringBlock,
-                'n', magmatterNanite,
-                'g', ItemList.GigaChad.get(1L));
-
-        // Stargate Controller
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                stargateController,
-                "---mmm---",
-                "--dkfkd--",
-                "-mkfsfkm-",
-                "-mfecefm-",
-                "-mkfsfkm-",
-                "--dkfkd--",
-                "--mpbpm--",
-                "--mpopm--",
-                "--mpupm--",
-                'm', magmatterBlock,
-                'd', darkMatterBlock,
-                'k', keyboard,
-                'f', NHItemList.StargateFramePart.get(),
-                's', ItemList.Sensor_UXV.get(1L),
-                'e', ItemList.Emitter_UXV.get(1L),
-                'c', stargateControllerCrystal,
-                'p', NHItemList.StargateShieldingFoil.get(),
-                'b', ItemList.ZPM6.get(1L),
-                'o', ocInterface,
-                'u', universeFluidCell);
-
+        if (AEML) {
+            // OpenComputers Stargate Interface
+            ItemStack singularityStorage = getModItem(AppliedEnergistics2.ID, "tile.BlockSingularityCraftingStorage", 1, 0, missing);
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    ocInterface,
+                    "mmcdddcmm",
+                    "m-c---c-m",
+                    "m-c-w-c-m",
+                    "d--csc--d",
+                    "d-wsrsw-d",
+                    "d--csc--d",
+                    "mnn-w-nnm",
+                    "mgn---ngm",
+                    "mmmdddmmm",
+                    'm', magmatterBlock,
+                    'd', darkMatterBlock,
+                    'c', compact5Coil,
+                    'w', tectech.thing.CustomItemList.dataIn_Wireless_Hatch.get(1L),
+                    's', singularityStorage,
+                    'r', ringBlock,
+                    'n', magmatterNanite,
+                    'g', ItemList.GigaChad.get(1L));
+        }
+        if (AEFCML && OCML) {
+            ItemStack universeFluidCell = getModItem(AE2FluidCraft.ID, "fluid_storage.Universe", 1, 0, missing);
+            ItemStack keyboard = getModItem(OpenComputers.ID, "keyboard", 1, 0, missing);
+            // Stargate Controller
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    stargateController,
+                    "---mmm---",
+                    "--dkfkd--",
+                    "-mkfsfkm-",
+                    "-mfecefm-",
+                    "-mkfsfkm-",
+                    "--dkfkd--",
+                    "--mpbpm--",
+                    "--mpopm--",
+                    "--mpupm--",
+                    'm', magmatterBlock,
+                    'd', darkMatterBlock,
+                    'k', keyboard,
+                    'f', NHItemList.StargateFramePart.get(),
+                    's', ItemList.Sensor_UXV.get(1L),
+                    'e', ItemList.Emitter_UXV.get(1L),
+                    'c', stargateControllerCrystal,
+                    'p', NHItemList.StargateShieldingFoil.get(),
+                    'b', ItemList.ZPM6.get(1L),
+                    'o', ocInterface,
+                    'u', universeFluidCell);
+        }
 
         // spotless:on
     }

@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.CarpentersBlocks;
 import static gregtech.api.enums.Mods.ExtraUtilities;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
@@ -49,17 +50,7 @@ public class ScriptThaumicBases implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                CarpentersBlocks.ID,
-                ExtraUtilities.ID,
-                IndustrialCraft2.ID,
-                IronTanks.ID,
-                Railcraft.ID,
-                Thaumcraft.ID,
-                ThaumicBases.ID,
-                ThaumicTinkerer.ID,
-                TinkersGregworks.ID,
-                TwilightForest.ID);
+        return Arrays.asList(Thaumcraft.ID, ThaumicBases.ID);
     }
 
     @Override
@@ -207,21 +198,24 @@ public class ScriptThaumicBases implements IScriptLoader {
                 "plateInfusedAir",
                 'i',
                 getModItem(Thaumcraft.ID, "blockWoodenDevice", 1, 6, missing));
-        TCHelper.addInfusionCraftingRecipe(
-                "TB.AdvAlc",
-                getModItem(ThaumicBases.ID, "advAlchFurnace", 1, 0, missing),
-                6,
-                new AspectList().add(Aspect.getAspect("ignis"), 48).add(Aspect.getAspect("potentia"), 32)
-                        .add(Aspect.getAspect("machina"), 16).add(Aspect.getAspect("metallum"), 16)
-                        .add(Aspect.getAspect("praecantatio"), 24),
-                getModItem(Thaumcraft.ID, "blockStoneDevice", 1, 0, missing),
-                getModItem(Railcraft.ID, "machine.beta", 1, 4, missing),
-                OrePrefixes.plateDense.get(Materials.Steel),
-                OrePrefixes.block.get(Materials.Thaumium),
-                getModItem(Thaumcraft.ID, "blockMetalDevice", 1, 0, missing),
-                getModItem(ThaumicBases.ID, "crystalBlock", 1, 1, missing),
-                OrePrefixes.block.get(Materials.Thaumium),
-                OrePrefixes.plateDense.get(Materials.Steel));
+
+        if (RCML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TB.AdvAlc",
+                    getModItem(ThaumicBases.ID, "advAlchFurnace", 1, 0, missing),
+                    6,
+                    new AspectList().add(Aspect.getAspect("ignis"), 48).add(Aspect.getAspect("potentia"), 32)
+                            .add(Aspect.getAspect("machina"), 16).add(Aspect.getAspect("metallum"), 16)
+                            .add(Aspect.getAspect("praecantatio"), 24),
+                    getModItem(Thaumcraft.ID, "blockStoneDevice", 1, 0, missing),
+                    getModItem(Railcraft.ID, "machine.beta", 1, 4, missing),
+                    OrePrefixes.plateDense.get(Materials.Steel),
+                    OrePrefixes.block.get(Materials.Thaumium),
+                    getModItem(Thaumcraft.ID, "blockMetalDevice", 1, 0, missing),
+                    getModItem(ThaumicBases.ID, "crystalBlock", 1, 1, missing),
+                    OrePrefixes.block.get(Materials.Thaumium),
+                    OrePrefixes.plateDense.get(Materials.Steel));
+        }
         ThaumcraftApi.addArcaneCraftingRecipe(
                 "TB.ThaumicAnvil",
                 getModItem(ThaumicBases.ID, "thaumicAnvil", 1, 0, missing),
@@ -389,29 +383,37 @@ public class ScriptThaumicBases implements IScriptLoader {
                 "blockThaumium",
                 'i',
                 "ingotThaumium");
-        TCHelper.addInfusionCraftingRecipe(
-                "TB.Spike.Void",
-                getModItem(ThaumicBases.ID, "spike", 1, 4, missing),
-                5,
-                new AspectList().add(Aspect.getAspect("telum"), 32).add(Aspect.getAspect("instrumentum"), 32)
-                        .add(Aspect.getAspect("tenebrae"), 16).add(Aspect.getAspect("alienis"), 16)
-                        .add(Aspect.getAspect("metallum"), 16).add(Aspect.getAspect("mortuus"), 16),
-                getModItem(ThaumicBases.ID, "spike", 1, 2, missing),
-                OrePrefixes.plate.get(Materials.Void),
-                createItemStack(
-                        TinkersGregworks.ID,
-                        "tGregToolPartArrowHead",
-                        1,
-                        1520,
-                        "{material:\"Titanium\"}",
-                        missing),
-                getModItem(Thaumcraft.ID, "ItemSwordVoid", 1, 0, missing),
-                getModItem(ThaumicBases.ID, "blockSalisMundus", 1, 0, missing),
-                OrePrefixes.plate.get(Materials.Void),
-                getModItem(ThaumicBases.ID, "blockSalisMundus", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemSwordVoid", 1, 0, missing),
-                createItemStack(TinkersGregworks.ID, "tGregToolPartArrowHead", 1, 1583, "{material:\"Void\"}", missing),
-                OrePrefixes.plate.get(Materials.Void));
+        if (TGML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TB.Spike.Void",
+                    getModItem(ThaumicBases.ID, "spike", 1, 4, missing),
+                    5,
+                    new AspectList().add(Aspect.getAspect("telum"), 32).add(Aspect.getAspect("instrumentum"), 32)
+                            .add(Aspect.getAspect("tenebrae"), 16).add(Aspect.getAspect("alienis"), 16)
+                            .add(Aspect.getAspect("metallum"), 16).add(Aspect.getAspect("mortuus"), 16),
+                    getModItem(ThaumicBases.ID, "spike", 1, 2, missing),
+                    OrePrefixes.plate.get(Materials.Void),
+                    createItemStack(
+                            TinkersGregworks.ID,
+                            "tGregToolPartArrowHead",
+                            1,
+                            1520,
+                            "{material:\"Titanium\"}",
+                            missing),
+                    getModItem(Thaumcraft.ID, "ItemSwordVoid", 1, 0, missing),
+                    getModItem(ThaumicBases.ID, "blockSalisMundus", 1, 0, missing),
+                    OrePrefixes.plate.get(Materials.Void),
+                    getModItem(ThaumicBases.ID, "blockSalisMundus", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemSwordVoid", 1, 0, missing),
+                    createItemStack(
+                            TinkersGregworks.ID,
+                            "tGregToolPartArrowHead",
+                            1,
+                            1583,
+                            "{material:\"Void\"}",
+                            missing),
+                    OrePrefixes.plate.get(Materials.Void));
+        }
         TCHelper.addInfusionCraftingRecipe(
                 "TB.VoidAnvil",
                 getModItem(ThaumicBases.ID, "voidAnvil", 1, 0, missing),
@@ -496,21 +498,23 @@ public class ScriptThaumicBases implements IScriptLoader {
                 getModItem(Thaumcraft.ID, "blockCrystal", 1, 4, missing),
                 ItemList.Sensor_LV.get(1L),
                 getModItem(Thaumcraft.ID, "blockCrystal", 1, 4, missing));
-        TCHelper.addInfusionCraftingRecipe(
-                "TB.Foci.Drain",
-                getModItem(ThaumicBases.ID, "fociDrain", 1, 0, missing),
-                5,
-                new AspectList().add(Aspect.getAspect("vacuos"), 32).add(Aspect.getAspect("perditio"), 32)
-                        .add(Aspect.getAspect("aqua"), 16),
-                OrePrefixes.lens.get(Materials.InfusedWater),
-                getModItem(Minecraft.ID, "bucket", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
-                getModItem(Thaumcraft.ID, "blockJar", 1, 3, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
-                getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
-                getModItem(ExtraUtilities.ID, "trashcan", 1, 1, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing));
+        if (XUML && ITML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TB.Foci.Drain",
+                    getModItem(ThaumicBases.ID, "fociDrain", 1, 0, missing),
+                    5,
+                    new AspectList().add(Aspect.getAspect("vacuos"), 32).add(Aspect.getAspect("perditio"), 32)
+                            .add(Aspect.getAspect("aqua"), 16),
+                    OrePrefixes.lens.get(Materials.InfusedWater),
+                    getModItem(Minecraft.ID, "bucket", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
+                    getModItem(Thaumcraft.ID, "blockJar", 1, 3, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
+                    getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
+                    getModItem(ExtraUtilities.ID, "trashcan", 1, 1, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing));
+        }
         TCHelper.addInfusionCraftingRecipe(
                 "TB.Foci.Flux",
                 getModItem(ThaumicBases.ID, "fociFlux", 1, 0, missing),
@@ -526,17 +530,19 @@ public class ScriptThaumicBases implements IScriptLoader {
                 getModItem(Thaumcraft.ID, "blockCrystal", 1, 6, missing),
                 getModItem(Thaumcraft.ID, "blockCustomPlant", 1, 1, missing),
                 getModItem(Thaumcraft.ID, "blockCrystal", 1, 6, missing));
-        TCHelper.addInfusionCraftingRecipe(
-                "TB.CryingObs",
-                getModItem(ThaumicBases.ID, "cryingObsidian", 1, 0, missing),
-                5,
-                new AspectList().add(Aspect.getAspect("iter"), 32).add(Aspect.getAspect("vinculum"), 32)
-                        .add(Aspect.getAspect("desidia"), 16).add(Aspect.getAspect("sensus"), 16),
-                GregtechItemList.DoubleCompressedObsidian.get(1),
-                getModItem(IndustrialCraft2.ID, "itemDensePlates", 1, 8, missing),
-                getModItem(CarpentersBlocks.ID, "itemCarpentersBed", 1, 0, missing),
-                OrePrefixes.gemFlawless.get(Materials.Diamond),
-                OrePrefixes.plateDense.get(Materials.Thaumium));
+        if (CBML && ICML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TB.CryingObs",
+                    getModItem(ThaumicBases.ID, "cryingObsidian", 1, 0, missing),
+                    5,
+                    new AspectList().add(Aspect.getAspect("iter"), 32).add(Aspect.getAspect("vinculum"), 32)
+                            .add(Aspect.getAspect("desidia"), 16).add(Aspect.getAspect("sensus"), 16),
+                    GregtechItemList.DoubleCompressedObsidian.get(1),
+                    getModItem(IndustrialCraft2.ID, "itemDensePlates", 1, 8, missing),
+                    getModItem(CarpentersBlocks.ID, "itemCarpentersBed", 1, 0, missing),
+                    OrePrefixes.gemFlawless.get(Materials.Diamond),
+                    OrePrefixes.plateDense.get(Materials.Thaumium));
+        }
         TCHelper.addInfusionCraftingRecipe(
                 "TB.TaintFlask",
                 getModItem(ThaumicBases.ID, "concentratedTaint", 1, 0, missing),
@@ -639,33 +645,35 @@ public class ScriptThaumicBases implements IScriptLoader {
                 getModItem(ThaumicBases.ID, "blockSalisMundus", 1, 0, missing),
                 OrePrefixes.block.get(Materials.Thaumium),
                 OrePrefixes.block.get(Materials.Thaumium));
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Iron",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 30).add(Aspect.getAspect("ignis"), 30)
-                        .add(Aspect.getAspect("aqua"), 30).add(Aspect.getAspect("terra"), 30)
-                        .add(Aspect.getAspect("ordo"), 30).add(Aspect.getAspect("perditio"), 30),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwAluminium",
-                'b',
-                getModItem(TwilightForest.ID, "item.nagaScale", 1, 0, missing),
-                'c',
-                "screwAluminium",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 0, missing),
-                'e',
-                "stickIron",
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 0, missing),
-                'g',
-                "boltIron",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltIron");
+        if (TFML) {
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Iron",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 30).add(Aspect.getAspect("ignis"), 30)
+                            .add(Aspect.getAspect("aqua"), 30).add(Aspect.getAspect("terra"), 30)
+                            .add(Aspect.getAspect("ordo"), 30).add(Aspect.getAspect("perditio"), 30),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwAluminium",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.nagaScale", 1, 0, missing),
+                    'c',
+                    "screwAluminium",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 0, missing),
+                    'e',
+                    "stickIron",
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 0, missing),
+                    'g',
+                    "boltIron",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltIron");
+        }
         ThaumcraftApi.addArcaneCraftingRecipe(
                 "TB.Bracelet.Gold",
                 getModItem(ThaumicBases.ID, "castingBracelet", 1, 1, missing),
@@ -720,270 +728,274 @@ public class ScriptThaumicBases implements IScriptLoader {
                 "craftingToolScrewdriver",
                 'i',
                 "boltRoseGold");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Reed",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 5, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
-                        .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
-                        .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTitanium",
-                'b',
-                getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
-                'c',
-                "screwTitanium",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "WandRod", 1, 5, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'g',
-                "boltThaumium",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltThaumium");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Bone",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 6, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
-                        .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
-                        .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTitanium",
-                'b',
-                getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
-                'c',
-                "screwTitanium",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "WandRod", 1, 7, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'g',
-                "boltThaumium",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltThaumium");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Obsidian",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 7, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
-                        .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
-                        .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTitanium",
-                'b',
-                getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
-                'c',
-                "screwTitanium",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "WandRod", 1, 1, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'g',
-                "boltThaumium",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltThaumium");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Blaze",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 8, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
-                        .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
-                        .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTitanium",
-                'b',
-                getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
-                'c',
-                "screwTitanium",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "WandRod", 1, 6, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'g',
-                "boltThaumium",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltThaumium");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Ice",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 9, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
-                        .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
-                        .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTitanium",
-                'b',
-                getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
-                'c',
-                "screwTitanium",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "WandRod", 1, 3, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'g',
-                "boltThaumium",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltThaumium");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Quartz",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 10, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
-                        .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
-                        .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTitanium",
-                'b',
-                getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
-                'c',
-                "screwTitanium",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "WandRod", 1, 4, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
-                'g',
-                "boltThaumium",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltThaumium");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Thaumium",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 3, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 135).add(Aspect.getAspect("ignis"), 135)
-                        .add(Aspect.getAspect("aqua"), 135).add(Aspect.getAspect("terra"), 135)
-                        .add(Aspect.getAspect("ordo"), 135).add(Aspect.getAspect("perditio"), 135),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTitanium",
-                'b',
-                getModItem(TwilightForest.ID, "item.fieryTears", 1, 0, missing),
-                'c',
-                "screwTitanium",
-                'd',
-                getModItem(ThaumicBases.ID, "resource", 1, 2, missing),
-                'e',
-                getModItem(ThaumicBases.ID, "resource", 1, 3, missing),
-                'f',
-                getModItem(ThaumicBases.ID, "resource", 1, 2, missing),
-                'g',
-                "boltThaumium",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltThaumium");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Silverwood",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 4, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 150).add(Aspect.getAspect("ignis"), 150)
-                        .add(Aspect.getAspect("aqua"), 150).add(Aspect.getAspect("terra"), 150)
-                        .add(Aspect.getAspect("ordo"), 150).add(Aspect.getAspect("perditio"), 150),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTungstenSteel",
-                'b',
-                getModItem(TwilightForest.ID, "item.carminite", 1, 0, missing),
-                'c',
-                "screwTungstenSteel",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 7, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "WandRod", 1, 2, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 7, missing),
-                'g',
-                "boltVoid",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltVoid");
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TB.Bracelet.Void",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 11, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 150).add(Aspect.getAspect("ignis"), 150)
-                        .add(Aspect.getAspect("aqua"), 150).add(Aspect.getAspect("terra"), 150)
-                        .add(Aspect.getAspect("ordo"), 150).add(Aspect.getAspect("perditio"), 150),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwTungstenSteel",
-                'b',
-                getModItem(TwilightForest.ID, "item.carminite", 1, 0, missing),
-                'c',
-                "screwTungstenSteel",
-                'd',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 7, missing),
-                'e',
-                getModItem(ThaumicBases.ID, "resource", 1, 4, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "WandCap", 1, 7, missing),
-                'g',
-                "boltVoid",
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "boltVoid");
-        TCHelper.addInfusionCraftingRecipe(
-                "TB.Bracelet.Primal",
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 12, missing),
-                10,
-                new AspectList().add(Aspect.getAspect("aer"), 64).add(Aspect.getAspect("ignis"), 64)
-                        .add(Aspect.getAspect("aqua"), 64).add(Aspect.getAspect("terra"), 64)
-                        .add(Aspect.getAspect("ordo"), 64).add(Aspect.getAspect("perditio"), 64)
-                        .add(Aspect.getAspect("praecantatio"), 32).add(Aspect.getAspect("alienis"), 32),
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 4, missing),
-                getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 4, missing),
-                NHItemList.SnowQueenBlood.get(),
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 5, missing),
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 6, missing),
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 7, missing),
-                OrePrefixes.screw.get(Materials.Iridium),
-                getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 4, missing),
-                OrePrefixes.screw.get(Materials.Iridium),
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 8, missing),
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 9, missing),
-                getModItem(ThaumicBases.ID, "castingBracelet", 1, 10, missing),
-                NHItemList.SnowQueenBlood.get());
+        if (TFML) {
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Reed",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 5, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
+                            .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
+                            .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTitanium",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
+                    'c',
+                    "screwTitanium",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "WandRod", 1, 5, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'g',
+                    "boltThaumium",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltThaumium");
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Bone",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 6, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
+                            .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
+                            .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTitanium",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
+                    'c',
+                    "screwTitanium",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "WandRod", 1, 7, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'g',
+                    "boltThaumium",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltThaumium");
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Obsidian",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 7, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
+                            .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
+                            .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTitanium",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
+                    'c',
+                    "screwTitanium",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "WandRod", 1, 1, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'g',
+                    "boltThaumium",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltThaumium");
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Blaze",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 8, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
+                            .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
+                            .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTitanium",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
+                    'c',
+                    "screwTitanium",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "WandRod", 1, 6, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'g',
+                    "boltThaumium",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltThaumium");
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Ice",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 9, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
+                            .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
+                            .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTitanium",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
+                    'c',
+                    "screwTitanium",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "WandRod", 1, 3, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'g',
+                    "boltThaumium",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltThaumium");
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Quartz",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 10, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 120).add(Aspect.getAspect("ignis"), 120)
+                            .add(Aspect.getAspect("aqua"), 120).add(Aspect.getAspect("terra"), 120)
+                            .add(Aspect.getAspect("ordo"), 120).add(Aspect.getAspect("perditio"), 120),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTitanium",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.fieryBlood", 1, 0, missing),
+                    'c',
+                    "screwTitanium",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "WandRod", 1, 4, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 2, missing),
+                    'g',
+                    "boltThaumium",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltThaumium");
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Thaumium",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 3, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 135).add(Aspect.getAspect("ignis"), 135)
+                            .add(Aspect.getAspect("aqua"), 135).add(Aspect.getAspect("terra"), 135)
+                            .add(Aspect.getAspect("ordo"), 135).add(Aspect.getAspect("perditio"), 135),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTitanium",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.fieryTears", 1, 0, missing),
+                    'c',
+                    "screwTitanium",
+                    'd',
+                    getModItem(ThaumicBases.ID, "resource", 1, 2, missing),
+                    'e',
+                    getModItem(ThaumicBases.ID, "resource", 1, 3, missing),
+                    'f',
+                    getModItem(ThaumicBases.ID, "resource", 1, 2, missing),
+                    'g',
+                    "boltThaumium",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltThaumium");
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Silverwood",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 4, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 150).add(Aspect.getAspect("ignis"), 150)
+                            .add(Aspect.getAspect("aqua"), 150).add(Aspect.getAspect("terra"), 150)
+                            .add(Aspect.getAspect("ordo"), 150).add(Aspect.getAspect("perditio"), 150),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTungstenSteel",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.carminite", 1, 0, missing),
+                    'c',
+                    "screwTungstenSteel",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 7, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "WandRod", 1, 2, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 7, missing),
+                    'g',
+                    "boltVoid",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltVoid");
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TB.Bracelet.Void",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 11, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 150).add(Aspect.getAspect("ignis"), 150)
+                            .add(Aspect.getAspect("aqua"), 150).add(Aspect.getAspect("terra"), 150)
+                            .add(Aspect.getAspect("ordo"), 150).add(Aspect.getAspect("perditio"), 150),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwTungstenSteel",
+                    'b',
+                    getModItem(TwilightForest.ID, "item.carminite", 1, 0, missing),
+                    'c',
+                    "screwTungstenSteel",
+                    'd',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 7, missing),
+                    'e',
+                    getModItem(ThaumicBases.ID, "resource", 1, 4, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "WandCap", 1, 7, missing),
+                    'g',
+                    "boltVoid",
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "boltVoid");
+        }
+        if (TTML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TB.Bracelet.Primal",
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 12, missing),
+                    10,
+                    new AspectList().add(Aspect.getAspect("aer"), 64).add(Aspect.getAspect("ignis"), 64)
+                            .add(Aspect.getAspect("aqua"), 64).add(Aspect.getAspect("terra"), 64)
+                            .add(Aspect.getAspect("ordo"), 64).add(Aspect.getAspect("perditio"), 64)
+                            .add(Aspect.getAspect("praecantatio"), 32).add(Aspect.getAspect("alienis"), 32),
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 4, missing),
+                    getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 4, missing),
+                    NHItemList.SnowQueenBlood.get(),
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 5, missing),
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 6, missing),
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 7, missing),
+                    OrePrefixes.screw.get(Materials.Iridium),
+                    getModItem(ThaumicTinkerer.ID, "kamiResource", 1, 4, missing),
+                    OrePrefixes.screw.get(Materials.Iridium),
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 8, missing),
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 9, missing),
+                    getModItem(ThaumicBases.ID, "castingBracelet", 1, 10, missing),
+                    NHItemList.SnowQueenBlood.get());
+        }
         TCHelper.addInfusionCraftingRecipe(
                 "TB.NodeFoci.Bright",
                 getModItem(ThaumicBases.ID, "nodeFoci", 1, 0, missing),

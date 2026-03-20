@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.util.GTModHandler.getModItem;
 
@@ -28,16 +29,7 @@ public class ScriptThaumicExploration implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                BiomesOPlenty.ID,
-                Botania.ID,
-                EnderIO.ID,
-                ExtraUtilities.ID,
-                ForbiddenMagic.ID,
-                Natura.ID,
-                PamsHarvestCraft.ID,
-                Thaumcraft.ID,
-                ThaumicExploration.ID);
+        return Arrays.asList(Thaumcraft.ID, ThaumicExploration.ID);
     }
 
     @Override
@@ -1403,26 +1395,28 @@ public class ScriptThaumicExploration implements IScriptLoader {
                         .setParents("TXJARVOID", "TXINFUSION", "WARDEDARCANA", "HUNGRYCHEST").setConcealed()
                         .setPages(new ResearchPage("te.text.TRASHJAR.1"), new ResearchPage("te.text.TRASHJAR.2"))
                         .registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "TrashjarGTNH",
-                getModItem(ThaumicExploration.ID, "trashJar", 1, 0, missing),
-                9,
-                new AspectList().add(Aspect.getAspect("alienis"), 16).add(Aspect.getAspect("fames"), 14)
-                        .add(Aspect.getAspect("perditio"), 24).add(Aspect.getAspect("vacuos"), 32)
-                        .add(Aspect.getAspect("praecantatio"), 12).add(Aspect.getAspect("tenebrae"), 8),
-                getModItem(Thaumcraft.ID, "blockJar", 1, 3, missing),
-                getModItem(Thaumcraft.ID, "blockChestHungry", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 5, missing),
-                getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 5, missing),
-                getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
-                getModItem(ExtraUtilities.ID, "trashcan", 1, 1, missing),
-                getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 5, missing),
-                getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 5, missing),
-                getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing));
+        if (XUML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TrashjarGTNH",
+                    getModItem(ThaumicExploration.ID, "trashJar", 1, 0, missing),
+                    9,
+                    new AspectList().add(Aspect.getAspect("alienis"), 16).add(Aspect.getAspect("fames"), 14)
+                            .add(Aspect.getAspect("perditio"), 24).add(Aspect.getAspect("vacuos"), 32)
+                            .add(Aspect.getAspect("praecantatio"), 12).add(Aspect.getAspect("tenebrae"), 8),
+                    getModItem(Thaumcraft.ID, "blockJar", 1, 3, missing),
+                    getModItem(Thaumcraft.ID, "blockChestHungry", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 5, missing),
+                    getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 5, missing),
+                    getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
+                    getModItem(ExtraUtilities.ID, "trashcan", 1, 1, missing),
+                    getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 5, missing),
+                    getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 5, missing),
+                    getModItem(Thaumcraft.ID, "blockCosmeticOpaque", 1, 2, missing));
+        }
         TCHelper.addResearchPage(
                 "TrashjarGTNH",
                 new ResearchPage(
@@ -1478,22 +1472,24 @@ public class ScriptThaumicExploration implements IScriptLoader {
                 getModItem(ThaumicExploration.ID, "bootsComet", 1, 0, missing))
                         .setParents("TXBOOTSTRAVELLER", "FOCUSFROST", "INFUSION").setConcealed()
                         .setPages(new ResearchPage("te.text.COMETBOOTS.1")).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "CometsbootsGTNH",
-                getModItem(ThaumicExploration.ID, "bootsComet", 1, 0, missing),
-                6,
-                new AspectList().add(Aspect.getAspect("gelum"), 32).add(Aspect.getAspect("iter"), 32)
-                        .add(Aspect.getAspect("aqua"), 32).add(Aspect.getAspect("motus"), 32)
-                        .add(Aspect.getAspect("praecantatio"), 16),
-                getModItem(Thaumcraft.ID, "BootsTraveller", 1, wildcard, missing),
-                getModItem(Thaumcraft.ID, "FocusFrost", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
-                getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
-                getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
-                getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing));
+        if (BOPML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "CometsbootsGTNH",
+                    getModItem(ThaumicExploration.ID, "bootsComet", 1, 0, missing),
+                    6,
+                    new AspectList().add(Aspect.getAspect("gelum"), 32).add(Aspect.getAspect("iter"), 32)
+                            .add(Aspect.getAspect("aqua"), 32).add(Aspect.getAspect("motus"), 32)
+                            .add(Aspect.getAspect("praecantatio"), 16),
+                    getModItem(Thaumcraft.ID, "BootsTraveller", 1, wildcard, missing),
+                    getModItem(Thaumcraft.ID, "FocusFrost", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
+                    getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
+                    getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "blockCrystal", 1, 2, missing),
+                    getModItem(BiomesOPlenty.ID, "hardIce", 1, 0, missing));
+        }
         TCHelper.addResearchPage(
                 "CometsbootsGTNH",
                 new ResearchPage(
@@ -1863,46 +1859,50 @@ public class ScriptThaumicExploration implements IScriptLoader {
                 getModItem(ThaumicExploration.ID, "talismanFood", 1, 0, missing))
                         .setParents("FleshcureGTNH", "TXINFUSION").setConcealed()
                         .setPages(new ResearchPage("tc.research_page.TalismanfoodtGTNH")).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "TalismanfoodtGTNH",
-                getModItem(ThaumicExploration.ID, "talismanFood", 1, 0, missing),
-                6,
-                new AspectList().add(Aspect.getAspect("fames"), 64).add(Aspect.getAspect("pannus"), 48)
-                        .add(Aspect.getAspect("messis"), 24).add(Aspect.getAspect("sano"), 24)
-                        .add(Aspect.getAspect("permutatio"), 32).add(Aspect.getAspect("ordo"), 16),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
-                OrePrefixes.gemExquisite.get(Materials.Ruby),
-                getModItem(PamsHarvestCraft.ID, "heartybreakfastItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "rainbowcurryItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "supremepizzaItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "sausageinbreadItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "beefwellingtonItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "epicbaconItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "meatfeastpizzaItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "delightedmealItem", 1, 0, missing));
+        if (PHML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TalismanfoodtGTNH",
+                    getModItem(ThaumicExploration.ID, "talismanFood", 1, 0, missing),
+                    6,
+                    new AspectList().add(Aspect.getAspect("fames"), 64).add(Aspect.getAspect("pannus"), 48)
+                            .add(Aspect.getAspect("messis"), 24).add(Aspect.getAspect("sano"), 24)
+                            .add(Aspect.getAspect("permutatio"), 32).add(Aspect.getAspect("ordo"), 16),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
+                    OrePrefixes.gemExquisite.get(Materials.Ruby),
+                    getModItem(PamsHarvestCraft.ID, "heartybreakfastItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "rainbowcurryItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "supremepizzaItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "sausageinbreadItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "beefwellingtonItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "epicbaconItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "meatfeastpizzaItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "delightedmealItem", 1, 0, missing));
+        }
         TCHelper.addResearchPage(
                 "TalismanfoodtGTNH",
                 new ResearchPage(
                         TCHelper.findInfusionRecipe(getModItem(ThaumicExploration.ID, "talismanFood", 1, 0, missing))));
         TCHelper.addResearchPrereq("THINKTANK", "BraincureGTNH", false);
         ThaumcraftApi.addWarpToResearch("THINKTANK", 2);
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "TalismanfoodtGTNH",
-                getModItem(ThaumicExploration.ID, "taintBerry", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 20).add(Aspect.getAspect("aqua"), 20)
-                        .add(Aspect.getAspect("ignis"), 20).add(Aspect.getAspect("terra"), 20)
-                        .add(Aspect.getAspect("ordo"), 25).add(Aspect.getAspect("perditio"), 25),
-                "tft",
-                "gbg",
-                "ggg",
-                't',
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 12, missing),
-                'g',
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
-                'b',
-                getModItem(Natura.ID, "berry.nether", 1, missing),
-                'f',
-                getModItem(ForbiddenMagic.ID, "TaintFruit", 1, missing));
+        if (NML && FMML) {
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "TalismanfoodtGTNH",
+                    getModItem(ThaumicExploration.ID, "taintBerry", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 20).add(Aspect.getAspect("aqua"), 20)
+                            .add(Aspect.getAspect("ignis"), 20).add(Aspect.getAspect("terra"), 20)
+                            .add(Aspect.getAspect("ordo"), 25).add(Aspect.getAspect("perditio"), 25),
+                    "tft",
+                    "gbg",
+                    "ggg",
+                    't',
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 12, missing),
+                    'g',
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
+                    'b',
+                    getModItem(Natura.ID, "berry.nether", 1, missing),
+                    'f',
+                    getModItem(ForbiddenMagic.ID, "TaintFruit", 1, missing));
+        }
         TCHelper.orphanResearch("DREAMCATCHER");
         TCHelper.removeResearch("DREAMCATCHER");
         new ResearchItem(
@@ -1991,35 +1991,35 @@ public class ScriptThaumicExploration implements IScriptLoader {
                                 getModItem(ThaumicExploration.ID, "crucibleSouls", 1, 0, missing))));
         ThaumcraftApi.addWarpToResearch("CrucsoulGTNH", 4);
         // SPAWNER
-
-        TCHelper.addInfusionCraftingRecipe(
-                "CrucsoulGTNH",
-                getModItem(EnderIO.ID, "itemBrokenSpawner", 1, 0, missing),
-                8,
-                new AspectList().add(Aspect.getAspect("exanimis"), 34).add(Aspect.getAspect("fames"), 18)
-                        .add(Aspect.getAspect("spiritus"), 62).add(Aspect.getAspect("mortuus"), 64)
-                        .add(Aspect.getAspect("telum"), 24).add(Aspect.getAspect("vinculum"), 46)
-                        .add(Aspect.getAspect("alienis"), 28),
-                getModItem(ThaumicExploration.ID, "crucibleSouls", 1, 0, missing),
-                getModItem(Botania.ID, "cocoon", 1, 0, missing),
-                getModItem(EnderIO.ID, "itemMaterial", 1, 9, missing),
-                getModItem(EnderIO.ID, "itemMaterial", 1, 17, missing),
-                OrePrefixes.frameGt.get(Materials.Shadow),
-                getModItem(EnderIO.ID, "itemFrankenSkull", 1, 4, missing),
-                getModItem(EnderIO.ID, "itemMaterial", 1, 9, missing),
-                getModItem(Botania.ID, "cocoon", 1, 0, missing),
-                getModItem(EnderIO.ID, "itemMaterial", 1, 9, missing),
-                getModItem(EnderIO.ID, "itemMaterial", 1, 16, missing),
-                OrePrefixes.frameGt.get(Materials.Shadow),
-                getModItem(EnderIO.ID, "itemFrankenSkull", 1, 4, missing),
-                getModItem(EnderIO.ID, "itemMaterial", 1, 9, missing));
-        TCHelper.addResearchPage(
-                "CrucsoulGTNH",
-                new ResearchPage(
-                        Objects.requireNonNull(
-                                TCHelper.findInfusionRecipe(
-                                        getModItem(EnderIO.ID, "itemBrokenSpawner", 1, 0, missing)))));
-
+        if (BML && EIOML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "CrucsoulGTNH",
+                    getModItem(EnderIO.ID, "itemBrokenSpawner", 1, 0, missing),
+                    8,
+                    new AspectList().add(Aspect.getAspect("exanimis"), 34).add(Aspect.getAspect("fames"), 18)
+                            .add(Aspect.getAspect("spiritus"), 62).add(Aspect.getAspect("mortuus"), 64)
+                            .add(Aspect.getAspect("telum"), 24).add(Aspect.getAspect("vinculum"), 46)
+                            .add(Aspect.getAspect("alienis"), 28),
+                    getModItem(ThaumicExploration.ID, "crucibleSouls", 1, 0, missing),
+                    getModItem(Botania.ID, "cocoon", 1, 0, missing),
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 9, missing),
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 17, missing),
+                    OrePrefixes.frameGt.get(Materials.Shadow),
+                    getModItem(EnderIO.ID, "itemFrankenSkull", 1, 4, missing),
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 9, missing),
+                    getModItem(Botania.ID, "cocoon", 1, 0, missing),
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 9, missing),
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 16, missing),
+                    OrePrefixes.frameGt.get(Materials.Shadow),
+                    getModItem(EnderIO.ID, "itemFrankenSkull", 1, 4, missing),
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 9, missing));
+            TCHelper.addResearchPage(
+                    "CrucsoulGTNH",
+                    new ResearchPage(
+                            Objects.requireNonNull(
+                                    TCHelper.findInfusionRecipe(
+                                            getModItem(EnderIO.ID, "itemBrokenSpawner", 1, 0, missing)))));
+        }
         TCHelper.addResearchPrereq("TENTACLERING", "BraincureGTNH", true);
         TCHelper.setResearchAspects(
                 "TENTACLERING",

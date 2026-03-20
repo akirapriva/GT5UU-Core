@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AdventureBackpack;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.Minecraft;
@@ -19,29 +20,33 @@ public class ScriptSleepingBags implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(AdventureBackpack.ID, Backpack.ID, OpenBlocks.ID, SleepingBags.ID);
+        return Arrays.asList(SleepingBags.ID);
     }
 
     @Override
     public void loadRecipes() {
-        addShapedRecipe(
-                getModItem(SleepingBags.ID, "sleepingBag", 1),
-                getModItem(Minecraft.ID, "carpet", 1, wildcard),
-                getModItem(Minecraft.ID, "carpet", 1, wildcard),
-                getModItem(Minecraft.ID, "carpet", 1, wildcard),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                getModItem(Backpack.ID, "tannedLeather", 1),
-                getModItem(Backpack.ID, "tannedLeather", 1),
-                getModItem(Backpack.ID, "tannedLeather", 1));
-
-        addShapelessRecipe(
-                getModItem(SleepingBags.ID, "sleepingBag", 1),
-                getModItem(AdventureBackpack.ID, "backpackComponent", 1, 1));
-
-        addShapelessRecipe(
-                getModItem(AdventureBackpack.ID, "backpackComponent", 1, 1),
-                getModItem(OpenBlocks.ID, "sleepingBag", 1));
+        if (BPML) {
+            addShapedRecipe(
+                    getModItem(SleepingBags.ID, "sleepingBag", 1),
+                    getModItem(Minecraft.ID, "carpet", 1, wildcard),
+                    getModItem(Minecraft.ID, "carpet", 1, wildcard),
+                    getModItem(Minecraft.ID, "carpet", 1, wildcard),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(Backpack.ID, "tannedLeather", 1),
+                    getModItem(Backpack.ID, "tannedLeather", 1),
+                    getModItem(Backpack.ID, "tannedLeather", 1));
+        }
+        if (ABML) {
+            addShapelessRecipe(
+                    getModItem(SleepingBags.ID, "sleepingBag", 1),
+                    getModItem(AdventureBackpack.ID, "backpackComponent", 1, 1));
+            if (OML) {
+                addShapelessRecipe(
+                        getModItem(AdventureBackpack.ID, "backpackComponent", 1, 1),
+                        getModItem(OpenBlocks.ID, "sleepingBag", 1));
+            }
+        }
     }
 }

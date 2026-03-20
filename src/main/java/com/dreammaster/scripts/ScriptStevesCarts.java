@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.Botany;
@@ -63,23 +64,7 @@ public class ScriptStevesCarts implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Backpack.ID,
-                Botany.ID,
-                BuildCraftFactory.ID,
-                BuildCraftSilicon.ID,
-                EnderIO.ID,
-                ExtraBees.ID,
-                ExtraUtilities.ID,
-                Forestry.ID,
-                Gendustry.ID,
-                IndustrialCraft2.ID,
-                IronTanks.ID,
-                OpenBlocks.ID,
-                ProjectRedExploration.ID,
-                ProjectRedIntegration.ID,
-                Railcraft.ID,
-                StevesCarts2.ID);
+        return Arrays.asList(StevesCarts2.ID);
     }
 
     @Override
@@ -172,17 +157,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 36, missing),
                 "wireGt01RedAlloy",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 36, missing));
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "BlockActivator", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 38, missing),
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 13, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 38, missing),
-                "wireGt01RedAlloy",
-                getModItem(StevesCarts2.ID, "BlockDetector", 1, 1, missing),
-                "wireGt01RedAlloy",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 36, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 36, missing));
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "BlockActivator", 1, 0, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 38, missing),
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 13, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 38, missing),
+                    "wireGt01RedAlloy",
+                    getModItem(StevesCarts2.ID, "BlockDetector", 1, 1, missing),
+                    "wireGt01RedAlloy",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 36, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 36, missing));
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 0, missing),
                 null,
@@ -393,28 +380,30 @@ public class ScriptStevesCarts implements IScriptLoader {
                 ItemList.Electric_Piston_MV.get(1L),
                 "screwStainlessSteel",
                 ItemList.Electric_Piston_MV.get(1L));
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 69, missing),
-                "itemCasingSteel",
-                "craftingIronFurnace",
-                "itemCasingSteel",
-                ItemList.Electric_Motor_LV.get(1L),
-                getModItem(IronTanks.ID, "obsidianTank", 1, 0, missing),
-                ItemList.Electric_Motor_LV.get(1L),
-                ItemList.Electric_Piston_LV.get(1L),
-                getModItem(Railcraft.ID, "machine.beta", 1, 3, missing),
-                ItemList.Electric_Piston_LV.get(1L));
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 70, missing),
-                "plateReinforced",
-                getModItem(StevesCarts2.ID, "CartModule", 1, 69, missing),
-                "plateReinforced",
-                ItemList.Electric_Motor_MV.get(1L),
-                getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
-                ItemList.Electric_Motor_MV.get(1L),
-                ItemList.Electric_Piston_MV.get(1L),
-                getModItem(Railcraft.ID, "machine.beta", 1, 4, missing),
-                ItemList.Electric_Piston_MV.get(1L));
+        if (ITML && RCML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 69, missing),
+                    "itemCasingSteel",
+                    "craftingIronFurnace",
+                    "itemCasingSteel",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    getModItem(IronTanks.ID, "obsidianTank", 1, 0, missing),
+                    ItemList.Electric_Motor_LV.get(1L),
+                    ItemList.Electric_Piston_LV.get(1L),
+                    getModItem(Railcraft.ID, "machine.beta", 1, 3, missing),
+                    ItemList.Electric_Piston_LV.get(1L));
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 70, missing),
+                    "plateReinforced",
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 69, missing),
+                    "plateReinforced",
+                    ItemList.Electric_Motor_MV.get(1L),
+                    getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
+                    ItemList.Electric_Motor_MV.get(1L),
+                    ItemList.Electric_Piston_MV.get(1L),
+                    getModItem(Railcraft.ID, "machine.beta", 1, 4, missing),
+                    ItemList.Electric_Piston_MV.get(1L));
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "ModuleComponents", 2, 30, missing),
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Wood, 1L),
@@ -643,17 +632,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateRedstone",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
                 "plateRedstone");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "upgrade", 1, 1, missing),
-                "gemFlawlessDiamond",
-                "blockEmerald",
-                "gemFlawlessDiamond",
-                "circuitAdvanced",
-                getModItem(IndustrialCraft2.ID, "itemBatCrystal", 1, wildcard, missing),
-                "circuitAdvanced",
-                "plateGlowstone",
-                getModItem(StevesCarts2.ID, "upgrade", 1, 0, missing),
-                "plateGlowstone");
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 1, missing),
+                    "gemFlawlessDiamond",
+                    "blockEmerald",
+                    "gemFlawlessDiamond",
+                    "circuitAdvanced",
+                    getModItem(IndustrialCraft2.ID, "itemBatCrystal", 1, wildcard, missing),
+                    "circuitAdvanced",
+                    "plateGlowstone",
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 0, missing),
+                    "plateGlowstone");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "upgrade", 1, 2, missing),
                 "bookEmpty",
@@ -665,17 +656,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateReinforced",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
                 "plateReinforced");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "upgrade", 1, 3, missing),
-                getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 8, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
-                getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 8, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
-                "plateReinforced",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
-                "plateReinforced",
-                getModItem(StevesCarts2.ID, "upgrade", 1, 2, missing),
-                "plateReinforced");
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 3, missing),
+                    getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 8, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
+                    getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 8, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
+                    "plateReinforced",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
+                    "plateReinforced",
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 2, missing),
+                    "plateReinforced");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "upgrade", 1, 4, missing),
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
@@ -743,17 +736,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateIron",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
                 "plateIron");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "upgrade", 1, 9, missing),
-                "plateIron",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                "plateIron",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                getModItem(BuildCraftSilicon.ID, "redstoneChipset", 1, 6, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                "plateReinforced",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
-                "plateReinforced");
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 9, missing),
+                    "plateIron",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    "plateIron",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    getModItem(BuildCraftSilicon.ID, "redstoneChipset", 1, 6, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    "plateReinforced",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
+                    "plateReinforced");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "upgrade", 1, 10, missing),
                 "plateIron",
@@ -765,17 +760,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateIron",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
                 "plateIron");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "upgrade", 1, 11, missing),
-                "plateIron",
-                ItemList.Robot_Arm_LV.get(1L),
-                "plateIron",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                getModItem(Railcraft.ID, "anvil", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                "plateIron",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
-                "plateIron");
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 11, missing),
+                    "plateIron",
+                    ItemList.Robot_Arm_LV.get(1L),
+                    "plateIron",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    getModItem(Railcraft.ID, "anvil", 1, 0, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    "plateIron",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
+                    "plateIron");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "upgrade", 1, 12, missing),
                 ItemList.Electric_Piston_LV.get(1L),
@@ -787,17 +784,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateIron",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
                 "plateIron");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "upgrade", 1, 13, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 10, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 17, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 21, missing),
-                "plateIron",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
-                "plateIron");
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 13, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 10, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 17, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 21, missing),
+                    "plateIron",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
+                    "plateIron");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "upgrade", 1, 15, missing),
                 "plateObsidian",
@@ -831,17 +830,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateIron",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
                 "plateIron");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "upgrade", 1, 18, missing),
-                getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
-                ItemList.Electric_Piston_LV.get(1L),
-                getModItem(StevesCarts2.ID, "CartModule", 1, 69, missing),
-                ItemList.Electric_Piston_LV.get(1L),
-                "plateObsidian",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
-                "plateObsidian");
+        if (ITML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 18, missing),
+                    getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
+                    ItemList.Electric_Piston_LV.get(1L),
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 69, missing),
+                    ItemList.Electric_Piston_LV.get(1L),
+                    "plateObsidian",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 59, missing),
+                    "plateObsidian");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "upgrade", 1, 19, missing),
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 44, missing),
@@ -930,28 +931,32 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateSteel",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 27, missing),
                 "plateSteel");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 33, missing),
-                getModItem(Minecraft.ID, "glowstone", 1, 0, missing),
-                "stoneNetherBrick",
-                getModItem(Minecraft.ID, "glowstone", 1, 0, missing),
-                getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
-                "craftingIronFurnace",
-                getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
-                "bucketLava",
-                "stoneNetherBrick",
-                "bucketLava");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 34, missing),
-                getModItem(Minecraft.ID, "glowstone", 1, 0, missing),
-                "plateObsidian",
-                getModItem(Minecraft.ID, "glowstone", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "CartModule", 1, 33, missing),
-                getModItem(Railcraft.ID, "machine.beta", 1, 6, missing),
-                getModItem(StevesCarts2.ID, "CartModule", 1, 33, missing),
-                "bucketLava",
-                "plateObsidian",
-                "bucketLava");
+        if (ITML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 33, missing),
+                    getModItem(Minecraft.ID, "glowstone", 1, 0, missing),
+                    "stoneNetherBrick",
+                    getModItem(Minecraft.ID, "glowstone", 1, 0, missing),
+                    getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
+                    "craftingIronFurnace",
+                    getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
+                    "bucketLava",
+                    "stoneNetherBrick",
+                    "bucketLava");
+        }
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 34, missing),
+                    getModItem(Minecraft.ID, "glowstone", 1, 0, missing),
+                    "plateObsidian",
+                    getModItem(Minecraft.ID, "glowstone", 1, 0, missing),
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 33, missing),
+                    getModItem(Railcraft.ID, "machine.beta", 1, 6, missing),
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 33, missing),
+                    "bucketLava",
+                    "plateObsidian",
+                    "bucketLava");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "CartModule", 1, 10, missing),
                 "plateIron",
@@ -974,12 +979,14 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateSteel",
                 "plateSteel",
                 "plateSteel");
-        addShapelessRecipe(
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 6, missing),
-                getModItem(IndustrialCraft2.ID, "itemDynamite", 1, 0, missing));
-        addShapelessRecipe(
-                getModItem(IndustrialCraft2.ID, "itemDynamite", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 6, missing));
+        if (ICML) {
+            addShapelessRecipe(
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 6, missing),
+                    getModItem(IndustrialCraft2.ID, "itemDynamite", 1, 0, missing));
+            addShapelessRecipe(
+                    getModItem(IndustrialCraft2.ID, "itemDynamite", 1, 0, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 6, missing));
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "CartModule", 1, 31, missing),
                 GTOreDictUnificator.get(OrePrefixes.plate, Materials.Wood, 1L),
@@ -1090,17 +1097,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "slabWood",
                 "slabWood",
                 "screwIron");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 49, missing),
-                "plateTitanium",
-                "circuitData",
-                "plateTitanium",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                getModItem(Railcraft.ID, "machine.alpha", 1, 2, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                "plateReinforced",
-                "circuitData",
-                "plateReinforced");
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 49, missing),
+                    "plateTitanium",
+                    "circuitData",
+                    "plateTitanium",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    getModItem(Railcraft.ID, "machine.alpha", 1, 2, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    "plateReinforced",
+                    "circuitData",
+                    "plateReinforced");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "CartModule", 1, 85, missing),
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 84, missing),
@@ -1112,17 +1121,19 @@ public class ScriptStevesCarts implements IScriptLoader {
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 84, missing),
                 ItemList.Electric_Motor_LV.get(1L),
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 84, missing));
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 68, missing),
-                "plateIron",
-                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Brass, 1L),
-                "plateIron",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                getModItem(ExtraUtilities.ID, "trashcan", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                "plateIron",
-                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Brass, 1L),
-                "plateIron");
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 68, missing),
+                    "plateIron",
+                    GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Brass, 1L),
+                    "plateIron",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    getModItem(ExtraUtilities.ID, "trashcan", 1, 0, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    "plateIron",
+                    GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Brass, 1L),
+                    "plateIron");
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "CartModule", 1, 32, missing),
                 "plateDenseObsidian",
@@ -1134,39 +1145,43 @@ public class ScriptStevesCarts implements IScriptLoader {
                 "plateDenseObsidian",
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 19, missing),
                 "plateDenseObsidian");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 16, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(Minecraft.ID, "iron_bars", 1, 0, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Steel, 1L),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Steel, 1L),
-                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L),
-                "craftingToolHardHammer",
-                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L));
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 95, missing),
-                "plateEmerald",
-                getModItem(OpenBlocks.ID, "xpdrain", 1, 0, missing),
-                "plateEmerald",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                getModItem(Minecraft.ID, "cauldron", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Steel, 1L),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 18, missing),
-                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Tin, 1L),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Tin, 1L),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing));
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 16, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    getModItem(Minecraft.ID, "iron_bars", 1, 0, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Steel, 1L),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Steel, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L),
+                    "craftingToolHardHammer",
+                    GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L));
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 95, missing),
+                    "plateEmerald",
+                    getModItem(OpenBlocks.ID, "xpdrain", 1, 0, missing),
+                    "plateEmerald",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    getModItem(Minecraft.ID, "cauldron", 1, 0, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.Steel, 1L),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing));
+            if (BPML) {
+                addShapedRecipe(
+                        getModItem(StevesCarts2.ID, "CartModule", 1, 18, missing),
+                        GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Tin, 1L),
+                        getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                        GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Tin, 1L),
+                        getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                        getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                        getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                        getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                        getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                        getModItem(Backpack.ID, "tannedLeather", 1, 0, missing));
+            }
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "CartModule", 1, 19, missing),
                 "plateIron",
@@ -1233,39 +1248,45 @@ public class ScriptStevesCarts implements IScriptLoader {
                 getModItem(Minecraft.ID, "stone_button", 1, 0, missing),
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
                 getModItem(Minecraft.ID, "stone_button", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 82, missing),
-                "plateIron",
-                "plateEnhancedGalgadorian",
-                "plateIron",
-                getModItem(Minecraft.ID, "writable_book", 1, 0, missing),
-                getModItem(EnderIO.ID, "blockEnchanter", 1, 0, missing),
-                getModItem(Minecraft.ID, "writable_book", 1, 0, missing),
-                "plateRedstone",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                "plateRedstone");
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 83, missing),
-                ItemList.Sensor_HV.get(1L),
-                "plateRedstone",
-                ItemList.Sensor_HV.get(1L),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
-                "plateGalgadorian",
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing));
-        addShapedRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 86, missing),
-                getModItem(Minecraft.ID, "hay_block", 1, 0, missing),
-                ItemList.Electric_Pump_LV.get(1L),
-                getModItem(Minecraft.ID, "hay_block", 1, 0, missing),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L),
-                getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing));
+        if (EIOML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 82, missing),
+                    "plateIron",
+                    "plateEnhancedGalgadorian",
+                    "plateIron",
+                    getModItem(Minecraft.ID, "writable_book", 1, 0, missing),
+                    getModItem(EnderIO.ID, "blockEnchanter", 1, 0, missing),
+                    getModItem(Minecraft.ID, "writable_book", 1, 0, missing),
+                    "plateRedstone",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    "plateRedstone");
+        }
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 83, missing),
+                    ItemList.Sensor_HV.get(1L),
+                    "plateRedstone",
+                    ItemList.Sensor_HV.get(1L),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
+                    "plateGalgadorian",
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 45, missing),
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing));
+        }
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(StevesCarts2.ID, "CartModule", 1, 86, missing),
+                    getModItem(Minecraft.ID, "hay_block", 1, 0, missing),
+                    ItemList.Electric_Pump_LV.get(1L),
+                    getModItem(Minecraft.ID, "hay_block", 1, 0, missing),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L),
+                    getModItem(StevesCarts2.ID, "ModuleComponents", 1, 16, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.pipeSmall, Materials.Steel, 1L),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(StevesCarts2.ID, "CartModule", 1, 89, missing),
                 ItemList.Sensor_MV.get(1L),
@@ -1362,63 +1383,67 @@ public class ScriptStevesCarts implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.ingot, Materials.GalgadorianEnhanced, 1L),
                 getModItem(StevesCarts2.ID, "ModuleComponents", 1, 49, missing));
 
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(StevesCarts2.ID, "upgrade", 1, 14, missing),
-                "---------",
-                "---------",
-                "--abcba--",
-                "--ddddd--",
-                "--cdedc--",
-                "--ddddd--",
-                "--abcba--",
-                "---------",
-                "---------",
-                'a',
-                "plateDenseNaquadria",
-                'b',
-                "ingotInfinity",
-                'c',
-                getModItem(StevesCarts2.ID, "upgrade", 1, 5, missing),
-                'd',
-                "plateEnhancedGalgadorian",
-                'e',
-                ItemList.Generator_Naquadah_Mark_III.get(1L));
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(StevesCarts2.ID, "CartModule", 1, 61, missing),
-                "---------",
-                "---------",
-                "--abcba--",
-                "--ddddd--",
-                "--edfde--",
-                "--ddddd--",
-                "--abcba--",
-                "---------",
-                "---------",
-                'a',
-                getModItem(Railcraft.ID, "firestone.refined", 1, 0, missing),
-                'b',
-                "ingotInfinity",
-                'c',
-                getModItem(StevesCarts2.ID, "upgrade", 1, 19, missing),
-                'd',
-                "plateEnhancedGalgadorian",
-                'e',
-                getModItem(StevesCarts2.ID, "upgrade", 1, 18, missing),
-                'f',
-                getModItem(IndustrialCraft2.ID, "blockReactorChamber", 1, 0, missing));
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "detector_rail", 1, 0, missing),
-                        getModItem(Railcraft.ID, "detector", 1, 9, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "BlockAdvDetector", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(Railcraft.ID, "track", 1, 0, "{track:\"railcraft:track.junction\"}", missing),
-                        GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.RedAlloy, 4L))
-                .itemOutputs(getModItem(StevesCarts2.ID, "BlockJunction", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (AML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 14, missing),
+                    "---------",
+                    "---------",
+                    "--abcba--",
+                    "--ddddd--",
+                    "--cdedc--",
+                    "--ddddd--",
+                    "--abcba--",
+                    "---------",
+                    "---------",
+                    'a',
+                    "plateDenseNaquadria",
+                    'b',
+                    "ingotInfinity",
+                    'c',
+                    getModItem(StevesCarts2.ID, "upgrade", 1, 5, missing),
+                    'd',
+                    "plateEnhancedGalgadorian",
+                    'e',
+                    ItemList.Generator_Naquadah_Mark_III.get(1L));
+            if (ICML && RCML) {
+                ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                        getModItem(StevesCarts2.ID, "CartModule", 1, 61, missing),
+                        "---------",
+                        "---------",
+                        "--abcba--",
+                        "--ddddd--",
+                        "--edfde--",
+                        "--ddddd--",
+                        "--abcba--",
+                        "---------",
+                        "---------",
+                        'a',
+                        getModItem(Railcraft.ID, "firestone.refined", 1, 0, missing),
+                        'b',
+                        "ingotInfinity",
+                        'c',
+                        getModItem(StevesCarts2.ID, "upgrade", 1, 19, missing),
+                        'd',
+                        "plateEnhancedGalgadorian",
+                        'e',
+                        getModItem(StevesCarts2.ID, "upgrade", 1, 18, missing),
+                        'f',
+                        getModItem(IndustrialCraft2.ID, "blockReactorChamber", 1, 0, missing));
+            }
+        }
+        if (RCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "detector_rail", 1, 0, missing),
+                            getModItem(Railcraft.ID, "detector", 1, 9, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "BlockAdvDetector", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder().itemInputs(
+                    createItemStack(Railcraft.ID, "track", 1, 0, "{track:\"railcraft:track.junction\"}", missing),
+                    GTOreDictUnificator.get(OrePrefixes.wireGt01, Materials.RedAlloy, 4L))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "BlockJunction", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "stick", 1, 0, missing),
@@ -1538,18 +1563,22 @@ public class ScriptStevesCarts implements IScriptLoader {
                     .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 17, missing)).duration(15 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                        getModItem(Forestry.ID, "saplingGE", 8, wildcard, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 17, missing)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
-                        getModItem(IndustrialCraft2.ID, "blockRubSapling", 8, 0, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 17, missing)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                            getModItem(Forestry.ID, "saplingGE", 8, wildcard, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 17, missing)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(StevesCarts2.ID, "ModuleComponents", 1, 9, missing),
+                            getModItem(IndustrialCraft2.ID, "blockRubSapling", 8, 0, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 17, missing)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (Natura.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1675,54 +1704,68 @@ public class ScriptStevesCarts implements IScriptLoader {
                         ItemList.Color_01.get(4L))
                 .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
                 .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(Gendustry.ID, "HoneyDrop", 4, 11, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(ProjectRedExploration.ID, "projectred.exploration.lilyseed", 4, 14, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(ExtraBees.ID, "misc", 4, 19, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(Botany.ID, "pigment", 4, 59, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
+        if (GDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(Gendustry.ID, "HoneyDrop", 4, 11, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
+        if (PREDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(ProjectRedExploration.ID, "projectred.exploration.lilyseed", 4, 14, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(ExtraBees.ID, "misc", 4, 19, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
+        if (BOML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(Botany.ID, "pigment", 4, 59, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 2, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
                         getModItem(Minecraft.ID, "dye", 4, 2, missing))
                 .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
                 .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(ExtraBees.ID, "misc", 4, 22, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(ProjectRedExploration.ID, "projectred.exploration.lilyseed", 4, 13, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(Gendustry.ID, "HoneyDrop", 4, 12, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(ExtraBees.ID, "misc", 4, 22, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
+        if (PREDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(ProjectRedExploration.ID, "projectred.exploration.lilyseed", 4, 13, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
+        if (GDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(Gendustry.ID, "HoneyDrop", 4, 12, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
@@ -1737,30 +1780,36 @@ public class ScriptStevesCarts implements IScriptLoader {
                     .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
                     .eut(2).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(Botany.ID, "pigment", 4, 28, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
+        if (BOML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(Botany.ID, "pigment", 4, 28, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 3, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
                         getModItem(Minecraft.ID, "dye", 4, 4, missing))
                 .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
                 .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(Botany.ID, "pigment", 4, 24, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(ExtraBees.ID, "misc", 4, 21, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
+        if (BOML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(Botany.ID, "pigment", 4, 24, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(ExtraBees.ID, "misc", 4, 21, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
         if (Natura.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1769,18 +1818,22 @@ public class ScriptStevesCarts implements IScriptLoader {
                     .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
                     .eut(2).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(ProjectRedExploration.ID, "projectred.exploration.lilyseed", 4, 11, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
-                        getModItem(Gendustry.ID, "HoneyDrop", 4, 14, missing))
-                .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
+        if (PREDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(ProjectRedExploration.ID, "projectred.exploration.lilyseed", 4, 11, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
+        if (GDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),
+                            getModItem(Gendustry.ID, "HoneyDrop", 4, 14, missing))
+                    .itemOutputs(getModItem(StevesCarts2.ID, "ModuleComponents", 1, 4, missing)).duration(5 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Glowstone, 2L),

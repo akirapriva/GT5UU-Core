@@ -34,7 +34,7 @@ public class ScriptMalisDoors implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(MalisisDoors.ID, ProjectRedIntegration.ID);
+        return Arrays.asList(MalisisDoors.ID);
     }
 
     @Override
@@ -876,17 +876,19 @@ public class ScriptMalisDoors implements IScriptLoader {
                 null,
                 "craftingToolHardHammer",
                 null);
-        addShapedRecipe(
-                getModItem(MalisisDoors.ID, "item.forcefieldItem", 1, 0, missing),
-                "plateDiamond",
-                "plateThaumium",
-                "plateDiamond",
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
-                "lensEnderEye",
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
-                "plateDiamond",
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 21, missing),
-                "plateDiamond");
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(MalisisDoors.ID, "item.forcefieldItem", 1, 0, missing),
+                    "plateDiamond",
+                    "plateThaumium",
+                    "plateDiamond",
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
+                    "lensEnderEye",
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
+                    "plateDiamond",
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 21, missing),
+                    "plateDiamond");
+        }
         addShapedRecipe(
                 getModItem(MalisisDoors.ID, "acaciaFenceGate", 1, 0, missing),
                 getModItem(Minecraft.ID, "flint", 1, 0, missing),

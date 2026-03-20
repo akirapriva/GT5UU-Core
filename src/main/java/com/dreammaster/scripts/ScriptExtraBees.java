@@ -41,7 +41,7 @@ public class ScriptExtraBees implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(ExtraBees.ID, ExtraUtilities.ID, Forestry.ID, IndustrialCraft2.ID, PamsHarvestCraft.ID);
+        return Arrays.asList(ExtraBees.ID, Forestry.ID);
     }
 
     @Override
@@ -152,32 +152,34 @@ public class ScriptExtraBees implements IScriptLoader {
                 getModItem(Forestry.ID, "frameProven", 1, 0, missing),
                 'i',
                 getModItem(Forestry.ID, "thermionicTubes", 1, 10, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("for.honey", 7500),
-                getModItem(Forestry.ID, "alveary", 1, 0, missing),
-                getModItem(ExtraBees.ID, "alveary", 1, 2, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
-                'b',
-                getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing),
-                'c',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
-                'd',
-                getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing),
-                'e',
-                getModItem(Minecraft.ID, "brick_block", 1, 0, missing),
-                'f',
-                getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing),
-                'g',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
-                'h',
-                getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing),
-                'i',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing));
+        if (ICML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("for.honey", 7500),
+                    getModItem(Forestry.ID, "alveary", 1, 0, missing),
+                    getModItem(ExtraBees.ID, "alveary", 1, 2, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
+                    'b',
+                    getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing),
+                    'c',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
+                    'd',
+                    getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing),
+                    'e',
+                    getModItem(Minecraft.ID, "brick_block", 1, 0, missing),
+                    'f',
+                    getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing),
+                    'g',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
+                    'h',
+                    getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing),
+                    'i',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 60,
                 FluidRegistry.getFluidStack("for.honey", 7500),
@@ -282,32 +284,34 @@ public class ScriptExtraBees implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.cableGt02, Materials.Aluminium, 1L),
                 'i',
                 getModItem(Forestry.ID, "thermionicTubes", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("for.honey", 7500),
-                getModItem(Forestry.ID, "alveary", 1, 0, missing),
-                getModItem(ExtraBees.ID, "alveary", 1, 7, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
-                'b',
-                getModItem(ExtraUtilities.ID, "curtains", 1, 0, missing),
-                'c',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
-                'd',
-                getModItem(ExtraUtilities.ID, "curtains", 1, 0, missing),
-                'e',
-                getModItem(Minecraft.ID, "wool", 1, 15, missing),
-                'f',
-                getModItem(ExtraUtilities.ID, "curtains", 1, 0, missing),
-                'g',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
-                'h',
-                getModItem(ExtraUtilities.ID, "curtains", 1, 0, missing),
-                'i',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing));
+        if (XUML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("for.honey", 7500),
+                    getModItem(Forestry.ID, "alveary", 1, 0, missing),
+                    getModItem(ExtraBees.ID, "alveary", 1, 7, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
+                    'b',
+                    getModItem(ExtraUtilities.ID, "curtains", 1, 0, missing),
+                    'c',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
+                    'd',
+                    getModItem(ExtraUtilities.ID, "curtains", 1, 0, missing),
+                    'e',
+                    getModItem(Minecraft.ID, "wool", 1, 15, missing),
+                    'f',
+                    getModItem(ExtraUtilities.ID, "curtains", 1, 0, missing),
+                    'g',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing),
+                    'h',
+                    getModItem(ExtraUtilities.ID, "curtains", 1, 0, missing),
+                    'i',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 8, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 20,
                 FluidRegistry.getFluidStack("for.honey", 1000),
@@ -424,51 +428,53 @@ public class ScriptExtraBees implements IScriptLoader {
                     "HEALINGFRAME",
                     new ResearchPage(
                             TCHelper.findArcaneRecipe(getModItem(ExtraBees.ID, "hiveFrame.clay", 1, 0, missing))));
-            new ResearchItem(
-                    "CHOCOLATEFRAME",
-                    "MAGICBEES",
-                    new AspectList().add(Aspect.getAspect("praecantatio"), 15).add(Aspect.getAspect("fabrico"), 12)
-                            .add(Aspect.getAspect("cognitio"), 9).add(Aspect.getAspect("fames"), 6),
-                    7,
-                    2,
-                    3,
-                    getModItem(ExtraBees.ID, "hiveFrame.cocoa", 1, 0, missing)).setParents("MB_EssenceUnstable")
-                            .setConcealed()
-                            .setPages(
-                                    new ResearchPage("ExtraBees.research_page.CHOCOLATEFRAME_1"),
-                                    new ResearchPage("ExtraBees.research_page.CHOCOLATEFRAME_2"))
-                            .registerResearchItem();
-            ThaumcraftApi.addArcaneCraftingRecipe(
-                    "CHOCOLATEFRAME",
-                    getModItem(ExtraBees.ID, "hiveFrame.cocoa", 1, 0, missing),
-                    new AspectList().add(Aspect.getAspect("ordo"), 4).add(Aspect.getAspect("terra"), 4)
-                            .add(Aspect.getAspect("aer"), 4).add(Aspect.getAspect("perditio"), 4)
-                            .add(Aspect.getAspect("ignis"), 4).add(Aspect.getAspect("aqua"), 4),
-                    "abc",
-                    "def",
-                    "ghi",
-                    'a',
-                    "screwIron",
-                    'b',
-                    getModItem(Minecraft.ID, "sugar", 1, 0, missing),
-                    'c',
-                    "screwIron",
-                    'd',
-                    getModItem(PamsHarvestCraft.ID, "cocoapowderItem", 1, 0, missing),
-                    'e',
-                    getModItem(Forestry.ID, "frameImpregnated", 1, 0, missing),
-                    'f',
-                    getModItem(PamsHarvestCraft.ID, "cocoapowderItem", 1, 0, missing),
-                    'g',
-                    "screwIron",
-                    'h',
-                    getModItem(Minecraft.ID, "sugar", 1, 0, missing),
-                    'i',
-                    "screwIron");
-            TCHelper.addResearchPage(
-                    "CHOCOLATEFRAME",
-                    new ResearchPage(
-                            TCHelper.findArcaneRecipe(getModItem(ExtraBees.ID, "hiveFrame.cocoa", 1, 0, missing))));
+            if (PHML) {
+                new ResearchItem(
+                        "CHOCOLATEFRAME",
+                        "MAGICBEES",
+                        new AspectList().add(Aspect.getAspect("praecantatio"), 15).add(Aspect.getAspect("fabrico"), 12)
+                                .add(Aspect.getAspect("cognitio"), 9).add(Aspect.getAspect("fames"), 6),
+                        7,
+                        2,
+                        3,
+                        getModItem(ExtraBees.ID, "hiveFrame.cocoa", 1, 0, missing)).setParents("MB_EssenceUnstable")
+                                .setConcealed()
+                                .setPages(
+                                        new ResearchPage("ExtraBees.research_page.CHOCOLATEFRAME_1"),
+                                        new ResearchPage("ExtraBees.research_page.CHOCOLATEFRAME_2"))
+                                .registerResearchItem();
+                ThaumcraftApi.addArcaneCraftingRecipe(
+                        "CHOCOLATEFRAME",
+                        getModItem(ExtraBees.ID, "hiveFrame.cocoa", 1, 0, missing),
+                        new AspectList().add(Aspect.getAspect("ordo"), 4).add(Aspect.getAspect("terra"), 4)
+                                .add(Aspect.getAspect("aer"), 4).add(Aspect.getAspect("perditio"), 4)
+                                .add(Aspect.getAspect("ignis"), 4).add(Aspect.getAspect("aqua"), 4),
+                        "abc",
+                        "def",
+                        "ghi",
+                        'a',
+                        "screwIron",
+                        'b',
+                        getModItem(Minecraft.ID, "sugar", 1, 0, missing),
+                        'c',
+                        "screwIron",
+                        'd',
+                        getModItem(PamsHarvestCraft.ID, "cocoapowderItem", 1, 0, missing),
+                        'e',
+                        getModItem(Forestry.ID, "frameImpregnated", 1, 0, missing),
+                        'f',
+                        getModItem(PamsHarvestCraft.ID, "cocoapowderItem", 1, 0, missing),
+                        'g',
+                        "screwIron",
+                        'h',
+                        getModItem(Minecraft.ID, "sugar", 1, 0, missing),
+                        'i',
+                        "screwIron");
+                TCHelper.addResearchPage(
+                        "CHOCOLATEFRAME",
+                        new ResearchPage(
+                                TCHelper.findArcaneRecipe(getModItem(ExtraBees.ID, "hiveFrame.cocoa", 1, 0, missing))));
+            }
             new ResearchItem(
                     "RESTRAINTFRAME",
                     "MAGICBEES",

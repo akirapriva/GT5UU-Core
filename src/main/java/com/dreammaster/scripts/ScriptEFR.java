@@ -7,7 +7,6 @@ import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.BloodMagic;
 import static gregtech.api.enums.Mods.Botania;
-import static gregtech.api.enums.Mods.Chisel;
 import static gregtech.api.enums.Mods.DraconicEvolution;
 import static gregtech.api.enums.Mods.ElectroMagicTools;
 import static gregtech.api.enums.Mods.EnderIO;
@@ -60,6 +59,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
@@ -110,34 +110,21 @@ public class ScriptEFR implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AE2Stuff.ID,
-                AdventureBackpack.ID,
-                AppliedEnergistics2.ID,
-                Chisel.ID,
-                EnderIO.ID,
-                EtFuturumRequiem.ID,
-                ExtraUtilities.ID,
-                Forestry.ID,
-                HardcoreEnderExpansion.ID,
-                IndustrialCraft2.ID,
-                PamsHarvestCraft.ID,
-                PamsHarvestTheNether.ID,
-                StevesCarts2.ID,
-                ZTones.ID);
+        return Arrays.asList(EtFuturumRequiem.ID);
     }
 
     @Override
     public void loadRecipes() {
         long bits = GTModHandler.RecipeBits.NOT_REMOVABLE | GTModHandler.RecipeBits.REVERSIBLE
                 | GTModHandler.RecipeBits.BUFFERED;
-        GTModHandler.addCraftingRecipe(
-                GTModHandler.getModItem(EtFuturumRequiem.ID, "observer", 1L),
-                bits,
-                new Object[] { "AEA", "BCD", "AAA", 'A', "cobblestone", 'B', "dustRedstone", 'C',
-                        GTModHandler.getModItem(ExtraUtilities.ID, "budoff", 1, 0), 'D',
-                        GTModHandler.getModItem(Minecraft.ID, "comparator", 1, 0), 'E', "gearGtSmallAnyIron" });
-
+        if (XUML) {
+            GTModHandler.addCraftingRecipe(
+                    GTModHandler.getModItem(EtFuturumRequiem.ID, "observer", 1L),
+                    bits,
+                    new Object[] { "AEA", "BCD", "AAA", 'A', "cobblestone", 'B', "dustRedstone", 'C',
+                            GTModHandler.getModItem(ExtraUtilities.ID, "budoff", 1, 0), 'D',
+                            GTModHandler.getModItem(Minecraft.ID, "comparator", 1, 0), 'E', "gearGtSmallAnyIron" });
+        }
         // Copper Grate
 
         GTModHandler.addCraftingRecipe(
@@ -342,13 +329,15 @@ public class ScriptEFR implements IScriptLoader {
                 ItemStack plank2 = plank.copy();
                 plank2.stackSize = 2;
 
-                GTValues.RA.stdBuilder()
-                        .itemInputs(
-                                getModItem(Minecraft.ID, "carpet", 2L, carpetType, missing),
-                                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 2, 0, missing),
-                                plank2)
-                        .circuit(1).itemOutputs(getModItem(EtFuturumRequiem.ID, bedType, 1L, 0, missing))
-                        .duration(5 * SECONDS).eut(24).addTo(assemblerRecipes);
+                if (PHML) {
+                    GTValues.RA.stdBuilder()
+                            .itemInputs(
+                                    getModItem(Minecraft.ID, "carpet", 2L, carpetType, missing),
+                                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 2, 0, missing),
+                                    plank2)
+                            .circuit(1).itemOutputs(getModItem(EtFuturumRequiem.ID, bedType, 1L, 0, missing))
+                            .duration(5 * SECONDS).eut(24).addTo(assemblerRecipes);
+                }
             }
         }
 
@@ -363,14 +352,15 @@ public class ScriptEFR implements IScriptLoader {
             if (plank == null) continue;
             ItemStack plank2 = plank.copy();
             plank2.stackSize = 2;
-
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(Minecraft.ID, "carpet", 2L, 14, missing),
-                            getModItem(PamsHarvestCraft.ID, "wovencottonItem", 2, 0, missing),
-                            plank2)
-                    .circuit(1).itemOutputs(getModItem(Minecraft.ID, "bed", 1L, 0, missing)).duration(5 * SECONDS)
-                    .eut(24).addTo(assemblerRecipes);
+            if (PHML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Minecraft.ID, "carpet", 2L, 14, missing),
+                                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 2, 0, missing),
+                                plank2)
+                        .circuit(1).itemOutputs(getModItem(Minecraft.ID, "bed", 1L, 0, missing)).duration(5 * SECONDS)
+                        .eut(24).addTo(assemblerRecipes);
+            }
         }
 
         // Regular Copper Trapdoors
@@ -1034,7 +1024,7 @@ public class ScriptEFR implements IScriptLoader {
                 .circuit(1).itemOutputs(getModItem(EtFuturumRequiem.ID, "blast_furnace", 1, 0, missing))
                 .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
 
-        if (BMML) {
+        if (BMML && AESML && BML && WML && TML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             getModItem(EtFuturumRequiem.ID, "amethyst_block", 64, 0, missing),
@@ -1056,33 +1046,35 @@ public class ScriptEFR implements IScriptLoader {
                 bits,
                 new Object[] { "SSS", "HHH", "SSS", 'S', getModItem(Minecraft.ID, "string", 1, 0, missing), 'H',
                         getModItem(EtFuturumRequiem.ID, "rabbit_hide", 1, 0, missing) });
-
-        GTModHandler.addCraftingRecipe(
-                getModItem(EtFuturumRequiem.ID, "target", 1, 0, missing),
-                bits,
-                new Object[] { "WTR", "CHD", "RTW", 'W', "blockWoolWhite", 'R', "blockWoolRed", 'T', "dustRedstone",
-                        'C', GTModHandler.getModItem(Minecraft.ID, "comparator", 1, 0), 'H',
-                        GTModHandler.getModItem(Minecraft.ID, "hay_block", 1, 0), 'D',
-                        GTModHandler.getModItem(ExtraUtilities.ID, "budoff", 1, 0) });
-
-        GTModHandler.addCraftingRecipe(
-                getModItem(EtFuturumRequiem.ID, "smoker", 1, 0, missing),
-                bits,
-                new Object[] { "PhP", "PFP", "SCS", 'P', "plateIron", 'F',
-                        getModItem(Minecraft.ID, "furnace", 1, 0, missing), 'S',
-                        getModItem(EtFuturumRequiem.ID, "smooth_stone", 1, 0, missing), 'C',
-                        getModItem(AdventureBackpack.ID, "blockCampFire", 1, 0, missing) });
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(Blocks.furnace, 1),
-                        getModItem(ZTones.ID, "minicharcoal", 6, 0, missing),
-                        getModItem(EtFuturumRequiem.ID, "smooth_stone", 2, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.AnyIron, 4L))
-                .circuit(6).itemOutputs(getModItem(EtFuturumRequiem.ID, "smoker", 1L)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-
-        if (DEML) {
+        if (XUML) {
+            GTModHandler.addCraftingRecipe(
+                    getModItem(EtFuturumRequiem.ID, "target", 1, 0, missing),
+                    bits,
+                    new Object[] { "WTR", "CHD", "RTW", 'W', "blockWoolWhite", 'R', "blockWoolRed", 'T', "dustRedstone",
+                            'C', GTModHandler.getModItem(Minecraft.ID, "comparator", 1, 0), 'H',
+                            GTModHandler.getModItem(Minecraft.ID, "hay_block", 1, 0), 'D',
+                            GTModHandler.getModItem(ExtraUtilities.ID, "budoff", 1, 0) });
+        }
+        if (ABML) {
+            GTModHandler.addCraftingRecipe(
+                    getModItem(EtFuturumRequiem.ID, "smoker", 1, 0, missing),
+                    bits,
+                    new Object[] { "PhP", "PFP", "SCS", 'P', "plateIron", 'F',
+                            getModItem(Minecraft.ID, "furnace", 1, 0, missing), 'S',
+                            getModItem(EtFuturumRequiem.ID, "smooth_stone", 1, 0, missing), 'C',
+                            getModItem(AdventureBackpack.ID, "blockCampFire", 1, 0, missing) });
+        }
+        if (ZML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(Blocks.furnace, 1),
+                            getModItem(ZTones.ID, "minicharcoal", 6, 0, missing),
+                            getModItem(EtFuturumRequiem.ID, "smooth_stone", 2, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.AnyIron, 4L))
+                    .circuit(6).itemOutputs(getModItem(EtFuturumRequiem.ID, "smoker", 1L)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (DEML && HEEML && AEML) {
             GTModHandler.addCraftingRecipe(
                     getModItem(EtFuturumRequiem.ID, "end_crystal", 1, 0, missing),
                     bits,
@@ -1135,15 +1127,16 @@ public class ScriptEFR implements IScriptLoader {
                 .itemOutputs(getModItem(EtFuturumRequiem.ID, "grass_path", 64L)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(Blocks.stone_slab, 1),
-                        getModItem(Forestry.ID, "oakStick", 5L),
-                        GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Iron, 3L),
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 2L))
-                .circuit(21).itemOutputs(getModItem(EtFuturumRequiem.ID, "wooden_armorstand", 1L)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(Blocks.stone_slab, 1),
+                            getModItem(Forestry.ID, "oakStick", 5L),
+                            GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Iron, 3L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 2L))
+                    .circuit(21).itemOutputs(getModItem(EtFuturumRequiem.ID, "wooden_armorstand", 1L))
+                    .duration(5 * SECONDS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (BOPML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1164,24 +1157,27 @@ public class ScriptEFR implements IScriptLoader {
                     .addTo(mixerRecipes);
         }
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(HardcoreEnderExpansion.ID, "laboratory_obsidian", 16L),
-                        getModItem(HardcoreEnderExpansion.ID, "spectral_tear", 1L, 0))
-                .fluidInputs(new FluidStack(FluidRegistry.getFluid("ic2distilledwater"), 4000))
-                .itemOutputs(getModItem(EtFuturumRequiem.ID, "crying_obsidian", 16L)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-
-        if (BOPML) {
-            ChiselHelper.addVariationFromStack("EFRHoneyBlock", getModItem(BiomesOPlenty.ID, "honeyBlock", 1L));
+        if (HEEML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(HardcoreEnderExpansion.ID, "laboratory_obsidian", 16L),
+                            getModItem(HardcoreEnderExpansion.ID, "spectral_tear", 1L, 0))
+                    .fluidInputs(new FluidStack(FluidRegistry.getFluid("ic2distilledwater"), 4000))
+                    .itemOutputs(getModItem(EtFuturumRequiem.ID, "crying_obsidian", 16L)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        ChiselHelper.addVariationFromStack("EFRHoneyBlock", getModItem(EtFuturumRequiem.ID, "honey_block", 1L));
+        if (CHML) {
+            if (BOPML) {
+                ChiselHelper.addVariationFromStack("EFRHoneyBlock", getModItem(BiomesOPlenty.ID, "honeyBlock", 1L));
+            }
+            ChiselHelper.addVariationFromStack("EFRHoneyBlock", getModItem(EtFuturumRequiem.ID, "honey_block", 1L));
 
-        ChiselHelper.addVariationFromStack(
-                "EFRAmethystBlock",
-                GTOreDictUnificator.get(OrePrefixes.block, Materials.Amethyst, 1L));
-        ChiselHelper.addVariationFromStack("EFRAmethystBlock", getModItem(EtFuturumRequiem.ID, "amethyst_block", 1L));
-
+            ChiselHelper.addVariationFromStack(
+                    "EFRAmethystBlock",
+                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Amethyst, 1L));
+            ChiselHelper
+                    .addVariationFromStack("EFRAmethystBlock", getModItem(EtFuturumRequiem.ID, "amethyst_block", 1L));
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         new ItemStack(Blocks.glass, 2),
@@ -1333,7 +1329,7 @@ public class ScriptEFR implements IScriptLoader {
                         GTOreDictUnificator.get(MaterialsOres.TITANITE.getDust(4))) // gt++
                 .duration(2 * MINUTES).eut(TierEU.RECIPE_EV).addTo(centrifugeRecipes);
 
-        if (TML && TCML) {
+        if (TML && TCML && EIOML) {
             // Totem of Undying
             new ResearchItem(
                     "UNDYINGTOTEM",
@@ -1766,7 +1762,7 @@ public class ScriptEFR implements IScriptLoader {
                             .registerResearchItem();
         }
         // Helmet
-        if (TML && BML && TGML) {
+        if (TML && BML && TGML && TGML) {
             ThaumcraftApi.addArcaneCraftingRecipe(
                     "NetheriteArmour",
                     getModItem(EtFuturumRequiem.ID, "netherite_helmet", 1, 0, missing),
@@ -1897,31 +1893,33 @@ public class ScriptEFR implements IScriptLoader {
                     'e',
                     GTOreDictUnificator.get("plateManaDiamond", 1));
             // Hoe
-            ThaumcraftApi.addArcaneCraftingRecipe(
-                    "NetheriteArmour",
-                    getModItem(EtFuturumRequiem.ID, "netherite_hoe", 1, 0, missing),
-                    new AspectList().add(Aspect.getAspect("aer"), 15).add(Aspect.getAspect("ignis"), 15)
-                            .add(Aspect.getAspect("terra"), 15).add(Aspect.getAspect("aqua"), 15)
-                            .add(Aspect.getAspect("ordo"), 15).add(Aspect.getAspect("perditio"), 15),
-                    "aba",
-                    "cdc",
-                    "aea",
-                    'a',
-                    getModItem(EtFuturumRequiem.ID, "netherite_scrap", 1, 0, missing),
-                    'b',
-                    createItemStack(
-                            TinkersGregworks.ID,
-                            "tGregToolPartLargePlate",
-                            1,
-                            1505,
-                            "{material:\"Gold\"}",
-                            missing),
-                    'c',
-                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
-                    'd',
-                    getModItem(PamsHarvestTheNether.ID, "Quartz Hoe", 1, 0, missing),
-                    'e',
-                    GTOreDictUnificator.get("plateManaDiamond", 1));
+            if (PHML) {
+                ThaumcraftApi.addArcaneCraftingRecipe(
+                        "NetheriteArmour",
+                        getModItem(EtFuturumRequiem.ID, "netherite_hoe", 1, 0, missing),
+                        new AspectList().add(Aspect.getAspect("aer"), 15).add(Aspect.getAspect("ignis"), 15)
+                                .add(Aspect.getAspect("terra"), 15).add(Aspect.getAspect("aqua"), 15)
+                                .add(Aspect.getAspect("ordo"), 15).add(Aspect.getAspect("perditio"), 15),
+                        "aba",
+                        "cdc",
+                        "aea",
+                        'a',
+                        getModItem(EtFuturumRequiem.ID, "netherite_scrap", 1, 0, missing),
+                        'b',
+                        createItemStack(
+                                TinkersGregworks.ID,
+                                "tGregToolPartLargePlate",
+                                1,
+                                1505,
+                                "{material:\"Gold\"}",
+                                missing),
+                        'c',
+                        getModItem(ForbiddenMagic.ID, "NetherShard", 1, 0, missing),
+                        'd',
+                        getModItem(PamsHarvestTheNether.ID, "Quartz Hoe", 1, 0, missing),
+                        'e',
+                        GTOreDictUnificator.get("plateManaDiamond", 1));
+            }
             // Shovel
             ThaumcraftApi.addArcaneCraftingRecipe(
                     "NetheriteArmour",
@@ -2068,22 +2066,24 @@ public class ScriptEFR implements IScriptLoader {
                     getModItem(EtFuturumRequiem.ID, "elytra", 1, 0, missing)).setParents("FeatherWings").setConcealed()
                             .setPages(new ResearchPage("EtFuturumRequiem.research_page.ELYTRA.1"))
                             .registerResearchItem();
-            TCHelper.addInfusionCraftingRecipe(
-                    "ELYTRA",
-                    getModItem(EtFuturumRequiem.ID, "elytra", 1, 0, missing),
-                    15,
-                    new AspectList().add(Aspect.getAspect("aer"), 100).add(Aspect.getAspect("praecantatio"), 150)
-                            .add(Aspect.getAspect("motus"), 150).add(Aspect.getAspect("tempestas"), 200)
-                            .add(Aspect.getAspect("praecantatio"), 200),
-                    getModItem(WitchingGadgets.ID, "item.WG_Kama", 1, 4, missing),
-                    getModItem(EnderIO.ID, "itemGliderWing", 1, 1, missing),
-                    GregtechItemList.MagicFeather.get(1),
-                    getModItem(ElectroMagicTools.ID, "EMTItems", 1, 14, missing),
-                    getModItem(StevesCarts2.ID, "CartModule", 1, 59, missing),
-                    getModItem(Botania.ID, "manaBeacon", 1, 10, missing),
-                    getModItem(StevesCarts2.ID, "CartModule", 1, 59, missing),
-                    getModItem(ElectroMagicTools.ID, "EMTItems", 1, 14, missing),
-                    GregtechItemList.MagicFeather.get(1));
+            if (SCML) {
+                TCHelper.addInfusionCraftingRecipe(
+                        "ELYTRA",
+                        getModItem(EtFuturumRequiem.ID, "elytra", 1, 0, missing),
+                        15,
+                        new AspectList().add(Aspect.getAspect("aer"), 100).add(Aspect.getAspect("praecantatio"), 150)
+                                .add(Aspect.getAspect("motus"), 150).add(Aspect.getAspect("tempestas"), 200)
+                                .add(Aspect.getAspect("praecantatio"), 200),
+                        getModItem(WitchingGadgets.ID, "item.WG_Kama", 1, 4, missing),
+                        getModItem(EnderIO.ID, "itemGliderWing", 1, 1, missing),
+                        GregtechItemList.MagicFeather.get(1),
+                        getModItem(ElectroMagicTools.ID, "EMTItems", 1, 14, missing),
+                        getModItem(StevesCarts2.ID, "CartModule", 1, 59, missing),
+                        getModItem(Botania.ID, "manaBeacon", 1, 10, missing),
+                        getModItem(StevesCarts2.ID, "CartModule", 1, 59, missing),
+                        getModItem(ElectroMagicTools.ID, "EMTItems", 1, 14, missing),
+                        GregtechItemList.MagicFeather.get(1));
+            }
             TCHelper.addResearchPage(
                     "ELYTRA",
                     new ResearchPage(
@@ -2097,18 +2097,18 @@ public class ScriptEFR implements IScriptLoader {
         addOxidizedCopperTrapdoors();
         addOxidizedCopperBlocks();
         addOxidizedCopperGrates();
+        if (CHML) {
+            // Concrete
+            for (int i = 0; i < 16; i++) {
+                ItemStack efrConcrete = getModItem(EtFuturumRequiem.ID, "concrete", 1L, i);
+                if (efrConcrete == null) continue;
+                ChiselHelper.addVariationFromStack("hempcrete", efrConcrete);
 
-        // Concrete
-        for (int i = 0; i < 16; i++) {
-            ItemStack efrConcrete = getModItem(EtFuturumRequiem.ID, "concrete", 1L, i);
-            if (efrConcrete == null) continue;
-            ChiselHelper.addVariationFromStack("hempcrete", efrConcrete);
-
-            ItemStack efrConcretePowder = getModItem(EtFuturumRequiem.ID, "concrete_powder", 1L, i);
-            if (efrConcretePowder == null) continue;
-            ChiselHelper.addVariationFromStack("hempcretesand", efrConcretePowder);
+                ItemStack efrConcretePowder = getModItem(EtFuturumRequiem.ID, "concrete_powder", 1L, i);
+                if (efrConcretePowder == null) continue;
+                ChiselHelper.addVariationFromStack("hempcretesand", efrConcretePowder);
+            }
         }
-
         // Red Sandstone OreDict
 
         OreDictionary.registerOre("stoneRedSand", getModItem(EtFuturumRequiem.ID, "red_sandstone", 1, 0));
@@ -2151,14 +2151,15 @@ public class ScriptEFR implements IScriptLoader {
         }
 
         // Red Sandstone Chisel group
-
-        ChiselHelper.addGroup("red_sandstone");
-        ChiselHelper.addVariationFromStack("red_sandstone", getModItem(EtFuturumRequiem.ID, "red_sandstone", 1, 0));
-        ChiselHelper.addVariationFromStack("red_sandstone", getModItem(EtFuturumRequiem.ID, "red_sandstone", 1, 1));
-        ChiselHelper.addVariationFromStack("red_sandstone", getModItem(EtFuturumRequiem.ID, "red_sandstone", 1, 2));
-        ChiselHelper
-                .addVariationFromStack("red_sandstone", getModItem(EtFuturumRequiem.ID, "smooth_red_sandstone", 1, 0));
-
+        if (CHML) {
+            ChiselHelper.addGroup("red_sandstone");
+            ChiselHelper.addVariationFromStack("red_sandstone", getModItem(EtFuturumRequiem.ID, "red_sandstone", 1, 0));
+            ChiselHelper.addVariationFromStack("red_sandstone", getModItem(EtFuturumRequiem.ID, "red_sandstone", 1, 1));
+            ChiselHelper.addVariationFromStack("red_sandstone", getModItem(EtFuturumRequiem.ID, "red_sandstone", 1, 2));
+            ChiselHelper.addVariationFromStack(
+                    "red_sandstone",
+                    getModItem(EtFuturumRequiem.ID, "smooth_red_sandstone", 1, 0));
+        }
         // Add Red Sandstone as valid sand for Thermionic Fabricator
         RecipeManagers.fabricatorSmeltingManager
                 .addSmelting(getModItem(EtFuturumRequiem.ID, "red_sandstone", 1, 0), Fluids.GLASS.getFluid(4000), 4800);

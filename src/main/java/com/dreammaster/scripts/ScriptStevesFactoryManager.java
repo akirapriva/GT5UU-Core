@@ -1,10 +1,10 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.Computronics;
 import static gregtech.api.enums.Mods.EnderIO;
 import static gregtech.api.enums.Mods.ExtraUtilities;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
 import static gregtech.api.enums.Mods.OpenBlocks;
 import static gregtech.api.enums.Mods.ProjectRedTransmission;
 import static gregtech.api.enums.Mods.Railcraft;
@@ -38,17 +38,7 @@ public class ScriptStevesFactoryManager implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AppliedEnergistics2.ID,
-                Computronics.ID,
-                EnderIO.ID,
-                ExtraUtilities.ID,
-                IndustrialCraft2.ID,
-                OpenBlocks.ID,
-                ProjectRedTransmission.ID,
-                Railcraft.ID,
-                StevesFactoryManager.ID,
-                StevesAddons.ID);
+        return Arrays.asList(StevesFactoryManager.ID);
     }
 
     @Override
@@ -64,25 +54,27 @@ public class ScriptStevesFactoryManager implements IScriptLoader {
                 "plateStainlessSteel",
                 ItemList.Electric_Motor_HV.get(1L),
                 "plateStainlessSteel");
-        addShapedRecipe(
-                getModItem(StevesFactoryManager.ID, "BlockCableName", 2, 0, missing),
-                "plateStainlessSteel",
-                getModItem(ProjectRedTransmission.ID, "projectred.transmission.wire", 1, 17, missing),
-                "plateStainlessSteel",
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
-                "plateStainlessSteel",
-                getModItem(ProjectRedTransmission.ID, "projectred.transmission.wire", 1, 17, missing),
-                "plateStainlessSteel");
+        if (AEML && PREDML) {
+            addShapedRecipe(
+                    getModItem(StevesFactoryManager.ID, "BlockCableName", 2, 0, missing),
+                    "plateStainlessSteel",
+                    getModItem(ProjectRedTransmission.ID, "projectred.transmission.wire", 1, 17, missing),
+                    "plateStainlessSteel",
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
+                    "plateStainlessSteel",
+                    getModItem(ProjectRedTransmission.ID, "projectred.transmission.wire", 1, 17, missing),
+                    "plateStainlessSteel");
 
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
-                        getModItem(ProjectRedTransmission.ID, "projectred.transmission.wire", 1, 17, missing))
-                .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.stainlesssteel", 144))
-                .duration(7 * SECONDS + 10 * TICKS).eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
+                            getModItem(ProjectRedTransmission.ID, "projectred.transmission.wire", 1, 17, missing))
+                    .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.stainlesssteel", 144))
+                    .duration(7 * SECONDS + 10 * TICKS).eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
@@ -97,27 +89,33 @@ public class ScriptStevesFactoryManager implements IScriptLoader {
                 .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableOutputName", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
-                        getModItem(Railcraft.ID, "detector", 1, 9, missing))
-                .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableRelayName", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
-                        getModItem(Computronics.ID, "computronics.detector", 1, 0, missing))
-                .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableRelayName", 1, 8, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 576)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
-                        getModItem(OpenBlocks.ID, "vacuumhopper", 1, 0, missing))
-                .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableIntakeName", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        if (RCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
+                            getModItem(Railcraft.ID, "detector", 1, 9, missing))
+                    .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableRelayName", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
+        if (CML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
+                            getModItem(Computronics.ID, "computronics.detector", 1, 0, missing))
+                    .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableRelayName", 1, 8, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 576)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
+        if (OML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
+                            getModItem(OpenBlocks.ID, "vacuumhopper", 1, 0, missing))
+                    .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableIntakeName", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(StevesFactoryManager.ID, "BlockCableIntakeName", 1, 0, missing),
@@ -125,13 +123,15 @@ public class ScriptStevesFactoryManager implements IScriptLoader {
                 .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableIntakeName", 1, 8, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 576)).duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
-                        getModItem(ExtraUtilities.ID, "budoff", 1, 3, missing))
-                .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableBUDName", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
+                            getModItem(ExtraUtilities.ID, "budoff", 1, 3, missing))
+                    .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableBUDName", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
@@ -139,16 +139,18 @@ public class ScriptStevesFactoryManager implements IScriptLoader {
                 .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableBreakerName", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(StevesFactoryManager.ID, "BlockCableBreakerName", 1, 0, missing),
-                        getModItem(OpenBlocks.ID, "generic", 1, 11, missing))
-                .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableSignName", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 576)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(StevesFactoryManager.ID, "BlockCableName", 8, 0, missing))
-                .circuit(1).itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableClusterName", 1, 8, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        if (OML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(StevesFactoryManager.ID, "BlockCableBreakerName", 1, 0, missing),
+                            getModItem(OpenBlocks.ID, "generic", 1, 11, missing))
+                    .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableSignName", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 576)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder().itemInputs(getModItem(StevesFactoryManager.ID, "BlockCableName", 8, 0, missing))
+                    .circuit(1).itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableClusterName", 1, 8, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
@@ -177,22 +179,25 @@ public class ScriptStevesFactoryManager implements IScriptLoader {
                 .itemOutputs(getModItem(StevesFactoryManager.ID, "BlockCableCamouflageName", 1, 2, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 864)).duration(20 * SECONDS)
                 .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
-                        getModItem(EnderIO.ID, "itemPowerConduit", 1, 0, missing))
-                .itemOutputs(getModItem(StevesAddons.ID, "cable_rf", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder().itemInputs(ItemList.Tool_Scanner.get(1L), ItemList.Tool_DataStick.get(1L))
-                .itemOutputs(getModItem(StevesAddons.ID, "duplicator", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 144)).duration(7 * SECONDS + 10 * TICKS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(NHItemList.Display.get(), GTOreDictUnificator.get(OrePrefixes.circuit, Materials.HV, 2))
-                .itemOutputs(getModItem(StevesAddons.ID, "labeler", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 144)).duration(7 * SECONDS + 10 * TICKS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-
+        if (SAML) {
+            if (EIOML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(StevesFactoryManager.ID, "BlockCableName", 1, 0, missing),
+                                getModItem(EnderIO.ID, "itemPowerConduit", 1, 0, missing))
+                        .itemOutputs(getModItem(StevesAddons.ID, "cable_rf", 1, 0, missing))
+                        .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 288)).duration(10 * SECONDS)
+                        .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+            }
+            GTValues.RA.stdBuilder().itemInputs(ItemList.Tool_Scanner.get(1L), ItemList.Tool_DataStick.get(1L))
+                    .itemOutputs(getModItem(StevesAddons.ID, "duplicator", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 144)).duration(7 * SECONDS + 10 * TICKS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(NHItemList.Display.get(), GTOreDictUnificator.get(OrePrefixes.circuit, Materials.HV, 2))
+                    .itemOutputs(getModItem(StevesAddons.ID, "labeler", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 144)).duration(7 * SECONDS + 10 * TICKS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
     }
 }

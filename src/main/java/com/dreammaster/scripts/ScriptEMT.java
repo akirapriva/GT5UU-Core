@@ -1,16 +1,14 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AdvancedSolarPanel;
-import static gregtech.api.enums.Mods.Avaritia;
 import static gregtech.api.enums.Mods.ElectroMagicTools;
-import static gregtech.api.enums.Mods.GalacticraftCore;
 import static gregtech.api.enums.Mods.GregTech;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
 import static gregtech.api.enums.Mods.Minecraft;
 import static gregtech.api.enums.Mods.ProjectRedIntegration;
 import static gregtech.api.enums.Mods.Railcraft;
 import static gregtech.api.enums.Mods.Thaumcraft;
-import static gregtech.api.enums.Mods.ThaumicEnergistics;
 import static gregtech.api.enums.Mods.TinkerConstruct;
 import static gregtech.api.recipe.RecipeMaps.alloySmelterRecipes;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
@@ -52,29 +50,20 @@ public class ScriptEMT implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AdvancedSolarPanel.ID,
-                Avaritia.ID,
-                ElectroMagicTools.ID,
-                GalacticraftCore.ID,
-                IndustrialCraft2.ID,
-                ProjectRedIntegration.ID,
-                Railcraft.ID,
-                Thaumcraft.ID,
-                ThaumicEnergistics.ID,
-                TinkerConstruct.ID);
+        return Arrays.asList(ElectroMagicTools.ID, IndustrialCraft2.ID, Thaumcraft.ID);
     }
 
     @Override
     public void loadRecipes() {
-
-        addShapelessRecipe(
-                getModItem(ElectroMagicTools.ID, "EMTItems", 1, 8, missing),
-                getModItem(TinkerConstruct.ID, "materials", 1, 36, missing),
-                getModItem(TinkerConstruct.ID, "materials", 1, 36, missing));
-        addShapelessRecipe(
-                getModItem(TinkerConstruct.ID, "materials", 2, 36, missing),
-                getModItem(ElectroMagicTools.ID, "EMTItems", 1, 8, missing));
+        if (TCML) {
+            addShapelessRecipe(
+                    getModItem(ElectroMagicTools.ID, "EMTItems", 1, 8, missing),
+                    getModItem(TinkerConstruct.ID, "materials", 1, 36, missing),
+                    getModItem(TinkerConstruct.ID, "materials", 1, 36, missing));
+            addShapelessRecipe(
+                    getModItem(TinkerConstruct.ID, "materials", 2, 36, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTItems", 1, 8, missing));
+        }
 
         GTValues.RA.stdBuilder()
                 .itemInputs(
@@ -966,44 +955,46 @@ public class ScriptEMT implements IScriptLoader {
                         TCHelper.findInfusionRecipe(
                                 getModItem(ElectroMagicTools.ID, "ThaumiumChainsaw", 1, 27, missing))));
         ThaumcraftApi.addWarpToResearch("ThaumiumChainsaw", 1);
-        TCHelper.orphanResearch("Chainsaw of the Stream");
-        TCHelper.removeResearch("Chainsaw of the Stream");
-        new ResearchItem(
-                "ChainsawoftheStream",
-                "EMT",
-                new AspectList().add(Aspect.getAspect("potentia"), 15).add(Aspect.getAspect("lucrum"), 12)
-                        .add(Aspect.getAspect("praecantatio"), 9).add(Aspect.getAspect("aer"), 6)
-                        .add(Aspect.getAspect("arbor"), 3),
-                0,
-                -6,
-                3,
-                getModItem(ElectroMagicTools.ID, "ChainsawStream", 1, 0, missing)).setParents("ThaumiumChainsaw")
-                        .setConcealed().setRound().setPages(new ResearchPage("tc.research_page.ChainsawoftheStream"))
-                        .registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "ChainsawoftheStream",
-                getModItem(ElectroMagicTools.ID, "ChainsawStream", 1, 27, missing),
-                10,
-                new AspectList().add(Aspect.getAspect("instrumentum"), 48).add(Aspect.getAspect("telum"), 32)
-                        .add(Aspect.getAspect("potentia"), 32).add(Aspect.getAspect("lucrum"), 24)
-                        .add(Aspect.getAspect("praecantatio"), 16).add(Aspect.getAspect("aer"), 8),
-                getModItem(ElectroMagicTools.ID, "ThaumiumChainsaw", 1, wildcard, missing),
-                getModItem(Thaumcraft.ID, "ItemAxeElemental", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "itemPartIridium", 1, 0, missing),
-                OrePrefixes.circuit.get(Materials.LuV),
-                getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 0, missing),
-                OrePrefixes.plate.get(Materials.Void),
-                getModItem(Railcraft.ID, "tool.steel.shears", 1, 0, missing),
-                OrePrefixes.plate.get(Materials.Void),
-                getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 0, missing),
-                OrePrefixes.circuit.get(Materials.LuV),
-                getModItem(IndustrialCraft2.ID, "itemPartIridium", 1, 0, missing));
-        TCHelper.addResearchPage(
-                "ChainsawoftheStream",
-                new ResearchPage(
-                        TCHelper.findInfusionRecipe(
-                                getModItem(ElectroMagicTools.ID, "ChainsawStream", 1, 27, missing))));
-        ThaumcraftApi.addWarpToResearch("ChainsawoftheStream", 2);
+        if (RCML) {
+            TCHelper.orphanResearch("Chainsaw of the Stream");
+            TCHelper.removeResearch("Chainsaw of the Stream");
+            new ResearchItem(
+                    "ChainsawoftheStream",
+                    "EMT",
+                    new AspectList().add(Aspect.getAspect("potentia"), 15).add(Aspect.getAspect("lucrum"), 12)
+                            .add(Aspect.getAspect("praecantatio"), 9).add(Aspect.getAspect("aer"), 6)
+                            .add(Aspect.getAspect("arbor"), 3),
+                    0,
+                    -6,
+                    3,
+                    getModItem(ElectroMagicTools.ID, "ChainsawStream", 1, 0, missing)).setParents("ThaumiumChainsaw")
+                            .setConcealed().setRound()
+                            .setPages(new ResearchPage("tc.research_page.ChainsawoftheStream")).registerResearchItem();
+            TCHelper.addInfusionCraftingRecipe(
+                    "ChainsawoftheStream",
+                    getModItem(ElectroMagicTools.ID, "ChainsawStream", 1, 27, missing),
+                    10,
+                    new AspectList().add(Aspect.getAspect("instrumentum"), 48).add(Aspect.getAspect("telum"), 32)
+                            .add(Aspect.getAspect("potentia"), 32).add(Aspect.getAspect("lucrum"), 24)
+                            .add(Aspect.getAspect("praecantatio"), 16).add(Aspect.getAspect("aer"), 8),
+                    getModItem(ElectroMagicTools.ID, "ThaumiumChainsaw", 1, wildcard, missing),
+                    getModItem(Thaumcraft.ID, "ItemAxeElemental", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "itemPartIridium", 1, 0, missing),
+                    OrePrefixes.circuit.get(Materials.LuV),
+                    getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 0, missing),
+                    OrePrefixes.plate.get(Materials.Void),
+                    getModItem(Railcraft.ID, "tool.steel.shears", 1, 0, missing),
+                    OrePrefixes.plate.get(Materials.Void),
+                    getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 0, missing),
+                    OrePrefixes.circuit.get(Materials.LuV),
+                    getModItem(IndustrialCraft2.ID, "itemPartIridium", 1, 0, missing));
+            TCHelper.addResearchPage(
+                    "ChainsawoftheStream",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(
+                                    getModItem(ElectroMagicTools.ID, "ChainsawStream", 1, 27, missing))));
+            ThaumcraftApi.addWarpToResearch("ChainsawoftheStream", 2);
+        }
         TCHelper.orphanResearch("Inventory Charging Ring");
         TCHelper.removeResearch("Inventory Charging Ring");
         new ResearchItem(
@@ -1084,51 +1075,53 @@ public class ScriptEMT implements IScriptLoader {
         TCHelper.removeResearch("Nanosuit Goggles of Revealing");
         TCHelper.orphanResearch("Quantum Goggles of Revealing");
         TCHelper.removeResearch("Quantum Goggles of Revealing");
-        new ResearchItem(
-                "ElectricGogglesofRevealing",
-                "EMT",
-                new AspectList().add(Aspect.getAspect("tutamen"), 15).add(Aspect.getAspect("potentia"), 12)
-                        .add(Aspect.getAspect("sensus"), 9).add(Aspect.getAspect("praecantatio"), 6)
-                        .add(Aspect.getAspect("electrum"), 3),
-                -6,
-                -2,
-                3,
-                getModItem(ElectroMagicTools.ID, "ElectricGogglesRevealing", 1, 0, missing)).setParents("GOGGLES")
-                        .setConcealed().setParentsHidden("ElectricMagicTools").setRound()
-                        .setPages(new ResearchPage("tc.research_page.ElectricGogglesofRevealing"))
-                        .registerResearchItem();
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "ElectricGogglesofRevealing",
-                getModItem(ElectroMagicTools.ID, "ElectricGogglesRevealing", 1, 165, missing),
-                new AspectList().add(Aspect.getAspect("aer"), 45).add(Aspect.getAspect("ignis"), 45)
-                        .add(Aspect.getAspect("terra"), 45).add(Aspect.getAspect("aqua"), 45)
-                        .add(Aspect.getAspect("ordo"), 45).add(Aspect.getAspect("perditio"), 45),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "wireGt02AnyCopper",
-                'b',
-                getModItem(Minecraft.ID, "diamond_helmet", 1, 0, missing),
-                'c',
-                "wireGt02AnyCopper",
-                'd',
-                "circuitBasic",
-                'e',
-                getModItem(Thaumcraft.ID, "ItemGoggles", 1, 0, missing),
-                'f',
-                "circuitBasic",
-                'g',
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 10, missing),
-                'h',
-                getModItem(IndustrialCraft2.ID, "itemAdvBat", 1, wildcard, missing),
-                'i',
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 10, missing));
-        TCHelper.addResearchPage(
-                "ElectricGogglesofRevealing",
-                new ResearchPage(
-                        TCHelper.findArcaneRecipe(
-                                getModItem(ElectroMagicTools.ID, "ElectricGogglesRevealing", 1, 165, missing))));
+        if (PREDML) {
+            new ResearchItem(
+                    "ElectricGogglesofRevealing",
+                    "EMT",
+                    new AspectList().add(Aspect.getAspect("tutamen"), 15).add(Aspect.getAspect("potentia"), 12)
+                            .add(Aspect.getAspect("sensus"), 9).add(Aspect.getAspect("praecantatio"), 6)
+                            .add(Aspect.getAspect("electrum"), 3),
+                    -6,
+                    -2,
+                    3,
+                    getModItem(ElectroMagicTools.ID, "ElectricGogglesRevealing", 1, 0, missing)).setParents("GOGGLES")
+                            .setConcealed().setParentsHidden("ElectricMagicTools").setRound()
+                            .setPages(new ResearchPage("tc.research_page.ElectricGogglesofRevealing"))
+                            .registerResearchItem();
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "ElectricGogglesofRevealing",
+                    getModItem(ElectroMagicTools.ID, "ElectricGogglesRevealing", 1, 165, missing),
+                    new AspectList().add(Aspect.getAspect("aer"), 45).add(Aspect.getAspect("ignis"), 45)
+                            .add(Aspect.getAspect("terra"), 45).add(Aspect.getAspect("aqua"), 45)
+                            .add(Aspect.getAspect("ordo"), 45).add(Aspect.getAspect("perditio"), 45),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "wireGt02AnyCopper",
+                    'b',
+                    getModItem(Minecraft.ID, "diamond_helmet", 1, 0, missing),
+                    'c',
+                    "wireGt02AnyCopper",
+                    'd',
+                    "circuitBasic",
+                    'e',
+                    getModItem(Thaumcraft.ID, "ItemGoggles", 1, 0, missing),
+                    'f',
+                    "circuitBasic",
+                    'g',
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 10, missing),
+                    'h',
+                    getModItem(IndustrialCraft2.ID, "itemAdvBat", 1, wildcard, missing),
+                    'i',
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 10, missing));
+            TCHelper.addResearchPage(
+                    "ElectricGogglesofRevealing",
+                    new ResearchPage(
+                            TCHelper.findArcaneRecipe(
+                                    getModItem(ElectroMagicTools.ID, "ElectricGogglesRevealing", 1, 165, missing))));
+        }
         new ResearchItem(
                 "NanosuitGogglesofRevealing",
                 "EMT",
@@ -1364,28 +1357,31 @@ public class ScriptEMT implements IScriptLoader {
                 getModItem(ElectroMagicTools.ID, "EMTSolars", 1, 2, missing),
                 getModItem(ElectroMagicTools.ID, "EMTSolars", 1, 2, missing),
                 getModItem(ElectroMagicTools.ID, "EMTSolars", 1, 2, missing));
-        TCHelper.addResearchPage(
-                "CompressedSolars",
-                new ResearchPage(
-                        TCHelper.findInfusionRecipe(getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing))));
-        TCHelper.addInfusionCraftingRecipe(
-                "CompressedSolars",
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 7, missing),
-                20,
-                new AspectList().add(Aspect.getAspect("aer"), 600).add(Aspect.getAspect("aqua"), 600)
-                        .add(Aspect.getAspect("terra"), 600).add(Aspect.getAspect("ignis"), 600)
-                        .add(Aspect.getAspect("ordo"), 600).add(Aspect.getAspect("perditio"), 600),
-                getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 8, missing),
-                getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 8, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
-                getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 8, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing));
+        if (ASML) {
+            TCHelper.addResearchPage(
+                    "CompressedSolars",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(
+                                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing))));
+            TCHelper.addInfusionCraftingRecipe(
+                    "CompressedSolars",
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 7, missing),
+                    20,
+                    new AspectList().add(Aspect.getAspect("aer"), 600).add(Aspect.getAspect("aqua"), 600)
+                            .add(Aspect.getAspect("terra"), 600).add(Aspect.getAspect("ignis"), 600)
+                            .add(Aspect.getAspect("ordo"), 600).add(Aspect.getAspect("perditio"), 600),
+                    getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 8, missing),
+                    getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 8, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
+                    getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 8, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 0, missing));
+        }
         TCHelper.addResearchPage(
                 "CompressedSolars",
                 new ResearchPage(
@@ -1430,28 +1426,31 @@ public class ScriptEMT implements IScriptLoader {
                 getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 14, missing),
                 getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 14, missing),
                 getModItem(ElectroMagicTools.ID, "EMTSolars3", 1, 14, missing));
-        TCHelper.addResearchPage(
-                "CompressedSolars",
-                new ResearchPage(
-                        TCHelper.findInfusionRecipe(getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing))));
-        TCHelper.addInfusionCraftingRecipe(
-                "CompressedSolars",
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 12, missing),
-                20,
-                new AspectList().add(Aspect.getAspect("aer"), 4800).add(Aspect.getAspect("aqua"), 4800)
-                        .add(Aspect.getAspect("terra"), 4800).add(Aspect.getAspect("ignis"), 4800)
-                        .add(Aspect.getAspect("ordo"), 4800).add(Aspect.getAspect("perditio"), 4800),
-                getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 13, missing),
-                getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 13, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
-                getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 13, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
-                getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing));
+        if (ASML) {
+            TCHelper.addResearchPage(
+                    "CompressedSolars",
+                    new ResearchPage(
+                            TCHelper.findInfusionRecipe(
+                                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing))));
+            TCHelper.addInfusionCraftingRecipe(
+                    "CompressedSolars",
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 12, missing),
+                    20,
+                    new AspectList().add(Aspect.getAspect("aer"), 4800).add(Aspect.getAspect("aqua"), 4800)
+                            .add(Aspect.getAspect("terra"), 4800).add(Aspect.getAspect("ignis"), 4800)
+                            .add(Aspect.getAspect("ordo"), 4800).add(Aspect.getAspect("perditio"), 4800),
+                    getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 13, missing),
+                    getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 13, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
+                    getModItem(AdvancedSolarPanel.ID, "asp_crafting_items", 1, 13, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing),
+                    getModItem(ElectroMagicTools.ID, "EMTSolars4", 1, 5, missing));
+        }
         TCHelper.addResearchPage(
                 "CompressedSolars",
                 new ResearchPage(

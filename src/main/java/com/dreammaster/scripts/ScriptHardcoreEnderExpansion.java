@@ -46,7 +46,7 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Chisel.ID, EnderStorage.ID, HardcoreEnderExpansion.ID, IronTanks.ID);
+        return Arrays.asList(HardcoreEnderExpansion.ID);
     }
 
     @Override
@@ -75,17 +75,19 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                     "blockEnder",
                     "plateDenseObsidian");
         }
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "void_chest", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                "plateEnderEye",
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "endium_block", 1, 0, missing),
-                getModItem(EnderStorage.ID, "enderChest", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "endium_block", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                "plateEnderEye",
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        if (ESML) {
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "void_chest", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    "plateEnderEye",
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "endium_block", 1, 0, missing),
+                    getModItem(EnderStorage.ID, "enderChest", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "endium_block", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    "plateEnderEye",
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(HardcoreEnderExpansion.ID, "biome_compass", 1, 0, missing),
                 "screwHeeEndium",
@@ -124,28 +126,30 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                 "blockStainlessSteel",
                 "blockHeeEndium",
                 "blockStainlessSteel");
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "energy_extraction_table", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                "plateThaumium",
-                getModItem(HardcoreEnderExpansion.ID, "living_matter", 1, 0, missing),
-                "plateThaumium",
-                "blockStainlessSteel",
-                "blockHeeEndium",
-                "blockStainlessSteel");
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "accumulation_table", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                "plateThaumium",
-                getModItem(HardcoreEnderExpansion.ID, "energy_wand_core", 1, 0, missing),
-                "plateThaumium",
-                "blockStainlessSteel",
-                "blockHeeEndium",
-                "blockStainlessSteel");
+        if (ITML) {
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "energy_extraction_table", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    "plateThaumium",
+                    getModItem(HardcoreEnderExpansion.ID, "living_matter", 1, 0, missing),
+                    "plateThaumium",
+                    "blockStainlessSteel",
+                    "blockHeeEndium",
+                    "blockStainlessSteel");
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "accumulation_table", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(IronTanks.ID, "ironTank", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    "plateThaumium",
+                    getModItem(HardcoreEnderExpansion.ID, "energy_wand_core", 1, 0, missing),
+                    "plateThaumium",
+                    "blockStainlessSteel",
+                    "blockHeeEndium",
+                    "blockStainlessSteel");
+        }
         addShapedRecipe(
                 getModItem(HardcoreEnderExpansion.ID, "spectral_tear", 1, 0, missing),
                 getModItem(HardcoreEnderExpansion.ID, "endoplasm", 1, 0, missing),
@@ -636,17 +640,19 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
 
         // Laboratory
 
-        addShapedRecipe(
-                getModItem(HardcoreEnderExpansion.ID, "laboratory_floor", 8, 0, missing),
-                getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
-                getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
-                getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
-                getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
-                getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
-                getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
-                getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
-                getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
-                getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing));
+        if (CHML) {
+            addShapedRecipe(
+                    getModItem(HardcoreEnderExpansion.ID, "laboratory_floor", 8, 0, missing),
+                    getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
+                    getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
+                    getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
+                    getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
+                    getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing),
+                    getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
+                    getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
+                    getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing),
+                    getModItem(Chisel.ID, "laboratoryblock", 1, 0, missing));
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "stone", 4, 0, missing),
@@ -743,18 +749,18 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                 null,
                 getModItem(Minecraft.ID, "glowstone_dust", 1, 0, missing),
                 null);
+        if (CHML) {
+            ChiselHelper.addGroup("HEERavagedBrick");
+            for (int meta = 0; meta < 6; ++meta) {
+                ChiselHelper.addVariationFromStack(
+                        "HEERavagedBrick",
+                        getModItem(HardcoreEnderExpansion.ID, "ravaged_brick", 1, meta, missing));
+            }
 
-        ChiselHelper.addGroup("HEERavagedBrick");
-        for (int meta = 0; meta < 6; ++meta) {
             ChiselHelper.addVariationFromStack(
                     "HEERavagedBrick",
-                    getModItem(HardcoreEnderExpansion.ID, "ravaged_brick", 1, meta, missing));
+                    getModItem(HardcoreEnderExpansion.ID, "ravaged_brick_smooth", 1, 0, missing));
         }
-
-        ChiselHelper.addVariationFromStack(
-                "HEERavagedBrick",
-                getModItem(HardcoreEnderExpansion.ID, "ravaged_brick_smooth", 1, 0, missing));
-
         // Peresgrit
 
         addShapedRecipe(
@@ -776,14 +782,15 @@ public class ScriptHardcoreEnderExpansion implements IScriptLoader {
                         getModItem(HardcoreEnderExpansion.ID, "end_powder", 1, 0, missing))
                 .circuit(24).itemOutputs(getModItem(HardcoreEnderExpansion.ID, "persegrit", 8, 0, missing))
                 .duration(5 * SECONDS).eut(24).addTo(assemblerRecipes);
+        if (CHML) {
+            ChiselHelper.addGroup("HEEPersegrit");
+            for (int meta = 0; meta < 16; ++meta) {
+                ChiselHelper.addVariationFromStack(
+                        "HEEPersegrit",
+                        getModItem(HardcoreEnderExpansion.ID, "persegrit", 1, meta, missing));
 
-        ChiselHelper.addGroup("HEEPersegrit");
-        for (int meta = 0; meta < 16; ++meta) {
-            ChiselHelper.addVariationFromStack(
-                    "HEEPersegrit",
-                    getModItem(HardcoreEnderExpansion.ID, "persegrit", 1, meta, missing));
-
-            // Death flower
+                // Death flower
+            }
         }
         GTValues.RA.stdBuilder().itemInputs(getModItem(HardcoreEnderExpansion.ID, "death_flower", 1, 0, missing))
                 .itemOutputs(getModItem(HardcoreEnderExpansion.ID, "death_flower", 1, 15, missing))

@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.ForbiddenMagic;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.IndustrialCraft2;
@@ -34,13 +35,7 @@ public class ScriptTaintedMagic implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                ForbiddenMagic.ID,
-                Forestry.ID,
-                IndustrialCraft2.ID,
-                TaintedMagic.ID,
-                Thaumcraft.ID,
-                TinkersGregworks.ID);
+        return Arrays.asList(TaintedMagic.ID, Thaumcraft.ID);
     }
 
     @Override
@@ -626,35 +621,37 @@ public class ScriptTaintedMagic implements IScriptLoader {
         TCHelper.addResearchPrereq("CrystalDaggerGTNH", "VOIDMETAL", false);
         ResearchCategories.getResearch("CrystalDaggerGTNH").setConcealed();
         TCHelper.addResearchPage("CrystalDaggerGTNH", new ResearchPage("tm.text.CRYSTALDAGGER.1"));
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "CrystalDaggerGTNH",
-                getModItem(TaintedMagic.ID, "ItemCrystalDagger", 1, 0, missing),
-                new AspectList().add(Aspect.getAspect("terra"), 100).add(Aspect.getAspect("ignis"), 100)
-                        .add(Aspect.getAspect("perditio"), 100).add(Aspect.getAspect("ordo"), 50)
-                        .add(Aspect.getAspect("aer"), 50),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                "screwThaumium",
-                'b',
-                "craftingToolWrench",
-                'c',
-                createItemStack(
-                        TinkersGregworks.ID,
-                        "tGregToolPartKnifeBlade",
-                        1,
-                        1622,
-                        "{material:\"Shadow\"}",
-                        missing),
-                'e',
-                getModItem(Thaumcraft.ID, "blockTube", 1, 7, missing),
-                'g',
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                'h',
-                "craftingToolScrewdriver",
-                'i',
-                "screwThaumium");
+        if (FML && TGML) {
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "CrystalDaggerGTNH",
+                    getModItem(TaintedMagic.ID, "ItemCrystalDagger", 1, 0, missing),
+                    new AspectList().add(Aspect.getAspect("terra"), 100).add(Aspect.getAspect("ignis"), 100)
+                            .add(Aspect.getAspect("perditio"), 100).add(Aspect.getAspect("ordo"), 50)
+                            .add(Aspect.getAspect("aer"), 50),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    "screwThaumium",
+                    'b',
+                    "craftingToolWrench",
+                    'c',
+                    createItemStack(
+                            TinkersGregworks.ID,
+                            "tGregToolPartKnifeBlade",
+                            1,
+                            1622,
+                            "{material:\"Shadow\"}",
+                            missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "blockTube", 1, 7, missing),
+                    'g',
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    'h',
+                    "craftingToolScrewdriver",
+                    'i',
+                    "screwThaumium");
+        }
         TCHelper.addResearchPage(
                 "CrystalDaggerGTNH",
                 new ResearchPage(
@@ -1177,27 +1174,29 @@ public class ScriptTaintedMagic implements IScriptLoader {
                 getModItem(TaintedMagic.ID, "ItemFocusTaint", 1, 0, missing))
                         .setParents("EvilshardsGTNH", "BOTTLETAINT", "TAINTSHOVEL").setConcealed()
                         .setPages(new ResearchPage("tm.text.TAINTFOCUS.1")).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "TaintFocusGTNH",
-                getModItem(TaintedMagic.ID, "ItemFocusTaint", 1, 0, missing),
-                9,
-                new AspectList().add(Aspect.getAspect("aqua"), 72).add(Aspect.getAspect("limus"), 72)
-                        .add(Aspect.getAspect("praecantatio"), 72).add(Aspect.getAspect("vitium"), 72)
-                        .add(Aspect.getAspect("aer"), 64).add(Aspect.getAspect("potentia"), 32),
-                getModItem(Thaumcraft.ID, "FocusPech", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
-                getModItem(TaintedMagic.ID, "ItemMaterial", 1, 4, missing),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 2, missing),
-                getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 12, missing),
-                getModItem(TaintedMagic.ID, "ItemMaterial", 1, 4, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
-                getModItem(TaintedMagic.ID, "ItemMaterial", 1, 4, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 12, missing),
-                getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
-                getModItem(ForbiddenMagic.ID, "NetherShard", 1, 2, missing),
-                getModItem(TaintedMagic.ID, "ItemMaterial", 1, 4, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing));
+        if (FMML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "TaintFocusGTNH",
+                    getModItem(TaintedMagic.ID, "ItemFocusTaint", 1, 0, missing),
+                    9,
+                    new AspectList().add(Aspect.getAspect("aqua"), 72).add(Aspect.getAspect("limus"), 72)
+                            .add(Aspect.getAspect("praecantatio"), 72).add(Aspect.getAspect("vitium"), 72)
+                            .add(Aspect.getAspect("aer"), 64).add(Aspect.getAspect("potentia"), 32),
+                    getModItem(Thaumcraft.ID, "FocusPech", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
+                    getModItem(TaintedMagic.ID, "ItemMaterial", 1, 4, missing),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 2, missing),
+                    getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 12, missing),
+                    getModItem(TaintedMagic.ID, "ItemMaterial", 1, 4, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
+                    getModItem(TaintedMagic.ID, "ItemMaterial", 1, 4, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 12, missing),
+                    getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
+                    getModItem(ForbiddenMagic.ID, "NetherShard", 1, 2, missing),
+                    getModItem(TaintedMagic.ID, "ItemMaterial", 1, 4, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing));
+        }
         TCHelper.addResearchPage(
                 "TaintFocusGTNH",
                 new ResearchPage(
@@ -1217,26 +1216,28 @@ public class ScriptTaintedMagic implements IScriptLoader {
                 getModItem(TaintedMagic.ID, "ItemFocusTaintedBlast", 1, 0, missing))
                         .setParents("TaintFocusGTNH", "FOCUSFIRE", "ELDRITCHMINOR", "FOCUSSHOCK").setConcealed()
                         .setPages(new ResearchPage("tm.text.FOCUSTAINTEDBLAST.1")).registerResearchItem();
-        TCHelper.addInfusionCraftingRecipe(
-                "FocusTaintedBlastGTNH",
-                getModItem(TaintedMagic.ID, "ItemFocusTaintedBlast", 1, 0, missing),
-                12,
-                new AspectList().add(Aspect.getAspect("motus"), 64).add(Aspect.getAspect("praecantatio"), 80)
-                        .add(Aspect.getAspect("telum"), 72).add(Aspect.getAspect("vitium"), 84)
-                        .add(Aspect.getAspect("cognitio"), 32).add(Aspect.getAspect("aer"), 48),
-                getModItem(TaintedMagic.ID, "ItemFocusTaint", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
-                getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
-                getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
-                getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
-                getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing),
-                getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
-                getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing));
+        if (ICML) {
+            TCHelper.addInfusionCraftingRecipe(
+                    "FocusTaintedBlastGTNH",
+                    getModItem(TaintedMagic.ID, "ItemFocusTaintedBlast", 1, 0, missing),
+                    12,
+                    new AspectList().add(Aspect.getAspect("motus"), 64).add(Aspect.getAspect("praecantatio"), 80)
+                            .add(Aspect.getAspect("telum"), 72).add(Aspect.getAspect("vitium"), 84)
+                            .add(Aspect.getAspect("cognitio"), 32).add(Aspect.getAspect("aer"), 48),
+                    getModItem(TaintedMagic.ID, "ItemFocusTaint", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
+                    getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
+                    getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
+                    getModItem(IndustrialCraft2.ID, "blockITNT", 1, 0, missing),
+                    getModItem(Thaumcraft.ID, "ItemResource", 1, 11, missing),
+                    getModItem(Thaumcraft.ID, "ItemBottleTaint", 1, 0, missing));
+        }
         TCHelper.addResearchPage(
                 "FocusTaintedBlastGTNH",
                 new ResearchPage(

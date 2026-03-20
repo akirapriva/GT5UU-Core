@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.AppliedEnergistics2;
 import static gregtech.api.enums.Mods.Backpack;
 import static gregtech.api.enums.Mods.Botania;
@@ -53,16 +54,7 @@ public class ScriptMagicBees implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AppliedEnergistics2.ID,
-                Backpack.ID,
-                Botania.ID,
-                Forestry.ID,
-                Genetics.ID,
-                IndustrialCraft2.ID,
-                MagicBees.ID,
-                Thaumcraft.ID,
-                PamsHarvestCraft.ID);
+        return Arrays.asList(Forestry.ID, MagicBees.ID, Thaumcraft.ID);
     }
 
     @Override
@@ -86,20 +78,22 @@ public class ScriptMagicBees implements IScriptLoader {
         addShapelessRecipe(
                 GTOreDictUnificator.get(OrePrefixes.dustSmall, Materials.InfusedEntropy, 1L),
                 getModItem(MagicBees.ID, "miscResources", 1, 23, missing));
-        addShapedRecipe(
-                getModItem(MagicBees.ID, "backpack.thaumaturgeT1", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "gemAmber",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                "gemAmber",
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
-        addShapelessRecipe(
-                getModItem(MagicBees.ID, "backpack.thaumaturgeT1", 1, 0, missing),
-                getModItem(MagicBees.ID, "backpack.thaumaturgeT1", 1, 0, missing));
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(MagicBees.ID, "backpack.thaumaturgeT1", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "gemAmber",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    "gemAmber",
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+            addShapelessRecipe(
+                    getModItem(MagicBees.ID, "backpack.thaumaturgeT1", 1, 0, missing),
+                    getModItem(MagicBees.ID, "backpack.thaumaturgeT1", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(MagicBees.ID, "magnet", 1, 0, missing),
                 "craftingToolWrench",
@@ -111,80 +105,83 @@ public class ScriptMagicBees implements IScriptLoader {
                 "screwSteelMagnetic",
                 "gemExquisiteDiamond",
                 "craftingToolScrewdriver");
-
-        ForestryHelper.removeCarpenterRecipe(getModItem(MagicBees.ID, "backpack.thaumaturgeT2", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("seedoil", 5000),
-                getModItem(MagicBees.ID, "backpack.thaumaturgeT1", 1, 0, missing),
-                getModItem(MagicBees.ID, "backpack.thaumaturgeT2", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'b',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'c',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'd',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'e',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'f',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'g',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'h',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
-                'i',
-                getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing));
-        BotaniaHelper
-                .removePetalRecipe(createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"beegonia\"}", missing));
-        BotaniaAPI.registerPetalRecipe(
-                createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"beegonia\"}", missing),
-                "flowerIngredientWhite",
-                "flowerIngredientYellow",
-                "flowerIngredientYellow",
-                "flowerIngredientBlack",
-                "powderMana",
-                "powderMana",
-                "powderMana",
-                "flowerAnemoneWhite");
-        BotaniaHelper.removePetalRecipe(
-                createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"hiveacynth\"}", missing));
-        BotaniaAPI.registerPetalRecipe(
-                createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"hiveacynth\"}", missing),
-                "flowerIngredientLightBlue",
-                "flowerIngredientCyan",
-                "flowerIngredientCyan",
-                "flowerIngredientBlue",
-                "powderMana",
-                getModItem(MagicBees.ID, "wax", 1, 1, missing),
-                getModItem(MagicBees.ID, "miscResources", 1, 7, missing),
-                "powderMana",
-                "redstoneRoot",
-                "runeSpringB",
-                "flowerIcyIris");
-        BotaniaHelper
-                .removePetalRecipe(createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"hibeescus\"}", missing));
-        BotaniaAPI.registerPetalRecipe(
-                createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"hibeescus\"}", missing),
-                "flowerIngredientOrange",
-                "flowerIngredientMagenta",
-                "flowerIngredientMagenta",
-                "flowerIngredientMagenta",
-                "flowerIngredientRed",
-                "powderMana",
-                getModItem(MagicBees.ID, "wax", 1, 1, missing),
-                getModItem(MagicBees.ID, "wax", 1, 2, missing),
-                "runeEnvyB",
-                "runeGreedB",
-                "runePrideB",
-                getModItem(MagicBees.ID, "miscResources", 1, 10, missing),
-                "redstoneRoot",
-                "eternalLifeEssence",
-                "flowerHibiscusPink");
+        if (BPML) {
+            ForestryHelper.removeCarpenterRecipe(getModItem(MagicBees.ID, "backpack.thaumaturgeT2", 1, 0, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("seedoil", 5000),
+                    getModItem(MagicBees.ID, "backpack.thaumaturgeT1", 1, 0, missing),
+                    getModItem(MagicBees.ID, "backpack.thaumaturgeT2", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'b',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'c',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'd',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'e',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'f',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'g',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'h',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing),
+                    'i',
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 3, missing));
+        }
+        if (BML) {
+            BotaniaHelper.removePetalRecipe(
+                    createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"beegonia\"}", missing));
+            BotaniaAPI.registerPetalRecipe(
+                    createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"beegonia\"}", missing),
+                    "flowerIngredientWhite",
+                    "flowerIngredientYellow",
+                    "flowerIngredientYellow",
+                    "flowerIngredientBlack",
+                    "powderMana",
+                    "powderMana",
+                    "powderMana",
+                    "flowerAnemoneWhite");
+            BotaniaHelper.removePetalRecipe(
+                    createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"hiveacynth\"}", missing));
+            BotaniaAPI.registerPetalRecipe(
+                    createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"hiveacynth\"}", missing),
+                    "flowerIngredientLightBlue",
+                    "flowerIngredientCyan",
+                    "flowerIngredientCyan",
+                    "flowerIngredientBlue",
+                    "powderMana",
+                    getModItem(MagicBees.ID, "wax", 1, 1, missing),
+                    getModItem(MagicBees.ID, "miscResources", 1, 7, missing),
+                    "powderMana",
+                    "redstoneRoot",
+                    "runeSpringB",
+                    "flowerIcyIris");
+            BotaniaHelper.removePetalRecipe(
+                    createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"hibeescus\"}", missing));
+            BotaniaAPI.registerPetalRecipe(
+                    createItemStack(Botania.ID, "specialFlower", 1, 0, "{type:\"hibeescus\"}", missing),
+                    "flowerIngredientOrange",
+                    "flowerIngredientMagenta",
+                    "flowerIngredientMagenta",
+                    "flowerIngredientMagenta",
+                    "flowerIngredientRed",
+                    "powderMana",
+                    getModItem(MagicBees.ID, "wax", 1, 1, missing),
+                    getModItem(MagicBees.ID, "wax", 1, 2, missing),
+                    "runeEnvyB",
+                    "runeGreedB",
+                    "runePrideB",
+                    getModItem(MagicBees.ID, "miscResources", 1, 10, missing),
+                    "redstoneRoot",
+                    "eternalLifeEssence",
+                    "flowerHibiscusPink");
+        }
 
         OreDictionary.registerOre("beeComb", getModItem(MagicBees.ID, "comb", 1, 0, missing));
         OreDictionary.registerOre("beeComb", getModItem(MagicBees.ID, "comb", 1, 1, missing));
@@ -207,21 +204,24 @@ public class ScriptMagicBees implements IScriptLoader {
         OreDictionary.registerOre("beeComb", getModItem(MagicBees.ID, "comb", 1, 18, missing));
         OreDictionary.registerOre("beeComb", getModItem(MagicBees.ID, "comb", 1, 19, missing));
         OreDictionary.registerOre("beeComb", getModItem(MagicBees.ID, "comb", 1, 20, missing));
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Genetics.ID, "misc", 2, 8, missing),
-                        getModItem(MagicBees.ID, "miscResources", 1, 17, missing))
-                .itemOutputs(getModItem(MagicBees.ID, "capsule.void", 2, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.gold", 288)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(AppliedEnergistics2.ID, "tile.BlockQuartzGlass", 5, 0, missing),
-                        getModItem(MagicBees.ID, "pollen", 1, 0, missing))
-                .itemOutputs(getModItem(MagicBees.ID, "effectJar", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.rubber", 144)).duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Genetics.ID, "misc", 2, 8, missing),
+                            getModItem(MagicBees.ID, "miscResources", 1, 17, missing))
+                    .itemOutputs(getModItem(MagicBees.ID, "capsule.void", 2, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.gold", 288)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
+        }
+        if (AEML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(AppliedEnergistics2.ID, "tile.BlockQuartzGlass", 5, 0, missing),
+                            getModItem(MagicBees.ID, "pollen", 1, 0, missing))
+                    .itemOutputs(getModItem(MagicBees.ID, "effectJar", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.rubber", 144)).duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(MagicBees.ID, "miscResources", 4, 3, missing)).circuit(4)
                 .itemOutputs(getModItem(MagicBees.ID, "miscResources", 1, 4, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.thaumium", 72)).duration(10 * SECONDS).eut(48)
@@ -385,20 +385,22 @@ public class ScriptMagicBees implements IScriptLoader {
                 .itemOutputs(getModItem(Forestry.ID, "fertilizerCompound", 10, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("water", 100)).duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2)
                 .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemFertilizer", 8, 0, missing),
-                        getModItem(MagicBees.ID, "miscResources", 1, 2, missing))
-                .itemOutputs(getModItem(Forestry.ID, "fertilizerCompound", 32, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("water", 1000)).duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemFertilizer", 8, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Apatite, 1L))
-                .itemOutputs(getModItem(Forestry.ID, "fertilizerCompound", 30, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("water", 1000)).duration(5 * SECONDS).eut(TierEU.RECIPE_LV / 2)
-                .addTo(mixerRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemFertilizer", 8, 0, missing),
+                            getModItem(MagicBees.ID, "miscResources", 1, 2, missing))
+                    .itemOutputs(getModItem(Forestry.ID, "fertilizerCompound", 32, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("water", 1000)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV / 2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemFertilizer", 8, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Apatite, 1L))
+                    .itemOutputs(getModItem(Forestry.ID, "fertilizerCompound", 30, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("water", 1000)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV / 2).addTo(mixerRecipes);
+        }
 
         TCHelper.removeInfusionRecipe(getModItem(MagicBees.ID, "miscResources", 3, 17, missing));
         TCHelper.removeInfusionRecipe(getModItem(MagicBees.ID, "miscResources", 3, 17, missing));

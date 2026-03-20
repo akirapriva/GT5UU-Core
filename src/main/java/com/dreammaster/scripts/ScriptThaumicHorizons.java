@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.BiomesOPlenty;
 import static gregtech.api.enums.Mods.Thaumcraft;
 import static gregtech.api.enums.Mods.ThaumicHorizons;
@@ -29,7 +30,7 @@ public class ScriptThaumicHorizons implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(BiomesOPlenty.ID, Thaumcraft.ID, ThaumicHorizons.ID);
+        return Arrays.asList(Thaumcraft.ID, ThaumicHorizons.ID);
     }
 
     @Override
@@ -196,9 +197,11 @@ public class ScriptThaumicHorizons implements IScriptLoader {
         TCHelper.refreshResearchPages("transductionAmplifier");
         TCHelper.refreshResearchPages("vortexStabilizer");
         TCHelper.refreshResearchPages("recombinator");
-        GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "flesh", 2, missing))
-                .itemOutputs(getModItem(ThaumicHorizons.ID, "meatTH", 1, missing)).duration(15 * SECONDS).eut(2)
-                .addTo(compressorRecipes);
+        if (BOPML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "flesh", 2, missing))
+                    .itemOutputs(getModItem(ThaumicHorizons.ID, "meatTH", 1, missing)).duration(15 * SECONDS).eut(2)
+                    .addTo(compressorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(ThaumicHorizons.ID, "meatCookedTH", 1, missing))
                 .itemOutputs(getModItem(ThaumicHorizons.ID, "meatNuggetTH", 4, missing)).duration(15 * SECONDS).eut(2)
                 .addTo(extractorRecipes);

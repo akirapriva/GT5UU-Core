@@ -1,10 +1,9 @@
 package com.dreammaster.scripts;
 
 import static bartworks.common.loaders.ItemRegistry.bw_realglas;
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static goodgenerator.api.recipe.GoodGeneratorRecipeMaps.preciseAssemblerRecipes;
-import static gregtech.api.enums.Mods.DraconicEvolution;
-import static gregtech.api.enums.Mods.EternalSingularity;
-import static gregtech.api.enums.Mods.UniversalSingularities;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.formingPressRecipes;
 import static gregtech.api.util.GTModHandler.getModItem;
@@ -51,7 +50,7 @@ public class ScriptFoundryRecipes implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(UniversalSingularities.ID, EternalSingularity.ID, DraconicEvolution.ID);
+        return Arrays.asList(TecTech.ID);
     }
 
     @Override
@@ -62,14 +61,15 @@ public class ScriptFoundryRecipes implements IScriptLoader {
     public void loadCasingRecipes() {
 
         // Exo Foundry Glass
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(bw_realglas, 8, 14),
-                        ItemList.Naquarite_Universal_Insulator_Foil.get(4),
-                        getModItem(UniversalSingularities.ID, "universal.general.singularity", 1, 13))
-                .fluidInputs(Materials.SuperCoolant.getFluid(64000)).itemOutputs(ItemList.Glass_ExoFoundry.get(8))
-                .duration(20 * SECONDS).eut(TierEU.RECIPE_UHV).addTo(formingPressRecipes);
-
+        if (USML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(bw_realglas, 8, 14),
+                            ItemList.Naquarite_Universal_Insulator_Foil.get(4),
+                            getModItem(UniversalSingularities.ID, "universal.general.singularity", 1, 13))
+                    .fluidInputs(Materials.SuperCoolant.getFluid(64000)).itemOutputs(ItemList.Glass_ExoFoundry.get(8))
+                    .duration(20 * SECONDS).eut(TierEU.RECIPE_UHV).addTo(formingPressRecipes);
+        }
         // Central Exo Foundry Casing
         GTValues.RA.stdBuilder()
                 .itemInputs(
@@ -240,28 +240,31 @@ public class ScriptFoundryRecipes implements IScriptLoader {
                 (int) TierEU.RECIPE_UXV);
 
         // Exo-Foundry Controller
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                ItemList.Machine_Mass_Solidifier.get(1),
-                4_000_000,
-                2_048,
-                (int) TierEU.RECIPE_UEV,
-                64,
-                new Object[] { ItemList.Machine_Mass_Solidifier.get(64), ItemList.Primary_Casing_ExoFoundry.get(16),
-                        GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Infinity, 8),
-                        GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUEV, 8),
-                        ItemList.Field_Generator_UEV.get(4), ItemList.Electric_Pump_UEV.get(8),
-                        ItemList.FluidRegulator_UEV.get(8), new Object[] { OrePrefixes.circuit.get(Materials.UIV), 2 },
-                        GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Netherite, 4),
-                        GTOreDictUnificator.get(OrePrefixes.rotor, Materials.CosmicNeutronium, 8),
-                        getModItem(EternalSingularity.ID, "eternal_singularity", 1L),
-                        GregtechItemList.Laser_Lens_Special.get(1) },
-                new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(INGOTS * 64),
-                        GGMaterial.preciousMetalAlloy.getMolten(INGOTS * 32),
-                        GGMaterial.metastableOganesson.getMolten(INGOTS * 20),
-                        MaterialsElements.STANDALONE.DRAGON_METAL.getFluidStack(INGOTS * 10) },
-                ItemList.Machine_Multi_ExoFoundry.get(1),
-                120 * SECONDS,
-                (int) TierEU.RECIPE_UIV);
+        if (EML) {
+            TTRecipeAdder.addResearchableAssemblylineRecipe(
+                    ItemList.Machine_Mass_Solidifier.get(1),
+                    4_000_000,
+                    2_048,
+                    (int) TierEU.RECIPE_UEV,
+                    64,
+                    new Object[] { ItemList.Machine_Mass_Solidifier.get(64), ItemList.Primary_Casing_ExoFoundry.get(16),
+                            GTOreDictUnificator.get(OrePrefixes.pipeLarge, Materials.Infinity, 8),
+                            GTOreDictUnificator.get(OrePrefixes.wireGt16, Materials.SuperconductorUEV, 8),
+                            ItemList.Field_Generator_UEV.get(4), ItemList.Electric_Pump_UEV.get(8),
+                            ItemList.FluidRegulator_UEV.get(8),
+                            new Object[] { OrePrefixes.circuit.get(Materials.UIV), 2 },
+                            GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Netherite, 4),
+                            GTOreDictUnificator.get(OrePrefixes.rotor, Materials.CosmicNeutronium, 8),
+                            getModItem(EternalSingularity.ID, "eternal_singularity", 1L),
+                            GregtechItemList.Laser_Lens_Special.get(1) },
+                    new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(INGOTS * 64),
+                            GGMaterial.preciousMetalAlloy.getMolten(INGOTS * 32),
+                            GGMaterial.metastableOganesson.getMolten(INGOTS * 20),
+                            MaterialsElements.STANDALONE.DRAGON_METAL.getFluidStack(INGOTS * 10) },
+                    ItemList.Machine_Multi_ExoFoundry.get(1),
+                    120 * SECONDS,
+                    (int) TierEU.RECIPE_UIV);
+        }
 
         // Exo-Foundry Base Casing
         TTRecipeAdder.addResearchableAssemblylineRecipe(
@@ -302,55 +305,61 @@ public class ScriptFoundryRecipes implements IScriptLoader {
                 (int) TierEU.RECIPE_UEV);
 
         // Exo-Foundry Chassis Tier 2
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                ItemList.Magnetic_Chassis_T1_ExoFoundry.get(1),
-                2_000_000,
-                4_096,
-                (int) TierEU.RECIPE_UIV,
-                64,
-                new Object[] { ItemRefer.Compact_Fusion_Coil_T4.get(1),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.Ichorium, 64),
-                        getModItem(EternalSingularity.ID, "combined_singularity", 1L, 2),
-                        getModItem(EternalSingularity.ID, "combined_singularity", 1L, 4),
-                        new Object[] { OrePrefixes.circuit.get(Materials.UIV), 4L },
-                        GTOreDictUnificator.get(OrePrefixes.nanite, Materials.TranscendentMetal, 2),
-                        GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.SixPhasedCopper, 1),
-                        ItemList.Emitter_UIV.get(1) },
-                new FluidStack[] { Materials.MoltenProtoHalkoniteBase.getFluid(INGOTS * 20),
-                        Materials.Mellion.getMolten(INGOTS * 4), Materials.Creon.getMolten(INGOTS * 4),
-                        Materials.DimensionallyShiftedSuperfluid.getFluid(20000) },
-                ItemList.Magnetic_Chassis_T2_ExoFoundry.get(1),
-                45 * SECONDS,
-                (int) TierEU.RECIPE_UIV);
-
-        // Exo-Foundry Chassis Tier 3
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                ItemList.Magnetic_Chassis_T2_ExoFoundry.get(1),
-                4_000_000,
-                8_192,
-                (int) TierEU.RECIPE_UXV,
-                256,
-                new Object[] { ItemRefer.Field_Restriction_Coil_T4.get(1), Godforge_SingularityShieldingCasing.get(4),
-                        new ItemStack(lscLapotronicEnergyUnit, 1, 5),
-                        GTOreDictUnificator.get(OrePrefixes.screw, Materials.Universium, 4),
-                        getModItem(DraconicEvolution.ID, "chaoticCore", 2),
-                        getModItem(EternalSingularity.ID, "combined_singularity", 64, 15, missing),
-                        new Object[] { OrePrefixes.circuit.get(Materials.UXV), 16L },
-                        ItemList.Field_Generator_UMV.get(8),
-                        GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.SpaceTime, 64),
-                        GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.SuperconductorUMVBase, 64),
-                        GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Eternity, 64),
-                        GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.MagMatter, 64),
-                        GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.SpaceTime, 16),
-                        GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.SuperconductorUMVBase, 16),
-                        GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Eternity, 16),
-                        GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.MagMatter, 16) },
-                // todo replace proto-halkonite with exo-halkonite
-                new FluidStack[] { Materials.MoltenProtoHalkoniteBase.getFluid(INGOTS * 4096),
-                        Materials.QuarkGluonPlasma.getFluid(100_000), Materials.MagMatter.getMolten(INGOTS * 40) },
-                ItemList.Magnetic_Chassis_T3_ExoFoundry.get(1),
-                60 * SECONDS,
-                (int) TierEU.RECIPE_UXV);
+        if (EML) {
+            TTRecipeAdder.addResearchableAssemblylineRecipe(
+                    ItemList.Magnetic_Chassis_T1_ExoFoundry.get(1),
+                    2_000_000,
+                    4_096,
+                    (int) TierEU.RECIPE_UIV,
+                    64,
+                    new Object[] { ItemRefer.Compact_Fusion_Coil_T4.get(1),
+                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.Ichorium, 64),
+                            getModItem(EternalSingularity.ID, "combined_singularity", 1L, 2),
+                            getModItem(EternalSingularity.ID, "combined_singularity", 1L, 4),
+                            new Object[] { OrePrefixes.circuit.get(Materials.UIV), 4L },
+                            GTOreDictUnificator.get(OrePrefixes.nanite, Materials.TranscendentMetal, 2),
+                            GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.SixPhasedCopper, 1),
+                            ItemList.Emitter_UIV.get(1) },
+                    new FluidStack[] { Materials.MoltenProtoHalkoniteBase.getFluid(INGOTS * 20),
+                            Materials.Mellion.getMolten(INGOTS * 4), Materials.Creon.getMolten(INGOTS * 4),
+                            Materials.DimensionallyShiftedSuperfluid.getFluid(20000) },
+                    ItemList.Magnetic_Chassis_T2_ExoFoundry.get(1),
+                    45 * SECONDS,
+                    (int) TierEU.RECIPE_UIV);
+            if (DEML) {
+                // Exo-Foundry Chassis Tier 3
+                TTRecipeAdder.addResearchableAssemblylineRecipe(
+                        ItemList.Magnetic_Chassis_T2_ExoFoundry.get(1),
+                        4_000_000,
+                        8_192,
+                        (int) TierEU.RECIPE_UXV,
+                        256,
+                        new Object[] { ItemRefer.Field_Restriction_Coil_T4.get(1),
+                                Godforge_SingularityShieldingCasing.get(4),
+                                new ItemStack(lscLapotronicEnergyUnit, 1, 5),
+                                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Universium, 4),
+                                getModItem(DraconicEvolution.ID, "chaoticCore", 2),
+                                getModItem(EternalSingularity.ID, "combined_singularity", 64, 15, missing),
+                                new Object[] { OrePrefixes.circuit.get(Materials.UXV), 16L },
+                                ItemList.Field_Generator_UMV.get(8),
+                                GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.SpaceTime, 64),
+                                GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.SuperconductorUMVBase, 64),
+                                GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.Eternity, 64),
+                                GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.MagMatter, 64),
+                                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.SpaceTime, 16),
+                                GTOreDictUnificator
+                                        .get(OrePrefixes.plateSuperdense, Materials.SuperconductorUMVBase, 16),
+                                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.Eternity, 16),
+                                GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.MagMatter, 16) },
+                        // todo replace proto-halkonite with exo-halkonite
+                        new FluidStack[] { Materials.MoltenProtoHalkoniteBase.getFluid(INGOTS * 4096),
+                                Materials.QuarkGluonPlasma.getFluid(100_000),
+                                Materials.MagMatter.getMolten(INGOTS * 40) },
+                        ItemList.Magnetic_Chassis_T3_ExoFoundry.get(1),
+                        60 * SECONDS,
+                        (int) TierEU.RECIPE_UXV);
+            }
+        }
 
     }
 }

@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Gadomancy;
 import static gregtech.api.enums.Mods.Minecraft;
 import static gregtech.api.enums.Mods.Thaumcraft;
@@ -34,7 +35,7 @@ public class ScriptGadomancy implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(Gadomancy.ID, Thaumcraft.ID, ThaumicTinkerer.ID);
+        return Arrays.asList(Gadomancy.ID, Thaumcraft.ID);
     }
 
     @Override
@@ -374,52 +375,54 @@ public class ScriptGadomancy implements IScriptLoader {
                         .add(Aspect.getAspect("praecantatio"), 9).add(Aspect.getAspect("alienis"), 6)
                         .add(Aspect.getAspect("cognitio"), 3));
         TCHelper.setResearchComplexity("GADOMANCY.REVEALER", 3);
-        TCHelper.clearPages("GADOMANCY.BLOCK_PROTECTOR");
-        TCHelper.addResearchPage(
-                "GADOMANCY.BLOCK_PROTECTOR",
-                new ResearchPage("gadomancy.research_page.BLOCK_PROTECTOR.1"));
-        ThaumcraftApi.addArcaneCraftingRecipe(
-                "GADOMANCY.BLOCK_PROTECTOR",
-                getModItem(Gadomancy.ID, "BlockStoneMachine", 1, 2, missing),
-                new AspectList().add(Aspect.getAspect("terra"), 150).add(Aspect.getAspect("ordo"), 150),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Minecraft.ID, "potion", 1, 8264, missing),
-                'b',
-                getModItem(ThaumicTinkerer.ID, "brightNitor", 1, 0, missing),
-                'c',
-                getModItem(Minecraft.ID, "potion", 1, 8264, missing),
-                'd',
-                getModItem(Thaumcraft.ID, "blockTube", 1, 0, missing),
-                'e',
-                getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing),
-                'f',
-                getModItem(Thaumcraft.ID, "blockTube", 1, 0, missing),
-                'g',
-                getModItem(Thaumcraft.ID, "blockMagicalLog", 1, 0, missing),
-                'h',
-                getModItem(Thaumcraft.ID, "blockMetalDevice", 1, 0, missing),
-                'i',
-                getModItem(Thaumcraft.ID, "blockMagicalLog", 1, 0, missing));
-        TCHelper.addResearchPage(
-                "GADOMANCY.BLOCK_PROTECTOR",
-                new ResearchPage(
-                        TCHelper.findArcaneRecipe(getModItem(Gadomancy.ID, "BlockStoneMachine", 1, 2, missing))));
-        TCHelper.addResearchPage(
-                "GADOMANCY.BLOCK_PROTECTOR",
-                new ResearchPage("gadomancy.research_page.BLOCK_PROTECTOR.3"));
-        TCHelper.addResearchPage(
-                "GADOMANCY.BLOCK_PROTECTOR",
-                new ResearchPage("gadomancy.research_page.BLOCK_PROTECTOR.4"));
-        TCHelper.setResearchAspects(
-                "GADOMANCY.BLOCK_PROTECTOR",
-                new AspectList().add(Aspect.getAspect("cognitio"), 21).add(Aspect.getAspect("bestia"), 18)
-                        .add(Aspect.getAspect("terra"), 15).add(Aspect.getAspect("ordo"), 12)
-                        .add(Aspect.getAspect("auram"), 9).add(Aspect.getAspect("lux"), 6)
-                        .add(Aspect.getAspect("tutamen"), 3));
-        TCHelper.setResearchComplexity("GADOMANCY.BLOCK_PROTECTOR", 3);
+        if (TTML) {
+            TCHelper.clearPages("GADOMANCY.BLOCK_PROTECTOR");
+            TCHelper.addResearchPage(
+                    "GADOMANCY.BLOCK_PROTECTOR",
+                    new ResearchPage("gadomancy.research_page.BLOCK_PROTECTOR.1"));
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                    "GADOMANCY.BLOCK_PROTECTOR",
+                    getModItem(Gadomancy.ID, "BlockStoneMachine", 1, 2, missing),
+                    new AspectList().add(Aspect.getAspect("terra"), 150).add(Aspect.getAspect("ordo"), 150),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Minecraft.ID, "potion", 1, 8264, missing),
+                    'b',
+                    getModItem(ThaumicTinkerer.ID, "brightNitor", 1, 0, missing),
+                    'c',
+                    getModItem(Minecraft.ID, "potion", 1, 8264, missing),
+                    'd',
+                    getModItem(Thaumcraft.ID, "blockTube", 1, 0, missing),
+                    'e',
+                    getModItem(Thaumcraft.ID, "blockJar", 1, 0, missing),
+                    'f',
+                    getModItem(Thaumcraft.ID, "blockTube", 1, 0, missing),
+                    'g',
+                    getModItem(Thaumcraft.ID, "blockMagicalLog", 1, 0, missing),
+                    'h',
+                    getModItem(Thaumcraft.ID, "blockMetalDevice", 1, 0, missing),
+                    'i',
+                    getModItem(Thaumcraft.ID, "blockMagicalLog", 1, 0, missing));
+            TCHelper.addResearchPage(
+                    "GADOMANCY.BLOCK_PROTECTOR",
+                    new ResearchPage(
+                            TCHelper.findArcaneRecipe(getModItem(Gadomancy.ID, "BlockStoneMachine", 1, 2, missing))));
+            TCHelper.addResearchPage(
+                    "GADOMANCY.BLOCK_PROTECTOR",
+                    new ResearchPage("gadomancy.research_page.BLOCK_PROTECTOR.3"));
+            TCHelper.addResearchPage(
+                    "GADOMANCY.BLOCK_PROTECTOR",
+                    new ResearchPage("gadomancy.research_page.BLOCK_PROTECTOR.4"));
+            TCHelper.setResearchAspects(
+                    "GADOMANCY.BLOCK_PROTECTOR",
+                    new AspectList().add(Aspect.getAspect("cognitio"), 21).add(Aspect.getAspect("bestia"), 18)
+                            .add(Aspect.getAspect("terra"), 15).add(Aspect.getAspect("ordo"), 12)
+                            .add(Aspect.getAspect("auram"), 9).add(Aspect.getAspect("lux"), 6)
+                            .add(Aspect.getAspect("tutamen"), 3));
+            TCHelper.setResearchComplexity("GADOMANCY.BLOCK_PROTECTOR", 3);
+        }
         ThaumcraftApi.addArcaneCraftingRecipe(
                 "GADOMANCY.E_PORTAL_CREATOR",
                 getModItem(Gadomancy.ID, "BlockStoneMachine", 1, 1, missing),

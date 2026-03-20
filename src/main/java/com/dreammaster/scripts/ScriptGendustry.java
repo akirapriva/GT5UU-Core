@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.ExtraBees;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.Gendustry;
@@ -38,7 +39,7 @@ public class ScriptGendustry implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(ExtraBees.ID, Forestry.ID, Gendustry.ID, IndustrialCraft2.ID, IronTanks.ID);
+        return Arrays.asList(Forestry.ID, Gendustry.ID);
     }
 
     @Override
@@ -156,17 +157,19 @@ public class ScriptGendustry implements IScriptLoader {
                 "batteryBasic",
                 "plateStainlessSteel");
         if (Gregtech.general.GTBees) {
-            addShapedRecipe(
-                    getModItem(Gendustry.ID, "ClimateModule", 1, 0, missing),
-                    GTBees.combs.getStackForType(CombType.IRIDIUM),
-                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                    GTBees.combs.getStackForType(CombType.URANIUM),
-                    "stickPalladium",
-                    "rotorOsmium",
-                    "stickPalladium",
-                    NHItemList.IridiumAlloyItemCasing.get(),
-                    ItemList.Electric_Motor_LuV.get(1L),
-                    NHItemList.IridiumAlloyItemCasing.get());
+            if (ICML) {
+                addShapedRecipe(
+                        getModItem(Gendustry.ID, "ClimateModule", 1, 0, missing),
+                        GTBees.combs.getStackForType(CombType.IRIDIUM),
+                        getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                        GTBees.combs.getStackForType(CombType.URANIUM),
+                        "stickPalladium",
+                        "rotorOsmium",
+                        "stickPalladium",
+                        NHItemList.IridiumAlloyItemCasing.get(),
+                        ItemList.Electric_Motor_LuV.get(1L),
+                        NHItemList.IridiumAlloyItemCasing.get());
+            }
         }
 
         ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
@@ -201,37 +204,39 @@ public class ScriptGendustry implements IScriptLoader {
                 'j',
                 ItemList.Electric_Motor_ZPM.get(1L));
         if (Gregtech.general.GTBees) {
-            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                    getModItem(Gendustry.ID, "Mutatron", 1, 0, missing),
-                    "---------",
-                    "---------",
-                    "--abcba--",
-                    "--defed--",
-                    "--ghihg--",
-                    "--defed--",
-                    "--abjba--",
-                    "---------",
-                    "---------",
-                    'a',
-                    ItemList.Casing_HeatProof.get(1L),
-                    'b',
-                    getModItem(ExtraBees.ID, "alveary", 1, 5, missing),
-                    'c',
-                    getModItem(Forestry.ID, "factory", 1, 2, missing),
-                    'd',
-                    GTBees.combs.getStackForType(CombType.NAQUADAH),
-                    'e',
-                    ItemList.Robot_Arm_LuV.get(1L),
-                    'f',
-                    getModItem(Gendustry.ID, "MutagenTank", 1, 0, missing),
-                    'g',
-                    MaterialsElements.getInstance().RUTHENIUM.getPlate(1),
-                    'h',
-                    getModItem(ExtraBees.ID, "alveary", 1, 6, missing),
-                    'i',
-                    getModItem(Forestry.ID, "hardenedMachine", 1, 0, missing),
-                    'j',
-                    getModItem(Forestry.ID, "factory", 1, 5, missing));
+            if (EXML) {
+                ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                        getModItem(Gendustry.ID, "Mutatron", 1, 0, missing),
+                        "---------",
+                        "---------",
+                        "--abcba--",
+                        "--defed--",
+                        "--ghihg--",
+                        "--defed--",
+                        "--abjba--",
+                        "---------",
+                        "---------",
+                        'a',
+                        ItemList.Casing_HeatProof.get(1L),
+                        'b',
+                        getModItem(ExtraBees.ID, "alveary", 1, 5, missing),
+                        'c',
+                        getModItem(Forestry.ID, "factory", 1, 2, missing),
+                        'd',
+                        GTBees.combs.getStackForType(CombType.NAQUADAH),
+                        'e',
+                        ItemList.Robot_Arm_LuV.get(1L),
+                        'f',
+                        getModItem(Gendustry.ID, "MutagenTank", 1, 0, missing),
+                        'g',
+                        MaterialsElements.getInstance().RUTHENIUM.getPlate(1),
+                        'h',
+                        getModItem(ExtraBees.ID, "alveary", 1, 6, missing),
+                        'i',
+                        getModItem(Forestry.ID, "hardenedMachine", 1, 0, missing),
+                        'j',
+                        getModItem(Forestry.ID, "factory", 1, 5, missing));
+            }
             ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
                     getModItem(Gendustry.ID, "MutatronAdv", 1, 0, missing),
                     "---------",
@@ -298,13 +303,15 @@ public class ScriptGendustry implements IScriptLoader {
                 .itemOutputs(getModItem(Gendustry.ID, "GeneTemplate", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.redstone", 576)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IronTanks.ID, "diamondTank", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Palladium, 1L))
-                .itemOutputs(getModItem(Gendustry.ID, "MutagenTank", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.plutonium", 576)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
+        if (ITML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IronTanks.ID, "diamondTank", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plateDouble, Materials.Palladium, 1L))
+                    .itemOutputs(getModItem(Gendustry.ID, "MutagenTank", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.plutonium", 576)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         NHItemList.GeneticCircuit.get(1),
@@ -318,24 +325,26 @@ public class ScriptGendustry implements IScriptLoader {
                 .itemOutputs(getModItem(Gendustry.ID, "EnvProcessor", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("liquiddna", 500)).duration(20 * SECONDS).eut(TierEU.RECIPE_EV)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 1L),
-                        getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 3, missing))
-                .itemOutputs(getModItem(Gendustry.ID, "EjectCover", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 1L),
-                        getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 6, missing))
-                .itemOutputs(getModItem(Gendustry.ID, "ImportCover", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 1L),
-                        getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 5, missing))
-                .itemOutputs(getModItem(Gendustry.ID, "ErrorSensorCover", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 1L),
+                            getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 3, missing))
+                    .itemOutputs(getModItem(Gendustry.ID, "EjectCover", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 1L),
+                            getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 6, missing))
+                    .itemOutputs(getModItem(Gendustry.ID, "ImportCover", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Palladium, 1L),
+                            getModItem(IndustrialCraft2.ID, "upgradeModule", 1, 5, missing))
+                    .itemOutputs(getModItem(Gendustry.ID, "ErrorSensorCover", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
+        }
 
     }
 }

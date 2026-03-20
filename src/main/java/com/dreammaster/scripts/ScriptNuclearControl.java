@@ -34,7 +34,7 @@ public class ScriptNuclearControl implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(AppliedEnergistics2.ID, IC2NuclearControl.ID, IndustrialCraft2.ID);
+        return Arrays.asList(IC2NuclearControl.ID, IndustrialCraft2.ID);
     }
 
     @Override
@@ -229,17 +229,19 @@ public class ScriptNuclearControl implements IScriptLoader {
                 "dyeBlack",
                 "dyeCyan",
                 "dyeBlue");
-        addShapedRecipe(
-                getModItem(IC2NuclearControl.ID, "networkLink", 1, 0, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 23, missing),
-                ItemList.Cover_Screen.get(1L),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 23, missing),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 0, missing),
-                ItemList.Casing_SolidSteel.get(1L),
-                getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 0, missing),
-                "plateAluminium",
-                getModItem(Minecraft.ID, "comparator", 1, 0, missing),
-                "plateAluminium");
+        if (AEML) {
+            addShapedRecipe(
+                    getModItem(IC2NuclearControl.ID, "networkLink", 1, 0, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 23, missing),
+                    ItemList.Cover_Screen.get(1L),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 23, missing),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 0, missing),
+                    ItemList.Casing_SolidSteel.get(1L),
+                    getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 0, missing),
+                    "plateAluminium",
+                    getModItem(Minecraft.ID, "comparator", 1, 0, missing),
+                    "plateAluminium");
+        }
         addShapedRecipe(
                 getModItem(IC2NuclearControl.ID, "remoteMonitor", 1, 0, missing),
                 "cableGt01Tin",
@@ -282,12 +284,14 @@ public class ScriptNuclearControl implements IScriptLoader {
                         getModItem(IndustrialCraft2.ID, "itemFreq", 1, 0, missing))
                 .itemOutputs(getModItem(IC2NuclearControl.ID, "ItemMultipleSensorKit", 1, 2, missing))
                 .duration(80 * SECONDS).eut(2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder() // Applied Energistics Monitor Kit
-                .itemInputs(
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 400, missing),
-                        getModItem(IndustrialCraft2.ID, "itemFreq", 1, 0, missing))
-                .itemOutputs(getModItem(IC2NuclearControl.ID, "KitAppeng", 1, 0, missing)).duration(140 * SECONDS)
-                .eut(2).addTo(assemblerRecipes);
+        if (AEML) {
+            GTValues.RA.stdBuilder() // Applied Energistics Monitor Kit
+                    .itemInputs(
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 400, missing),
+                            getModItem(IndustrialCraft2.ID, "itemFreq", 1, 0, missing))
+                    .itemOutputs(getModItem(IC2NuclearControl.ID, "KitAppeng", 1, 0, missing)).duration(140 * SECONDS)
+                    .eut(2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder() // Time Card
                 .itemInputs(
                         getModItem(Minecraft.ID, "clock", 1, 0, missing),

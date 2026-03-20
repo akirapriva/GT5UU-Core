@@ -1,10 +1,8 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static goodgenerator.api.recipe.GoodGeneratorRecipeMaps.preciseAssemblerRecipes;
-import static gregtech.api.enums.Mods.AE2FluidCraft;
-import static gregtech.api.enums.Mods.AppliedEnergistics2;
-import static gregtech.api.enums.Mods.OpenComputers;
-import static gregtech.api.enums.Mods.UniversalSingularities;
+import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.formingPressRecipes;
 import static gregtech.api.recipe.RecipeMaps.laserEngraverRecipes;
@@ -64,7 +62,7 @@ public class ScriptNanochipRecipes implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(AE2FluidCraft.ID, AppliedEnergistics2.ID, OpenComputers.ID, UniversalSingularities.ID);
+        return Arrays.asList(TecTech.ID);
     }
 
     @Override
@@ -83,47 +81,53 @@ public class ScriptNanochipRecipes implements IScriptLoader {
 
         registerAssemblyMatrixRecipes();
 
-        // Nanochip Firewall Projection Casing
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                ItemList.ReinforcementNanochipCasing.get(1),
-                16777216,
-                4096,
-                (int) TierEU.RECIPE_UHV,
-                4,
-                new Object[] { ItemList.ReinforcementNanochipCasing.get(1), ItemList.MobRep_UV.get(4),
-                        GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.SuperconductorUHVBase, 2),
-                        GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.TengamAttuned, 8),
-                        ItemList.Emitter_UEV.get(2), ItemList.Sensor_UEV.get(2),
-                        getModItem(UniversalSingularities.ID, "universal.general.singularity", 1, 24), // Nether Star
-                                                                                                       // Singularity
-                        ItemList.Field_Generator_UHV.get(1) },
-                new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(128 * INGOTS),
-                        WerkstoffLoader.Oganesson.getFluidOrGas(16000),
-                        Materials.SuperconductorUEVBase.getMolten(16 * INGOTS),
-                        Materials.RadoxPolymer.getMolten(4 * INGOTS) },
-                ItemList.FirewallProjectionNanochipCasing.get(1),
-                120 * SECONDS,
-                (int) TierEU.RECIPE_UEV);
+        if (USML) {
+            // Nanochip Firewall Projection Casing
+            TTRecipeAdder.addResearchableAssemblylineRecipe(
+                    ItemList.ReinforcementNanochipCasing.get(1),
+                    16777216,
+                    4096,
+                    (int) TierEU.RECIPE_UHV,
+                    4,
+                    new Object[] { ItemList.ReinforcementNanochipCasing.get(1), ItemList.MobRep_UV.get(4),
+                            GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.SuperconductorUHVBase, 2),
+                            GTOreDictUnificator.get(OrePrefixes.plateSuperdense, Materials.TengamAttuned, 8),
+                            ItemList.Emitter_UEV.get(2), ItemList.Sensor_UEV.get(2),
+                            getModItem(UniversalSingularities.ID, "universal.general.singularity", 1, 24), // Nether
+                                                                                                           // Star
+                            // Singularity
+                            ItemList.Field_Generator_UHV.get(1) },
+                    new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(128 * INGOTS),
+                            WerkstoffLoader.Oganesson.getFluidOrGas(16000),
+                            Materials.SuperconductorUEVBase.getMolten(16 * INGOTS),
+                            Materials.RadoxPolymer.getMolten(4 * INGOTS) },
+                    ItemList.FirewallProjectionNanochipCasing.get(1),
+                    120 * SECONDS,
+                    (int) TierEU.RECIPE_UEV);
+        }
 
         // Nanochip Computational Matrix Casing
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                ItemList.MeshInterfaceNanochipCasing.get(1),
-                16777216,
-                4096,
-                (int) TierEU.RECIPE_UHV,
-                4,
-                new Object[] { ItemList.MeshInterfaceNanochipCasing.get(4), CustomItemList.rack_Hatch.get(1),
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 60), // 16384k Item Component
-                        getModItem(AE2FluidCraft.ID, "fluid_part", 1, 7), // 16384k Fluid Component
-                        getModItem(OpenComputers.ID, "item", 1, 69), // Server Tier 4
-                        ItemList.Optically_Perfected_CPU.get(2), ItemList.Optically_Compatible_Memory.get(2),
-                        CustomItemList.DATApipe.get(16) },
-                new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(16 * INGOTS),
-                        Materials.Xenoxene.getFluid(16 * INGOTS), Materials.TengamPurified.getMolten(16 * INGOTS), },
-                ItemList.ComputationalMatrixNanochipCasing.get(4),
-                60 * SECONDS,
-                (int) TierEU.RECIPE_UHV);
-
+        if (AEFCML && OML) {
+            TTRecipeAdder.addResearchableAssemblylineRecipe(
+                    ItemList.MeshInterfaceNanochipCasing.get(1),
+                    16777216,
+                    4096,
+                    (int) TierEU.RECIPE_UHV,
+                    4,
+                    new Object[] { ItemList.MeshInterfaceNanochipCasing.get(4), CustomItemList.rack_Hatch.get(1),
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiMaterial", 1, 60), // 16384k Item
+                                                                                                 // Component
+                            getModItem(AE2FluidCraft.ID, "fluid_part", 1, 7), // 16384k Fluid Component
+                            getModItem(OpenComputers.ID, "item", 1, 69), // Server Tier 4
+                            ItemList.Optically_Perfected_CPU.get(2), ItemList.Optically_Compatible_Memory.get(2),
+                            CustomItemList.DATApipe.get(16) },
+                    new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(16 * INGOTS),
+                            Materials.Xenoxene.getFluid(16 * INGOTS),
+                            Materials.TengamPurified.getMolten(16 * INGOTS), },
+                    ItemList.ComputationalMatrixNanochipCasing.get(4),
+                    60 * SECONDS,
+                    (int) TierEU.RECIPE_UHV);
+        }
         // Nanochip Complex Glass
         GTValues.RA.stdBuilder()
                 .itemInputs(
@@ -198,30 +202,34 @@ public class ScriptNanochipRecipes implements IScriptLoader {
                 .itemOutputs(ItemList.Hatch_Splitter_Level.get(1)).duration(15 * SECONDS).eut(TierEU.RECIPE_UHV)
                 .addTo(assemblerRecipes);
 
-        // Nanochip Assembly Complex
-        TTRecipeAdder.addResearchableAssemblylineRecipe(
-                ItemList.Optically_Perfected_CPU.get(1),
-                16777216,
-                4096,
-                (int) TierEU.RECIPE_UHV,
-                4,
-                new Object[] { GTUtility.copyAmount(64, ItemRegistry.cal), CustomItemList.Machine_Multi_Computer.get(8),
-                        CustomItemList.Machine_Multi_Research.get(8), CustomItemList.Machine_Multi_DataBank.get(8),
-                        ItemList.MeshInterfaceNanochipCasing.get(16), ItemList.ReinforcementNanochipCasing.get(16),
-                        ItemList.ComputationalMatrixNanochipCasing.get(8),
-                        ItemList.FirewallProjectionNanochipCasing.get(4),
-                        new Object[] { OrePrefixes.circuit.get(Materials.UEV), 8 },
-                        new Object[] { OrePrefixes.circuit.get(Materials.UHV), 16 },
-                        new Object[] { OrePrefixes.circuit.get(Materials.UV), 32 }, ItemList.ZPM2.get(1),
-                        ItemList.Sensor_UEV.get(4), ItemList.Emitter_UEV.get(4),
-                        getModItem(OpenComputers.ID, "screen3", 1, 0), getModItem(OpenComputers.ID, "keyboard", 1, 0) },
-                new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(256 * INGOTS),
-                        new FluidStack(MaterialsElements.STANDALONE.CELESTIAL_TUNGSTEN.getPlasma(), 64 * INGOTS),
-                        Materials.Americium.getPlasma(64 * INGOTS),
-                        new FluidStack(MaterialsElements.STANDALONE.ASTRAL_TITANIUM.getPlasma(), 64 * INGOTS) },
-                ItemList.Machine_Multi_NanochipAssemblyComplex.get(1),
-                120 * SECONDS,
-                (int) TierEU.RECIPE_UIV);
+        if (OML) {
+            // Nanochip Assembly Complex
+            TTRecipeAdder.addResearchableAssemblylineRecipe(
+                    ItemList.Optically_Perfected_CPU.get(1),
+                    16777216,
+                    4096,
+                    (int) TierEU.RECIPE_UHV,
+                    4,
+                    new Object[] { GTUtility.copyAmount(64, ItemRegistry.cal),
+                            CustomItemList.Machine_Multi_Computer.get(8), CustomItemList.Machine_Multi_Research.get(8),
+                            CustomItemList.Machine_Multi_DataBank.get(8), ItemList.MeshInterfaceNanochipCasing.get(16),
+                            ItemList.ReinforcementNanochipCasing.get(16),
+                            ItemList.ComputationalMatrixNanochipCasing.get(8),
+                            ItemList.FirewallProjectionNanochipCasing.get(4),
+                            new Object[] { OrePrefixes.circuit.get(Materials.UEV), 8 },
+                            new Object[] { OrePrefixes.circuit.get(Materials.UHV), 16 },
+                            new Object[] { OrePrefixes.circuit.get(Materials.UV), 32 }, ItemList.ZPM2.get(1),
+                            ItemList.Sensor_UEV.get(4), ItemList.Emitter_UEV.get(4),
+                            getModItem(OpenComputers.ID, "screen3", 1, 0),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0) },
+                    new FluidStack[] { MaterialMisc.MUTATED_LIVING_SOLDER.getFluidStack(256 * INGOTS),
+                            new FluidStack(MaterialsElements.STANDALONE.CELESTIAL_TUNGSTEN.getPlasma(), 64 * INGOTS),
+                            Materials.Americium.getPlasma(64 * INGOTS),
+                            new FluidStack(MaterialsElements.STANDALONE.ASTRAL_TITANIUM.getPlasma(), 64 * INGOTS) },
+                    ItemList.Machine_Multi_NanochipAssemblyComplex.get(1),
+                    120 * SECONDS,
+                    (int) TierEU.RECIPE_UIV);
+        }
 
         // Assembly Matrix
         GTValues.RA.stdBuilder()

@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.*;
 import static gregtech.api.recipe.RecipeMaps.centrifugeRecipes;
 import static gregtech.api.recipe.RecipeMaps.extractorRecipes;
@@ -40,7 +41,7 @@ public class ScriptHarvestcraft implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(ExtraTrees.ID, Forestry.ID, PamsHarvestCraft.ID);
+        return Arrays.asList(PamsHarvestCraft.ID);
     }
 
     @Override
@@ -757,9 +758,11 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(Minecraft.ID, "apple", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "applejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 0, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "applejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 0, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "applejuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(Minecraft.ID, "melon", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "melonjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -780,9 +783,11 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "grapeItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "grapejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 45, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 45, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "blueberryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
@@ -791,18 +796,24 @@ public class ScriptHarvestcraft implements IScriptLoader {
                     .itemOutputs(getModItem(PamsHarvestCraft.ID, "blueberryjuiceItem", 1, 0, missing))
                     .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
         }
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 5, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherryjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 5, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "cherryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherryjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 0, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherryjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 43, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberryjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (FML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 0, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 43, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "blackberryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
@@ -814,67 +825,83 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "raspberryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 44, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 44, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         if (Natura.isModLoaded()) {
             GTValues.RA.stdBuilder().itemInputs(getModItem(Natura.ID, "berry", 1, 0, missing))
                     .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberryjuiceItem", 1, 0, missing))
                     .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
         }
-        GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 6, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "papayajuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (FML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 6, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "papayajuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "papayaItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "papayajuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 58, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "starfruitjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 58, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "starfruitjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "starfruitItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "starfruitjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "pomegranateItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "pomegranatejuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 57, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "mangojuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 57, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "mangojuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "mangoItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "mangojuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "limeItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "limejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 3, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "limejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 17, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "limejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 3, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "limejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 17, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "limejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "orangeItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 1, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangejuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 1, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangejuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         if (BiomesOPlenty.isModLoaded()) {
             GTValues.RA.stdBuilder().itemInputs(getModItem(BiomesOPlenty.ID, "food", 1, 3, missing))
                     .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachjuiceItem", 1, 0, missing))
                     .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
         }
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 12, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 12, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "peachItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "kiwiItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "kiwijuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 46, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "cranberryjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 46, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "cranberryjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "cranberryItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "cranberryjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
@@ -884,12 +911,16 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "plumItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 8, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 4, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 8, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+        }
+        if (FML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 4, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "pearItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -898,15 +929,17 @@ public class ScriptHarvestcraft implements IScriptLoader {
                     .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                     .eut(2).addTo(extractorRecipes);
         }
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 22, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 23, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 10, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "apricotjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 22, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 23, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 10, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "apricotjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "apricotItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "apricotjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -918,21 +951,27 @@ public class ScriptHarvestcraft implements IScriptLoader {
                     .itemOutputs(getModItem(PamsHarvestCraft.ID, "persimmonjuiceItem", 1, 0, missing))
                     .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
         }
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 11, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "grapefruitjuiceItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 11, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "grapefruitjuiceItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "grapefruitItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "grapefruitjuiceItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 32, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "figjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 32, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "figjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "figItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "figjuiceItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 35, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "oliveoilItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 35, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "oliveoilItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "oliveItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "oliveoilItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -942,9 +981,11 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "walnutItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "oliveoilItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 1, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "oliveoilItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (FML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 1, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "oliveoilItem", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "waxcombItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "beeswaxItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
@@ -969,21 +1010,27 @@ public class ScriptHarvestcraft implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "almondItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "almondbutterItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 9, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "almondbutterItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 9, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "almondbutterItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "cashewItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "cashewbutterItem", 1, 0, missing)).duration(15 * SECONDS)
                 .eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 51, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "cashewbutterItem", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(2).addTo(extractorRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(ExtraTrees.ID, "food", 1, 51, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "cashewbutterItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "chestnutItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "chestnutbutterItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 2, missing))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "chestnutbutterItem", 1, 0, missing))
-                .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        if (FML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(Forestry.ID, "fruits", 1, 2, missing))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "chestnutbutterItem", 1, 0, missing))
+                    .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(PamsHarvestCraft.ID, "pistachioItem", 1, 0, missing))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "pistachiobutterItem", 1, 0, missing))
                 .duration(15 * SECONDS).eut(2).addTo(extractorRecipes);
@@ -1068,24 +1115,26 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherrysmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 4, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 5, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 6, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 4, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 5, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 6, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "cherrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "starfruitItem", 1, 0, missing),
@@ -1098,72 +1147,80 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "bananasmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 28, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "bananasmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 29, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "bananasmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 28, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "bananasmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 29, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "bananasmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "orangeItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 1, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 18, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 13, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 21, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 1, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 18, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 13, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 21, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "orangesmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "papayaItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "papayasmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "fruits", 1, 6, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "papayasmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Forestry.ID, "fruits", 1, 6, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "papayasmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "peachItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 12, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 12, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "peachsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         if (BiomesOPlenty.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1178,36 +1235,40 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "limesmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 3, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "limesmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 17, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "limesmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 16, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "limesmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 3, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "limesmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 17, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "limesmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 16, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "limesmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "mangoItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "mangosmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 57, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "mangosmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 57, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "mangosmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "pomegranateItem", 1, 0, missing),
@@ -1228,12 +1289,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                     .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberrysmoothieItem", 1, 0, missing))
                     .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 43, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 43, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "blackberrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "raspberryItem", 1, 0, missing),
@@ -1248,12 +1311,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                     .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberrysmoothieItem", 1, 0, missing))
                     .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 44, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 44, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "raspberrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "kiwiItem", 1, 0, missing),
@@ -1266,24 +1331,28 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "apricotsmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 10, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "apricotsmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 10, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "apricotsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "grapefruitItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "grapefruitsmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 11, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "grapefruitsmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 11, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "grapefruitsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "persimmonItem", 1, 0, missing),
@@ -1304,48 +1373,56 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "gooseberrysmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 48, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "gooseberrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 48, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "gooseberrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "apple", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "applesmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "applesmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "applesmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "coconutItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "coconutsmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 50, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "coconutsmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 50, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "coconutsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "cranberryItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "cranberrysmoothieItem", 1, 0, missing))
                 .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 46, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "cranberrysmoothieItem", 1, 0, missing))
-                .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 46, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "cranberrysmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "grapeItem", 1, 0, missing),
@@ -1364,12 +1441,14 @@ public class ScriptHarvestcraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 22, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 22, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         if (BiomesOPlenty.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1378,42 +1457,50 @@ public class ScriptHarvestcraft implements IScriptLoader {
                     .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing))
                     .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 23, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 23, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "pearsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "plumItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "fruits", 1, 4, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 8, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Forestry.ID, "fruits", 1, 4, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 8, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "plumsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "figItem", 1, 0, missing),
                         GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
                 .itemOutputs(getModItem(PamsHarvestCraft.ID, "figsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
                 .eut(2).addTo(mixerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "food", 1, 32, missing),
-                        GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
-                .itemOutputs(getModItem(PamsHarvestCraft.ID, "figsmoothieItem", 1, 0, missing)).duration(20 * SECONDS)
-                .eut(2).addTo(mixerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "food", 1, 32, missing),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ice, 1L))
+                    .itemOutputs(getModItem(PamsHarvestCraft.ID, "figsmoothieItem", 1, 0, missing))
+                    .duration(20 * SECONDS).eut(2).addTo(mixerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(PamsHarvestCraft.ID, "oliveoilItem", 1, 0, missing),

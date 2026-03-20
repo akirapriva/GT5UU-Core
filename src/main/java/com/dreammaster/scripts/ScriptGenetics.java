@@ -1,12 +1,12 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.Botany;
 import static gregtech.api.enums.Mods.BuildCraftFactory;
 import static gregtech.api.enums.Mods.ExtraBees;
 import static gregtech.api.enums.Mods.ExtraTrees;
 import static gregtech.api.enums.Mods.Forestry;
 import static gregtech.api.enums.Mods.Genetics;
-import static gregtech.api.enums.Mods.IndustrialCraft2;
 import static gregtech.api.enums.Mods.Minecraft;
 import static gregtech.api.recipe.RecipeMaps.assemblerRecipes;
 import static gregtech.api.recipe.RecipeMaps.mixerRecipes;
@@ -39,14 +39,7 @@ public class ScriptGenetics implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Botany.ID,
-                BuildCraftFactory.ID,
-                ExtraBees.ID,
-                ExtraTrees.ID,
-                Forestry.ID,
-                Genetics.ID,
-                IndustrialCraft2.ID);
+        return Arrays.asList(Botany.ID, ExtraBees.ID, ExtraTrees.ID, Forestry.ID, Genetics.ID);
     }
 
     @Override
@@ -120,28 +113,30 @@ public class ScriptGenetics implements IScriptLoader {
                 "gearGtSmallStainlessSteel",
                 ItemList.Electric_Motor_MV.get(1L),
                 "gearGtSmallStainlessSteel");
-        addShapedRecipe(
-                getModItem(Genetics.ID, "labMachine", 1, 2, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "craftingIronFurnace",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(Genetics.ID, "misc", 1, 9, missing),
-                getModItem(Genetics.ID, "misc", 1, 0, missing),
-                getModItem(Genetics.ID, "misc", 1, 9, missing),
-                "gearGtSmallStainlessSteel",
-                ItemList.Electric_Motor_MV.get(1L),
-                "gearGtSmallStainlessSteel");
-        addShapedRecipe(
-                getModItem(Genetics.ID, "labMachine", 1, 3, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "chestIron",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(Genetics.ID, "misc", 1, 9, missing),
-                getModItem(Genetics.ID, "misc", 1, 0, missing),
-                getModItem(Genetics.ID, "misc", 1, 9, missing),
-                "gearGtSmallStainlessSteel",
-                ItemList.Electric_Motor_MV.get(1L),
-                "gearGtSmallStainlessSteel");
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(Genetics.ID, "labMachine", 1, 2, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "craftingIronFurnace",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    getModItem(Genetics.ID, "misc", 1, 9, missing),
+                    getModItem(Genetics.ID, "misc", 1, 0, missing),
+                    getModItem(Genetics.ID, "misc", 1, 9, missing),
+                    "gearGtSmallStainlessSteel",
+                    ItemList.Electric_Motor_MV.get(1L),
+                    "gearGtSmallStainlessSteel");
+            addShapedRecipe(
+                    getModItem(Genetics.ID, "labMachine", 1, 3, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "chestIron",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    getModItem(Genetics.ID, "misc", 1, 9, missing),
+                    getModItem(Genetics.ID, "misc", 1, 0, missing),
+                    getModItem(Genetics.ID, "misc", 1, 9, missing),
+                    "gearGtSmallStainlessSteel",
+                    ItemList.Electric_Motor_MV.get(1L),
+                    "gearGtSmallStainlessSteel");
+        }
         addShapedRecipe(
                 getModItem(Genetics.ID, "labMachine", 1, 4, missing),
                 "bucketWater",

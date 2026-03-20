@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.BuildCraftBuilders;
 import static gregtech.api.enums.Mods.GalacticraftCore;
 import static gregtech.api.enums.Mods.GalacticraftMars;
@@ -55,13 +56,7 @@ public class ScriptGalaxySpace implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                BuildCraftBuilders.ID,
-                GalacticraftCore.ID,
-                GalacticraftMars.ID,
-                GalaxySpace.ID,
-                IndustrialCraft2.ID,
-                OpenComputers.ID);
+        return Arrays.asList(GalacticraftCore.ID, GalacticraftMars.ID, GalaxySpace.ID);
     }
 
     @Override
@@ -115,139 +110,143 @@ public class ScriptGalaxySpace implements IScriptLoader {
                 .itemOutputs(getGSItem("item.spacesuit_helmetglasses", 1, 0))
                 .fluidInputs(Materials.Duralumin.getMolten(1440)).duration(30 * SECONDS).eut(TierEU.RECIPE_EV)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getGSItem("item.spacesuit_plate", 1, 0),
-                        getModItem(IndustrialCraft2.ID, "itemArmorJetpackElectric", 1, WILDCARD, missing))
-                .itemOutputs(getGSItem("item.spacesuit_jetplate", 1, 0))
-                .fluidInputs(Materials.Duralumin.getMolten(1440)).duration(30 * SECONDS).eut(TierEU.RECIPE_EV)
-                .addTo(assemblerRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getGSItem("item.spacesuit_plate", 1, 0),
+                            getModItem(IndustrialCraft2.ID, "itemArmorJetpackElectric", 1, WILDCARD, missing))
+                    .itemOutputs(getGSItem("item.spacesuit_jetplate", 1, 0))
+                    .fluidInputs(Materials.Duralumin.getMolten(1440)).duration(30 * SECONDS).eut(TierEU.RECIPE_EV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(
                 getGSItem("item.spacesuit_boots", 1, 0),
                 // Compressed Magnesium
                 getGSItem("item.CompressedPlates", 2, 4)).itemOutputs(getGSItem("item.spacesuit_gravityboots", 1, 0))
                 .fluidInputs(Materials.Duralumin.getMolten(1440)).duration(30 * SECONDS).eut(TierEU.RECIPE_EV)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case1", 1, 0, missing),
-                        getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
-                        NHItemList.Display.get(),
-                        ItemList.Emitter_HV.get(1),
-                        ItemList.Sensor_HV.get(1),
-                        new ItemStack(GCItems.heavyPlatingTier1))
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 1))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(576)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case1", 1, 0, missing),
-                        getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
-                        NHItemList.Display.get(),
-                        ItemList.Field_Generator_EV.get(2),
-                        new ItemStack(MarsItems.marsItemBasic, 1, 3))
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 2))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(864)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case1", 1, 0, missing),
-                        getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
-                        NHItemList.Display.get(),
-                        ItemList.Emitter_IV.get(1),
-                        ItemList.Sensor_IV.get(1),
-                        new ItemStack(AsteroidsItems.basicItem))
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 3))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(1152)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_IV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case2", 1, 0, missing),
-                        getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
-                        NHItemList.Display.get(),
-                        ItemList.Emitter_IV.get(1),
-                        ItemList.Sensor_IV.get(1),
-                        NHItemList.HeavyDutyPlateTier4.get())
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 4))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(1728)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_IV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case2", 1, 0, missing),
-                        getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
-                        NHItemList.Display.get(),
-                        ItemList.Emitter_LuV.get(1),
-                        ItemList.Sensor_LuV.get(1),
-                        NHItemList.HeavyDutyPlateTier5.get())
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 5))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(2304)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_LuV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case3", 1, 0, missing),
-                        getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
-                        NHItemList.Display.get(),
-                        ItemList.Emitter_ZPM.get(1),
-                        ItemList.Sensor_ZPM.get(1),
-                        NHItemList.HeavyDutyPlateTier6.get())
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 6))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(3456)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_ZPM).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case3", 1, 0, missing),
-                        getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
-                        NHItemList.Display.get(),
-                        ItemList.Emitter_UV.get(1),
-                        ItemList.Sensor_UV.get(1),
-                        NHItemList.HeavyDutyPlateTier7.get())
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 7))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(4608)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_UV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case3", 1, 0, missing),
-                        getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
-                        NHItemList.Display.get(),
-                        ItemList.Emitter_UV.get(1),
-                        ItemList.Sensor_UV.get(1),
-                        NHItemList.HeavyDutyPlateTier8.get())
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 8))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(6912)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_UV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case1", 1, 0, missing),
-                        new ItemStack(GCItems.basicItem, 1, 14),
-                        GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 1),
-                        ItemList.Emitter_HV.get(1),
-                        ItemList.Sensor_HV.get(1),
-                        new ItemStack(GCItems.heavyPlatingTier1))
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 100))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(576)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case1", 1, 0, missing),
-                        new ItemStack(GCItems.basicItem, 1, 14),
-                        GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 1),
-                        ItemList.Emitter_EV.get(1),
-                        ItemList.Sensor_EV.get(1),
-                        new ItemStack(MarsItems.marsItemBasic, 1, 3))
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 101))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(864)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(OpenComputers.ID, "case1", 1, 0, missing),
-                        new ItemStack(GCItems.basicItem, 1, 14),
-                        GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 1),
-                        ItemList.Emitter_IV.get(1),
-                        ItemList.Sensor_IV.get(1),
-                        new ItemStack(AsteroidsItems.basicItem))
-                .itemOutputs(getGSItem("item.RocketControlComputer", 1, 102))
-                .fluidInputs(Materials.SolderingAlloy.getMolten(1152)).requiresCleanRoom().duration(30 * SECONDS)
-                .eut(TierEU.RECIPE_IV).addTo(assemblerRecipes);
+        if (OCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case1", 1, 0, missing),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
+                            NHItemList.Display.get(),
+                            ItemList.Emitter_HV.get(1),
+                            ItemList.Sensor_HV.get(1),
+                            new ItemStack(GCItems.heavyPlatingTier1))
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 1))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(576)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case1", 1, 0, missing),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
+                            NHItemList.Display.get(),
+                            ItemList.Field_Generator_EV.get(2),
+                            new ItemStack(MarsItems.marsItemBasic, 1, 3))
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 2))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(864)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case1", 1, 0, missing),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
+                            NHItemList.Display.get(),
+                            ItemList.Emitter_IV.get(1),
+                            ItemList.Sensor_IV.get(1),
+                            new ItemStack(AsteroidsItems.basicItem))
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 3))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(1152)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_IV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case2", 1, 0, missing),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
+                            NHItemList.Display.get(),
+                            ItemList.Emitter_IV.get(1),
+                            ItemList.Sensor_IV.get(1),
+                            NHItemList.HeavyDutyPlateTier4.get())
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 4))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(1728)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_IV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case2", 1, 0, missing),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
+                            NHItemList.Display.get(),
+                            ItemList.Emitter_LuV.get(1),
+                            ItemList.Sensor_LuV.get(1),
+                            NHItemList.HeavyDutyPlateTier5.get())
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 5))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(2304)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_LuV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case3", 1, 0, missing),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
+                            NHItemList.Display.get(),
+                            ItemList.Emitter_ZPM.get(1),
+                            ItemList.Sensor_ZPM.get(1),
+                            NHItemList.HeavyDutyPlateTier6.get())
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 6))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(3456)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_ZPM).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case3", 1, 0, missing),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
+                            NHItemList.Display.get(),
+                            ItemList.Emitter_UV.get(1),
+                            ItemList.Sensor_UV.get(1),
+                            NHItemList.HeavyDutyPlateTier7.get())
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 7))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(4608)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_UV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case3", 1, 0, missing),
+                            getModItem(OpenComputers.ID, "keyboard", 1, 0, missing),
+                            NHItemList.Display.get(),
+                            ItemList.Emitter_UV.get(1),
+                            ItemList.Sensor_UV.get(1),
+                            NHItemList.HeavyDutyPlateTier8.get())
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 8))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(6912)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_UV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case1", 1, 0, missing),
+                            new ItemStack(GCItems.basicItem, 1, 14),
+                            GTOreDictUnificator.get(OrePrefixes.circuit, Materials.EV, 1),
+                            ItemList.Emitter_HV.get(1),
+                            ItemList.Sensor_HV.get(1),
+                            new ItemStack(GCItems.heavyPlatingTier1))
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 100))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(576)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case1", 1, 0, missing),
+                            new ItemStack(GCItems.basicItem, 1, 14),
+                            GTOreDictUnificator.get(OrePrefixes.circuit, Materials.IV, 1),
+                            ItemList.Emitter_EV.get(1),
+                            ItemList.Sensor_EV.get(1),
+                            new ItemStack(MarsItems.marsItemBasic, 1, 3))
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 101))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(864)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_EV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(OpenComputers.ID, "case1", 1, 0, missing),
+                            new ItemStack(GCItems.basicItem, 1, 14),
+                            GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LuV, 1),
+                            ItemList.Emitter_IV.get(1),
+                            ItemList.Sensor_IV.get(1),
+                            new ItemStack(AsteroidsItems.basicItem))
+                    .itemOutputs(getGSItem("item.RocketControlComputer", 1, 102))
+                    .fluidInputs(Materials.SolderingAlloy.getMolten(1152)).requiresCleanRoom().duration(30 * SECONDS)
+                    .eut(TierEU.RECIPE_IV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         BlockList.NeutroniumPlatedReinforcedStone.get(),
@@ -316,66 +315,68 @@ public class ScriptGalaxySpace implements IScriptLoader {
                 .itemOutputs(getGSItem("plutoglowstone", 1, 0)).duration(15 * SECONDS).eut(2).addTo(compressorRecipes);
 
         // Laser Engraver
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsMoonBuggy.get())
-                .itemOutputs(new ItemStack(GCItems.schematic)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsTier2.get())
-                .itemOutputs(new ItemStack(GCItems.schematic, 1, 1)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsTier3.get())
-                .itemOutputs(new ItemStack(MarsItems.schematic)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsCargoRocket.get())
-                .itemOutputs(new ItemStack(MarsItems.schematic, 1, 1)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsAstroMiner.get())
-                .itemOutputs(new ItemStack(MarsItems.schematic, 1, 2)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsTier4.get())
-                .itemOutputs(getGSItem("item.SchematicTier4", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsTier5.get())
-                .itemOutputs(getGSItem("item.SchematicTier5", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsTier6.get())
-                .itemOutputs(getGSItem("item.SchematicTier6", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsTier7.get())
-                .itemOutputs(getGSItem("item.SchematicTier7", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
-                        NHItemList.SchematicsTier8.get())
-                .itemOutputs(getGSItem("item.SchematicTier8", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+        if (BCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsMoonBuggy.get())
+                    .itemOutputs(new ItemStack(GCItems.schematic)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsTier2.get())
+                    .itemOutputs(new ItemStack(GCItems.schematic, 1, 1)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsTier3.get())
+                    .itemOutputs(new ItemStack(MarsItems.schematic)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsCargoRocket.get())
+                    .itemOutputs(new ItemStack(MarsItems.schematic, 1, 1)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsAstroMiner.get())
+                    .itemOutputs(new ItemStack(MarsItems.schematic, 1, 2)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsTier4.get())
+                    .itemOutputs(getGSItem("item.SchematicTier4", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsTier5.get())
+                    .itemOutputs(getGSItem("item.SchematicTier5", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsTier6.get())
+                    .itemOutputs(getGSItem("item.SchematicTier6", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsTier7.get())
+                    .itemOutputs(getGSItem("item.SchematicTier7", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftBuilders.ID, "blueprintItem", 1, 0, missing),
+                            NHItemList.SchematicsTier8.get())
+                    .itemOutputs(getGSItem("item.SchematicTier8", 1, 0)).requiresCleanRoom().duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(laserEngraverRecipes);
+        }
 
         // Pulverization
         GTValues.RA.stdBuilder().itemInputs(getGSItem("ceresglowstone", 1, 0))

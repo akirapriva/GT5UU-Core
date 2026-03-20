@@ -40,14 +40,7 @@ public class ScriptIndustrialApiary implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Botany.ID,
-                ExtraBees.ID,
-                ExtraUtilities.ID,
-                Forestry.ID,
-                Gendustry.ID,
-                Genetics.ID,
-                ProjectRedIllumination.ID);
+        return Arrays.asList(Botany.ID, ExtraBees.ID, Forestry.ID, Gendustry.ID, Genetics.ID);
     }
 
     @Override
@@ -69,8 +62,6 @@ public class ScriptIndustrialApiary implements IScriptLoader {
         final ItemStack ClimateControlModule = getModItem(Gendustry.ID, "ClimateModule", 1);
         final ItemStack EnvironmentalProcessor = getModItem(Gendustry.ID, "EnvProcessor", 1);
         final Block Grass = Blocks.grass;
-        final ItemStack GlowstoneGlass = getModItem(ExtraUtilities.ID, "decorativeBlock2", 1, 7);
-        final ItemStack ReinforcedDarkGlass = getModItem(ExtraUtilities.ID, "decorativeBlock2", 1, 11);
         final ItemStack BotanyPollen = getModItem(Botany.ID, "pollen", 1, wildcard);
         final ItemStack HardenedIce = getModItem(BiomesOPlenty.ID, "hardIce", 1);
         final ItemStack Sand = new ItemStack(Blocks.sand, 1, wildcard);
@@ -91,7 +82,6 @@ public class ScriptIndustrialApiary implements IScriptLoader {
         final Block Vines = Blocks.vine;
         final String IronPlate = "plateIron";
         final String EnderPearlPlate = "plateEnderPearl";
-        final ItemStack InvertedBlueLamp = getModItem(ProjectRedIllumination.ID, "projectred.illumination.lamp", 1, 27);
         final ItemStack ClearGlassPane = getModItem(TinkerConstruct.ID, "GlassPane", 1);
         final Block Netherrack = Blocks.netherrack;
         final ItemStack WovenSilk = getModItem(Forestry.ID, "craftingMaterial", 1, 3);
@@ -178,30 +168,38 @@ public class ScriptIndustrialApiary implements IScriptLoader {
                 SmallStainlessGear);
 
         // Light Upgrade
-        addShapedRecipe(
-                ItemList.IndustrialApiary_Upgrade_LIGHT.get(1),
-                SmallSteelGear,
-                GlowstoneGlass,
-                SmallSteelGear,
-                GlowstoneGlass,
-                UpgradeFrame,
-                GlowstoneGlass,
-                SmallStainlessGear,
-                GlowstoneGlass,
-                SmallStainlessGear);
+        if (XUML) {
+            final ItemStack GlowstoneGlass = getModItem(ExtraUtilities.ID, "decorativeBlock2", 1, 7);
+            final ItemStack ReinforcedDarkGlass = getModItem(ExtraUtilities.ID, "decorativeBlock2", 1, 11);
+            addShapedRecipe(
+                    ItemList.IndustrialApiary_Upgrade_LIGHT.get(1),
+                    SmallSteelGear,
+                    GlowstoneGlass,
+                    SmallSteelGear,
+                    GlowstoneGlass,
+                    UpgradeFrame,
+                    GlowstoneGlass,
+                    SmallStainlessGear,
+                    GlowstoneGlass,
+                    SmallStainlessGear);
+        }
 
         // Unlight Upgrade
-        addShapedRecipe(
-                ItemList.IndustrialApiary_Upgrade_UNLIGHT.get(1),
-                SmallSteelGear,
-                ReinforcedDarkGlass,
-                SmallSteelGear,
-                ReinforcedDarkGlass,
-                UpgradeFrame,
-                ReinforcedDarkGlass,
-                SmallStainlessGear,
-                ReinforcedDarkGlass,
-                SmallStainlessGear);
+        if (XUML) {
+            final ItemStack GlowstoneGlass = getModItem(ExtraUtilities.ID, "decorativeBlock2", 1, 7);
+            final ItemStack ReinforcedDarkGlass = getModItem(ExtraUtilities.ID, "decorativeBlock2", 1, 11);
+            addShapedRecipe(
+                    ItemList.IndustrialApiary_Upgrade_UNLIGHT.get(1),
+                    SmallSteelGear,
+                    ReinforcedDarkGlass,
+                    SmallSteelGear,
+                    ReinforcedDarkGlass,
+                    UpgradeFrame,
+                    ReinforcedDarkGlass,
+                    SmallStainlessGear,
+                    ReinforcedDarkGlass,
+                    SmallStainlessGear);
+        }
 
         // Flowering Upgrade
         addShapedRecipe(
@@ -402,8 +400,13 @@ public class ScriptIndustrialApiary implements IScriptLoader {
                 EnvironmentalProcessor,
                 SmallStainlessGear);
 
-        if (TCML) {
+        if (TCML && PREDML) {
             // Open Sky Upgrade
+            final ItemStack InvertedBlueLamp = getModItem(
+                    ProjectRedIllumination.ID,
+                    "projectred.illumination.lamp",
+                    1,
+                    27);
             addShapedRecipe(
                     ItemList.IndustrialApiary_Upgrade_SKY.get(1),
                     SmallSteelGear,

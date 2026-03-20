@@ -1,5 +1,6 @@
 package com.dreammaster.scripts;
 
+import static com.dreammaster.scripts.BooleanModLoaded.*;
 import static gregtech.api.enums.Mods.IguanaTweaksTinkerConstruct;
 import static gregtech.api.enums.Mods.Natura;
 import static gregtech.api.util.GTModHandler.getModItem;
@@ -20,7 +21,7 @@ public class ScriptIguanaTweaks implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(IguanaTweaksTinkerConstruct.ID, Natura.ID);
+        return Arrays.asList(IguanaTweaksTinkerConstruct.ID);
     }
 
     @Override
@@ -40,17 +41,19 @@ public class ScriptIguanaTweaks implements IScriptLoader {
                 "dustClay",
                 "dustClay");
 
-        addShapedRecipe(
-                getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketWater", 1),
-                getModItem(Natura.ID, "waterdrop", 1),
-                getModItem(Natura.ID, "waterdrop", 1),
-                getModItem(Natura.ID, "waterdrop", 1),
-                getModItem(Natura.ID, "waterdrop", 1),
-                getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketFired", 1),
-                getModItem(Natura.ID, "waterdrop", 1),
-                getModItem(Natura.ID, "waterdrop", 1),
-                getModItem(Natura.ID, "waterdrop", 1),
-                getModItem(Natura.ID, "waterdrop", 1));
+        if (NML) {
+            addShapedRecipe(
+                    getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketWater", 1),
+                    getModItem(Natura.ID, "waterdrop", 1),
+                    getModItem(Natura.ID, "waterdrop", 1),
+                    getModItem(Natura.ID, "waterdrop", 1),
+                    getModItem(Natura.ID, "waterdrop", 1),
+                    getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketFired", 1),
+                    getModItem(Natura.ID, "waterdrop", 1),
+                    getModItem(Natura.ID, "waterdrop", 1),
+                    getModItem(Natura.ID, "waterdrop", 1),
+                    getModItem(Natura.ID, "waterdrop", 1));
+        }
 
         /*
          * oredict so the recipes modified in iguanatweaks will work those are exceptionnally in iguanatweaks because

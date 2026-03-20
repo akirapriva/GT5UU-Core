@@ -60,15 +60,7 @@ public class ScriptForestry implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Backpack.ID,
-                BuildCraftFactory.ID,
-                ExtraBees.ID,
-                Forestry.ID,
-                IndustrialCraft2.ID,
-                PamsHarvestCraft.ID,
-                ProjectRedExpansion.ID,
-                Railcraft.ID);
+        return Arrays.asList(Forestry.ID);
     }
 
     @Override
@@ -344,39 +336,41 @@ public class ScriptForestry implements IScriptLoader {
                 "itemCasingBronze",
                 "screwSteel",
                 "itemCasingBronze");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "core", 1, 0, missing),
-                getModItem(Forestry.ID, "treealyzer", 1, 0, missing),
-                getModItem(Forestry.ID, "beealyzer", 1, 0, missing),
-                getModItem(Forestry.ID, "flutterlyzer", 1, 0, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "circuitBasic",
-                ItemList.Electric_Motor_LV.get(1L),
-                "circuitBasic");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "factory", 1, 0, missing),
-                "plateCupronickel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "plateCupronickel",
-                "ringAnyRubber",
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                "ringAnyRubber",
-                "gearGtSmallSteel",
-                ItemList.Electric_Motor_LV.get(1L),
-                "gearGtSmallSteel");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "factory", 1, 1, missing),
-                "plateCupronickel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "plateCupronickel",
-                ItemList.Robot_Arm_LV.get(1L),
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                ItemList.Robot_Arm_LV.get(1L),
-                "gearGtSmallSteel",
-                ItemList.Electric_Motor_LV.get(1L),
-                "gearGtSmallSteel");
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "core", 1, 0, missing),
+                    getModItem(Forestry.ID, "treealyzer", 1, 0, missing),
+                    getModItem(Forestry.ID, "beealyzer", 1, 0, missing),
+                    getModItem(Forestry.ID, "flutterlyzer", 1, 0, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "circuitBasic",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "circuitBasic");
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "factory", 1, 0, missing),
+                    "plateCupronickel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "plateCupronickel",
+                    "ringAnyRubber",
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    "ringAnyRubber",
+                    "gearGtSmallSteel",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "gearGtSmallSteel");
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "factory", 1, 1, missing),
+                    "plateCupronickel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "plateCupronickel",
+                    ItemList.Robot_Arm_LV.get(1L),
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    ItemList.Robot_Arm_LV.get(1L),
+                    "gearGtSmallSteel",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "gearGtSmallSteel");
+        }
         addShapedRecipe(
                 getModItem(Forestry.ID, "factory", 1, 2, missing),
                 "plateCupronickel",
@@ -388,50 +382,54 @@ public class ScriptForestry implements IScriptLoader {
                 "gearGtSmallSteel",
                 ItemList.Electric_Motor_LV.get(1L),
                 "gearGtSmallSteel");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "factory", 1, 3, missing),
-                "plateCupronickel",
-                ItemList.Rotor_LV.get(1L),
-                "plateCupronickel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "gearGtSmallSteel",
-                ItemList.Electric_Motor_LV.get(1L),
-                "gearGtSmallSteel");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "factory", 1, 4, missing),
-                "plateCupronickel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "plateCupronickel",
-                ItemList.Rotor_LV.get(1L),
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                ItemList.Rotor_LV.get(1L),
-                "gearGtSmallSteel",
-                ItemList.Electric_Motor_LV.get(1L),
-                "gearGtSmallSteel");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "factory", 1, 5, missing),
-                "plateCupronickel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "plateCupronickel",
-                ItemList.Electric_Piston_LV.get(1L),
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                ItemList.Electric_Piston_LV.get(1L),
-                "gearGtSmallSteel",
-                ItemList.Electric_Motor_LV.get(1L),
-                "gearGtSmallSteel");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "factory", 1, 6, missing),
-                "plateCupronickel",
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                "plateCupronickel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "gearGtSmallSteel",
-                ItemList.Electric_Motor_LV.get(1L),
-                "gearGtSmallSteel");
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "factory", 1, 3, missing),
+                    "plateCupronickel",
+                    ItemList.Rotor_LV.get(1L),
+                    "plateCupronickel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "gearGtSmallSteel",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "gearGtSmallSteel");
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "factory", 1, 4, missing),
+                    "plateCupronickel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "plateCupronickel",
+                    ItemList.Rotor_LV.get(1L),
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    ItemList.Rotor_LV.get(1L),
+                    "gearGtSmallSteel",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "gearGtSmallSteel");
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "factory", 1, 5, missing),
+                    "plateCupronickel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "plateCupronickel",
+                    ItemList.Electric_Piston_LV.get(1L),
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    ItemList.Electric_Piston_LV.get(1L),
+                    "gearGtSmallSteel",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "gearGtSmallSteel");
+            if (ICML) {
+                addShapedRecipe(
+                        getModItem(Forestry.ID, "factory", 1, 6, missing),
+                        "plateCupronickel",
+                        getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                        "plateCupronickel",
+                        getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                        getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                        getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                        "gearGtSmallSteel",
+                        ItemList.Electric_Motor_LV.get(1L),
+                        "gearGtSmallSteel");
+            }
+        }
         addShapedRecipe(
                 getModItem(Forestry.ID, "factory", 1, 7, missing),
                 "plateCupronickel",
@@ -476,17 +474,19 @@ public class ScriptForestry implements IScriptLoader {
                 "screwIron",
                 getModItem(Minecraft.ID, "chest", 1, 0, missing),
                 "screwIron");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "mail", 1, 0, missing),
-                "plateIron",
-                getModItem(Minecraft.ID, "iron_bars", 1, 0, missing),
-                "plateIron",
-                "dyeBlue",
-                getModItem(IndustrialCraft2.ID, "blockMachine", 1, 0, missing),
-                "dyeBlue",
-                "gearGtSmallBronze",
-                "chestWood",
-                "gearGtSmallBronze");
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "mail", 1, 0, missing),
+                    "plateIron",
+                    getModItem(Minecraft.ID, "iron_bars", 1, 0, missing),
+                    "plateIron",
+                    "dyeBlue",
+                    getModItem(IndustrialCraft2.ID, "blockMachine", 1, 0, missing),
+                    "dyeBlue",
+                    "gearGtSmallBronze",
+                    "chestWood",
+                    "gearGtSmallBronze");
+        }
         addShapedRecipe(
                 getModItem(Forestry.ID, "mail", 1, 1, missing),
                 getModItem(Forestry.ID, "thermionicTubes", 1, 9, missing),
@@ -498,17 +498,19 @@ public class ScriptForestry implements IScriptLoader {
                 "gearGtSmallSteel",
                 "circuitBasic",
                 "gearGtSmallSteel");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "engine", 1, 3, missing),
-                "plateCupronickel",
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                "plateCupronickel",
-                "circuitBasic",
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                "circuitBasic",
-                "gearGtSmallSteel",
-                ItemList.Electric_Motor_LV.get(1L),
-                "gearGtSmallSteel");
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "engine", 1, 3, missing),
+                    "plateCupronickel",
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    "plateCupronickel",
+                    "circuitBasic",
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    "circuitBasic",
+                    "gearGtSmallSteel",
+                    ItemList.Electric_Motor_LV.get(1L),
+                    "gearGtSmallSteel");
+        }
         addShapedRecipe(
                 getModItem(Forestry.ID, "apiculture", 1, 2, missing),
                 "slabWood",
@@ -520,9 +522,11 @@ public class ScriptForestry implements IScriptLoader {
                 "beeComb",
                 "slabWood",
                 "beeComb");
-        addShapelessRecipe(
-                getModItem(Forestry.ID, "apiculture", 1, 2, missing),
-                getModItem(PamsHarvestCraft.ID, "apiary", 1, 0, missing));
+        if (PHML) {
+            addShapelessRecipe(
+                    getModItem(Forestry.ID, "apiculture", 1, 2, missing),
+                    getModItem(PamsHarvestCraft.ID, "apiary", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "beealyzer", 1, 0, missing),
                 getModItem(Forestry.ID, "beealyzer", 1, 0, missing));
@@ -576,115 +580,131 @@ public class ScriptForestry implements IScriptLoader {
                 "stickWood",
                 "stickWood",
                 "stickWood");
-        addShapedRecipe(
-                getModItem(Forestry.ID, "apiaristBag", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                getModItem(Forestry.ID, "apicultureChest", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "apiaristBag", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    getModItem(Forestry.ID, "apicultureChest", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "apiaristBag", 1, 0, missing),
                 getModItem(Forestry.ID, "apiaristBag", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Forestry.ID, "lepidopteristBag", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                getModItem(Forestry.ID, "lepidopterology", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "lepidopteristBag", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    getModItem(Forestry.ID, "lepidopterology", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "lepidopteristBag", 1, 0, missing),
                 getModItem(Forestry.ID, "lepidopteristBag", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Forestry.ID, "minerBag", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "ingotIron",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                "ingotIron",
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "minerBag", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "ingotIron",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    "ingotIron",
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "minerBag", 1, 0, missing),
                 getModItem(Forestry.ID, "minerBag", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Forestry.ID, "diggerBag", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "stone",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                "stone",
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "diggerBag", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "stone",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    "stone",
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "diggerBag", 1, 0, missing),
                 getModItem(Forestry.ID, "diggerBag", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Forestry.ID, "foresterBag", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "logWood",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                "logWood",
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "foresterBag", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "logWood",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    "logWood",
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "foresterBag", 1, 0, missing),
                 getModItem(Forestry.ID, "foresterBag", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Forestry.ID, "hunterBag", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                getModItem(Minecraft.ID, "feather", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                getModItem(Minecraft.ID, "feather", 1, 0, missing),
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "hunterBag", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    getModItem(Minecraft.ID, "feather", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    getModItem(Minecraft.ID, "feather", 1, 0, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "hunterBag", 1, 0, missing),
                 getModItem(Forestry.ID, "hunterBag", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Forestry.ID, "builderBag", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "fenceWood",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                "fenceWood",
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "builderBag", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "fenceWood",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    "fenceWood",
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "builderBag", 1, 0, missing),
                 getModItem(Forestry.ID, "builderBag", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Forestry.ID, "coinBag", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "plateGold",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "itemLeather",
-                "plateGold",
-                "itemLeather",
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather");
+        if (BPML && PHML) {
+            addShapedRecipe(
+                    getModItem(Forestry.ID, "coinBag", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "plateGold",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "itemLeather",
+                    "plateGold",
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather");
+        }
         addShapelessRecipe(
                 getModItem(Forestry.ID, "coinBag", 1, 0, missing),
                 getModItem(Forestry.ID, "coinBag", 1, 0, missing));
@@ -2602,9 +2622,11 @@ public class ScriptForestry implements IScriptLoader {
                 "stickWood",
                 getModItem(Forestry.ID, "planksFireproof", 1, 28, missing),
                 "stickWood");
-        addShapelessRecipe(
-                getModItem(Forestry.ID, "factory2", 1, 2, missing),
-                getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 10, missing));
+        if (PREDML) {
+            addShapelessRecipe(
+                    getModItem(Forestry.ID, "factory2", 1, 2, missing),
+                    getModItem(ProjectRedExpansion.ID, "projectred.expansion.machine2", 1, 10, missing));
+        }
         addShapedRecipe(
                 getModItem(Forestry.ID, "cart.beehouse", 1, 0, missing),
                 null,
@@ -2636,32 +2658,34 @@ public class ScriptForestry implements IScriptLoader {
     }
 
     private void recipes1() {
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("molten.redstone", 1152),
-                getModItem(Forestry.ID, "factory2", 1, 2, missing),
-                getModItem(Forestry.ID, "factory2", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
-                'b',
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                'c',
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
-                'd',
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                'e',
-                getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
-                'f',
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                'g',
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
-                'h',
-                ItemList.Electric_Motor_LV.get(1L),
-                'i',
-                GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L));
+        if (BCML && ICML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("molten.redstone", 1152),
+                    getModItem(Forestry.ID, "factory2", 1, 2, missing),
+                    getModItem(Forestry.ID, "factory2", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    'b',
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    'c',
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    'd',
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    'e',
+                    getModItem(Forestry.ID, "sturdyMachine", 1, 0, missing),
+                    'f',
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    'g',
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    'h',
+                    ItemList.Electric_Motor_LV.get(1L),
+                    'i',
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 60,
                 FluidRegistry.getFluidStack("seedoil", 1000),
@@ -2842,58 +2866,62 @@ public class ScriptForestry implements IScriptLoader {
                 ItemList.Electric_Motor_MV.get(1L),
                 'i',
                 getModItem(Forestry.ID, "thermionicTubes", 1, 11, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("for.honey", 5000),
-                getModItem(Forestry.ID, "alveary", 1, 0, missing),
-                getModItem(Forestry.ID, "alveary", 1, 4, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 7, missing),
-                'b',
-                NHItemList.SteelBars.get(),
-                'c',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 7, missing),
-                'd',
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                'e',
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                'f',
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
-                'g',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 7, missing),
-                'h',
-                ItemList.Electric_Motor_MV.get(1L),
-                'i',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 7, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("for.honey", 5000),
-                getModItem(Forestry.ID, "alveary", 1, 0, missing),
-                getModItem(Forestry.ID, "alveary", 1, 5, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 6, missing),
-                'b',
-                "circuitGood",
-                'c',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 6, missing),
-                'd',
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                'e',
-                GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.StainlessSteel, 1L),
-                'f',
-                getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                'g',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 6, missing),
-                'h',
-                GTOreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
-                'i',
-                getModItem(Forestry.ID, "thermionicTubes", 1, 6, missing));
+        if (ICML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("for.honey", 5000),
+                    getModItem(Forestry.ID, "alveary", 1, 0, missing),
+                    getModItem(Forestry.ID, "alveary", 1, 4, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 7, missing),
+                    'b',
+                    NHItemList.SteelBars.get(),
+                    'c',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 7, missing),
+                    'd',
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    'e',
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    'f',
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 0, missing),
+                    'g',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 7, missing),
+                    'h',
+                    ItemList.Electric_Motor_MV.get(1L),
+                    'i',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 7, missing));
+        }
+        if (BCML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("for.honey", 5000),
+                    getModItem(Forestry.ID, "alveary", 1, 0, missing),
+                    getModItem(Forestry.ID, "alveary", 1, 5, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 6, missing),
+                    'b',
+                    "circuitGood",
+                    'c',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 6, missing),
+                    'd',
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    'e',
+                    GTOreDictUnificator.get(OrePrefixes.pipeMedium, Materials.StainlessSteel, 1L),
+                    'f',
+                    getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                    'g',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 6, missing),
+                    'h',
+                    GTOreDictUnificator.get(OrePrefixes.plate, Materials.RedAlloy, 1L),
+                    'i',
+                    getModItem(Forestry.ID, "thermionicTubes", 1, 6, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 60,
                 FluidRegistry.getFluidStack("for.honey", 5000),
@@ -4513,24 +4541,26 @@ public class ScriptForestry implements IScriptLoader {
                     'h',
                     getModItem(Natura.ID, "barleyFood", 1, 0, missing));
         }
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("water", 100),
-                null,
-                getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing),
-                'd',
-                getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing),
-                'e',
-                getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
-                'f',
-                getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing),
-                'h',
-                getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing));
+        if (PHML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("water", 100),
+                    null,
+                    getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing),
+                    'd',
+                    getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing),
+                    'e',
+                    getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
+                    'f',
+                    getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing),
+                    'h',
+                    getModItem(PamsHarvestCraft.ID, "barleyItem", 1, 0, missing));
+        }
         if (BOPML) {
             RecipeManagers.carpenterManager.addRecipe(
                     20,
@@ -4551,42 +4581,44 @@ public class ScriptForestry implements IScriptLoader {
                     'h',
                     getModItem(BiomesOPlenty.ID, "plants", 1, 6, missing));
         }
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("water", 100),
-                null,
-                getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                getModItem(PamsHarvestCraft.ID, "ryeItem", 1, 0, missing),
-                'd',
-                getModItem(PamsHarvestCraft.ID, "ryeItem", 1, 0, missing),
-                'e',
-                getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
-                'f',
-                getModItem(PamsHarvestCraft.ID, "ryeItem", 1, 0, missing),
-                'h',
-                getModItem(PamsHarvestCraft.ID, "ryeItem", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("water", 100),
-                null,
-                getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                getModItem(PamsHarvestCraft.ID, "oatsItem", 1, 0, missing),
-                'd',
-                getModItem(PamsHarvestCraft.ID, "oatsItem", 1, 0, missing),
-                'e',
-                getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
-                'f',
-                getModItem(PamsHarvestCraft.ID, "oatsItem", 1, 0, missing),
-                'h',
-                getModItem(PamsHarvestCraft.ID, "oatsItem", 1, 0, missing));
+        if (PHML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("water", 100),
+                    null,
+                    getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    getModItem(PamsHarvestCraft.ID, "ryeItem", 1, 0, missing),
+                    'd',
+                    getModItem(PamsHarvestCraft.ID, "ryeItem", 1, 0, missing),
+                    'e',
+                    getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
+                    'f',
+                    getModItem(PamsHarvestCraft.ID, "ryeItem", 1, 0, missing),
+                    'h',
+                    getModItem(PamsHarvestCraft.ID, "ryeItem", 1, 0, missing));
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("water", 100),
+                    null,
+                    getModItem(Forestry.ID, "fertilizerBio", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    getModItem(PamsHarvestCraft.ID, "oatsItem", 1, 0, missing),
+                    'd',
+                    getModItem(PamsHarvestCraft.ID, "oatsItem", 1, 0, missing),
+                    'e',
+                    getModItem(Minecraft.ID, "dirt", 1, wildcard, missing),
+                    'f',
+                    getModItem(PamsHarvestCraft.ID, "oatsItem", 1, 0, missing),
+                    'h',
+                    getModItem(PamsHarvestCraft.ID, "oatsItem", 1, 0, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 20,
                 FluidRegistry.getFluidStack("water", 100),
@@ -4715,32 +4747,34 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
                 'i',
                 getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                40,
-                FluidRegistry.getFluidStack("for.honey", 1000),
-                getModItem(Forestry.ID, "canEmpty", 1, 0, missing),
-                getModItem(Forestry.ID, "iodineCapsule", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'b',
-                getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
-                'c',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'd',
-                getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
-                'e',
-                getModItem(ExtraBees.ID, "propolis", 1, wildcard, missing),
-                'f',
-                getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
-                'g',
-                getModItem(Minecraft.ID, "gunpowder", 1, 0, missing),
-                'h',
-                getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
-                'i',
-                getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
+        if (EXML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    40,
+                    FluidRegistry.getFluidStack("for.honey", 1000),
+                    getModItem(Forestry.ID, "canEmpty", 1, 0, missing),
+                    getModItem(Forestry.ID, "iodineCapsule", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'b',
+                    getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
+                    'c',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'd',
+                    getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
+                    'e',
+                    getModItem(ExtraBees.ID, "propolis", 1, wildcard, missing),
+                    'f',
+                    getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
+                    'g',
+                    getModItem(Minecraft.ID, "gunpowder", 1, 0, missing),
+                    'h',
+                    getModItem(Forestry.ID, "pollen", 1, wildcard, missing),
+                    'i',
+                    getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
+        }
         if (TML) {
             RecipeManagers.carpenterManager.addRecipe(
                     40,
@@ -4795,32 +4829,34 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
                 'i',
                 getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
-        RecipeManagers.carpenterManager.addRecipe(
-                40,
-                FluidRegistry.getFluidStack("for.honey", 1000),
-                getModItem(Forestry.ID, "canEmpty", 1, 0, missing),
-                getModItem(Forestry.ID, "craftingMaterial", 1, 4, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'b',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'c',
-                getModItem(Forestry.ID, "honeydew", 1, 0, missing),
-                'd',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'e',
-                getModItem(ExtraBees.ID, "propolis", 1, wildcard, missing),
-                'f',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'g',
-                getModItem(Minecraft.ID, "gunpowder", 1, 0, missing),
-                'h',
-                getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
-                'i',
-                getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
+        if (EXML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    40,
+                    FluidRegistry.getFluidStack("for.honey", 1000),
+                    getModItem(Forestry.ID, "canEmpty", 1, 0, missing),
+                    getModItem(Forestry.ID, "craftingMaterial", 1, 4, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'b',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'c',
+                    getModItem(Forestry.ID, "honeydew", 1, 0, missing),
+                    'd',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'e',
+                    getModItem(ExtraBees.ID, "propolis", 1, wildcard, missing),
+                    'f',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'g',
+                    getModItem(Minecraft.ID, "gunpowder", 1, 0, missing),
+                    'h',
+                    getModItem(Forestry.ID, "royalJelly", 1, 0, missing),
+                    'i',
+                    getModItem(Minecraft.ID, "gunpowder", 1, 0, missing));
+        }
         if (TML) {
             RecipeManagers.carpenterManager.addRecipe(
                     40,
@@ -4893,60 +4929,62 @@ public class ScriptForestry implements IScriptLoader {
                 getModItem(Forestry.ID, "peat", 1, 0, missing),
                 'h',
                 GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
-        RecipeManagers.carpenterManager.addRecipe(
-                12,
-                (FluidStack) null,
-                null,
-                getModItem(Forestry.ID, "bituminousPeat", 2, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'd',
-                getModItem(Forestry.ID, "peat", 1, 0, missing),
-                'e',
-                getModItem(ExtraBees.ID, "propolis", 1, 0, missing),
-                'f',
-                getModItem(Forestry.ID, "peat", 1, 0, missing),
-                'h',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
-        RecipeManagers.carpenterManager.addRecipe(
-                14,
-                (FluidStack) null,
-                null,
-                getModItem(Forestry.ID, "bituminousPeat", 3, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'd',
-                getModItem(Forestry.ID, "peat", 1, 0, missing),
-                'e',
-                getModItem(ExtraBees.ID, "propolis", 1, 1, missing),
-                'f',
-                getModItem(Forestry.ID, "peat", 1, 0, missing),
-                'h',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
-        RecipeManagers.carpenterManager.addRecipe(
-                16,
-                (FluidStack) null,
-                null,
-                getModItem(Forestry.ID, "bituminousPeat", 4, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'b',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
-                'd',
-                getModItem(Forestry.ID, "peat", 1, 0, missing),
-                'e',
-                getModItem(ExtraBees.ID, "propolis", 1, 2, missing),
-                'f',
-                getModItem(Forestry.ID, "peat", 1, 0, missing),
-                'h',
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
+        if (EXML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    12,
+                    (FluidStack) null,
+                    null,
+                    getModItem(Forestry.ID, "bituminousPeat", 2, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'd',
+                    getModItem(Forestry.ID, "peat", 1, 0, missing),
+                    'e',
+                    getModItem(ExtraBees.ID, "propolis", 1, 0, missing),
+                    'f',
+                    getModItem(Forestry.ID, "peat", 1, 0, missing),
+                    'h',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
+            RecipeManagers.carpenterManager.addRecipe(
+                    14,
+                    (FluidStack) null,
+                    null,
+                    getModItem(Forestry.ID, "bituminousPeat", 3, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'd',
+                    getModItem(Forestry.ID, "peat", 1, 0, missing),
+                    'e',
+                    getModItem(ExtraBees.ID, "propolis", 1, 1, missing),
+                    'f',
+                    getModItem(Forestry.ID, "peat", 1, 0, missing),
+                    'h',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
+            RecipeManagers.carpenterManager.addRecipe(
+                    16,
+                    (FluidStack) null,
+                    null,
+                    getModItem(Forestry.ID, "bituminousPeat", 4, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'b',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L),
+                    'd',
+                    getModItem(Forestry.ID, "peat", 1, 0, missing),
+                    'e',
+                    getModItem(ExtraBees.ID, "propolis", 1, 2, missing),
+                    'f',
+                    getModItem(Forestry.ID, "peat", 1, 0, missing),
+                    'h',
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Ash, 1L));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 10,
                 FluidRegistry.getFluidStack("molten.redstone", 1152),
@@ -5244,22 +5282,24 @@ public class ScriptForestry implements IScriptLoader {
                 GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Bronze, 1L),
                 'i',
                 GTOreDictUnificator.get(OrePrefixes.screw, Materials.Bronze, 1L));
-        RecipeManagers.carpenterManager.addRecipe(
-                60,
-                FluidRegistry.getFluidStack("molten.redstone", 576),
-                null,
-                getModItem(Forestry.ID, "solderingIron", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 1L),
-                'd',
-                GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Steel, 1L),
-                'e',
-                GTOreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 1L),
-                'i',
-                getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 3, missing));
+        if (ICML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    60,
+                    FluidRegistry.getFluidStack("molten.redstone", 576),
+                    null,
+                    getModItem(Forestry.ID, "solderingIron", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 1L),
+                    'd',
+                    GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Steel, 1L),
+                    'e',
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 1L),
+                    'i',
+                    getModItem(IndustrialCraft2.ID, "itemRecipePart", 1, 3, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 10,
                 FluidRegistry.getFluidStack("seedoil", 100),
@@ -5282,32 +5322,34 @@ public class ScriptForestry implements IScriptLoader {
                     'a',
                     getModItem(Natura.ID, "natura.stick", 1, wildcard, missing));
         }
-        RecipeManagers.carpenterManager.addRecipe(
-                20,
-                FluidRegistry.getFluidStack("seedoil", 250),
-                null,
-                getModItem(Forestry.ID, "frameImpregnated", 1, 0, missing),
-                "abc",
-                "def",
-                "ghi",
-                'a',
-                getModItem(Railcraft.ID, "slab", 1, 38, missing),
-                'b',
-                getModItem(Railcraft.ID, "slab", 1, 38, missing),
-                'c',
-                getModItem(Railcraft.ID, "slab", 1, 38, missing),
-                'd',
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                'e',
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                'f',
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                'g',
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                'h',
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing),
-                'i',
-                getModItem(Forestry.ID, "oakStick", 1, 0, missing));
+        if (PHML && RCML) {
+            RecipeManagers.carpenterManager.addRecipe(
+                    20,
+                    FluidRegistry.getFluidStack("seedoil", 250),
+                    null,
+                    getModItem(Forestry.ID, "frameImpregnated", 1, 0, missing),
+                    "abc",
+                    "def",
+                    "ghi",
+                    'a',
+                    getModItem(Railcraft.ID, "slab", 1, 38, missing),
+                    'b',
+                    getModItem(Railcraft.ID, "slab", 1, 38, missing),
+                    'c',
+                    getModItem(Railcraft.ID, "slab", 1, 38, missing),
+                    'd',
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    'e',
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    'f',
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    'g',
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    'h',
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing),
+                    'i',
+                    getModItem(Forestry.ID, "oakStick", 1, 0, missing));
+        }
         RecipeManagers.carpenterManager.addRecipe(
                 10,
                 FluidRegistry.getFluidStack("for.honey", 100),

@@ -11,7 +11,6 @@ import static gregtech.api.enums.Mods.IndustrialCraft2;
 import static gregtech.api.enums.Mods.IronChests;
 import static gregtech.api.enums.Mods.Minecraft;
 import static gregtech.api.enums.Mods.PamsHarvestCraft;
-import static gregtech.api.enums.Mods.ProjectRedIllumination;
 import static gregtech.api.enums.Mods.Railcraft;
 import static gregtech.api.enums.Mods.RandomThings;
 import static gregtech.api.enums.Mods.Thaumcraft;
@@ -71,21 +70,7 @@ public class ScriptExtraUtilities implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Avaritia.ID,
-                BuildCraftFactory.ID,
-                BuildCraftTransport.ID,
-                ExtraUtilities.ID,
-                HardcoreEnderExpansion.ID,
-                IndustrialCraft2.ID,
-                IronChests.ID,
-                PamsHarvestCraft.ID,
-                ProjectRedIllumination.ID,
-                Railcraft.ID,
-                RandomThings.ID,
-                TwilightForest.ID,
-                WirelessRedstoneCBECore.ID,
-                WirelessRedstoneCBELogic.ID);
+        return Arrays.asList(ExtraUtilities.ID);
     }
 
     @Override
@@ -306,28 +291,30 @@ public class ScriptExtraUtilities implements IScriptLoader {
                 "plateLapis",
                 getModItem(Minecraft.ID, "diamond_pickaxe", 1, 0, missing),
                 "plateLapis");
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 5, missing),
-                "plateEnderEye",
-                getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 2, missing),
-                "plateEnderEye",
-                "gearIridium",
-                getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 0, missing),
-                "gearIridium",
-                "plateEnderEye",
-                "plateNetherStar",
-                "plateEnderEye");
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 6, missing),
-                "plateEnderEye",
-                getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 2, missing),
-                "plateEnderEye",
-                "gearIridium",
-                getModItem(WirelessRedstoneCBECore.ID, "recieverDish", 1, 0, missing),
-                "gearIridium",
-                "plateEnderEye",
-                "plateNetherStar",
-                "plateEnderEye");
+        if (WRML) {
+            addShapedRecipe(
+                    getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 5, missing),
+                    "plateEnderEye",
+                    getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 2, missing),
+                    "plateEnderEye",
+                    "gearIridium",
+                    getModItem(WirelessRedstoneCBELogic.ID, "wirelessLogic", 1, 0, missing),
+                    "gearIridium",
+                    "plateEnderEye",
+                    "plateNetherStar",
+                    "plateEnderEye");
+            addShapedRecipe(
+                    getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 6, missing),
+                    "plateEnderEye",
+                    getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 2, missing),
+                    "plateEnderEye",
+                    "gearIridium",
+                    getModItem(WirelessRedstoneCBECore.ID, "recieverDish", 1, 0, missing),
+                    "gearIridium",
+                    "plateEnderEye",
+                    "plateNetherStar",
+                    "plateEnderEye");
+        }
         addShapedRecipe(
                 getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 7, missing),
                 "plateRedAlloy",
@@ -383,17 +370,19 @@ public class ScriptExtraUtilities implements IScriptLoader {
                 "plateRedAlloy",
                 getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 0, missing),
                 "plateRedAlloy");
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                null,
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                null,
-                "stickWood",
-                getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
-                "stickWood",
-                null,
-                null);
+        if (PHML) {
+            addShapedRecipe(
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    null,
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    null,
+                    "stickWood",
+                    getModItem(PamsHarvestCraft.ID, "wovencottonItem", 1, 0, missing),
+                    "stickWood",
+                    null,
+                    null);
+        }
         addShapedRecipe(
                 getModItem(ExtraUtilities.ID, "drum", 1, 0, missing),
                 "plateSteel",
@@ -427,17 +416,19 @@ public class ScriptExtraUtilities implements IScriptLoader {
                 "gearGtSmallSteel",
                 ItemList.Electric_Motor_LV.get(1L),
                 "gearGtSmallSteel");
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "filing", 1, 0, missing),
-                "plateSteel",
-                "chestWood",
-                "plateSteel",
-                "screwSteel",
-                getModItem(IronChests.ID, "BlockIronChest", 1, 0, missing),
-                "screwSteel",
-                "plateSteel",
-                "chestWood",
-                "plateSteel");
+        if (IML) {
+            addShapedRecipe(
+                    getModItem(ExtraUtilities.ID, "filing", 1, 0, missing),
+                    "plateSteel",
+                    "chestWood",
+                    "plateSteel",
+                    "screwSteel",
+                    getModItem(IronChests.ID, "BlockIronChest", 1, 0, missing),
+                    "screwSteel",
+                    "plateSteel",
+                    "chestWood",
+                    "plateSteel");
+        }
         addShapedRecipe(
                 getModItem(ExtraUtilities.ID, "filing", 1, 1, missing),
                 getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 8, missing),
@@ -710,10 +701,12 @@ public class ScriptExtraUtilities implements IScriptLoader {
                 "stoneObsidian",
                 "stoneObsidian",
                 "stoneObsidian");
-        addShapelessRecipe(
-                getModItem(ExtraUtilities.ID, "enderCollector", 1, 0, missing),
-                getModItem(RandomThings.ID, "advancedItemCollector", 1, 0, missing));
-        if (TML) {
+        if (RTML) {
+            addShapelessRecipe(
+                    getModItem(ExtraUtilities.ID, "enderCollector", 1, 0, missing),
+                    getModItem(RandomThings.ID, "advancedItemCollector", 1, 0, missing));
+        }
+        if (TML && HEEML) {
             addShapedRecipe(
                     getModItem(ExtraUtilities.ID, "endConstructor", 1, 0, missing),
                     "plateEnderEye",
@@ -800,22 +793,11 @@ public class ScriptExtraUtilities implements IScriptLoader {
                 getModItem(ExtraUtilities.ID, "angelBlock", 1, 0, missing),
                 getModItem(Minecraft.ID, "shears", 1, 0, missing),
                 getModItem(ExtraUtilities.ID, "angelBlock", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "ethericsword", 1, 0, missing),
-                null,
-                "ingotUnstable",
-                null,
-                null,
-                "ingotUnstable",
-                null,
-                null,
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null);
-        if (TCML) {
+        if (RTML) {
             addShapedRecipe(
-                    getModItem(ExtraUtilities.ID, "lawSword", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "ethericsword", 1, 0, missing),
                     null,
-                    getModItem(TinkerConstruct.ID, "largeSwordBlade", 1, 314, missing),
+                    "ingotUnstable",
                     null,
                     null,
                     "ingotUnstable",
@@ -823,52 +805,64 @@ public class ScriptExtraUtilities implements IScriptLoader {
                     null,
                     getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
                     null);
+            if (TCML) {
+                addShapedRecipe(
+                        getModItem(ExtraUtilities.ID, "lawSword", 1, 0, missing),
+                        null,
+                        getModItem(TinkerConstruct.ID, "largeSwordBlade", 1, 314, missing),
+                        null,
+                        null,
+                        "ingotUnstable",
+                        null,
+                        null,
+                        getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                        null);
+            }
+            addShapedRecipe(
+                    getModItem(ExtraUtilities.ID, "erosionShovel", 1, 0, missing),
+                    null,
+                    "ingotUnstable",
+                    null,
+                    null,
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    null,
+                    null,
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    null);
+            addShapedRecipe(
+                    getModItem(ExtraUtilities.ID, "destructionpickaxe", 1, 0, missing),
+                    "ingotUnstable",
+                    "ingotUnstable",
+                    "ingotUnstable",
+                    null,
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    null,
+                    null,
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    null);
+            addShapedRecipe(
+                    getModItem(ExtraUtilities.ID, "defoliageAxe", 1, 0, missing),
+                    "ingotUnstable",
+                    "ingotUnstable",
+                    null,
+                    "ingotUnstable",
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    null,
+                    null,
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    null);
+            addShapedRecipe(
+                    getModItem(ExtraUtilities.ID, "temporalHoe", 1, 0, missing),
+                    "ingotUnstable",
+                    "ingotUnstable",
+                    null,
+                    null,
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    null,
+                    null,
+                    getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
+                    null);
         }
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "erosionShovel", 1, 0, missing),
-                null,
-                "ingotUnstable",
-                null,
-                null,
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null,
-                null,
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null);
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "destructionpickaxe", 1, 0, missing),
-                "ingotUnstable",
-                "ingotUnstable",
-                "ingotUnstable",
-                null,
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null,
-                null,
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null);
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "defoliageAxe", 1, 0, missing),
-                "ingotUnstable",
-                "ingotUnstable",
-                null,
-                "ingotUnstable",
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null,
-                null,
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null);
-        addShapedRecipe(
-                getModItem(ExtraUtilities.ID, "temporalHoe", 1, 0, missing),
-                "ingotUnstable",
-                "ingotUnstable",
-                null,
-                null,
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null,
-                null,
-                getModItem(RandomThings.ID, "ingredient", 1, 1, missing),
-                null);
-
         addShapedRecipe(
                 getModItem(ExtraUtilities.ID, "unstableingot", 1, 0, missing),
                 getModItem(Minecraft.ID, "iron_ingot", 1, 0, missing),
@@ -924,30 +918,32 @@ public class ScriptExtraUtilities implements IScriptLoader {
                         ItemList.OreDrill2.get(1L),
                         'i',
                         getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 11, missing)));
-        EnderConstructorRecipesHandler.registerRecipe(
-                new ShapedOreRecipe(
-                        getModItem(ExtraUtilities.ID, "enderThermicPump", 1, 0, missing),
-                        "abc",
-                        "def",
-                        "ghi",
-                        'a',
-                        getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing),
-                        'b',
-                        "circuitData",
-                        'c',
-                        getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing),
-                        'd',
-                        getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                        'e',
-                        getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 11, missing),
-                        'f',
-                        getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
-                        'g',
-                        getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing),
-                        'h',
-                        ItemList.Pump_HV.get(1L),
-                        'i',
-                        getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing)));
+        if (BCML) {
+            EnderConstructorRecipesHandler.registerRecipe(
+                    new ShapedOreRecipe(
+                            getModItem(ExtraUtilities.ID, "enderThermicPump", 1, 0, missing),
+                            "abc",
+                            "def",
+                            "ghi",
+                            'a',
+                            getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing),
+                            'b',
+                            "circuitData",
+                            'c',
+                            getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing),
+                            'd',
+                            getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                            'e',
+                            getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 11, missing),
+                            'f',
+                            getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing),
+                            'g',
+                            getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing),
+                            'h',
+                            ItemList.Pump_HV.get(1L),
+                            'i',
+                            getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing)));
+        }
         if (TML) {
             EnderConstructorRecipesHandler.registerRecipe(
                     new ShapedOreRecipe(
@@ -974,30 +970,32 @@ public class ScriptExtraUtilities implements IScriptLoader {
                             'i',
                             getModItem(ExtraUtilities.ID, "chandelier", 1, 0, missing)));
         }
-        EnderConstructorRecipesHandler.registerRecipe(
-                new ShapedOreRecipe(
-                        getModItem(ExtraUtilities.ID, "extractor_base", 1, 12, missing),
-                        "abc",
-                        "def",
-                        "ghi",
-                        'a',
-                        getModItem(ExtraUtilities.ID, "extractor_base", 1, 0, missing),
-                        'b',
-                        getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerdiamond", 1, 0, missing),
-                        'c',
-                        getModItem(ExtraUtilities.ID, "extractor_base", 1, 0, missing),
-                        'd',
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.EnderEye, 1L),
-                        'e',
-                        getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 8, missing),
-                        'f',
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.EnderEye, 1L),
-                        'g',
-                        getModItem(ExtraUtilities.ID, "extractor_base", 1, 0, missing),
-                        'h',
-                        getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerdiamond", 1, 0, missing),
-                        'i',
-                        getModItem(ExtraUtilities.ID, "extractor_base", 1, 0, missing)));
+        if (BCML) {
+            EnderConstructorRecipesHandler.registerRecipe(
+                    new ShapedOreRecipe(
+                            getModItem(ExtraUtilities.ID, "extractor_base", 1, 12, missing),
+                            "abc",
+                            "def",
+                            "ghi",
+                            'a',
+                            getModItem(ExtraUtilities.ID, "extractor_base", 1, 0, missing),
+                            'b',
+                            getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerdiamond", 1, 0, missing),
+                            'c',
+                            getModItem(ExtraUtilities.ID, "extractor_base", 1, 0, missing),
+                            'd',
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.EnderEye, 1L),
+                            'e',
+                            getModItem(ExtraUtilities.ID, "nodeUpgrade", 1, 8, missing),
+                            'f',
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.EnderEye, 1L),
+                            'g',
+                            getModItem(ExtraUtilities.ID, "extractor_base", 1, 0, missing),
+                            'h',
+                            getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowerdiamond", 1, 0, missing),
+                            'i',
+                            getModItem(ExtraUtilities.ID, "extractor_base", 1, 0, missing)));
+        }
         EnderConstructorRecipesHandler.registerRecipe(
                 new ShapedOreRecipe(
                         getModItem(ExtraUtilities.ID, "extractor_base", 1, 13, missing),
@@ -1180,13 +1178,15 @@ public class ScriptExtraUtilities implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Wood, 2L))
                 .itemOutputs(getModItem(ExtraUtilities.ID, "chestMini", 1, 0, missing))
                 .duration(2 * SECONDS + 10 * TICKS).eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraUtilities.ID, "decorativeBlock1", 4, 2, missing),
-                        getModItem(IndustrialCraft2.ID, "itemDensePlates", 4, 7, missing))
-                .itemOutputs(getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("ender", 500)).duration(30 * SECONDS).eut(TierEU.RECIPE_MV)
-                .addTo(assemblerRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraUtilities.ID, "decorativeBlock1", 4, 2, missing),
+                            getModItem(IndustrialCraft2.ID, "itemDensePlates", 4, 7, missing))
+                    .itemOutputs(getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 1, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("ender", 500)).duration(30 * SECONDS).eut(TierEU.RECIPE_MV)
+                    .addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(ExtraUtilities.ID, "decorativeBlock1", 4, 1, missing),
@@ -1194,12 +1194,14 @@ public class ScriptExtraUtilities implements IScriptLoader {
                 .itemOutputs(getModItem(ExtraUtilities.ID, "endConstructor", 1, 2, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("ender", 1000)).duration(20 * SECONDS).eut(TierEU.RECIPE_MV)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Railcraft.ID, "detector", 1, 2, missing),
-                        getModItem(Minecraft.ID, "sticky_piston", 1, 0, missing))
-                .itemOutputs(getModItem(ExtraUtilities.ID, "budoff", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (RCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Railcraft.ID, "detector", 1, 2, missing),
+                            getModItem(Minecraft.ID, "sticky_piston", 1, 0, missing))
+                    .itemOutputs(getModItem(ExtraUtilities.ID, "budoff", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(ExtraUtilities.ID, "budoff", 1, 0, missing),
@@ -1259,10 +1261,12 @@ public class ScriptExtraUtilities implements IScriptLoader {
                 .itemOutputs(getModItem(ExtraUtilities.ID, "decorativeBlock1", 1, 11, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("ender", 1000)).duration(1 * MINUTES).eut(TierEU.RECIPE_MV)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(getModItem(Railcraft.ID, "machine.alpha", 1, 6, missing), ItemList.Plank_Oak.get(4L))
-                .itemOutputs(getModItem(ExtraUtilities.ID, "trading_post", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (RCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(getModItem(Railcraft.ID, "machine.alpha", 1, 6, missing), ItemList.Plank_Oak.get(4L))
+                    .itemOutputs(getModItem(ExtraUtilities.ID, "trading_post", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(GTOreDictUnificator.get(OrePrefixes.plate, Materials.Steel, 2L)).circuit(2)
                 .itemOutputs(getModItem(ExtraUtilities.ID, "pipes", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.redalloy", 36)).duration(5 * SECONDS)
@@ -1320,39 +1324,43 @@ public class ScriptExtraUtilities implements IScriptLoader {
                         getModItem(Minecraft.ID, "ender_pearl", 1, 0, missing))
                 .itemOutputs(getModItem(ExtraUtilities.ID, "trashcan", 1, 0, missing)).duration(10 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraUtilities.ID, "trashcan", 1, 0, missing),
-                        getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing))
-                .itemOutputs(getModItem(ExtraUtilities.ID, "trashcan", 1, 1, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraUtilities.ID, "trashcan", 1, 0, missing),
-                        getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowergold", 1, 0, missing))
-                .itemOutputs(getModItem(ExtraUtilities.ID, "trashcan", 1, 2, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemRecipePart", 2, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Iron, 4L))
-                .itemOutputs(getModItem(ExtraUtilities.ID, "heatingElement", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.tin", 144)).duration(20 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemRecipePart", 2, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Iron, 4L))
-                .itemOutputs(getModItem(ExtraUtilities.ID, "heatingElement", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.lead", 288)).duration(20 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "itemRecipePart", 2, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Iron, 4L))
-                .itemOutputs(getModItem(ExtraUtilities.ID, "heatingElement", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.solderingalloy", 72)).duration(20 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (BCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraUtilities.ID, "trashcan", 1, 0, missing),
+                            getModItem(BuildCraftFactory.ID, "tankBlock", 1, 0, missing))
+                    .itemOutputs(getModItem(ExtraUtilities.ID, "trashcan", 1, 1, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraUtilities.ID, "trashcan", 1, 0, missing),
+                            getModItem(BuildCraftTransport.ID, "item.buildcraftPipe.pipepowergold", 1, 0, missing))
+                    .itemOutputs(getModItem(ExtraUtilities.ID, "trashcan", 1, 2, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemRecipePart", 2, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Iron, 4L))
+                    .itemOutputs(getModItem(ExtraUtilities.ID, "heatingElement", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.tin", 144)).duration(20 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemRecipePart", 2, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Iron, 4L))
+                    .itemOutputs(getModItem(ExtraUtilities.ID, "heatingElement", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.lead", 288)).duration(20 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "itemRecipePart", 2, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Iron, 4L))
+                    .itemOutputs(getModItem(ExtraUtilities.ID, "heatingElement", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.solderingalloy", 72)).duration(20 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(Minecraft.ID, "ender_pearl", 1, 0, missing),
@@ -1382,34 +1390,37 @@ public class ScriptExtraUtilities implements IScriptLoader {
                     .addTo(maceratorRecipes);
         }
         if (TML) {
-            TCHelper.addInfusionCraftingRecipe(
-                    "EXURINGS_CRAFTING",
-                    getModItem(ExtraUtilities.ID, "angelRing", 1, 0, missing),
-                    30,
-                    new AspectList().add(Aspect.getAspect("praecantatio"), 200).add(Aspect.getAspect("volatus"), 200)
-                            .add(Aspect.getAspect("tempestas"), 200).add(Aspect.getAspect("nebrisum"), 200)
-                            .add(Aspect.getAspect("motus"), 200).add(Aspect.getAspect("terminus"), 200),
-                    createItemStack(
-                            TinkerConstruct.ID,
-                            "travelWings",
-                            1,
-                            0,
-                            "{TinkerArmor:{BaseDurability:1035,BaseDefense:2.0d,Built:1b,MaxDefense:8.0d,Damage:0,BonusDurability:0,Modifiers:3,DamageReduction:0.0d,TotalDurability:1035,ModDurability:0.0f,Broken:0b}}",
-                            missing),
-                    OrePrefixes.ring.get(Materials.Iridium),
-                    OrePrefixes.screw.get(Materials.Tritanium),
-                    NHItemList.EngravedGoldChip.get(1),
-                    getModItem(ExtraUtilities.ID, "angelBlock", 1, 0, missing),
-                    getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
-                    GregtechItemList.MagicFeather.get(1),
-                    getModItem(Minecraft.ID, "nether_star", 1, 0, missing),
-                    getModItem(Avaritia.ID, "big_pearl", 1, 0, missing),
-                    getModItem(Minecraft.ID, "nether_star", 1, 0, missing),
-                    GregtechItemList.MagicFeather.get(1),
-                    getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
-                    getModItem(ExtraUtilities.ID, "angelBlock", 1, 0, missing),
-                    NHItemList.EngravedGoldChip.get(1),
-                    OrePrefixes.screw.get(Materials.Tritanium));
+            if (XUML && AML && TCML) {
+                TCHelper.addInfusionCraftingRecipe(
+                        "EXURINGS_CRAFTING",
+                        getModItem(ExtraUtilities.ID, "angelRing", 1, 0, missing),
+                        30,
+                        new AspectList().add(Aspect.getAspect("praecantatio"), 200)
+                                .add(Aspect.getAspect("volatus"), 200).add(Aspect.getAspect("tempestas"), 200)
+                                .add(Aspect.getAspect("nebrisum"), 200).add(Aspect.getAspect("motus"), 200)
+                                .add(Aspect.getAspect("terminus"), 200),
+                        createItemStack(
+                                TinkerConstruct.ID,
+                                "travelWings",
+                                1,
+                                0,
+                                "{TinkerArmor:{BaseDurability:1035,BaseDefense:2.0d,Built:1b,MaxDefense:8.0d,Damage:0,BonusDurability:0,Modifiers:3,DamageReduction:0.0d,TotalDurability:1035,ModDurability:0.0f,Broken:0b}}",
+                                missing),
+                        OrePrefixes.ring.get(Materials.Iridium),
+                        OrePrefixes.screw.get(Materials.Tritanium),
+                        NHItemList.EngravedGoldChip.get(1),
+                        getModItem(ExtraUtilities.ID, "angelBlock", 1, 0, missing),
+                        getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
+                        GregtechItemList.MagicFeather.get(1),
+                        getModItem(Minecraft.ID, "nether_star", 1, 0, missing),
+                        getModItem(Avaritia.ID, "big_pearl", 1, 0, missing),
+                        getModItem(Minecraft.ID, "nether_star", 1, 0, missing),
+                        GregtechItemList.MagicFeather.get(1),
+                        getModItem(Thaumcraft.ID, "ItemResource", 1, 15, missing),
+                        getModItem(ExtraUtilities.ID, "angelBlock", 1, 0, missing),
+                        NHItemList.EngravedGoldChip.get(1),
+                        OrePrefixes.screw.get(Materials.Tritanium));
+            }
             if (TCML) {
                 TCHelper.addInfusionCraftingRecipe(
                         "EXURINGS_CRAFTING",
@@ -1422,26 +1433,30 @@ public class ScriptExtraUtilities implements IScriptLoader {
                         getModItem(TinkerConstruct.ID, "fletching", 1, 0, missing),
                         getModItem(TinkerConstruct.ID, "fletching", 1, 0, missing));
             }
-            TCHelper.addInfusionCraftingRecipe(
-                    "EXURINGS_CRAFTING",
-                    getModItem(ExtraUtilities.ID, "angelRing", 1, 2, missing),
-                    4,
-                    new AspectList().add(Aspect.getAspect("permutatio"), 50).add(Aspect.getAspect("volatus"), 50)
-                            .add(Aspect.getAspect("auram"), 50),
-                    getModItem(ExtraUtilities.ID, "angelRing", 1, 0, missing),
-                    getModItem(Thaumcraft.ID, "ItemResource", 1, 14, missing),
-                    getModItem(TwilightForest.ID, "item.critter", 1, 0, missing),
-                    getModItem(TwilightForest.ID, "item.critter", 1, 1, missing));
-            TCHelper.addInfusionCraftingRecipe(
-                    "EXURINGS_CRAFTING",
-                    getModItem(ExtraUtilities.ID, "angelRing", 1, 3, missing),
-                    4,
-                    new AspectList().add(Aspect.getAspect("permutatio"), 50).add(Aspect.getAspect("bestia"), 50)
-                            .add(Aspect.getAspect("infernus"), 50),
-                    getModItem(ExtraUtilities.ID, "angelRing", 1, 0, missing),
-                    getModItem(Thaumcraft.ID, "ItemResource", 1, 14, missing),
-                    getModItem(Minecraft.ID, "dragon_egg", 1, 0, missing),
-                    getModItem(Botania.ID, "manaResource", 1, 9, missing));
+            if (TFML) {
+                TCHelper.addInfusionCraftingRecipe(
+                        "EXURINGS_CRAFTING",
+                        getModItem(ExtraUtilities.ID, "angelRing", 1, 2, missing),
+                        4,
+                        new AspectList().add(Aspect.getAspect("permutatio"), 50).add(Aspect.getAspect("volatus"), 50)
+                                .add(Aspect.getAspect("auram"), 50),
+                        getModItem(ExtraUtilities.ID, "angelRing", 1, 0, missing),
+                        getModItem(Thaumcraft.ID, "ItemResource", 1, 14, missing),
+                        getModItem(TwilightForest.ID, "item.critter", 1, 0, missing),
+                        getModItem(TwilightForest.ID, "item.critter", 1, 1, missing));
+            }
+            if (BML) {
+                TCHelper.addInfusionCraftingRecipe(
+                        "EXURINGS_CRAFTING",
+                        getModItem(ExtraUtilities.ID, "angelRing", 1, 3, missing),
+                        4,
+                        new AspectList().add(Aspect.getAspect("permutatio"), 50).add(Aspect.getAspect("bestia"), 50)
+                                .add(Aspect.getAspect("infernus"), 50),
+                        getModItem(ExtraUtilities.ID, "angelRing", 1, 0, missing),
+                        getModItem(Thaumcraft.ID, "ItemResource", 1, 14, missing),
+                        getModItem(Minecraft.ID, "dragon_egg", 1, 0, missing),
+                        getModItem(Botania.ID, "manaResource", 1, 9, missing));
+            }
             TCHelper.addInfusionCraftingRecipe(
                     "EXURINGS_CRAFTING",
                     getModItem(ExtraUtilities.ID, "angelRing", 1, 4, missing),

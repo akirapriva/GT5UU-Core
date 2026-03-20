@@ -29,23 +29,8 @@ public class ScriptMinecraft implements IScriptLoader {
         return "Minecraft";
     }
 
-    @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                Backpack.ID,
-                CarpentersBlocks.ID,
-                EtFuturumRequiem.ID,
-                ExtraTrees.ID,
-                ExtraUtilities.ID,
-                Forestry.ID,
-                GalacticraftAmunRa.ID,
-                GalaxySpace.ID,
-                HardcoreEnderExpansion.ID,
-                IndustrialCraft2.ID,
-                PamsHarvestCraft.ID,
-                PamsHarvestTheNether.ID,
-                Railcraft.ID,
-                StevesCarts2.ID);
+        return Arrays.asList(Minecraft.ID);
     }
 
     @Override
@@ -64,7 +49,7 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Thaumcraft.ID, "ItemResource", 1, 3, missing)).duration(15 * SECONDS).eut(2)
                     .addTo(extractorRecipes);
         }
-        if (BOPML) {
+        if (BOPML && PHNML) {
             GTValues.RA.stdBuilder().itemInputs(getModItem(Minecraft.ID, "hay_block", 1, 0, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "wheat", 9, 0, missing)).duration(15 * SECONDS).eut(2)
                     .addTo(extractorRecipes);
@@ -221,18 +206,20 @@ public class ScriptMinecraft implements IScriptLoader {
                         getModItem(Minecraft.ID, "flint", 2, 0, missing))
                 .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(GalacticraftAmunRa.ID, "tile.log1", 1, 0, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(GalacticraftAmunRa.ID, "tile.wood1", 1, 0, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
+        if (AMML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(GalacticraftAmunRa.ID, "tile.log1", 1, 0, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(GalacticraftAmunRa.ID, "tile.wood1", 1, 0, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+        }
         if (TML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -311,276 +298,282 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
                     .eut(4).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logs", 1, wildcard, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logsFireproof", 1, wildcard, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 0, "{meta:0}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 1, "{meta:1}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 2, "{meta:2}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 3, "{meta:3}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 4, "{meta:4}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 5, "{meta:5}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 6, "{meta:6}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 7, "{meta:7}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 8, "{meta:8}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 9, "{meta:9}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 10, "{meta:10}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 11, "{meta:11}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 12, "{meta:12}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 13, "{meta:13}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 14, "{meta:14}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 15, "{meta:15}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 16, "{meta:16}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 17, "{meta:17}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 18, "{meta:18}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 19, "{meta:19}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 20, "{meta:20}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 21, "{meta:21}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 22, "{meta:22}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 23, "{meta:23}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 24, "{meta:24}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 25, "{meta:25}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 26, "{meta:26}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 27, "{meta:27}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 28, "{meta:28}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 29, "{meta:29}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 30, "{meta:30}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 31, "{meta:31}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 32, "{meta:32}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 33, "{meta:33}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 34, "{meta:34}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 35, "{meta:35}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 36, "{meta:36}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 37, "{meta:37}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 38, "{meta:38}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        createItemStack(ExtraTrees.ID, "log", 1, 39, "{meta:39}", missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(PamsHarvestCraft.ID, "pamMaple", 1, 0, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(PamsHarvestCraft.ID, "pamPaperbark", 1, 0, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(PamsHarvestCraft.ID, "pamCinnamon", 1, 0, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Forestry.ID, "logs", 1, wildcard, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Forestry.ID, "logsFireproof", 1, wildcard, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+        }
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 0, "{meta:0}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 1, "{meta:1}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 2, "{meta:2}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 3, "{meta:3}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 4, "{meta:4}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 5, "{meta:5}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 6, "{meta:6}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 7, "{meta:7}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 8, "{meta:8}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 9, "{meta:9}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 10, "{meta:10}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 11, "{meta:11}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 12, "{meta:12}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 13, "{meta:13}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 14, "{meta:14}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 15, "{meta:15}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 16, "{meta:16}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 17, "{meta:17}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 18, "{meta:18}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 19, "{meta:19}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 20, "{meta:20}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 21, "{meta:21}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 22, "{meta:22}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 23, "{meta:23}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 24, "{meta:24}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 25, "{meta:25}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 26, "{meta:26}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 27, "{meta:27}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 28, "{meta:28}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 29, "{meta:29}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 30, "{meta:30}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 31, "{meta:31}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 32, "{meta:32}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 33, "{meta:33}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 34, "{meta:34}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 35, "{meta:35}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 36, "{meta:36}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 37, "{meta:37}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 38, "{meta:38}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            createItemStack(ExtraTrees.ID, "log", 1, 39, "{meta:39}", missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+        }
+        if (PHML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(PamsHarvestCraft.ID, "pamMaple", 1, 0, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(PamsHarvestCraft.ID, "pamPaperbark", 1, 0, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(PamsHarvestCraft.ID, "pamCinnamon", 1, 0, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+        }
         if (TBML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -609,12 +602,14 @@ public class ScriptMinecraft implements IScriptLoader {
                         getModItem(Minecraft.ID, "flint", 2, 0, missing))
                 .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(GalaxySpace.ID, "barnardaClog", 1, 0, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
+        if (GSML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(GalaxySpace.ID, "barnardaClog", 1, 0, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+        }
         if (TMML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -637,12 +632,14 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
                     .eut(4).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(PamsHarvestTheNether.ID, "netherLog", 1, 0, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
+        if (PHNML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(PamsHarvestTheNether.ID, "netherLog", 1, 0, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+        }
         if (FMML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -651,12 +648,14 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
                     .eut(4).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(IndustrialCraft2.ID, "blockRubWood", 1, 0, missing),
-                        getModItem(Minecraft.ID, "flint", 2, 0, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(IndustrialCraft2.ID, "blockRubWood", 1, 0, missing),
+                            getModItem(Minecraft.ID, "flint", 2, 0, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "crafting_table", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 2L),
@@ -669,12 +668,14 @@ public class ScriptMinecraft implements IScriptLoader {
                         getModItem(Minecraft.ID, "planks", 2, wildcard, missing))
                 .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log", 2, wildcard, missing),
-                        getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log", 2, wildcard, missing),
+                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (BOPML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -683,24 +684,28 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log", 2, wildcard, missing),
-                        getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log", 2, wildcard, missing),
+                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log", 2, wildcard, missing),
+                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log", 2, wildcard, missing),
+                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (NML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -723,12 +728,14 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log", 2, wildcard, missing),
-                        getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (PHNML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log", 2, wildcard, missing),
+                            getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (Witchery.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -751,30 +758,36 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
-                        getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
-                        getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
+                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
+                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
+                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
+                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (NML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -797,12 +810,14 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
-                        getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (PHNML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(Minecraft.ID, "log2", 2, wildcard, missing),
+                            getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (Witchery.isModLoaded()) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -824,30 +839,36 @@ public class ScriptMinecraft implements IScriptLoader {
                             getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
-                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
-                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
-                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
-                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (EXML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
+                                getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (XUML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
+                                getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (FML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             if (NML) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
@@ -870,12 +891,14 @@ public class ScriptMinecraft implements IScriptLoader {
                         .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
             }
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
-                            getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (PHNML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs1", 2, wildcard, missing),
+                                getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             if (Witchery.isModLoaded()) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
@@ -896,30 +919,36 @@ public class ScriptMinecraft implements IScriptLoader {
                             getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
-                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
-                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
-                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
-                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (EXML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
+                                getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (XUML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
+                                getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (FML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             if (NML) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
@@ -942,12 +971,14 @@ public class ScriptMinecraft implements IScriptLoader {
                         .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
             }
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
-                            getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (PHNML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs2", 2, wildcard, missing),
+                                getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             if (Witchery.isModLoaded()) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
@@ -968,30 +999,36 @@ public class ScriptMinecraft implements IScriptLoader {
                             getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
-                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
-                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
-                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
-                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (EXML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
+                                getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (XUML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
+                                getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (FML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             if (NML) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
@@ -1014,12 +1051,14 @@ public class ScriptMinecraft implements IScriptLoader {
                         .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
             }
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
-                            getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (PHNML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs3", 2, wildcard, missing),
+                                getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             if (Witchery.isModLoaded()) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
@@ -1040,30 +1079,36 @@ public class ScriptMinecraft implements IScriptLoader {
                             getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
-                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
-                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
-                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
-                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (EXML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
+                                getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (XUML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
+                                getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (FML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             if (NML) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
@@ -1086,12 +1131,14 @@ public class ScriptMinecraft implements IScriptLoader {
                         .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
             }
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
-                            getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (PHNML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(BiomesOPlenty.ID, "logs4", 2, wildcard, missing),
+                                getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             if (Witchery.isModLoaded()) {
                 GTValues.RA.stdBuilder()
                         .itemInputs(
@@ -1101,227 +1148,249 @@ public class ScriptMinecraft implements IScriptLoader {
                         .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
             }
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                        getModItem(Minecraft.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (BOPML) {
+        if (EXML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                            getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
+                            getModItem(Minecraft.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (BOPML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (XUML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (FML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (NML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(Natura.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (TML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 6, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 7, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (PHNML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (Witchery.isModLoaded() && ExtraTrees.isModLoaded()) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
+                                getModItem(Witchery.ID, "witchwood", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                        getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                        getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (NML) {
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                            getModItem(Natura.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        if (TML) {
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 6, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 7, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                        getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (Witchery.isModLoaded() && ExtraTrees.isModLoaded()) {
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(ExtraTrees.ID, "log", 2, wildcard, missing),
-                            getModItem(Witchery.ID, "witchwood", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                        getModItem(Minecraft.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (BOPML) {
+        if (FML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                            getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
+                            getModItem(Minecraft.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                        getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                        getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (NML) {
+            if (BOPML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logs", 2, wildcard, missing),
+                                getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (EXML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logs", 2, wildcard, missing),
+                                getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (XUML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logs", 2, wildcard, missing),
+                                getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                            getModItem(Natura.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        if (TML) {
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 6, missing))
+                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 7, missing))
+                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                        getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (Witchery.isModLoaded() && Forestry.isModLoaded()) {
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(Forestry.ID, "logs", 2, wildcard, missing),
-                            getModItem(Witchery.ID, "witchwood", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                        getModItem(Minecraft.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (BOPML) {
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                            getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                        getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                        getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                        getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (NML) {
+            if (NML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logs", 2, wildcard, missing),
+                                getModItem(Natura.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (TML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logs", 2, wildcard, missing),
+                                getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 6, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logs", 2, wildcard, missing),
+                                getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 7, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (PHNML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logs", 2, wildcard, missing),
+                                getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (Witchery.isModLoaded() && Forestry.isModLoaded()) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logs", 2, wildcard, missing),
+                                getModItem(Witchery.ID, "witchwood", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                            getModItem(Natura.ID, "planks", 2, wildcard, missing))
+                            getModItem(Minecraft.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        if (TML) {
+            if (BOPML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
+                                getModItem(BiomesOPlenty.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (EXML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
+                                getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (XUML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
+                                getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 6, missing))
+                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                            getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 7, missing))
+                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                        getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        if (Witchery.isModLoaded() && Forestry.isModLoaded()) {
-            GTValues.RA.stdBuilder()
-                    .itemInputs(
-                            getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
-                            getModItem(Witchery.ID, "witchwood", 2, wildcard, missing))
-                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            if (NML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
+                                getModItem(Natura.ID, "planks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (TML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
+                                getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 6, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
+                                getModItem(Thaumcraft.ID, "blockWoodenDevice", 2, 7, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (PHNML) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
+                                getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
+            if (Witchery.isModLoaded() && Forestry.isModLoaded()) {
+                GTValues.RA.stdBuilder()
+                        .itemInputs(
+                                getModItem(Forestry.ID, "logsFireproof", 2, wildcard, missing),
+                                getModItem(Witchery.ID, "witchwood", 2, wildcard, missing))
+                        .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                        .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            }
         }
         GTValues.RA.stdBuilder()
                 .itemInputs(
@@ -1337,30 +1406,36 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
-                        getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
-                        getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
-                        getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
-                        getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
+                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
+                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
+                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
+                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (NML && BOPML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1383,12 +1458,14 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
-                        getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (PHNML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Rainforest, 2, 0),
+                            getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (Witchery.isModLoaded() && BOPML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1411,30 +1488,36 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
-                        getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
-                        getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
-                        getModItem(Forestry.ID, "planks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
-                        getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (EXML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
+                            getModItem(ExtraTrees.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
+                            getModItem(ExtraUtilities.ID, "colorWoodPlanks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
+        if (FML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
+                            getModItem(Forestry.ID, "planks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
+                            getModItem(Forestry.ID, "planksFireproof", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (NML && BOPML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1457,12 +1540,14 @@ public class ScriptMinecraft implements IScriptLoader {
                     .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
                     .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
         }
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
-                        getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
-                .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        if (PHNML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            new ItemStack(BOPBlockRegistrator.log_Pine, 2, 0),
+                            getModItem(PamsHarvestTheNether.ID, "netherPlanks", 2, wildcard, missing))
+                    .itemOutputs(getModItem(Minecraft.ID, "chest", 1, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_LV).addTo(assemblerRecipes);
+        }
         if (Witchery.isModLoaded() && BOPML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
@@ -1509,42 +1594,44 @@ public class ScriptMinecraft implements IScriptLoader {
                 .itemInputs(GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L), ItemList.Plank_Oak.get(1L))
                 .itemOutputs(getModItem(Minecraft.ID, "sign", 3, 0, missing)).duration(5 * SECONDS).eut(4)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
-                        ItemList.Plank_Spruce.get(1L))
-                .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_spruce", 3, 0, missing)).duration(5 * SECONDS)
-                .eut(4).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
-                        ItemList.Plank_Birch.get(1L))
-                .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_birch", 3, 0, missing)).duration(5 * SECONDS)
-                .eut(4).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
-                        ItemList.Plank_Jungle.get(1L))
-                .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_jungle", 3, 0, missing)).duration(5 * SECONDS)
-                .eut(4).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
-                        ItemList.Plank_Acacia.get(1L))
-                .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_acacia", 3, 0, missing)).duration(5 * SECONDS)
-                .eut(4).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
-                        ItemList.Plank_DarkOak.get(1L))
-                .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_dark_oak", 3, 0, missing)).duration(5 * SECONDS)
-                .eut(4).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
-                        ItemList.Plank_Cherry_EFR.get(1L))
-                .itemOutputs(getModItem(EtFuturumRequiem.ID, "cherry_sign", 3, 0, missing)).duration(5 * SECONDS).eut(4)
-                .addTo(assemblerRecipes);
+        if (EFRML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
+                            ItemList.Plank_Spruce.get(1L))
+                    .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_spruce", 3, 0, missing))
+                    .duration(5 * SECONDS).eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
+                            ItemList.Plank_Birch.get(1L))
+                    .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_birch", 3, 0, missing))
+                    .duration(5 * SECONDS).eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
+                            ItemList.Plank_Jungle.get(1L))
+                    .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_jungle", 3, 0, missing))
+                    .duration(5 * SECONDS).eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
+                            ItemList.Plank_Acacia.get(1L))
+                    .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_acacia", 3, 0, missing))
+                    .duration(5 * SECONDS).eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
+                            ItemList.Plank_DarkOak.get(1L))
+                    .itemOutputs(getModItem(EtFuturumRequiem.ID, "item_sign_dark_oak", 3, 0, missing))
+                    .duration(5 * SECONDS).eut(4).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
+                            ItemList.Plank_Cherry_EFR.get(1L))
+                    .itemOutputs(getModItem(EtFuturumRequiem.ID, "cherry_sign", 3, 0, missing)).duration(5 * SECONDS)
+                    .eut(4).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.stick, Materials.Wood, 1L),
@@ -1647,24 +1734,26 @@ public class ScriptMinecraft implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.spring, Materials.PigIron, 1))
                 .itemOutputs(getModItem(Minecraft.ID, "wooden_pressure_plate", 2, 0, missing)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_ULV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(EtFuturumRequiem.ID, "stone_slab", 2, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.spring, Materials.Iron, 1L))
-                .itemOutputs(getModItem(Minecraft.ID, "stone_pressure_plate", 2, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_ULV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(EtFuturumRequiem.ID, "stone_slab", 2, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.spring, Materials.WroughtIron, 1))
-                .itemOutputs(getModItem(Minecraft.ID, "stone_pressure_plate", 2, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_ULV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(EtFuturumRequiem.ID, "stone_slab", 2, 0, missing),
-                        GTOreDictUnificator.get(OrePrefixes.spring, Materials.PigIron, 1))
-                .itemOutputs(getModItem(Minecraft.ID, "stone_pressure_plate", 2, 0, missing)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_ULV).addTo(assemblerRecipes);
+        if (EFRML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(EtFuturumRequiem.ID, "stone_slab", 2, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.spring, Materials.Iron, 1L))
+                    .itemOutputs(getModItem(Minecraft.ID, "stone_pressure_plate", 2, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_ULV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(EtFuturumRequiem.ID, "stone_slab", 2, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.spring, Materials.WroughtIron, 1))
+                    .itemOutputs(getModItem(Minecraft.ID, "stone_pressure_plate", 2, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_ULV).addTo(assemblerRecipes);
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(EtFuturumRequiem.ID, "stone_slab", 2, 0, missing),
+                            GTOreDictUnificator.get(OrePrefixes.spring, Materials.PigIron, 1))
+                    .itemOutputs(getModItem(Minecraft.ID, "stone_pressure_plate", 2, 0, missing)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_ULV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.Gold, 1L),
@@ -1767,17 +1856,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 "logWood",
                 "logWood",
                 "stickWood");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "chest", 1, 0, missing),
-                getModItem(EtFuturumRequiem.ID, "bark", 1, 0, missing),
-                "plankWood",
-                getModItem(EtFuturumRequiem.ID, "bark", 1, 0, missing),
-                "plankWood",
-                "craftingToolKnife",
-                "plankWood",
-                getModItem(EtFuturumRequiem.ID, "bark", 1, 0, missing),
-                "plankWood",
-                getModItem(EtFuturumRequiem.ID, "bark", 1, 0, missing));
+        if (EFRML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "chest", 1, 0, missing),
+                    getModItem(EtFuturumRequiem.ID, "bark", 1, 0, missing),
+                    "plankWood",
+                    getModItem(EtFuturumRequiem.ID, "bark", 1, 0, missing),
+                    "plankWood",
+                    "craftingToolKnife",
+                    "plankWood",
+                    getModItem(EtFuturumRequiem.ID, "bark", 1, 0, missing),
+                    "plankWood",
+                    getModItem(EtFuturumRequiem.ID, "bark", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "trapped_chest", 1, 0, missing),
                 null,
@@ -1822,17 +1913,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 "gearGtSmallAnyIron",
                 "stickRedAlloy",
                 "gearGtSmallAnyIron");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "piston", 1, 0, missing),
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "gearGtSmallAnyIron",
-                "fenceWood",
-                "gearGtSmallAnyIron",
-                "cobblestone",
-                "plateRedAlloy",
-                "cobblestone");
+        if (CBML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "piston", 1, 0, missing),
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "gearGtSmallAnyIron",
+                    "fenceWood",
+                    "gearGtSmallAnyIron",
+                    "cobblestone",
+                    "plateRedAlloy",
+                    "cobblestone");
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "sticky_piston", 1, 0, missing),
                 null,
@@ -1844,39 +1937,41 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 getModItem(Minecraft.ID, "piston", 1, 0, missing),
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "rail", 8, 0, missing),
-                "screwAnyIron",
-                null,
-                "screwAnyIron",
-                getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
-                getModItem(Railcraft.ID, "part.railbed", 1, 0, missing),
-                getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
-                "craftingToolScrewdriver",
-                null,
-                "craftingToolHardHammer");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "detector_rail", 1, 0, missing),
-                "screwAnyIron",
-                getModItem(Railcraft.ID, "detector", 1, 1, missing),
-                "screwAnyIron",
-                getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
-                getModItem(Railcraft.ID, "part.railbed", 1, 0, missing),
-                getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
-                "craftingToolScrewdriver",
-                "stickRedAlloy",
-                "craftingToolHardHammer");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "activator_rail", 2, 0, missing),
-                "screwAnyIron",
-                getModItem(Minecraft.ID, "redstone_torch", 1, 0, missing),
-                "screwAnyIron",
-                getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
-                getModItem(Railcraft.ID, "part.railbed", 1, 0, missing),
-                getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
-                "craftingToolScrewdriver",
-                "stickRedAlloy",
-                "craftingToolHardHammer");
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "rail", 8, 0, missing),
+                    "screwAnyIron",
+                    null,
+                    "screwAnyIron",
+                    getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
+                    getModItem(Railcraft.ID, "part.railbed", 1, 0, missing),
+                    getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
+                    "craftingToolScrewdriver",
+                    null,
+                    "craftingToolHardHammer");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "detector_rail", 1, 0, missing),
+                    "screwAnyIron",
+                    getModItem(Railcraft.ID, "detector", 1, 1, missing),
+                    "screwAnyIron",
+                    getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
+                    getModItem(Railcraft.ID, "part.railbed", 1, 0, missing),
+                    getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
+                    "craftingToolScrewdriver",
+                    "stickRedAlloy",
+                    "craftingToolHardHammer");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "activator_rail", 2, 0, missing),
+                    "screwAnyIron",
+                    getModItem(Minecraft.ID, "redstone_torch", 1, 0, missing),
+                    "screwAnyIron",
+                    getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
+                    getModItem(Railcraft.ID, "part.railbed", 1, 0, missing),
+                    getModItem(Railcraft.ID, "part.rail", 1, 0, missing),
+                    "craftingToolScrewdriver",
+                    "stickRedAlloy",
+                    "craftingToolHardHammer");
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "noteblock", 1, 0, missing),
                 "plankWood",
@@ -1937,17 +2032,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 getModItem(Minecraft.ID, "wooden_slab", 1, 0, missing),
                 "stickWood",
                 getModItem(Minecraft.ID, "wooden_slab", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stone_pressure_plate", 2, 0, missing),
-                "screwIron",
-                "craftingToolHardHammer",
-                "screwIron",
-                getModItem(EtFuturumRequiem.ID, "stone_slab", 1, 0, missing),
-                "springAnyIron",
-                getModItem(EtFuturumRequiem.ID, "stone_slab", 1, 0, missing),
-                "screwIron",
-                "craftingToolScrewdriver",
-                "screwIron");
+        if (EFRML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stone_pressure_plate", 2, 0, missing),
+                    "screwIron",
+                    "craftingToolHardHammer",
+                    "screwIron",
+                    getModItem(EtFuturumRequiem.ID, "stone_slab", 1, 0, missing),
+                    "springAnyIron",
+                    getModItem(EtFuturumRequiem.ID, "stone_slab", 1, 0, missing),
+                    "screwIron",
+                    "craftingToolScrewdriver",
+                    "screwIron");
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "wooden_pressure_plate", 2, 0, missing),
                 "screwWood",
@@ -1964,12 +2061,14 @@ public class ScriptMinecraft implements IScriptLoader {
         addShapedRecipe(getModItem(Minecraft.ID, "torch", 2, 0, missing), "gemCharcoal", null, "stickWood", null);
         addShapedRecipe(getModItem(Minecraft.ID, "torch", 1, 0, missing), "gemLignite", null, "stickWood", null);
         addShapedRecipe(getModItem(Minecraft.ID, "torch", 5, 0, missing), "fuelCoke", null, "stickWood", null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "torch", 5, 0, missing),
-                "blockWool",
-                getModItem(Railcraft.ID, "fluid.creosote.bucket", 1, 0, missing),
-                "stickWood",
-                null);
+        if (RCML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "torch", 5, 0, missing),
+                    "blockWool",
+                    getModItem(Railcraft.ID, "fluid.creosote.bucket", 1, 0, missing),
+                    "stickWood",
+                    null);
+        }
         if (ITML) {
             addShapedRecipe(
                     getModItem(Minecraft.ID, "torch", 5, 0, missing),
@@ -1992,12 +2091,14 @@ public class ScriptMinecraft implements IScriptLoader {
                 getModItem(Minecraft.ID, "string", 1, 0, missing),
                 "stickWood",
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "torch", 2, 0, missing),
-                getModItem(IndustrialCraft2.ID, "itemHarz", 1, 0, missing),
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "stickWood",
-                null);
+        if (ICML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "torch", 2, 0, missing),
+                    getModItem(IndustrialCraft2.ID, "itemHarz", 1, 0, missing),
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "stickWood",
+                    null);
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "lever", 1, 0, missing),
                 "stickWood",
@@ -2082,39 +2183,41 @@ public class ScriptMinecraft implements IScriptLoader {
                 "stickWood",
                 getModItem(Minecraft.ID, "planks", 1, 0, missing),
                 "stickWood");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "fence", 2, 0, missing),
-                null,
-                null,
-                null,
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "fence", 4, 0, missing),
-                "screwAnyIron",
-                "craftingToolScrewdriver",
-                "screwAnyIron",
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "fence", 6, 0, missing),
-                "screwSteel",
-                "craftingToolScrewdriver",
-                "screwSteel",
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood");
+        if (CBML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "fence", 2, 0, missing),
+                    null,
+                    null,
+                    null,
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "fence", 4, 0, missing),
+                    "screwAnyIron",
+                    "craftingToolScrewdriver",
+                    "screwAnyIron",
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "fence", 6, 0, missing),
+                    "screwSteel",
+                    "craftingToolScrewdriver",
+                    "screwSteel",
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood");
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "fence_gate", 1, 0, missing),
                 getModItem(Minecraft.ID, "flint", 1, 0, missing),
@@ -2148,39 +2251,41 @@ public class ScriptMinecraft implements IScriptLoader {
                 getModItem(Minecraft.ID, "planks", 1, 0, missing),
                 "stickWood",
                 getModItem(Minecraft.ID, "planks", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "fence_gate", 2, 0, missing),
-                null,
-                null,
-                null,
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "fence_gate", 4, 0, missing),
-                "screwAnyIron",
-                "craftingToolScrewdriver",
-                "screwAnyIron",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "fence_gate", 6, 0, missing),
-                "screwSteel",
-                "craftingToolScrewdriver",
-                "screwSteel",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
-                "stickWood",
-                getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing));
+        if (CBML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "fence_gate", 2, 0, missing),
+                    null,
+                    null,
+                    null,
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "fence_gate", 4, 0, missing),
+                    "screwAnyIron",
+                    "craftingToolScrewdriver",
+                    "screwAnyIron",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing));
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "fence_gate", 6, 0, missing),
+                    "screwSteel",
+                    "craftingToolScrewdriver",
+                    "screwSteel",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing),
+                    "stickWood",
+                    getModItem(CarpentersBlocks.ID, "blockCarpentersBlock", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "redstone_lamp", 1, 0, missing),
                 getModItem(Minecraft.ID, "glass_pane", 1, 0, missing),
@@ -2238,17 +2343,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 "craftingToolHardHammer",
                 "plateAnyIron",
                 "craftingToolFile");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 0, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeWhite",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 0, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeWhite",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+        }
         addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 0, missing), "blockWool", "dyeWhite");
         addShapedRecipe(
                 getModItem(Minecraft.ID, "wool", 1, 0, missing),
@@ -2274,569 +2381,583 @@ public class ScriptMinecraft implements IScriptLoader {
                     getModItem(BiomesOPlenty.ID, "plants", 1, 7, missing),
                     getModItem(BiomesOPlenty.ID, "plants", 1, 7, missing));
         }
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 1, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeOrange",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 1, missing), "blockWool", "dyeOrange");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 2, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeMagenta",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 2, missing), "blockWool", "dyeMagenta");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 3, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeLightBlue",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 3, missing), "blockWool", "dyeLightBlue");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 4, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeYellow",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 4, missing), "blockWool", "dyeYellow");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 5, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeLime",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 5, missing), "blockWool", "dyeLime");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 6, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyePink",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 6, missing), "blockWool", "dyePink");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 7, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeGray",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 7, missing), "blockWool", "dyeGray");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 8, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeLightGray",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 8, missing), "blockWool", "dyeLightGray");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 9, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeCyan",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 9, missing), "blockWool", "dyeCyan");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 10, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyePurple",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 10, missing), "blockWool", "dyePurple");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 11, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeBlue",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 11, missing), "blockWool", "dyeBlue");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 12, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeBrown",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 12, missing), "blockWool", "dyeBrown");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 13, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeGreen",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 13, missing), "blockWool", "dyeGreen");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 14, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeRed",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 14, missing), "blockWool", "dyeRed");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "wool", 7, 15, missing),
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "blockWool",
-                "dyeBlack",
-                "blockWool",
-                "blockWool",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "blockWool");
-        addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 15, missing), "blockWool", "dyeBlack");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 0, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeWhite",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 0, missing), "glass", "dyeWhite");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 1, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeOrange",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 1, missing), "glass", "dyeOrange");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 2, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeMagenta",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 2, missing), "glass", "dyeMagenta");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 3, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeLightBlue",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 3, missing), "glass", "dyeLightBlue");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 4, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeYellow",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 4, missing), "glass", "dyeYellow");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 5, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeLime",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 5, missing), "glass", "dyeLime");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 6, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyePink",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 6, missing), "glass", "dyePink");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 7, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeGray",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 7, missing), "glass", "dyeGray");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 8, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeLightGray",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 8, missing), "glass", "dyeLightGray");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 9, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeCyan",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 9, missing), "glass", "dyeCyan");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 10, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyePurple",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 10, missing), "glass", "dyePurple");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 11, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeBlue",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 11, missing), "glass", "dyeBlue");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 12, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeBrown",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 12, missing), "glass", "dyeBrown");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 13, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeGreen",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 13, missing), "glass", "dyeGreen");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 14, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeRed",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 14, missing), "glass", "dyeRed");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass", 7, 15, missing),
-                "glass",
-                "glass",
-                "glass",
-                "glass",
-                "dyeBlack",
-                "glass",
-                "glass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "glass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 15, missing), "glass", "dyeBlack");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 0, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeWhite",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 0, missing), "paneGlass", "dyeWhite");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 1, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeOrange",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 1, missing), "paneGlass", "dyeOrange");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 2, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeMagenta",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 2, missing), "paneGlass", "dyeMagenta");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 3, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeLightBlue",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 3, missing), "paneGlass", "dyeLightBlue");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 4, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeYellow",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 4, missing), "paneGlass", "dyeYellow");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 5, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeLime",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 5, missing), "paneGlass", "dyeLime");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 6, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyePink",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 6, missing), "paneGlass", "dyePink");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 7, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeGray",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 7, missing), "paneGlass", "dyeGray");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 8, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeLightGray",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 8, missing), "paneGlass", "dyeLightGray");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 9, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeCyan",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 9, missing), "paneGlass", "dyeCyan");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 10, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyePurple",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 10, missing), "paneGlass", "dyePurple");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 11, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeBlue",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 11, missing), "paneGlass", "dyeBlue");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 12, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeBrown",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 12, missing), "paneGlass", "dyeBrown");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 13, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeGreen",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 13, missing), "paneGlass", "dyeGreen");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 14, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeRed",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
-        addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 14, missing), "paneGlass", "dyeRed");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_glass_pane", 7, 15, missing),
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "paneGlass",
-                "dyeBlack",
-                "paneGlass",
-                "paneGlass",
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                "paneGlass");
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 1, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeOrange",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 1, missing), "blockWool", "dyeOrange");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 2, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeMagenta",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 2, missing), "blockWool", "dyeMagenta");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 3, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeLightBlue",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 3, missing), "blockWool", "dyeLightBlue");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 4, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeYellow",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 4, missing), "blockWool", "dyeYellow");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 5, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeLime",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 5, missing), "blockWool", "dyeLime");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 6, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyePink",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 6, missing), "blockWool", "dyePink");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 7, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeGray",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 7, missing), "blockWool", "dyeGray");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 8, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeLightGray",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 8, missing), "blockWool", "dyeLightGray");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 9, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeCyan",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 9, missing), "blockWool", "dyeCyan");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 10, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyePurple",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 10, missing), "blockWool", "dyePurple");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 11, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeBlue",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 11, missing), "blockWool", "dyeBlue");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 12, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeBrown",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 12, missing), "blockWool", "dyeBrown");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 13, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeGreen",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 13, missing), "blockWool", "dyeGreen");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 14, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeRed",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 14, missing), "blockWool", "dyeRed");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "wool", 7, 15, missing),
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "blockWool",
+                    "dyeBlack",
+                    "blockWool",
+                    "blockWool",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "blockWool");
+            addShapelessRecipe(getModItem(Minecraft.ID, "wool", 1, 15, missing), "blockWool", "dyeBlack");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 0, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeWhite",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 0, missing), "glass", "dyeWhite");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 1, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeOrange",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 1, missing), "glass", "dyeOrange");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 2, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeMagenta",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 2, missing), "glass", "dyeMagenta");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 3, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeLightBlue",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 3, missing), "glass", "dyeLightBlue");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 4, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeYellow",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 4, missing), "glass", "dyeYellow");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 5, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeLime",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 5, missing), "glass", "dyeLime");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 6, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyePink",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 6, missing), "glass", "dyePink");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 7, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeGray",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 7, missing), "glass", "dyeGray");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 8, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeLightGray",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 8, missing), "glass", "dyeLightGray");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 9, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeCyan",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 9, missing), "glass", "dyeCyan");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 10, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyePurple",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 10, missing), "glass", "dyePurple");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 11, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeBlue",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 11, missing), "glass", "dyeBlue");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 12, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeBrown",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 12, missing), "glass", "dyeBrown");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 13, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeGreen",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 13, missing), "glass", "dyeGreen");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 14, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeRed",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 14, missing), "glass", "dyeRed");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass", 7, 15, missing),
+                    "glass",
+                    "glass",
+                    "glass",
+                    "glass",
+                    "dyeBlack",
+                    "glass",
+                    "glass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "glass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass", 1, 15, missing), "glass", "dyeBlack");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 0, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeWhite",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 0, missing), "paneGlass", "dyeWhite");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 1, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeOrange",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 1, missing), "paneGlass", "dyeOrange");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 2, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeMagenta",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 1, 2, missing),
+                    "paneGlass",
+                    "dyeMagenta");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 3, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeLightBlue",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 1, 3, missing),
+                    "paneGlass",
+                    "dyeLightBlue");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 4, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeYellow",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 4, missing), "paneGlass", "dyeYellow");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 5, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeLime",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 5, missing), "paneGlass", "dyeLime");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 6, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyePink",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 6, missing), "paneGlass", "dyePink");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 7, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeGray",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 7, missing), "paneGlass", "dyeGray");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 8, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeLightGray",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 1, 8, missing),
+                    "paneGlass",
+                    "dyeLightGray");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 9, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeCyan",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 9, missing), "paneGlass", "dyeCyan");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 10, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyePurple",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 1, 10, missing),
+                    "paneGlass",
+                    "dyePurple");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 11, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeBlue",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 11, missing), "paneGlass", "dyeBlue");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 12, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeBrown",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 12, missing), "paneGlass", "dyeBrown");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 13, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeGreen",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 13, missing), "paneGlass", "dyeGreen");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 14, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeRed",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+            addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 14, missing), "paneGlass", "dyeRed");
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_glass_pane", 7, 15, missing),
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "paneGlass",
+                    "dyeBlack",
+                    "paneGlass",
+                    "paneGlass",
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    "paneGlass");
+        }
         addShapelessRecipe(getModItem(Minecraft.ID, "stained_glass_pane", 1, 15, missing), "paneGlass", "dyeBlack");
         addShapedRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -2855,17 +2976,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 1, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeOrange",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 1, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeOrange",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 1, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -2887,17 +3010,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 2, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeMagenta",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 2, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeMagenta",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 2, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -2919,17 +3044,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 3, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeLightBlue",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 3, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeLightBlue",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 3, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -2951,17 +3078,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 4, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeYellow",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 4, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeYellow",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 4, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -2983,17 +3112,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 5, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeLime",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 5, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeLime",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 5, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3015,17 +3146,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 6, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyePink",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 6, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyePink",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 6, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3047,17 +3180,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 7, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeGray",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 7, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeGray",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 7, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3079,17 +3214,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 8, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeLightGray",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 8, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeLightGray",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 8, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3111,17 +3248,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 9, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeCyan",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 9, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeCyan",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 9, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3143,17 +3282,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 10, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyePurple",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 10, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyePurple",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 10, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3175,17 +3316,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 11, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeBlue",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 11, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeBlue",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 11, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3207,17 +3350,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 12, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeBrown",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 12, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeBrown",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 12, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3239,17 +3384,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 13, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeGreen",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 13, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeGreen",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 13, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3271,17 +3418,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 14, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeRed",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 14, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeRed",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 14, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3303,17 +3452,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "carpet", 7, 15, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                "dyeBlack",
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "carpet", 7, 15, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    "dyeBlack",
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "carpet", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "carpet", 1, 15, missing),
                 getModItem(Minecraft.ID, "carpet", 1, 0, missing),
@@ -3335,242 +3486,274 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeWhite",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeWhite",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 0, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeWhite");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 1, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeOrange",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 1, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeOrange",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 1, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeOrange");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 2, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeMagenta",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 2, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeMagenta",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 2, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeMagenta");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 3, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeLightBlue",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 3, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeLightBlue",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 3, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeLightBlue");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 4, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeYellow",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 4, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeYellow",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 4, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeYellow");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 5, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeLime",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 5, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeLime",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 5, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeLime");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 6, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyePink",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 6, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyePink",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 6, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyePink");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 7, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeGray",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 7, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeGray",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 7, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeGray");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 8, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeLightGray",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 8, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeLightGray",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 8, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeLightGray");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 9, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeCyan",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 9, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeCyan",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 9, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeCyan");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 10, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyePurple",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 10, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyePurple",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 10, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyePurple");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 11, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeBlue",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 11, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeBlue",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 11, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeBlue");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 12, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeBrown",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 12, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeBrown",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 12, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeBrown");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 13, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeGreen",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 13, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeGreen",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 13, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeGreen");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 14, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeRed",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 14, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeRed",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 14, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
                 "dyeRed");
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "stained_hardened_clay", 7, 15, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                "dyeBlack",
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
-                getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
-                getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        if (XUML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "stained_hardened_clay", 7, 15, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    "dyeBlack",
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
+                    getModItem(ExtraUtilities.ID, "paintbrush", 1, 0, missing),
+                    getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing));
+        }
         addShapelessRecipe(
                 getModItem(Minecraft.ID, "stained_hardened_clay", 1, 15, missing),
                 getModItem(Minecraft.ID, "hardened_clay", 1, 0, missing),
@@ -3766,17 +3949,19 @@ public class ScriptMinecraft implements IScriptLoader {
                 getModItem(Minecraft.ID, "diamond_leggings", 1, 0, missing),
                 "screwDiamond",
                 getModItem(Minecraft.ID, "diamond_leggings", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(Minecraft.ID, "saddle", 1, 0, missing),
-                "itemLeather",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather",
-                "itemLeather",
-                getModItem(Minecraft.ID, "carpet", 1, wildcard, missing),
-                "itemLeather",
-                "ringAnyIron",
-                getModItem(Minecraft.ID, "string", 1, 0, missing),
-                "ringAnyIron");
+        if (BPML) {
+            addShapedRecipe(
+                    getModItem(Minecraft.ID, "saddle", 1, 0, missing),
+                    "itemLeather",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    getModItem(Minecraft.ID, "carpet", 1, wildcard, missing),
+                    "itemLeather",
+                    "ringAnyIron",
+                    getModItem(Minecraft.ID, "string", 1, 0, missing),
+                    "ringAnyIron");
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "clock", 1, 0, missing),
                 GTOreDictUnificator.get(OrePrefixes.ring, Materials.Gold, 1L),
@@ -3857,11 +4042,13 @@ public class ScriptMinecraft implements IScriptLoader {
                     getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketWater", 1, 0, missing),
                     GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wheat, 1L));
         }
-        addShapelessRecipe(
-                ItemList.Food_Dough.get(1L),
-                getModItem(PamsHarvestCraft.ID, "freshwaterItem", 1, 0, missing),
-                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wheat, 1L),
-                getModItem(PamsHarvestCraft.ID, "freshwaterItem", 1, 0, missing));
+        if (PHML) {
+            addShapelessRecipe(
+                    ItemList.Food_Dough.get(1L),
+                    getModItem(PamsHarvestCraft.ID, "freshwaterItem", 1, 0, missing),
+                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Wheat, 1L),
+                    getModItem(PamsHarvestCraft.ID, "freshwaterItem", 1, 0, missing));
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "chest_minecart", 1, 0, missing),
                 "craftingToolHardHammer",
@@ -4035,47 +4222,61 @@ public class ScriptMinecraft implements IScriptLoader {
                     "craftingToolFile",
                     getModItem(IguanaTweaksTinkerConstruct.ID, "clayBucketFired", 1, 0, missing));
         }
-        addShapelessRecipe(
-                getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
-                "craftingToolSaw",
-                getModItem(EtFuturumRequiem.ID, "smooth_stone", 1, 0, missing));
-
+        if (EFRML) {
+            addShapelessRecipe(
+                    getModItem(Minecraft.ID, "stone_slab", 1, 0, missing),
+                    "craftingToolSaw",
+                    getModItem(EtFuturumRequiem.ID, "smooth_stone", 1, 0, missing));
+        }
         // Cobble slabs
         ItemStack cobblestoneSlab = getModItem(Minecraft.ID, "stone_slab", 1, 3, missing);
-        ItemStack mossyCobbleOutputSlab = getModItem(EtFuturumRequiem.ID, "stone_slab", 1L, 1, missing);
-        addShapelessRecipe(cobblestoneSlab, "craftingToolSaw", getModItem(Minecraft.ID, "cobblestone", 1, 0, missing));
-        addShapelessRecipe(
-                mossyCobbleOutputSlab,
-                "craftingToolSaw",
-                getModItem(Minecraft.ID, "mossy_cobblestone", 1, 0, missing));
-        for (int meta = 0; meta < 16; meta++) {
+        if (EFRML) {
+            ItemStack mossyCobbleOutputSlab = getModItem(EtFuturumRequiem.ID, "stone_slab", 1L, 1, missing);
             addShapelessRecipe(
                     cobblestoneSlab,
                     "craftingToolSaw",
-                    getModItem(ExtraUtilities.ID, "color_stonebrick", 1, meta, missing));
+                    getModItem(Minecraft.ID, "cobblestone", 1, 0, missing));
+            addShapelessRecipe(
+                    mossyCobbleOutputSlab,
+                    "craftingToolSaw",
+                    getModItem(Minecraft.ID, "mossy_cobblestone", 1, 0, missing));
+        }
+        if (XUML) {
+            for (int meta = 0; meta < 16; meta++) {
+                addShapelessRecipe(
+                        cobblestoneSlab,
+                        "craftingToolSaw",
+                        getModItem(ExtraUtilities.ID, "color_stonebrick", 1, meta, missing));
+            }
         }
 
         // Stone brick slabs
         ItemStack stoneBrickSlab = getModItem(Minecraft.ID, "stone_slab", 1, 5, missing);
-        ItemStack mossyStoneBrickOutputSlab = getModItem(EtFuturumRequiem.ID, "stone_slab", 1L, 2, missing);
-        addShapelessRecipe(stoneBrickSlab, "craftingToolSaw", getModItem(Minecraft.ID, "stonebrick", 1, 0, missing));
-        addShapelessRecipe(
-                mossyStoneBrickOutputSlab,
-                "craftingToolSaw",
-                getModItem(Minecraft.ID, "stonebrick", 1, 1, missing));
+        if (EFRML) {
+            ItemStack mossyStoneBrickOutputSlab = getModItem(EtFuturumRequiem.ID, "stone_slab", 1L, 2, missing);
+            addShapelessRecipe(
+                    stoneBrickSlab,
+                    "craftingToolSaw",
+                    getModItem(Minecraft.ID, "stonebrick", 1, 0, missing));
+            addShapelessRecipe(
+                    mossyStoneBrickOutputSlab,
+                    "craftingToolSaw",
+                    getModItem(Minecraft.ID, "stonebrick", 1, 1, missing));
+        }
         addShapelessRecipe(stoneBrickSlab, "craftingToolSaw", getModItem(Minecraft.ID, "stonebrick", 1, 2, missing));
         addShapelessRecipe(stoneBrickSlab, "craftingToolSaw", getModItem(Minecraft.ID, "stonebrick", 1, 3, missing));
 
         // Sandstone slabs
         ItemStack sandstoneSlab = getModItem(Minecraft.ID, "stone_slab", 1L, 1, missing);
-        ItemStack cutSandstoneOutputSlab = getModItem(EtFuturumRequiem.ID, "stone_slab", 1L, 3, missing);
-        addShapelessRecipe(sandstoneSlab, "craftingToolSaw", getModItem(Minecraft.ID, "sandstone", 1, 0, missing));
-        addShapelessRecipe(sandstoneSlab, "craftingToolSaw", getModItem(Minecraft.ID, "sandstone", 1, 1, missing));
-        addShapelessRecipe(
-                cutSandstoneOutputSlab,
-                "craftingToolSaw",
-                getModItem(Minecraft.ID, "sandstone", 1, 2, missing));
-
+        if (EFRML) {
+            ItemStack cutSandstoneOutputSlab = getModItem(EtFuturumRequiem.ID, "stone_slab", 1L, 3, missing);
+            addShapelessRecipe(sandstoneSlab, "craftingToolSaw", getModItem(Minecraft.ID, "sandstone", 1, 0, missing));
+            addShapelessRecipe(sandstoneSlab, "craftingToolSaw", getModItem(Minecraft.ID, "sandstone", 1, 1, missing));
+            addShapelessRecipe(
+                    cutSandstoneOutputSlab,
+                    "craftingToolSaw",
+                    getModItem(Minecraft.ID, "sandstone", 1, 2, missing));
+        }
         ItemStack stoneBrick = getModItem(Minecraft.ID, "stonebrick", 1, 0, missing);
         addShapedRecipe(
                 getModItem(Minecraft.ID, "stone_brick_stairs", 4, 0, missing),
@@ -4222,72 +4423,74 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 "stickWood",
                 null);
-        addShapedRecipe(
-                getModItem(EtFuturumRequiem.ID, "item_sign_spruce", 3, 0, missing),
-                ItemList.Plank_Spruce.get(1L),
-                ItemList.Plank_Spruce.get(1L),
-                ItemList.Plank_Spruce.get(1L),
-                ItemList.Plank_Spruce.get(1L),
-                ItemList.Plank_Spruce.get(1L),
-                ItemList.Plank_Spruce.get(1L),
-                null,
-                "stickWood",
-                null);
-        addShapedRecipe(
-                getModItem(EtFuturumRequiem.ID, "item_sign_birch", 3, 0, missing),
-                ItemList.Plank_Birch.get(1L),
-                ItemList.Plank_Birch.get(1L),
-                ItemList.Plank_Birch.get(1L),
-                ItemList.Plank_Birch.get(1L),
-                ItemList.Plank_Birch.get(1L),
-                ItemList.Plank_Birch.get(1L),
-                null,
-                "stickWood",
-                null);
-        addShapedRecipe(
-                getModItem(EtFuturumRequiem.ID, "item_sign_jungle", 3, 0, missing),
-                ItemList.Plank_Jungle.get(1L),
-                ItemList.Plank_Jungle.get(1L),
-                ItemList.Plank_Jungle.get(1L),
-                ItemList.Plank_Jungle.get(1L),
-                ItemList.Plank_Jungle.get(1L),
-                ItemList.Plank_Jungle.get(1L),
-                null,
-                "stickWood",
-                null);
-        addShapedRecipe(
-                getModItem(EtFuturumRequiem.ID, "item_sign_acacia", 3, 0, missing),
-                ItemList.Plank_Acacia.get(1L),
-                ItemList.Plank_Acacia.get(1L),
-                ItemList.Plank_Acacia.get(1L),
-                ItemList.Plank_Acacia.get(1L),
-                ItemList.Plank_Acacia.get(1L),
-                ItemList.Plank_Acacia.get(1L),
-                null,
-                "stickWood",
-                null);
-        addShapedRecipe(
-                getModItem(EtFuturumRequiem.ID, "item_sign_dark_oak", 3, 0, missing),
-                ItemList.Plank_DarkOak.get(1L),
-                ItemList.Plank_DarkOak.get(1L),
-                ItemList.Plank_DarkOak.get(1L),
-                ItemList.Plank_DarkOak.get(1L),
-                ItemList.Plank_DarkOak.get(1L),
-                ItemList.Plank_DarkOak.get(1L),
-                null,
-                "stickWood",
-                null);
-        addShapedRecipe(
-                getModItem(EtFuturumRequiem.ID, "cherry_sign", 3, 0, missing),
-                ItemList.Plank_Cherry_EFR.get(1L),
-                ItemList.Plank_Cherry_EFR.get(1L),
-                ItemList.Plank_Cherry_EFR.get(1L),
-                ItemList.Plank_Cherry_EFR.get(1L),
-                ItemList.Plank_Cherry_EFR.get(1L),
-                ItemList.Plank_Cherry_EFR.get(1L),
-                null,
-                "stickWood",
-                null);
+        if (EFRML) {
+            addShapedRecipe(
+                    getModItem(EtFuturumRequiem.ID, "item_sign_spruce", 3, 0, missing),
+                    ItemList.Plank_Spruce.get(1L),
+                    ItemList.Plank_Spruce.get(1L),
+                    ItemList.Plank_Spruce.get(1L),
+                    ItemList.Plank_Spruce.get(1L),
+                    ItemList.Plank_Spruce.get(1L),
+                    ItemList.Plank_Spruce.get(1L),
+                    null,
+                    "stickWood",
+                    null);
+            addShapedRecipe(
+                    getModItem(EtFuturumRequiem.ID, "item_sign_birch", 3, 0, missing),
+                    ItemList.Plank_Birch.get(1L),
+                    ItemList.Plank_Birch.get(1L),
+                    ItemList.Plank_Birch.get(1L),
+                    ItemList.Plank_Birch.get(1L),
+                    ItemList.Plank_Birch.get(1L),
+                    ItemList.Plank_Birch.get(1L),
+                    null,
+                    "stickWood",
+                    null);
+            addShapedRecipe(
+                    getModItem(EtFuturumRequiem.ID, "item_sign_jungle", 3, 0, missing),
+                    ItemList.Plank_Jungle.get(1L),
+                    ItemList.Plank_Jungle.get(1L),
+                    ItemList.Plank_Jungle.get(1L),
+                    ItemList.Plank_Jungle.get(1L),
+                    ItemList.Plank_Jungle.get(1L),
+                    ItemList.Plank_Jungle.get(1L),
+                    null,
+                    "stickWood",
+                    null);
+            addShapedRecipe(
+                    getModItem(EtFuturumRequiem.ID, "item_sign_acacia", 3, 0, missing),
+                    ItemList.Plank_Acacia.get(1L),
+                    ItemList.Plank_Acacia.get(1L),
+                    ItemList.Plank_Acacia.get(1L),
+                    ItemList.Plank_Acacia.get(1L),
+                    ItemList.Plank_Acacia.get(1L),
+                    ItemList.Plank_Acacia.get(1L),
+                    null,
+                    "stickWood",
+                    null);
+            addShapedRecipe(
+                    getModItem(EtFuturumRequiem.ID, "item_sign_dark_oak", 3, 0, missing),
+                    ItemList.Plank_DarkOak.get(1L),
+                    ItemList.Plank_DarkOak.get(1L),
+                    ItemList.Plank_DarkOak.get(1L),
+                    ItemList.Plank_DarkOak.get(1L),
+                    ItemList.Plank_DarkOak.get(1L),
+                    ItemList.Plank_DarkOak.get(1L),
+                    null,
+                    "stickWood",
+                    null);
+            addShapedRecipe(
+                    getModItem(EtFuturumRequiem.ID, "cherry_sign", 3, 0, missing),
+                    ItemList.Plank_Cherry_EFR.get(1L),
+                    ItemList.Plank_Cherry_EFR.get(1L),
+                    ItemList.Plank_Cherry_EFR.get(1L),
+                    ItemList.Plank_Cherry_EFR.get(1L),
+                    ItemList.Plank_Cherry_EFR.get(1L),
+                    ItemList.Plank_Cherry_EFR.get(1L),
+                    null,
+                    "stickWood",
+                    null);
+        }
         addShapedRecipe(
                 getModItem(Minecraft.ID, "sign", 3, 0, missing),
                 ItemList.Plank_Larch.get(1L),
@@ -4655,7 +4858,7 @@ public class ScriptMinecraft implements IScriptLoader {
                 null,
                 null,
                 null);
-        if (ESML) {
+        if (ESML && SCML) {
             GTModHandler.addCraftingRecipe(
                     new ItemStack(Blocks.ender_chest, 1),
                     BITS,
@@ -4663,6 +4866,5 @@ public class ScriptMinecraft implements IScriptLoader {
                             GTModHandler.getModItem(EnderStorage.ID, "enderChest", 1L, 0), 'D',
                             GTModHandler.getModItem(StevesCarts2.ID, "ModuleComponents", 1L, 45) });
         }
-
     }
 }

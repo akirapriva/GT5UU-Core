@@ -64,20 +64,7 @@ public class ScriptEnderIO implements IScriptLoader {
 
     @Override
     public List<String> getDependencies() {
-        return Arrays.asList(
-                AppliedEnergistics2.ID,
-                Avaritia.ID,
-                Backpack.ID,
-                BuildCraftFactory.ID,
-                EnderIO.ID,
-                ExtraUtilities.ID,
-                FloodLights.ID,
-                GraviSuite.ID,
-                HardcoreEnderExpansion.ID,
-                IndustrialCraft2.ID,
-                OpenBlocks.ID,
-                ProjectRedIllumination.ID,
-                ProjectRedIntegration.ID);
+        return Arrays.asList(EnderIO.ID);
     }
 
     @Override
@@ -88,50 +75,53 @@ public class ScriptEnderIO implements IScriptLoader {
         ItemStack staffOfTravelling = getModItem(EnderIO.ID, "itemTravelStaff", 1, wildcard);
         ItemStack endestPearl = getModItem(Avaritia.ID, "Endest_Pearl", 1);
         ItemStack fieldGeneratorZPM = ItemList.Field_Generator_ZPM.get(1);
+        if (AEML && AML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    teleportStaff,
+                    "      aaa",
+                    "     abca",
+                    "    abcba",
+                    "   abcba ",
+                    "   daba  ",
+                    "  deda   ",
+                    " dfd     ",
+                    "dfd      ",
+                    " d       ",
+                    'a',
+                    "plateDenseObsidian",
+                    'b',
+                    denseEnergyCell,
+                    'c',
+                    energyCell,
+                    'd',
+                    staffOfTravelling,
+                    'e',
+                    endestPearl,
+                    'f',
+                    fieldGeneratorZPM);
+        }
 
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                teleportStaff,
-                "      aaa",
-                "     abca",
-                "    abcba",
-                "   abcba ",
-                "   daba  ",
-                "  deda   ",
-                " dfd     ",
-                "dfd      ",
-                " d       ",
-                'a',
-                "plateDenseObsidian",
-                'b',
-                denseEnergyCell,
-                'c',
-                energyCell,
-                'd',
-                staffOfTravelling,
-                'e',
-                endestPearl,
-                'f',
-                fieldGeneratorZPM);
+        if (AEML) {
+            // ME Conduit
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 4, 16),
+                            GTOreDictUnificator.get(OrePrefixes.circuit, Materials.MV, 1L))
+                    .circuit(2).itemOutputs(getModItem(EnderIO.ID, "itemMEConduit", 4))
+                    .fluidInputs(Materials.ConductiveIron.getMolten(144L)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_HV / 2).addTo(assemblerRecipes);
 
-        // ME Conduit
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 4, 16),
-                        GTOreDictUnificator.get(OrePrefixes.circuit, Materials.MV, 1L))
-                .circuit(2).itemOutputs(getModItem(EnderIO.ID, "itemMEConduit", 4))
-                .fluidInputs(Materials.ConductiveIron.getMolten(144L)).duration(10 * SECONDS).eut(TierEU.RECIPE_HV / 2)
-                .addTo(assemblerRecipes);
+            // ME Dense Conduit
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(EnderIO.ID, "itemMEConduit", 16),
+                            GTOreDictUnificator.get(OrePrefixes.circuit, Materials.HV, 1L))
+                    .circuit(2).itemOutputs(getModItem(EnderIO.ID, "itemMEConduit", 4, 1))
+                    .fluidInputs(Materials.EnergeticAlloy.getMolten(144L)).duration(10 * SECONDS).eut(TierEU.RECIPE_HV)
+                    .addTo(assemblerRecipes);
+        }
 
-        // ME Dense Conduit
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(EnderIO.ID, "itemMEConduit", 16),
-                        GTOreDictUnificator.get(OrePrefixes.circuit, Materials.HV, 1L))
-                .circuit(2).itemOutputs(getModItem(EnderIO.ID, "itemMEConduit", 4, 1))
-                .fluidInputs(Materials.EnergeticAlloy.getMolten(144L)).duration(10 * SECONDS).eut(TierEU.RECIPE_HV)
-                .addTo(assemblerRecipes);
-
-        if (DEML) {
+        if (DEML && AML) {
             ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
                     createItemStack(
                             EnderIO.ID,
@@ -168,41 +158,43 @@ public class ScriptEnderIO implements IScriptLoader {
                     'f',
                     getModItem(DraconicEvolution.ID, "chaoticCore", 1, 0, missing));
         }
-        ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
-                getModItem(EnderIO.ID, "blockTelePad", 9, 0, missing),
-                "aaaaaaaaa",
-                "abcdddcba",
-                "aefcdcfea",
-                "acgfhfgca",
-                "aijfkfjia",
-                "acgflfgca",
-                "aefcdcfea",
-                "abcdddcba",
-                "aaaaaaaaa",
-                'a',
-                getModItem(EnderIO.ID, "itemMachinePart", 1, 3, missing),
-                'b',
-                ItemList.Field_Generator_ZPM.get(1L),
-                'c',
-                new ItemStack(bw_realglas, 1, 4),
-                'd',
-                "plateDenseNaquadahEnriched",
-                'e',
-                "plateDenseStellarAlloy",
-                'f',
-                getModItem(EnderIO.ID, "itemPowerConduitEndergy", 1, 11, missing),
-                'g',
-                ItemList.Electric_Motor_ZPM.get(1L),
-                'h',
-                getModItem(EnderIO.ID, "itemCoordSelector", 1, wildcard, missing),
-                'i',
-                getModItem(GraviSuite.ID, "itemSimpleItem", 1, 2, missing),
-                'j',
-                getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 5, missing),
-                'k',
-                getModItem(EnderIO.ID, "blockCapBank", 1, 3, missing),
-                'l',
-                "circuitSuperconductor");
+        if (AML && GSuiteML) {
+            ExtremeCraftingManager.getInstance().addExtremeShapedOreRecipe(
+                    getModItem(EnderIO.ID, "blockTelePad", 9, 0, missing),
+                    "aaaaaaaaa",
+                    "abcdddcba",
+                    "aefcdcfea",
+                    "acgfhfgca",
+                    "aijfkfjia",
+                    "acgflfgca",
+                    "aefcdcfea",
+                    "abcdddcba",
+                    "aaaaaaaaa",
+                    'a',
+                    getModItem(EnderIO.ID, "itemMachinePart", 1, 3, missing),
+                    'b',
+                    ItemList.Field_Generator_ZPM.get(1L),
+                    'c',
+                    new ItemStack(bw_realglas, 1, 4),
+                    'd',
+                    "plateDenseNaquadahEnriched",
+                    'e',
+                    "plateDenseStellarAlloy",
+                    'f',
+                    getModItem(EnderIO.ID, "itemPowerConduitEndergy", 1, 11, missing),
+                    'g',
+                    ItemList.Electric_Motor_ZPM.get(1L),
+                    'h',
+                    getModItem(EnderIO.ID, "itemCoordSelector", 1, wildcard, missing),
+                    'i',
+                    getModItem(GraviSuite.ID, "itemSimpleItem", 1, 2, missing),
+                    'j',
+                    getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 5, missing),
+                    'k',
+                    getModItem(EnderIO.ID, "blockCapBank", 1, 3, missing),
+                    'l',
+                    "circuitSuperconductor");
+        }
 
         addShapedRecipe(
                 getModItem(EnderIO.ID, "blockStirlingGenerator", 1, 0, missing),
@@ -446,17 +438,19 @@ public class ScriptEnderIO implements IScriptLoader {
                 ItemList.Electric_Motor_LV.get(1L),
                 "rotorSteel",
                 ItemList.Electric_Motor_LV.get(1L));
-        addShapedRecipe(
-                getModItem(EnderIO.ID, "blockCrafter", 1, 0, missing),
-                "itemCasingSteel",
-                getModItem(BuildCraftFactory.ID, "autoWorkbenchBlock", 1, 0, missing),
-                "itemCasingSteel",
-                "circuitBasic",
-                getModItem(EnderIO.ID, "itemMachinePart", 1, 0, missing),
-                "circuitBasic",
-                "itemCasingSteel",
-                getModItem(EnderIO.ID, "itemFrankenSkull", 1, 1, missing),
-                "itemCasingSteel");
+        if (BCML) {
+            addShapedRecipe(
+                    getModItem(EnderIO.ID, "blockCrafter", 1, 0, missing),
+                    "itemCasingSteel",
+                    getModItem(BuildCraftFactory.ID, "autoWorkbenchBlock", 1, 0, missing),
+                    "itemCasingSteel",
+                    "circuitBasic",
+                    getModItem(EnderIO.ID, "itemMachinePart", 1, 0, missing),
+                    "circuitBasic",
+                    "itemCasingSteel",
+                    getModItem(EnderIO.ID, "itemFrankenSkull", 1, 1, missing),
+                    "itemCasingSteel");
+        }
         addShapedRecipe(
                 getModItem(EnderIO.ID, "itemMachinePart", 1, 0, missing),
                 "itemCasingSteel",
@@ -836,17 +830,19 @@ public class ScriptEnderIO implements IScriptLoader {
                 "plateElectricalSteel",
                 getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
                 "plateElectricalSteel");
-        addShapedRecipe(
-                getModItem(EnderIO.ID, "blockTravelAnchor", 1, 0, missing),
-                "plateElectricalSteel",
-                getModItem(OpenBlocks.ID, "elevator", 1, 0, missing),
-                "plateElectricalSteel",
-                getModItem(EnderIO.ID, "itemMaterial", 1, 5, missing),
-                getModItem(EnderIO.ID, "itemMachinePart", 1, 0, missing),
-                getModItem(EnderIO.ID, "itemMaterial", 1, 5, missing),
-                "plateElectricalSteel",
-                ItemList.Field_Generator_LV.get(1L),
-                "plateElectricalSteel");
+        if (OML) {
+            addShapedRecipe(
+                    getModItem(EnderIO.ID, "blockTravelAnchor", 1, 0, missing),
+                    "plateElectricalSteel",
+                    getModItem(OpenBlocks.ID, "elevator", 1, 0, missing),
+                    "plateElectricalSteel",
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 5, missing),
+                    getModItem(EnderIO.ID, "itemMachinePart", 1, 0, missing),
+                    getModItem(EnderIO.ID, "itemMaterial", 1, 5, missing),
+                    "plateElectricalSteel",
+                    ItemList.Field_Generator_LV.get(1L),
+                    "plateElectricalSteel");
+        }
         addShapedRecipe(
                 getModItem(EnderIO.ID, "blockSliceAndSplice", 1, 0, missing),
                 "plateSoularium",
@@ -990,39 +986,43 @@ public class ScriptEnderIO implements IScriptLoader {
                 getModItem(EnderIO.ID, "blockDarkIronBars", 1, 0, missing),
                 "craftingToolWrench",
                 getModItem(EnderIO.ID, "blockDarkIronBars", 1, 0, missing));
-        addShapedRecipe(
-                getModItem(EnderIO.ID, "blockElectricLight", 8, 0, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                "plateSiliconSolarGrade",
-                getModItem(FloodLights.ID, "electricIncandescentLightBulb", 1, 0, missing),
-                "plateSiliconSolarGrade",
-                "circuitBasic",
-                getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 0, missing),
-                "circuitBasic");
-        addShapedRecipe(
-                getModItem(EnderIO.ID, "blockElectricLight", 8, 0, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                "plateSiliconSolarGrade",
-                getModItem(FloodLights.ID, "electricIncandescentLightBulb", 1, 0, missing),
-                "plateSiliconSolarGrade",
-                "circuitBasic",
-                getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 7, missing),
-                "circuitBasic");
-        addShapedRecipe(
-                getModItem(EnderIO.ID, "blockElectricLight", 16, 2, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
-                "plateSiliconSolarGrade",
-                getModItem(ProjectRedIllumination.ID, "projectred.illumination.lamp", 1, 0, missing),
-                "plateSiliconSolarGrade",
-                "plateIron",
-                "wireGt01RedAlloy",
-                "plateIron");
+        if (FLML) {
+            addShapedRecipe(
+                    getModItem(EnderIO.ID, "blockElectricLight", 8, 0, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    "plateSiliconSolarGrade",
+                    getModItem(FloodLights.ID, "electricIncandescentLightBulb", 1, 0, missing),
+                    "plateSiliconSolarGrade",
+                    "circuitBasic",
+                    getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 0, missing),
+                    "circuitBasic");
+            addShapedRecipe(
+                    getModItem(EnderIO.ID, "blockElectricLight", 8, 0, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    "plateSiliconSolarGrade",
+                    getModItem(FloodLights.ID, "electricIncandescentLightBulb", 1, 0, missing),
+                    "plateSiliconSolarGrade",
+                    "circuitBasic",
+                    getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 7, missing),
+                    "circuitBasic");
+        }
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(EnderIO.ID, "blockElectricLight", 16, 2, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    getModItem(EnderIO.ID, "blockFusedQuartz", 1, 0, missing),
+                    "plateSiliconSolarGrade",
+                    getModItem(ProjectRedIllumination.ID, "projectred.illumination.lamp", 1, 0, missing),
+                    "plateSiliconSolarGrade",
+                    "plateIron",
+                    "wireGt01RedAlloy",
+                    "plateIron");
+        }
         addShapedRecipe(
                 getModItem(EnderIO.ID, "blockReinforcedObsidian", 1, 0, missing),
                 "plateDarkSteel",
@@ -1070,17 +1070,19 @@ public class ScriptEnderIO implements IScriptLoader {
                 null,
                 "ingotElectricalSteel",
                 null);
-        addShapedRecipe(
-                getModItem(EnderIO.ID, "itemConduitProbe", 1, 0, missing),
-                "plateSiliconSolarGrade",
-                getModItem(EnderIO.ID, "itemPowerConduit", 1, 0, missing),
-                "plateSiliconSolarGrade",
-                "circuitBasic",
-                getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
-                "circuitBasic",
-                "plateElectricalSteel",
-                getModItem(EnderIO.ID, "itemRedstoneConduit", 1, 2, missing),
-                "plateElectricalSteel");
+        if (PREDML) {
+            addShapedRecipe(
+                    getModItem(EnderIO.ID, "itemConduitProbe", 1, 0, missing),
+                    "plateSiliconSolarGrade",
+                    getModItem(EnderIO.ID, "itemPowerConduit", 1, 0, missing),
+                    "plateSiliconSolarGrade",
+                    "circuitBasic",
+                    getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing),
+                    "circuitBasic",
+                    "plateElectricalSteel",
+                    getModItem(EnderIO.ID, "itemRedstoneConduit", 1, 2, missing),
+                    "plateElectricalSteel");
+        }
         addShapedRecipe(
                 getModItem(EnderIO.ID, "itemTravelStaff", 1, 16, missing),
                 "craftingToolScrewdriver",
@@ -1103,17 +1105,19 @@ public class ScriptEnderIO implements IScriptLoader {
                 "stickSoularium",
                 "screwEnergeticAlloy",
                 "craftingToolWrench");
-        addShapedRecipe(
-                getModItem(EnderIO.ID, "itemGliderWing", 1, 0, missing),
-                "craftingToolHardHammer",
-                "stickDarkSteel",
-                "itemLeather",
-                "stickDarkSteel",
-                getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
-                "itemLeather",
-                "itemLeather",
-                "itemLeather",
-                "itemLeather");
+        if (BPML) {
+            addShapedRecipe(
+                    getModItem(EnderIO.ID, "itemGliderWing", 1, 0, missing),
+                    "craftingToolHardHammer",
+                    "stickDarkSteel",
+                    "itemLeather",
+                    "stickDarkSteel",
+                    getModItem(Backpack.ID, "tannedLeather", 1, 0, missing),
+                    "itemLeather",
+                    "itemLeather",
+                    "itemLeather",
+                    "itemLeather");
+        }
         addShapedRecipe(
                 getModItem(EnderIO.ID, "itemGliderWing", 1, 1, missing),
                 "screwDarkSteel",
@@ -1312,13 +1316,14 @@ public class ScriptEnderIO implements IScriptLoader {
                 "stickWood",
                 "craftingToolScrewdriver",
                 "stickWood");
-
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        ItemList.Automation_ChestBuffer_LV.get(1L),
-                        getModItem(ExtraUtilities.ID, "enderCollector", 1, 0, missing))
-                .itemOutputs(getModItem(EnderIO.ID, "blockVacuumChest", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
+        if (XUML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            ItemList.Automation_ChestBuffer_LV.get(1L),
+                            getModItem(ExtraUtilities.ID, "enderCollector", 1, 0, missing))
+                    .itemOutputs(getModItem(EnderIO.ID, "blockVacuumChest", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(EnderIO.ID, "blockBuffer", 1, 0, missing),
@@ -1398,12 +1403,14 @@ public class ScriptEnderIO implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.plate, Materials.DarkSteel, 2L))
                 .itemOutputs(getModItem(EnderIO.ID, "blockDarkSteelPressurePlate", 1, 0, missing))
                 .duration(10 * SECONDS).eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(EnderIO.ID, "blockDarkSteelPressurePlate", 1, 0, missing),
-                        getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing))
-                .itemOutputs(getModItem(EnderIO.ID, "blockDarkSteelPressurePlate", 1, 1, missing))
-                .duration(10 * SECONDS).eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(EnderIO.ID, "blockDarkSteelPressurePlate", 1, 0, missing),
+                            getModItem(IndustrialCraft2.ID, "blockRubber", 1, 0, missing))
+                    .itemOutputs(getModItem(EnderIO.ID, "blockDarkSteelPressurePlate", 1, 1, missing))
+                    .duration(10 * SECONDS).eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(EnderIO.ID, "blockDarkIronBars", 1, 0, missing)).circuit(2)
                 .itemOutputs(getModItem(EnderIO.ID, "blockDarkSteelLadder", 2, 0, missing)).duration(5 * SECONDS)
                 .eut(96).addTo(assemblerRecipes);
@@ -1625,13 +1632,15 @@ public class ScriptEnderIO implements IScriptLoader {
                 .itemOutputs(getModItem(EnderIO.ID, "itemItemConduit", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.plastic", 144)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
-                        GTOreDictUnificator.get(OrePrefixes.plate, Materials.RedstoneAlloy, 1L))
-                .itemOutputs(getModItem(EnderIO.ID, "itemOCConduit", 1, 0, missing))
-                .fluidInputs(FluidRegistry.getFluidStack("molten.plastic", 144)).duration(5 * SECONDS)
-                .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        if (AEML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(AppliedEnergistics2.ID, "item.ItemMultiPart", 1, 16, missing),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.RedstoneAlloy, 1L))
+                    .itemOutputs(getModItem(EnderIO.ID, "itemOCConduit", 1, 0, missing))
+                    .fluidInputs(FluidRegistry.getFluidStack("molten.plastic", 144)).duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_HV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(ItemList.Component_Filter.get(1L), getModItem(Minecraft.ID, "iron_bars", 1, 0, missing))
                 .itemOutputs(getModItem(EnderIO.ID, "itemBasicFilterUpgrade", 1, 0, missing)).duration(15 * SECONDS)
@@ -1642,12 +1651,14 @@ public class ScriptEnderIO implements IScriptLoader {
                         getModItem(EnderIO.ID, "itemFrankenSkull", 1, 1, missing))
                 .itemOutputs(getModItem(EnderIO.ID, "itemBasicFilterUpgrade", 1, 1, missing)).duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(EnderIO.ID, "itemBasicFilterUpgrade", 1, 1, missing),
-                        getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing))
-                .itemOutputs(getModItem(EnderIO.ID, "itemLimitedItemFilter", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        if (PREDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(EnderIO.ID, "itemBasicFilterUpgrade", 1, 1, missing),
+                            getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 26, missing))
+                    .itemOutputs(getModItem(EnderIO.ID, "itemLimitedItemFilter", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(EnderIO.ID, "itemBasicFilterUpgrade", 2, 1, missing),
@@ -1660,12 +1671,14 @@ public class ScriptEnderIO implements IScriptLoader {
                         getModItem(EnderIO.ID, "itemFrankenSkull", 1, 2, missing))
                 .itemOutputs(getModItem(EnderIO.ID, "itemBigFilterUpgrade", 1, 1, missing)).duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_HV / 2).addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(EnderIO.ID, "itemBasicFilterUpgrade", 1, 1, missing),
-                        getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 20, missing))
-                .itemOutputs(getModItem(EnderIO.ID, "itemExistingItemFilter", 1, 0, missing)).duration(15 * SECONDS)
-                .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        if (PREDML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(EnderIO.ID, "itemBasicFilterUpgrade", 1, 1, missing),
+                            getModItem(ProjectRedIntegration.ID, "projectred.integration.gate", 1, 20, missing))
+                    .itemOutputs(getModItem(EnderIO.ID, "itemExistingItemFilter", 1, 0, missing)).duration(15 * SECONDS)
+                    .eut(TierEU.RECIPE_MV).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(EnderIO.ID, "itemBasicFilterUpgrade", 1, 0, missing),
@@ -1702,15 +1715,17 @@ public class ScriptEnderIO implements IScriptLoader {
                         GTOreDictUnificator.get(OrePrefixes.round, Materials.Soularium, 1L))
                 .itemOutputs(getModItem(EnderIO.ID, "itemSoulVessel", 1, 0, missing)).duration(10 * SECONDS).eut(48)
                 .addTo(assemblerRecipes);
-        GTValues.RA.stdBuilder()
-                .itemInputs(
-                        getModItem(BuildCraftFactory.ID, "autoWorkbenchBlock", 1, 0, missing),
-                        getModItem(EnderIO.ID, "itemMachinePart", 1, 0, missing),
-                        getModItem(EnderIO.ID, "itemFrankenSkull", 1, 1, missing),
-                        GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LV, 1),
-                        GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Steel, 2L))
-                .itemOutputs(getModItem(EnderIO.ID, "blockCrafter", 1, 0, missing)).duration(10 * SECONDS)
-                .eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
+        if (BCML) {
+            GTValues.RA.stdBuilder()
+                    .itemInputs(
+                            getModItem(BuildCraftFactory.ID, "autoWorkbenchBlock", 1, 0, missing),
+                            getModItem(EnderIO.ID, "itemMachinePart", 1, 0, missing),
+                            getModItem(EnderIO.ID, "itemFrankenSkull", 1, 1, missing),
+                            GTOreDictUnificator.get(OrePrefixes.circuit, Materials.LV, 1),
+                            GTOreDictUnificator.get(OrePrefixes.itemCasing, Materials.Steel, 2L))
+                    .itemOutputs(getModItem(EnderIO.ID, "blockCrafter", 1, 0, missing)).duration(10 * SECONDS)
+                    .eut(TierEU.RECIPE_MV / 2).addTo(assemblerRecipes);
+        }
         GTValues.RA.stdBuilder()
                 .itemInputs(
                         getModItem(EnderIO.ID, "itemBasicCapacitor", 1, 0),
@@ -1736,9 +1751,11 @@ public class ScriptEnderIO implements IScriptLoader {
                 .itemOutputs(getModItem(EnderIO.ID, "blockDarkSteelAnvil", 1, 0, missing))
                 .fluidInputs(FluidRegistry.getFluidStack("molten.darksteel", 4464)).duration(45 * SECONDS)
                 .eut(TierEU.RECIPE_MV).addTo(fluidSolidifierRecipes);
-        GTValues.RA.stdBuilder().itemInputs(getModItem(IndustrialCraft2.ID, "itemPartCFPowder", 1, 0, missing))
-                .itemOutputs(getModItem(EnderIO.ID, "itemMaterial", 9, 2, missing)).outputChances(10000)
-                .duration(15 * SECONDS).eut(2).addTo(maceratorRecipes);
+        if (ICML) {
+            GTValues.RA.stdBuilder().itemInputs(getModItem(IndustrialCraft2.ID, "itemPartCFPowder", 1, 0, missing))
+                    .itemOutputs(getModItem(EnderIO.ID, "itemMaterial", 9, 2, missing)).outputChances(10000)
+                    .duration(15 * SECONDS).eut(2).addTo(maceratorRecipes);
+        }
         GTValues.RA.stdBuilder().itemInputs(getModItem(EnderIO.ID, "itemMaterial", 1, 5, missing))
                 .itemOutputs(getModItem(EnderIO.ID, "itemMaterial", 1, 14, missing)).duration(5 * SECONDS)
                 .eut(TierEU.RECIPE_MV).addTo(maceratorRecipes);
@@ -1751,7 +1768,7 @@ public class ScriptEnderIO implements IScriptLoader {
         GTValues.RA.stdBuilder().itemInputs(getModItem(EnderIO.ID, "itemMaterial", 1, 13, missing))
                 .itemOutputs(getModItem(EnderIO.ID, "itemMaterial", 1, 17, missing)).duration(15 * SECONDS)
                 .eut(TierEU.RECIPE_MV).addTo(maceratorRecipes);
-        if (MBML) {
+        if (MBML && HEEML) {
             GTValues.RA.stdBuilder()
                     .itemInputs(
                             GTModHandler.getModItem(HardcoreEnderExpansion.ID, "enderman_head", 1L, 0),
